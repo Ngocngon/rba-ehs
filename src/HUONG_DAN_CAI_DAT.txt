@@ -1,0 +1,100 @@
+﻿=====================================================================
+  HỆ THỐNG TỰ ĐỘNG HÓA BÁO CÁO ĐÁNH GIÁ EHS — CHUẨN RBA 8.0.1
+  BẢN OFFLINE (chạy trên máy tính, không cần Internet)
+  Bản quyền: NGUYỄN NGỌC NGÔN
+=====================================================================
+
+I. YÊU CẦU
+---------------------------------------------------------------------
+  - Máy tính macOS hoặc Windows 10/11.
+  - Python 3.8 trở lên (miễn phí, chỉ cài 1 lần). Không cần cài thêm
+    thư viện nào khác.
+  - (Tùy chọn) Google Chrome hoặc Microsoft Edge để xuất PDF.
+    Cài LibreOffice nếu muốn PDF giống 100% file Word.
+
+II. CÀI PYTHON (chỉ làm 1 lần)
+---------------------------------------------------------------------
+  1. Vào https://www.python.org/downloads/ và tải bản mới nhất
+     (có thể tải sẵn bằng máy khác rồi chép bằng USB).
+  2. Windows: khi cài, BẮT BUỘC tick ô "Add python.exe to PATH",
+     sau đó bấm "Install Now".
+     macOS: mở tệp .pkg vừa tải và bấm Continue đến hết.
+  3. Kiểm tra: mở Terminal (macOS) hoặc Command Prompt (Windows), gõ
+        python3 --version     (macOS)
+        py --version          (Windows)
+     Nếu hiện "Python 3.x.x" là đã cài xong.
+
+III. CÀI HỆ THỐNG
+---------------------------------------------------------------------
+  1. Giải nén tệp cài đặt .zip vào một thư mục cố định,
+     ví dụ:  Documents/RBA_8.0.1   hoặc   D:\RBA_8.0.1
+     (KHÔNG chạy trực tiếp bên trong tệp .zip).
+  2. Chạy hệ thống:
+     - macOS  : bấm đúp "Khoi_dong_RBA.command".
+                Lần đầu macOS có thể chặn → bấm "Done" (Xong), vào
+                System Settings › Privacy & Security, kéo xuống và bấm
+                "Open Anyway" (Vẫn mở), rồi bấm đúp lại tệp. Các lần
+                sau bấm đúp bình thường.
+     - Windows: bấm đúp "Khoi_dong_RBA.bat".
+                Nếu Windows hiện "Windows protected your PC" → bấm
+                "More info" → "Run anyway". Nếu tường lửa hỏi quyền
+                mạng → bấm "Allow" (cho phép).
+  3. Trình duyệt tự mở địa chỉ  http://127.0.0.1:8801
+     (nếu không tự mở, hãy tự gõ địa chỉ này vào trình duyệt).
+  4. Đăng nhập:
+        Admin : ngocngon / Abc1234@@
+        Khách : nút "Truy cập với tư cách Khách"
+                (hoặc tài khoản khach / 123456)
+     → Nên đổi mật khẩu ngay: bấm avatar góc phải → Thông tin tài khoản.
+
+  ⚠ Giữ cửa sổ đen (Terminal / Command Prompt) MỞ trong khi làm việc.
+    Đóng cửa sổ đó = tắt hệ thống. Dữ liệu đang làm dở được tự động
+    lưu mỗi 2 phút và khi đóng trang.
+
+IV. DÙNG CHUNG TRONG MẠNG NỘI BỘ (LAN) — tùy chọn
+---------------------------------------------------------------------
+  Mặc định hệ thống CHỈ mở trên máy này. Muốn chia sẻ trong mạng nội bộ,
+  khởi động bằng:
+     - macOS  : HOST=0.0.0.0 ./Khoi_dong_RBA.command
+     - Windows: set HOST=0.0.0.0  rồi chạy Khoi_dong_RBA.bat
+  Máy khác cùng mạng công ty mở trình duyệt và gõ:
+        http://<địa-chỉ-IP-máy-chạy-hệ-thống>:8801
+  Xem IP:  macOS → System Settings › Network;  Windows → gõ "ipconfig".
+  ⚠ Người ở máy khác KHÔNG dùng được nút "Khách" và mật khẩu mặc định:
+    mỗi người cần tài khoản riêng do Admin tạo, và phải đổi mật khẩu ở
+    lần đăng nhập đầu. Mỗi người chỉ thấy báo cáo của mình; Admin thấy
+    tất cả. Nếu đặt sau proxy (Cloudflare, Funnel, ngrok...): thêm
+    RBA_TRUST_PROXY=1 khi khởi động.
+  Mỗi người nên có tài khoản riêng (Admin tạo trong mục Quản lý người dùng).
+
+V. DỮ LIỆU ĐƯỢC LƯU Ở ĐÂU
+---------------------------------------------------------------------
+  database/   tài khoản, phân quyền, Dữ liệu gốc RBA 8.0.1, danh mục kho
+  storage/    toàn bộ báo cáo đã lưu (Finding, Checklist, Word, PDF)
+  backups/    bản sao lưu tự động (mỗi lần khởi động bản mới + mỗi ngày)
+  → Mỗi máy cài hệ thống có dữ liệu riêng, các máy KHÔNG tự đồng bộ với nhau.
+  → Sao lưu thủ công: chép 3 thư mục trên ra ổ USB / ổ mạng.
+  → Chuyển sang máy khác: cài hệ thống ở máy mới, rồi chép đè 2 thư mục
+    database/ và storage/ từ máy cũ sang.
+
+VI. KHI GẶP SỰ CỐ
+---------------------------------------------------------------------
+  - "Cổng đang được sử dụng": hệ thống đã chạy ở một cửa sổ khác → chỉ cần
+    mở trình duyệt tới http://127.0.0.1:8801, hoặc đóng cửa sổ cũ rồi chạy lại.
+  - Muốn đổi cổng: macOS chạy  PORT=8802 ./Khoi_dong_RBA.command
+                   Windows chạy  set PORT=8802  rồi chạy Khoi_dong_RBA.bat
+  - Sửa tên lớp CSS trong index.html: chạy  python3 build_css.py  để tạo lại
+    static/tailwind.css (cần Chrome hoặc Edge, không cần Internet).
+  - Hệ thống không mở được sau khi cập nhật: hệ thống tự quay về bản ổn định.
+    Nếu vẫn lỗi, bấm đúp "Khoi_phuc_ban_on_dinh" (.command / .bat) và gõ: latest
+  - Quên mật khẩu Admin: xóa tệp database/auth_config.json rồi khởi động lại
+    → tài khoản trở về mặc định (ngocngon / Abc1234@@). Báo cáo không bị mất.
+
+VII. TÍNH NĂNG CẦN INTERNET
+---------------------------------------------------------------------
+  Mọi chức năng chạy offline, NGOẠI TRỪ gửi thông báo Email / Zalo /
+  Webhook (chỉ hoạt động khi máy có Internet).
+
+=====================================================================
+  RBA 8.0.1 EHS Automation Suite · © NGUYỄN NGỌC NGÔN
+=====================================================================

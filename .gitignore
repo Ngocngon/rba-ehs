@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+src/output/*
+!src/output/.gitkeep
+src/backups/
+src/logs/
+src/database/autosave/
+src/database/sessions.json
+src/database/auth_config.json
+src/database/*.tmp

@@ -1,0 +1,1530 @@
+{
+  "standard_version": "RBA 8.0.1",
+  "copyright_owner": "NGUYỄN NGỌC NGÔN",
+  "updated_at": "2026-10-22T01:58:53.367973",
+  "updated_by": "ngocngon",
+  "mandatory_triggers": [
+    "mandatory",
+    "bắt buộc",
+    "hmbb",
+    "x",
+    "yes",
+    "1"
+  ],
+  "grade_thresholds": {
+    "A": 90,
+    "B": 80,
+    "C": 70,
+    "D": 0,
+    "priority_downgrade_note": "Nếu phát sinh ≥ 1 lỗi Priority, hạ 1 cấp xếp hạng đối tác."
+  },
+  "category_groups": [
+    {
+      "category": "Safety",
+      "standard_items": 5,
+      "codes": [
+        "BH101",
+        "BH102",
+        "BH103",
+        "BH501",
+        "BH601"
+      ],
+      "note": "F16:F18 (BH101-BH103) + F26:F27 (BH501-BH601)"
+    },
+    {
+      "category": "Firefighting",
+      "standard_items": 4,
+      "codes": [
+        "BH201",
+        "BH202",
+        "BH203",
+        "BH204"
+      ],
+      "note": "F19:F22 (BH201-BH204)"
+    },
+    {
+      "category": "Chemical",
+      "standard_items": 5,
+      "codes": [
+        "BH301",
+        "BH302",
+        "BH401",
+        "BH701",
+        "BH702"
+      ],
+      "note": "F23:F25 (BH301-BH401) + F28:F29 (BH701-BH702)"
+    },
+    {
+      "category": "Safety System",
+      "standard_items": 10,
+      "codes": [
+        "BM101",
+        "BM102",
+        "BM201",
+        "BM202",
+        "BM203",
+        "BM301",
+        "BM302",
+        "BM401",
+        "BM402",
+        "BM403"
+      ],
+      "note": "F30:F39 (BM101-BM403)"
+    },
+    {
+      "category": "Environment",
+      "standard_items": 7,
+      "codes": [
+        "CE101",
+        "CE201",
+        "CE301",
+        "CE401",
+        "CE402",
+        "CE501",
+        "CE601"
+      ],
+      "note": "F40:F46 (CE101-CE601)"
+    },
+    {
+      "category": "Environment System",
+      "standard_items": 10,
+      "codes": [
+        "CM101",
+        "CM102",
+        "CM201",
+        "CM202",
+        "CM203",
+        "CM301",
+        "CM302",
+        "CM401",
+        "CM402",
+        "CM403"
+      ],
+      "note": "F47:F56 (CM101-CM403)"
+    }
+  ],
+  "items": [
+    {
+      "row_num": 5,
+      "provision": "BH1) Occupational Health and Safety",
+      "audit_id": "BH101",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Permits, licenses and test reports for occupational health & safety",
+      "conformance_statement": "All required permits, licenses, and test reports for Occupational Health and Safety are in place and communicated timely to the  government (if required).",
+      "criteria_vn": "Priority\n   Có hơn 2 nội dung trong các nội dung sau đây:\n    1. Không bổ nhiệm ‘người quản lý an toàn’ hoặc không ký hợp đồng ký ủy thác.\n    2. Không bổ nhiệm ‘người quản lý y tế' hoặc không ký hợp đồng ký ủy thác.\n    3. Không chỉ định ‘người giám sát quản lý' có nhiệm vụ quản lý an toàn và y tế\n    4. Không bổ nhiệm ‘người chịu trách nhiệm quản lý an toàn và y tế’ và ‘người chịu trách nhiệm tổng quát về an toàn và y tế’- những người phụ trách tổng quát ác công việc về an toàn và y tế\n    6. Không có nhân sự đủ trình độ chuyên môn về điện, PCCC, môi trường, phương tiện vận chuyển (xe nâng, thang máy…)\n    7. Không bổ nhiệm người quản lý an toàn cho thiết bị hạ tầng (nồi hơi, máy làm lạnh, gas)\n    8. Không thành lập cơ quan tư vấn định kỳ về nhà thầu phụ công ty và không tiến hành tuần tra\nMajor\n    Có hơn 1 hạng mục trong số các hạng mục Priority \n\nMinor\n  Nhân lực về mặt pháp lý đã được bổ nhiệm theo từng lĩnh vực một cách thích hợp; tuy nhiên, việc đào tạo duy trì trình độ chuyên môn và quản lý hợp đồng ủy thác theo chu kỳ còn nhiều thiếu sót\n\nNot Applicable\n   Không có nghĩa vụ bổ nghiệm người quản lý an toàn và y tế\n\nConformance\n    Bổ nhiệm người quản lý an toàn, người quản lý y tế, môi trường; đào tạo về thẩm quyền pháp lý/ trình độ chuyên môn nhân sự liên quan tới cơ sở hạ tầng, đồng thời duy trì hợp đồng quản lý ủy thác",
+      "criteria_en": "Priority\n   Two or more of the following applicable:\n    1. No 'safety manager' appointed or no consignment contract entered\n    2. No 'health manager' appointed or no consignment contract entered\n    3. No ‘management supervisor’ charged with safety and health management designated\n    4. No ‘safety and health management supervisor’ or ‘general safety and health supervisor’ in charge of health and safety work appointed\n    6. No persons with electric, fire safety, environment, transportation equipment (fork lift, elevator, etc.) qualification procured\n    7. No infrastructure equipment (boiler, freezer, gas, radiation) safety manager appointed\n    8. No regular consultative group for in-company contracting organized, and walk-around inspection not conducted \n\nMajor\n      Two or more of the following applicable:\n    1. No 'safety manager' appointed or no consignment contract entered\n    2. No 'health manager' appointed or no consignment contract entered\n    3. No ‘management supervisor’ charged with safety and health management designated\n    4. No ‘safety and health management supervisor’ or ‘general safety and health supervisor’ in charge of health and safety work appointed\n    6. No persons with electric, fire safety, environment, transportation equipment (fork lift, elevator, etc.) qualification procured\n    7. No infrastructure equipment (boiler, freezer, gas, radiation) safety manager appointed\n    8. No regular consultative group for in-company contracting organized, and walk-around inspection not conducted \n\nMinor\n   Legal personnel appropriately appointed, but qualification maintenance education and consignment contract management are insufficient.\n\nNot Applicable\n   Not required to appoint safety and health manager legally\n\nConformance\n   Appointed safety manager, health manager, or facility infrastructure manager, or maintained consigned management contract",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Giấy phép, bổ nhiệm nhân sự an toàn & y tế",
+        "priority_kw": [
+          "không bổ nhiệm người quản lý an toàn",
+          "no safety manager appointed",
+          "no health manager appointed"
+        ],
+        "major_kw": [
+          "không bổ nhiệm",
+          "chưa bổ nhiệm",
+          "không có chứng chỉ chuyên môn",
+          "no qualification"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 6,
+      "provision": "BH1) Occupational Health and Safety",
+      "audit_id": "BH102",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Design and control of safe workplaces",
+      "conformance_statement": "Occupational health & safety hazards are identified, assessed, and mitigated using the Hierarchy of Controls, which includes  eliminating, substituting, and controlling through proper design, process and administrative controls, and appropriate Personal  Protective Equipment (PPE) which is consistently and correctly used",
+      "criteria_vn": "Priority\n   Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Có hơn 3 trường hợp không phù hợp với tiêu chuẩn quản lý thi công công trình điện; có nguy cơ xảy ra tai nạn điện rất cao\n       * Tiêu chuẩn quản lý thi công : ① Cách ly bộ phận nạp của bảng phân phối điện ② Hoàn thiện bộ phận đóng mở ③ Nối đất ④ Bố trí dây điện lộn xộn ⑤ Không sử dụng ống dẫn dây điện ⑥ Quạt thông gió bằng chất liệu nhựa\n   2. Có nguy cơ ngừng hoạt động của nhà máy ngay lập tức nếu thiết bị điện xảy ra sự cố do một hoặc nhiều nguồn điện cung cấp không phù hợp với thiết bị tiện ích.\n   3. Không có tiêu chuẩn cung cấp dụng cụ bảo hộ hoặc đội trưởng phân phối dụng cụ bảo hộ lao động\n   4. Ở công đoạn mà do các yếu tố có hại gây ảnh hưởng rõ ràng tới sức khỏe công nhân, không cung cấp dụng cụ bảo hộ cho người lao động gây ra nguy hiểm sức khỏe ngay tức thì người lao động\n      (Bắt buộc) Ở công đoạn làm việc tiếp xúc với hóa chất độc hại, không cung cấp/ không sử dụng dụng cụ bảo hộ chống hóa chất (như bình oxy)\nMajor\n   Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Không tiến hành đánh giá để lựa chọn đối tượng cần cung cấp dụng cụ bảo hộ lao động (nguy hiểm do tiếp xúc với hóa chất), không thiết lập tiêu chuẩn cung cấp dụng cụ bảo hộ lao động cho từng công đoạn  nguy hiểm\n   2. Có ghi chép cung cấp dụng cụ bảo hộ cho người lao động trong công đoạn cần sử dụng dụng cụ bảo hộ nhưng người lao động không sử dụng nên có nguy cơ ảnh hưởng tới sức khỏe\n     - Giày bảo hộ dùng trong nhà khi hay trong khi làm việc với xe nâng\n     - Thiết bị bảo vệ thính lực khi làm việc trong công đoạn mà kết quả đo mức độ tiếng ồn nơi làm việc trên 90 dB\n    - Những dụng cụ lao động phù hợp trong công đoạn mà có phát sinh ra các chất độc hại khác\n   3. Không đảm bảo hiệu quả của dụng cụ bảo hộ do thiết sót trong việc quản lý dụng cụ bảo hộ như không lắp đặt hộp bảo quản đồ bảo hộ\n     - Không ghi chép ngày mở bộ lọc (filter) phòng độc \n   4.  Ít nhất hai nội dung không phù hợp với quản lý thi công thiết bị điện\nMinor\n      Mặc dù công nhân làm việc trong các quy trình nguy hiểm có hại sử dụng dụng cụ bảo hộ phù hợp, nhưng không thiết lập quy trình lựa chọn dụng cụ bảo hộ phù hợp khi áp dụng quy trình mới hoặc thay đổi quy trình và công việc phát sinh.\nConformance\n   1. Tiến hành đánh giá việc lựa chọn công đoạn người lao động phải sử dụng dụng cụ bảo hộ  ( nguy hiểm khi tiếp xúc với hóa chất), đồng thười thiết lập quy trình quản lý dụng cụ bảo hộ lao động\n   2. Công nhân làm việc trong các công đoạn nguy hiểm sử dụng dụng cụ bảo hộ thích hợp\n   3. Có quản lý ghi ghép phân phối dụng cụ bảo hộ hoặc có tiêu chuẩn cung cấp dụng cụ bảo hộ ( bao gồm giấy chứng nhận chất lượng dụng cụ bảo hộ)\n(Bắt buộc) ⑤ Cung cấp/ sử dụng dụng cụ bảo hộ trong công đoạn làm việc với hóa chất",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. Three or more nonconformities for electric equipment construction management standards, very high risk of electric accidents\n      - Construction management standards: ① isolate charging part of panel board, ② finishing of openings, ③ grounding, \n                                                         ④ disorderly wiring, ⑤ non-use of conduits, ⑥ plastic ventilators \n   2. When there is 1 or more nonconformities of power supplied to utility equipment, there is the risk of immediate stopping of plant operation\n   3. No protective equipment supply standards or supply registry\n   4. Protective equipment not supplied to worker at a process where there is clear health impacts due to harmful factors, \n      thus causing immediate health risks to workers\n     * (Mandatory) Did not supply or wear chemical (respiratory, etc.) protective equipment in processes handling harmful chemical substances\nMajor\n   One or more of the following applicable:\n   1. No perform evaluation (hazards, etc. due to exposure to chemical substances) for selecting persons subject to receiving protective equipment, \n      and No establish protective equipment supply standards per harmful or dangerous processes\n   2. There are records of supplying workers with protective equipment in processes that require such equipment,but workers did not wear it,thus having health risks \n     - Safety shoes for processes in warehouses or using forklifts\n     - Hearing protection for processes with noise levels found to be over 90dB according to work environment noise measurements\n     - Appropriate protective equipment for workers in processes having other harmful substances\n   3. Protective equipment management status is poor, or storage box not installed, thus being unable to ensure effects of wearing equipment\n     - Gas filter opening date not recorded, etc.\n   4. More than two nonconformities for electric equipment construction management\nMinor\n   Workers in harmful and dangerous processes wear appropriate protective equipment, but there is no process for selecting appropriate protective equipment\n   when introducing new processes or when there are change in processes or work\nConformance\n   1. Established and operating evaluation (hazards due to exposure to chemical substances, etc.) and protective equipment management process for selecting\n      processes to wear protective equipment in the harmful and dangerous processes\n   2. Workers in harmful and dangerous processes wear appropriate protective equipment\n   3. Managing protective equipment supply standards (including protective equipment certifications) or supply registries\n\n (Mandatory) ⑤ Supply/wear chemical substance process protective equipment",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 5,
+        "Minor": 3,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 5
+      },
+      "rule": {
+        "desc": "Thiết kế & kiểm soát nơi làm việc an toàn (An toàn điện & PPE)",
+        "priority_kw": [
+          "nguy cơ ngừng hoạt động",
+          "không cung cấp dụng cụ bảo hộ chống hóa chất",
+          "không có tiêu chuẩn cung cấp dụng cụ bảo hộ"
+        ],
+        "major_kw": [
+          "tủ điện",
+          "electric cabinet",
+          "aptomat",
+          "bảo hộ",
+          "protective gear",
+          "ppe",
+          "tiếp địa",
+          "khe hở",
+          "unsealed opening"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 7,
+      "provision": "BH1) Occupational Health and Safety",
+      "audit_id": "BH103",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Maternity protection",
+      "conformance_statement": "Gender-responsive measures are taken to ensure pregnant women and nursing mothers are not in working conditions, which could  be hazardous to them or their child, and provide reasonable accommodations for nursing mothers",
+      "criteria_vn": "Priority\n   Có hơn 2 nội dung trong các nội dung sau đây:\n   1. Không có kế hoạch định hướng nào liên quan đến phụ nữ mang thai hoặc không được nêu trong quy định nhân sự\n       √ (Hàn Quốc) Thực hiện chế độ giảm 2 tiếng làm việc/ngàycho lao động nữ mang thai trong vòng 12 tuần đến 36 tuần của thai kỳ (nếu đăng ký)\n       √ (Hàn Quốc) Lao động nữ có con dưới 1 tuổi được phép cho con bú (vắt sữa) 2 lần/ngày, mỗi lần 30 phút và thời gian này được tính lương \n   2. Làm việc trong quy trình có nguy hiểm rõ ràng đến sức khỏe của phụ nữ mang thai và thai nhi do không tiến hành đánh giá rủi ro đối với phụ nữ mang thai và thai nhi\n   3. Không cung cấp không gian nghỉ ngơi hợp lý cho phụ nữ mang thai\n      √ Cung cấp không gian nghỉ ngơi hợp lý trong 1 năm sau khi sinh con\n      √Cung cấp không gian nghỉ ngơi mà không bị người khác làm phiền và không thể nhìn thấy bên trong khi đừng ở bên ngoài (lắp đặt ghế, tủ lạnh, vòi nước / máy lọc nước uống) \n\nMajor\n  Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Không có kế hoạch định hướng nào liên quan đến phụ nữ mang thai hoặc không được nêu trong quy định nhân sự\n   2. Làm việc trong quy trình có nguy hiểm tức thời đến sức khỏe của phụ nữ mang thai và thai nhi do không tiến hành đánh giá rủi ro đối với phụ nữ mang thai và thai nhi\n   3. Không cung cấp không gian nghỉ ngơi hợp lý cho phụ nữ mang thai\n        √ Cung cấp không gian nghỉ ngơi hợp lý trong 1 năm sau khi sinh con\n      √ Cung cấp không gian nghỉ ngơi mà không bị người khác làm phiền và không thể nhìn thấy bên trong khi đừng ở bên ngoài (lắp đặt ghế, tủ lạnh, vòi nước / máy lọc nước uống)\nMinor\n    Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Phương châm liên quan đến phụ nữ mang thai đã được xây dựng nhưng chưa có đủ nội dung để bảo vệ phụ nữ mang thai\n   2. Đã tiến hành đánh giá rủi ro đối với phụ nữ mang thai nhưng đã bỏ qua các yếu tố nguy hiểm hoặc bỏ qua một số biện pháp giảm thiểu yếu tố nguy hiểm.\n   3. Phòng nghỉ dành cho sản p hụ đã được lắp đặt nhưng không phải là một không gian độc lập hoặc không đảm bảo sự riêng tư từ bên ngoài \n\nNot Applicable\n     Không có lao động nữ trong công đoạn /nơi làm việc\n\nConformance\n   1. Có phương châm liên quan đến phụ nữ mang thai và được nêu trong quy định nhân sự\n   2. Tiến hành đánh giá rủi ro đối với phụ nữ mang thai và đã thực hiện các biện pháp thích hợp như thay đổi công việc...\n   3. Cung cấp không gian nghỉ ngơi và thời gian nghỉ ngơi đầy đủ",
+      "criteria_en": "Priority\n   Two or more of the following applicable:\n   1. No policies related to pregnant women or not explicated in HR regulations\n       - (Korea) Implement system for reducing labor hours by 2 hours per day for pregnant laborers before 12 weeks of pregnancy or after 36 weeks in pregnancy \n          (when applied for)\n       - (Korea) Female laborers with infants under the age of 1 year shall be given two 30-minute breaks for lactation per day \n   2. Harm and risk assessments for pregnant women and fetuses not performed, thus work in processes with clear dangers to the health of the pregnant mother and fetus\n   3. Appropriate rest space not provided for pregnant women\n      - Provide appropriate rest time after childbirth\n      - Provide rest area that others cannot interrupt or look into from the outside (install chairs, refrigerator, water fountain/purifier)\n\nMajor\n   One or more of the following applicable:\n   1. No policies related to pregnant women or not explicated in HR regulations\n   2. Harm and risk assessments for pregnant women and fetuses not performed, thus work in processes with immediate dangers to the health of the pregnant mother and fetus\n   3. Appropriate rest space not provided for pregnant women\n      √ Provide appropriate rest time after childbirth\n      √ Provide rest area that others cannot interrupt or look into from the outside (install chairs, refrigerator, water fountain/purifier)\n\nMinor\n   One or more of the following applicable:\n   1. There are policies related to pregnant women, but not enough contents for protecting pregnant women\n   2. Risk assessment was performed for pregnant women, but risk factors are missing or some measures for mitigating risk factors are missing\n   3. Rest area for new mothers installed, but they are not independent spaces or do not have privacy from the outside\n\nNot Applicable\n   No female workers in process/workplace\n\nConformance\n   1. Policies related to pregnant women exist and explicated in HR regulations\n   2. Risk assessments are conducted for pregnant women and appropriate measures are being taken such as changing duties, etc.\n   3. Rest area and sufficient rest time is provided",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Bảo vệ lao động nữ mang thai & nuôi con nhỏ",
+        "priority_kw": [
+          "nguy hiểm rõ ràng đến sức khỏe của phụ nữ mang thai",
+          "clear dangers to the health of the pregnant"
+        ],
+        "major_kw": [
+          "không có kế hoạch định hướng nào liên quan đến phụ nữ mang thai",
+          "không cung cấp không gian nghỉ ngơi",
+          "no policies related to pregnant"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 8,
+      "provision": "BH2) Emergency Preparedness",
+      "audit_id": "BH201",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Fire detection, alarm and suppression systems",
+      "conformance_statement": "Adequate and effective fire detection, alarm, and suppression systems are in place",
+      "criteria_vn": "Priority\n  Có hơn 1 nội dung trong các nội dung sau đây\n   1. (Bắt buộc) Không lắp đặt thiết bị chữa cháy tự động (vòi phun nước...) trong quy trình có nguy cơ cháy nổ và không sử dụng vật liệu không cháy để làm vật liệu xây dựng\n   2. Không có giấy phép sử dụng tòa nhà (kiểm tra  hoàn thiện công trình) (công trình bất hợp pháp)\n   3. Để máy bơm chữa cháy tự động ở trạng thái vận hành thủ công hoặc bỏ mặc máy bơm bị hỏng\n   4. (Bắt buộc) Không lắp đặt thiết bị phát hiện và báo cháy tự động ở trong quy trình\n\n\nMajor\n   Có hơn 2 nội dung trong các nội dung sau đây\n   1. Đã lắp đặt tất cả thiết bị chữa cháy tự động, thiết bị báo  cháy tự động, thiết bị báo cháy và phát sóng nhưng không tiến hành kiểm tra mỗi tháng một lần\n   2. Đã lắp đặt tất cả thiết bị chữa cháy tự động, thiết bị báo cháy tự động, thiết bị báo cháy và phát sóng nhưng có dưới 2 hạng mục của toàn bộ thiết bị là không phù hợp.\n   3. Sử dụng vật liệu dễ cháy như mút xốp làm vật liệu xây dựng cho các công trình cơ bản\n   4. Có hơn 3 thiết bị trong số bình chữa cháy, vòi chữa cháy…không được kiểm tra mỗi tháng một lần\n   5. Không tiến hành kiểm tra định kỳ về mặt pháp lý đối với hệ thống phòng cháy chữa cháy.\n\nMinor\n    Có hơn 2 nội dung trong các nội dung sau đây\n   1. Đã lắp đặt tất cả thiết bị chữa cháy tự động, thiết bị phát hiện đám cháy tự động, thiết bị báo cháy và phát sóng nhưng không tiến hành kiểm tra mỗi tháng một lần\n   2. Đã lắp đặt tất cả thiết bị chữa cháy tự động, thiết bị phát hiện đám cháy tự động, thiết bị báo cháy và phát sóng nhưng có dưới 1 hạng mục của toàn bộ thiết bị là không phù hợp\n   3. Có hơn 2 thiết bị trong số bình chữa cháy, vòi chữa cháy…không được kiểm tra mỗi tháng một lần\n   4. Trong quá trình xây dựng ban đầu của tòa nhà nhà xưởng đã có được sự đồng ý  để phê duyệt sử dụng tòa nhà (kiểm tra hoàn chỉnh), nhưng không tiến hành thủ tục phê duyệt phần mở rộng\n5. Thực hiện kiểm tra định kỳ theo pháp luật nhưng không tiến hành hoàn thiện các vấn đề phát sinh khi kiểm tra\n\nNot Applicable\n   Không áp dụng\n\nConformance\n    1. Kiểm tra thiết bị chữa cháy theo luật định và tự kiểm tra mỗi tháng một lần\n   2. Lắp đặt thiết bị chữa cháy tự động trong các quy trình có nguy cơ cháy nổ và sử dụng vật liệu khó cháy để làm vật liệu xây dựng, ở các công trình cơ bản không sử dụng vật liệu dễ cháy làm vật liệu xây dựng\n   3.  Lắp đặt thiết bị phát hiện đám cháy tự động và đảm bảo chúng hoạt động bình thường (Tiêu chuẩn lắp đjăt theo quy định luật pháp quốc gia, nếu luật pháp không có nội dung quy định, thì cần thiết lắp đặt ở công đoạn sản xuất và khu vực nhà kho)\n   4. Tất cả các thiết bị liên quan đến phòng cháy chữa cháy hoạt động bình thường (không có bất thường)\n   5. Nhận được giấy phép xây dựng và giấy chứng nhận phòng cháy ( giữa bản cập nhật mới nhất)\n   6. Thực hiện kiểm tra định kỳ theo pháp luật đối với hệ thống phòng cháy chữa cháy và thực hiện bổ sung hoàn thiện các vấn đề phát sinh khi kiểm tra\n(Hàn Quốc) Việc kiểm tra định kỳ theo pháp luật được thực hiện thông qua việc ủy thác cho cơ quan chuyên môn.\n\n* Quy trình có nguy cơ cháy nổ : sơn, pha sơn, cao su, mạ, EPS, hộp giấy\n\n(Bắt buộc) ① Các vật liệu không cháy và thiết bị chữa cháy tự động có được lắp đặt trong các công đoạn có nguy cơ hỏa hoạn hay không\n(Bắt buộc) ② Lắp đặt và duy trì hoạt động bình thường của thiết bị phát hiện báo cháy tự động (cảm biến) trong tòa nhà là đối tượng được pháp luật quy định",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. (Mandatory) Automated fire extinguishing equipment (sprinklers, etc) not installed in fire risk process and nonflammable construction materials not used\n   2. Failure to obtain approval for use of a building (completion inspection) (illegal building)\n   3. Maintain manual operation status for automatic firefighting pump or leave broken\n   4. (Mandatory) Auto fire detection equipment not installed in process\n\nMajor\n   Two or more of the following applicable\n   1. Automatic fire extinguishing equipment, auto fire detection equipment, alarm/broadcasting equipment all installed, but not inspected at least once a month\n   2. Automatic fire extinguishing equipment, auto fire detection equipment, alarm/broadcasting equipment all installed, but two or less of all equipment found to be nonconforming\n   3. Use combustible materials for construction materials in general process\n   4. 3 or more fire extinguishers, fire hydrants, etc. not inspected monthly\n   5. Did not perform regular legal inspection for fire safety facilities\n\nMinor\n   One or more of the following applicable\n   1. Automatic fire extinguishing equipment, auto fire detection equipment, alarm/broadcasting equipment all installed, but not inspected at least once a month\n   2. Automatic fire extinguishing equipment, auto fire detection equipment, alarm/broadcasting equipment all installed, but one found to be nonconforming\n   3. 2 or less fire extinguishers, fire hydrants, etc. not inspected monthly\n   4. The initial building use approval agreement (completion inspection) was obtained, but the approval process for the extension and renovation part was not carried out.\n   5. Regular legal inspections performed but supplementations for issues found through inspections not performed\n\nConformance\n   1. Legally required inspection and monthly self-inspection of fire safety equipment\n   2. Install auto fire extinguishing equipment in processes with fire risks and use incombustible materials for construction materials, Not use combustible construction materials for general processes\n   3. Auto fire detection equipment installation and normal operation\n      (Installation standards are in accordance with the relevant national laws and regulations, but if there are no items under the laws and regulations, \n       the production process and warehouse area must be installed)\n   4. All fire safety-related equipment operates normally and have no issues\n   5. Acquired building and fire safety authorization (maintain latest copy)\n   6. Perform regular legal inspections for fire safety facilities and supplement issues found through inspection results\n       (Korea) Regular legal inspections conducted by consigning a specialized institute\n\n      * Process with risk of fire: Painting, paint mixing, rubber, plating, EPS, paper box\n\n(Mandatory) ① Use of incombustible materials and installation of auto fire extinguishing equipment in process with risk of fire\n(Mandatory) ② Installation and normal operation of auto fire detection equipment (detector) of buildings required by law",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 6,
+        "Minor": 4,
+        "Major": 2,
+        "Priority": 0,
+        "N/A": 6
+      },
+      "rule": {
+        "desc": "Hệ thống phát hiện, báo cháy và chữa cháy",
+        "priority_kw": [
+          "không lắp đặt thiết bị chữa cháy tự động",
+          "công trình bất hợp pháp",
+          "illegal building",
+          "không lắp đặt thiết bị phát hiện và báo cháy tự động"
+        ],
+        "major_kw": [
+          "bơm bù",
+          "bơm diesel",
+          "diesel pump",
+          "nút ấn báo cháy",
+          "fire alarm button",
+          "bình chữa cháy",
+          "fire extinguisher",
+          "họng nước",
+          "che chắn"
+        ],
+        "major_min_count": 3
+      }
+    },
+    {
+      "row_num": 9,
+      "provision": "BH2) Emergency Preparedness",
+      "audit_id": "BH202",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Emergency preparedness and response programs",
+      "conformance_statement": "Effective emergency preparedness and response programs (plans/processes) are established",
+      "criteria_vn": "Priority\n   Không thể phân biệt công đoạn và công việc cần ứng phó khẩn cấp hoặc không có kế hoạch ứng phó khẩn cấp\n\nMajor\n   Có 2 nội dung trong các nội dung sau đây\n   1. Đã lập kế hoạch ứng phó khẩn cấp nhưng một phần của rủi ro quan trọng được xác định trong đánh giá rủi ro đã bị bỏ qua\n   2. Không thông báo kế hoạch ứng phó khẩn cấp cho nhân viên hoặc không tiến hành huấn luyện ứng phó khẩn cấp nên nhân viên không biết về kế hoạch ứng phó khẩn cấp\n   3. Không thiết lập điểm tập kết điểm tập kết sơ tán ở trong nhà/ngoài trời\n   4. Không thiết lập trình tự, kế hoạch vận hành liên tục trong doanh nghiệp\n\nMinor\n   Có dưới 1 nội dung trong số các hạng mục ở  Major \n\nConformance\n   1. Thiết lập kế hoạch ứng phó khẩn cấp cho từng tình huống dựa trên kết quả đánh giá rủi ro\n      √ Hỏa hoạn, động đất, lũ lụt, rò rỉ hóa chất, bạo loạn (đình công)...\n   2. Tổ chức diễn tập định kỳ cho từng kế hoạch ứng phó khẩn cấp, sau đó sửa đổi kế hoạch ứng phó theo kết quả diễn tập (diễn tập hơn 2 kịch bản mỗi năm)\n   3. Thiết lập điểm tập kết điểm tập kết khi sơ tán ở trong nhà/ngoài trời\n   4. Thiết lập trình tự, kế hoạch vận hành liên tục trong doanh nghiệp",
+      "criteria_en": "Priority\n   Unable to discern process or works requiring emergency response, or have no emergency response plans\n\nMajor\n   Two of the following applicable:\n   1. Established emergency response plans, but some of the major dangers found in the risk assessment missing\n   2. Did not announce emergency response plans or perform response training for employees, and thus employees are unaware of the response plans\n   3. Emergency assembly area not installed indoors/outdoors\n   4. Business continuity resumption plans and procedures not established (BCP)\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   1. Establish emergency response plans for each situation based on the risk assessment results\n      - Fire, earthquake, storm and floods, chemical substance exposure, uprising (strikes), etc.\n   2. Perform regular training per emergency response plan and review training results to revise response plans (training for at least 2 scenarios every year)\n   3. Install emergency assembly area indoors/outdoors\n   4. Establish business continuity resumption plans and procedures",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Chương trình chuẩn bị và ứng phó khẩn cấp (ERP/BCP)",
+        "priority_kw": [
+          "không có kế hoạch ứng phó khẩn cấp",
+          "no emergency response plans"
+        ],
+        "major_kw": [
+          "không thiết lập điểm tập kết",
+          "không thiết lập trình tự, kế hoạch vận hành liên tục",
+          "bcp"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 10,
+      "provision": "BH2) Emergency Preparedness",
+      "audit_id": "BH203",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Emergency exit",
+      "conformance_statement": "Effective emergency exit access, exits, and exit discharge are adequate in number and location, readily accessible, and properly  maintained.",
+      "criteria_vn": "Priority\n    Có 1 nội dung trong các nội dung sau đây:\n   1. Đảm bảo có lối thoát hiểm, cửa thoát hiểm ở toàn bộ nơi làm việc nhưng bỏ mặc những đèn chỉ dẫn sơ tán và đèn khẩn cấp bị hỏng/ không lắp đjăt 3 chiếc trở lên\n   2. Có ít nhất 3 lối thoát hiểm trong từng tòa nhà bị chặn hoặc đang ở trạng thái khó thoát hiểm do có chướng ngại vật\n      √ Cửa thoát hiểm bị bỏ mặc ở trạng thái không thể thoát hiểm dễ dàng hoặc mất thời gian mở do bị khóa hoặc phải ấn mật khẩu \n      √ Không thể thoát hiểm nhanh chóng vì vật liệu và hàng hóa được chất trên lối thoát hiểm.\n   3. Không gắn sơ đồ thoát hiểm (bao gồm điểm tập kết khi sơ tán) \n\nMajor\n   Toàn bộ nơi làm việc, Không xác định đường lối thoát hiểm và cửa thoát hiểm, có dưới 2 thiết bị đèn chỉ dẫn sơ tán, đèn khẩn cấp bị hư hỏng\n\nMinor\n   Không gắn sơ đồ thoát hiểm ( bao gồm vị trí tập kết khi sơ tán) ở một số vị trí, sơ đồ thoát hiểm thiết thông tin\n\nConformance\n   1. Đảm bảo có lối thoát hiểm ở toàn bộ nơi làm việc (theo hai hướng)\n   2. Các thiết bị sơ tán như đèn chỉ dẫn sơ tán, đèn khẩn cấp, chuông báo cháy không bị hỏng\n   3. Sơ đồ sơ tán (bao gồm điểm tập kết khi sơ tán) được gắn mà không thiếu thông tin",
+      "criteria_en": "Priority\n   One of the following applicable:\n   1. Procure emergency evacuation route throughout the workplace, emergency exit, evacuation signal lights and emergency lighting malfunction left neglected\n      ; Three or more cases of failure among above items\n   2. Three or more of all evacuation routes per building blocked, or evacuation difficult due to obstacles\n      - Emergency exits locked with keys or passwords, etc. and left making it difficult to evacuate\n      - Materials, objects, etc. loaded on evacuation routes, making quick evacuation impossible\n   3. Evacuation drawings (including evacuation assembly area) not attached\n\nMajor\n   Procure emergency evacuation route throughout the workplace, emergency exit, evacuation signal lights and emergency lighting malfunction left neglected\n   ;Two or more cases of failure among above items\n\nMinor\n   Evacuation drawings (including evacuation assembly area) partially not attached, missing information\n\nConformance\n   1. Procure evacuation routes in all areas of workplace (2 directions)\n   2. No malfunctioning evacuation equipment such as evacuation sign lights, emergency lights, alarm bells, etc.\n   3. Attach all information on evacuation drawings (including evacuation assembly area)",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Lối thoát nạn, cửa thoát hiểm, đèn chiếu sáng khẩn cấp & sơ đồ thoát nạn",
+        "priority_kw": [
+          "không gắn sơ đồ thoát hiểm toàn bộ",
+          "3 lối thoát hiểm trong từng tòa nhà bị chặn",
+          "three or more of all evacuation routes per building blocked"
+        ],
+        "major_kw": [
+          "toàn bộ nơi làm việc không xác định đường lối thoát hiểm"
+        ],
+        "major_min_count": 6
+      }
+    },
+    {
+      "row_num": 11,
+      "provision": "BH2) Emergency Preparedness",
+      "audit_id": "BH204",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Emergency evacuation drills",
+      "conformance_statement": "Adequate and effective fire and other identified emergency evacuation drills are conducted with all workers and people on site.",
+      "criteria_vn": "Priority\n   Trong 1 năm gần nhất, không tổ chức diễn tập phòng cháy chữa cháy cho toàn bộ nhân viên \n\nMajor\n   Đã tổ chức diễn tập phòng cháy chữa cháy cho toàn bộ nhân viên trong vòng 1 năm gần đây nhưng\n   1. Thiếu sự tham gia của một số phòng ban/khu vực/công đoạn\n   2. Với nhóm làm việc theo ca, chỉ tổ chức diễn tập cho một số ca làm việc\n   3. Bỏ qua diễn tập phòng cháy chữa cháy cho nhân sự làm ca ngày/ đêm (chỉ tổ chức diễn tập cho nhân viên làm việc vào ban đêm)\n\n\nMinor\n   Đã tổ chức diễn tập phòng cháy chữa cháy nhưng thiếu nội dung đánh giá kết quả (thời gian cần thiế sơ tán , các nội dung thiếu sót, hạng mục cần bổ sung...)\n\nConformance\n   1. Tổ chức diễn tập phòng cháy chữa cháy mỗi năm một lần cho toàn bộ nhân viên\n   2. Xem xét các vấn đề tồn đọng và hoàn thiện các biện pháp khắc phục",
+      "criteria_en": "Priority\n   Did not perform fire extinguishing training for all employees in the past year\n\nMajor\n   Performed fire extinguishing training for all employees in the past year, but,\n   1. Omitted training for some departments/zones/processes\n   2. Conducted training only for some shifts\n   3. Omitted nighttime fire safety training (limited to when operating night shift)\n\nMinor\n   Fire safety training performed, but evaluations on results missing (time taken for evacuation, insufficiencies, necessary supplementations, etc.)\n\nConformance\n   1. Perform fire safety training at least once a year and participated by all employees\n   2. Review issues and completed corrective actions",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Diễn tập sơ tán khẩn cấp PCCC cho toàn bộ ca/nhân viên",
+        "priority_kw": [
+          "không tổ chức diễn tập phòng cháy chữa cháy",
+          "did not perform fire extinguishing training"
+        ],
+        "major_kw": [
+          "ca đêm",
+          "night rehearsals",
+          "nighttime",
+          "82/900",
+          "chỉ tổ chức diễn tập cho một số ca",
+          "thiếu sự tham gia"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 12,
+      "provision": "BH3) Occupational Injury and Illness",
+      "audit_id": "BH301",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Industrial accident cause analysis",
+      "conformance_statement": "Work-related accidents, near-misses, and illnesses are reported, tracked, accurate, investigated, and analyzed, and workers are not  in situations that can cause them imminent harm",
+      "criteria_vn": "Priority\n   Có ít nhất một trong các nội dung sau:\n1. Không báo cáo tai nạn lao động, bệnh nghề nghiệp cần báo cáo với cơ quan có liên quan như Bộ Lao động\n2. Không có thủ tục ứng phó để người lao động báo cáo, điều trị, bồi thường, quay trở lại làm việc khi xảy ra tai nạn lao động và bệnh nghề nghiệp\n3. Trở lại làm việc trước khi thực hiện đầy đủ các biện pháp để phục hồi bệnh tật\n\nMajor\n     Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không quản lý các ghi chép về tai nạn lao động, bệnh nghề nghiệp, tính huống cận nguy hiểm(near miss)\n   2. Có quản lý các ghi chép về tai nạn lao động, bệnh nghề nghiệp, tính huống cận nguy hiểm nhưng không tiến hành điều tra tai nạn, phân tích nguyên nhân, biện pháp khắc phục, ngăn ngừa tái phát để ngăn ngừa tai nạn tương tự có thể xảy ra\n\nMinor\n   Có hơn 1 nội dung trong các nội dung sau đây\n   1. Có quản lý các ghi chép về tai nạn lao động, bệnh nghề nghiệp, tính huống cận nguy hiểm nhưng còn nhiều thiếu sót\n   2. Có quản lý các ghi chép về tai nạn lao động, bệnh nghề nghiệp, tính huống cận nguy hiểm và có tiến hành phân tích và thưc hiện các biện pháp ngăn ngừa tái phát nhưng còn nhiều thiếu sót\n   3. Đã xác nhận rằng có bệnh nghề nghiệp theo kết quả khám sức khỏe nhưng không thực hiện các biện pháp xử lý như chuyển đổi công việc, khám và điều trị thêm\n\nNot Applicable\n   Không có tai nạn lao động, bệnh nghề nghiệp trong 3 năm qua\n\nConformance\n    1. Thiết lập quy trình ứng phó trong trường hợp tai nạn lao động và bệnh nghề nghiệp\n   2. Quản lý các ghi chép về tai nạn lao động, bệnh nghề nghiệp, tính huống cận nguy hiểm \n   3. Thực hiện các biện pháp khắc phục bệnh tật như thay đổi công việc, khám hoặc điều trị thêm sau khi xác nhận rằng có bệnh nghề nghiệp, đồng thời quản lý các ghi chép về tai nạn lao động và bệnh nghề nghiệp",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. Not reported industrial accidents or job-related diseases that must be reported to the relevant institute such as the Ministry of Employment and Labor \n   2. No response procedures such as reporting, treatment, compensation and return when industrial accidents and job-related diseases occur\n   3. Return to work before sufficient measures are taken to recover from the disease (standard: when it is possible to return based on the medical certificate)\n\nMajor\n   One or more of the following applicable\n   1. Records on industrial accidents, job-related diseases and near miss accidents not managed\n   2. Records on industrial accidents, job-related diseases, and near misses are managed, but investigation of accident, cause analysis, corrective action, and \n      recurrence prevention measures, etc. to prevent same or similar accidents not carried out\n\nMinor\n   One or more of the following applicable\n   1. Records on industrial accidents, job-related diseases and near miss accidents managed, but partially omitted\n   2. Records on industrial accidents, job-related diseases and near miss accidents managed, analysis and recurrence prevention plans implemented, but partially missing\n   3. Health exam results showed opinions for job-related diseases, but measures such as work change, additional inspection, treatment, etc. not taken\n\nNot Applicable\n   No industrial accidents or job-related diseases occurred in the past 3 years\n\nConformance\n   1. Response procedures for industrial accidents and job-related diseases constructed \n   2. Records on industrial accidents, job-related diseases and near miss accidents managed\n   3. Work change, additional examinations, and if necessary, sufficient measures to recover from diseases such as treatment for persons having job-related diseases taken, \n      and records are being managed",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Báo cáo, điều tra nguyên nhân tai nạn lao động & bệnh nghề nghiệp",
+        "priority_kw": [
+          "không báo cáo tai nạn lao động",
+          "không có thủ tục ứng phó",
+          "trở lại làm việc trước khi"
+        ],
+        "major_kw": [
+          "không quản lý các ghi chép về tai nạn",
+          "không tiến hành điều tra tai nạn",
+          "không phân tích nguyên nhân"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 13,
+      "provision": "BH3) Occupational Injury and Illness",
+      "audit_id": "BH302",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Use of first aid equipments and kit",
+      "conformance_statement": "Adequate first response equipment and first aid kits to provide medical treatment for injured or ill workers are available.",
+      "criteria_vn": "Priority\n     Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không có nhân lực cứu hộ khẩn cấp, nhân viên y tế doanh nghiệp (quy định pháp luật) và không có các trang thiết bị sơ cấp cứu trong công ty (phòng y tế, dụng cụ sơ cấp cứu theo luật...)\n    2. Không có quy trình sơ cấp cứu\n\nMajor\n   Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không thể ứng cứu vì không có nhân lực cứu hộ khẩn cấp khi xảy ra tai nạn hoặc có người bệnh.\n   2. Đã lựa chọn nhân lực cứu hộ khẩn cấp nhưng chưa được đào tạo\n   3. Không chuẩn bị hòm sơ cấp cứu, dược phẩm dự phòng để ứng phò với tình huống phát sinh bệnh nhân cần cấp cứu\n   4. Chuẩn bị hòm sơ cấp cứu, dược phẩm dự phòng để ứng phò với tình huống phát sinh bệnh nhân cần cấp cứu nhưng chỉ có 1 số bộ phận, 1 số công đoạn trong công ty mới có thể tiếp cận \n\nMinor\n   Có hơn 1 nội dung trong các nội dung sau đây\n   1. Có nhân lực cứu hộ khẩn cấp được đào tạo nhưng không có quy trình ứng phó\n   2. Có nhân lực cứu hộ khẩn cấp nhưng người lao động không biết (nhận biết) về nhân viên cứu hộ\n   3. Chuẩn bị hòm sơ cấp cứu, dược phẩm dự phòng  nhưng không quản lý số lượng \n   4. Chuẩn bị hòm sơ cấp cứu, dược phẩm dự phòng, không ghi chép quản lý số lượng trên 1 lần 1 tháng\n\nNot Applicable\n  Không có nghĩa vụ mở rộng trang thiết bị y tế và nhân lực y tế trong công ty \n\nConformance\n    1. Có nhân lực sơ cấp cứu khẩn cấp đủ tư cách\n    2. Đã thiết lập trình tự các bước ứng phó thích hợp khi xảy ra trường hợp khẩn cấp và lưu giữ các ghi chép về tình huống khẩn cấp đã phát sinh tại nơi làm việc\n   3. Mở rộng trang thiết bị y tế và nhân lực y tế trong công ty theo luật \n   4. Chuẩn bị hòm cấp cứu và các loại dược phẩm khẩn cấp, đồng thời kiểm tra định kỳ mỗi tháng 1 lần và lưu trữ, quản lý ghi chép kiểm tra",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. No emergency rescue personnel or industrial health medical personnel or in company medical facilities (legal medical offices or first aid supplies)\n   2. No emergency rescue procedure\n\nMajor\n   One or more of the following applicable\n   1. Did not procure emergency rescue personnel to respond to accidents or patients, thus making response impossible\n   2. Emergency rescue personnel selected, but not trained\n   3. First-aid kit, emergency medicine, etc. for responding to emergency patients not furnished\n   4. First-aid kit, emergency medicine, etc. for responding to emergency patients furnished but access to first-aid kit at some departments or processes at the workplace limited\n\nMinor\n   One or more of the following applicable\n   1. Emergency rescue personnel procured and training performed, but no response process\n   2. Emergency rescue personnel procured, but workers are not aware of the rescue personnel\n   3. First-aid kit and emergency medicine furnished but medicine inventory not managed\n   4. No monthly inspection records for procuring first-aid kits and emergency medicine or for maintaining inventory \n\nNot Applicable\n   Not legal required to procure in-company medical facilities or medical staff\n\nConformance\n   1. Procured qualified first-aid personnel\n   2. Established procedures for appropriate response when emergencies occur and possess records for emergency situations that occur at the workplace\n   3. Procured in-company medical facility and medical staff according to legal standards\n   4. Procured first-aid kit and emergency medicine, and managing inspection records at least once a month to maintain appropriate inventory",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Trang thiết bị sơ cấp cứu, túi y tế & phòng y tế",
+        "priority_kw": [
+          "không có nhân lực cứu hộ khẩn cấp",
+          "không có quy trình sơ cấp cứu",
+          "no emergency rescue procedure"
+        ],
+        "major_kw": [
+          "không chuẩn bị hòm sơ cấp cứu",
+          "chưa được đào tạo sơ cấp cứu",
+          "first-aid kit not furnished"
+        ],
+        "major_min_count": 4
+      }
+    },
+    {
+      "row_num": 14,
+      "provision": "BH4) Industrial Hygiene",
+      "audit_id": "BH401",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Controls for worker exposures to chemical, biological and physical agents",
+      "conformance_statement": "Workers’ exposures to chemical, biological, and physical hazards are identified, evaluated, and adequately controlled in accordance  with the hierarchy of controls, which is maintained through ongoing, systematic monitoring of worker’s health",
+      "criteria_vn": "Priority\n   Có hơn 1 nội dung trong các nội dung sau đây:\n   1. (Bắt buộc) Sử dụng chất bị cấm trong quy trình hoặc sử dụng hơn 3 chất bị hạn chế và chưa được phê duyệt trong quy trình\n   2. (Bắt buộc) Không lắp đặt thiết bị xả cục trong những quy trình có nghĩa vụ phải lắp đặt thiết bị xả cục bộ và có hơn 3 thiết bị có tốc độ gió không đạt\n       (* Hàn Quốc : quy trình sử dụng chất thuộc đối tượng quản lý, Luật An toàn và Sức khoẻ Lao động)\n   3. (Bắt buộc) Trong nơi làm việc, không tiến hành đo lường chất lượng môi trường làm việc với các tác nhân gây hại\n   4. Không tiến hành kiểm tra sức khỏe đặc biệt (bao gồm cả trước/sau khi bố trí) cho đối tượng công nhân tiếp xúc với các tác nhân có hại\n   5. Không tiến hành kiểm tra sức khỏe tổng quát cho toàn bộ nhân viên\n   6. Không có giấy phép bảo quản và xử lý hóa chất (chất độc hại)\n   7. Tình trạng bảo quản hóa chất (chất độc hại) không đạt chuẩn  và khi phát sinh tình huống như rò rỉ thì dẫn tới  sự cố ô nhiễm môi trường, thiết bị\n\nMajor\n    Có hơn 1 nội dung trong các nội dung sau đây\n   1. Sử dụng dưới 2 chất bị hạn chế và chưa được phê duyệt trong quy trình\n   2. Đã lắp đặt tất cả thiết bị xả cục bộ trong những quy trình phát sinh tác nhân gây hại nhưng có 2 thiết bị có tốc độ gió không đạt\n   3. Có 2 địa điểm trở lên có kết quả đo lường chất lượng môi trường làm việc vượt quá tiêu chuẩn pháp luật\n   4. Khi lựa chọn công đoạn để đo lường chất lượng môi trường làm việc, bỏ qua công đoạn có thể phát sinh các nhân tố gây hại  \n   5. Tiến hành kiểm tra sức khỏe đặc biệt (bao gồm cả trước/sau khi bố trí) đối tượng công nhân tiếp xúc với các yếu tố có hại nhưng bỏ qua 1 bộ phận công nhân tiếp xúc với các tác nhân gây hại khi xã nhận kết quả chất lượng môi trường làm việc\n   6. Dưới 10% nhân viên không tiến hành kiểm tra sức khỏe tổng quát \n   7. Không thiết lập quy trình làm việc để quản lý hóa chất (chất độc hại)\n       - Xuất nhập kho, bảo quản, cung cấp, sử dụng, tiêu hủy \n   8. Không có quy trình kiểm tra tính độc hại khi sử dụng hóa chất mới \n   9. Không tuân thủ các tiêu chuẩn lắp đặt kho chứa hóa chất (chất độc hại) * Các tiêu chuẩn lắp đặt theo quy định của pháp luật quốc gia\n       ① Kho lưu trữ: Kiểm tra xem có lắp đặt hệ thống thông gió, ánh sáng, đèn, lắp đặt cửa chống cháy, cấu trúc chống cháy hay không. \n       ② Sàn nhà kho lưu trữ: Kiểm tra xem có xây dựng bằng chất liệu chống thấm, thiết kế nghiêng để dễ hấp thụ dầu hay không.\n       ③ Kiểm tra xem có lắp đặt thiết bị chống rò rỉ trong kho bảo quản và các vật dụng cần thiết ứng phó vưới tình huống khẩn cấp hay không\n      ④ Lắp đặt các thiết bị điện kiểu chống nổ ở khu vực lưu trữ chất nguy hiểm ( đèn, công tắc, ổ điện, đèn cảm ứng, máy dò...)\n       ⑤ Kiểm tả xem có lắp đặt thiết bị báo rò rỉ, cột thu lôi hay không ( khu vực lưu trữ chất độc hại)                    ⑥ Bảo quản riêng biệt theo đặc tính, MSDS, dán nhãn an toàn sức khỏe\n      \n* Tuân thủ tối thiểu các hạng mục cần thiết nếu không thuộc đối tượng cấp phép\n       ① Thiết bị chống rò rỉ  ② Bảo quản riêng biệt theo đặc tính ③ Gắn nhãn an toàn sức khỏe/MSDS \n   10. Không quản lý hồ sơ xuất nhập kho tại nơi lưu trữ hóa chất (chất độc hại)\n(Hàn Quốc) Kiểm tra định kỳ (1 lần/tuần) , lưu trữ hồ sơ 5 năm trở lên\n\nMinor\n     Có hơn 1 nội dung trong các nội dung sau đây\n   1. Sử dụng dưới 1 chất bị hạn chế và chưa được phê duyệt trong quy trình\n   2. Đã lắp đặt tất cả thiết bị xả cục bộ trong những quy trình phát sinh tác nhân gây hại nhưng có 1 thiết bị có tốc độ gió không đạt\n   3. Không trưng bày MSDS (phiên bản mới nhất, ngôn ngữ bản địa, mẹo quản lý công việc theo từng quy trình)\n   4. Có ít nhất 1 nơi mà kết quả đo lường môi trường làm việc vượt quá tiêu chuẩn pháp luật quy định \n   5. Có dưới 5% toàn bộ nhân viên không thưucj hiện kiểm tra sức khỏe cơ bản \n   6. Có 1 nội dung trùng với hạng mục 7 tới 10 của Major \n\nNot Applicable\n   1.Không áp dụng\n   2. Không bảo quản, sử dụng hóa chất (chất độc hại) trong khu vực công ty \n\nConformance\n  1. Không sử dụng chất bị cấm hoặc chất bị hạn chế và không được phê duyệt trong quy trình\n   2. Lắp đặt thiết bị xả cục bộ trong những quy trình phát sinh tác nhân gây hại vàcó tốc độ gió không đạt tiêu chuẩn\n   3. Đo lường môi trường làm việc, tiến hành ddaafy đủ kiểm tra sức khỏe cơ bản và kiểm tra sức khỏe đặc biệt \n     * Theo tiêu chuẩn quy định pháp luật quốc gia\n   4. Thiết lập quy trình làm việc để quản lý việc sử dụng hóa chất ( chất độc hại) trong khu vực công ty,  vận hành và quản lý quy trình nhằm dự phòng tai nạn\n\n * 금지물질 2종 및 제한물질 23종 중 수세척, 냉각제로 사용금지, \n    이외 제한물질 사용시 G-SRM 등록 승인후 사용(국소배기 설치, 안전보호구 착용, 교육, 안전보건표지 부착 등) \n  - 금지물질 2종(노말헥산 110-54-3, 벤젠 71-43-2) \n  - 제한물질 23종(메탄올 67-56-1, TCE 79-01-6, 톨루엔 108-88-3, 시클로헥사논 108-94-1, 디클로로메탄 75-09-2, \n                    니트로메탄 75-52-5, 디메틸포름아미드 68-12-2, 트리클로로메탄 67-66-3, 퍼클로로에틸렌 127-18-4\n                    산화에틸렌 75-21-8, 2-메톡시에탄올 109-86-4, 2-메톡시에틸아세테이트 110-49-6, 2-에톡시에탄올 110-80-5,\n                    2-에톡시에틸아세테이트 111-15-9, 포름알데히드 50-00-0, 비스(2-메톡시에틸)에테르 111-96-6, 1,2-디클로로프로판 78-87-5, \n                    1,3-부타디엔 106-99-0, N,N-디메틸아세트아미드 127-19-5, 1-브로모프로판 106-94-5, 2-브로모프로판 75-26-3, \n                    아크릴로니트릴 107-13-1, 염화비닐 75-01-4)\n\n(필수) ③ 작업환경 정기 측정 미실시\n(필수) ④ 공정내 금지물질 사용, 제한물질 미승인 사용\n(필수) ⑥ 유해공정 국소배기설치 및 풍속 정상 여부",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. (Mandatory) Use of prohibited materials in the process or use of 3 or more unauthorized or restricted substances within the process\n   2. (Mandatory) Local ventilator not installed in processes requiring installation of local ventilator or 3 or more not meeting wind speed requirements\n   3. (Mandatory) Work environment measurement for harmful factors in the workplace not performed\n   4. Special health exams (including before/after arrangement) for workers exposed to harmful elements not performed\n   5. General health exams for all employees not performed\n   6. Authorization for chemicals(hazardous material) storage and handling not acquired \n   7. Insufficient handling and storage for chemicals(hazardous materials) thus connected to facility or environmental contamination accidents when leaked\n\nMajor\n   Two or more of the following applicable\n   1. Use of 2 or less unauthorized or restricted materials in the process\n   2. Local ventilators installed in all processes that generate harmful elements, but 2 or more areas with insufficient wind speed\n   3. More than 2 areas with work environment results exceeding legal standards\n   4. Missing process where harmful elements occur when selecting target process related to work environment measurement  \n   5. Special health exam (including before and after assignment) for workers exposed to harmful elements performed, \n      but some workers exposed to harmful elements found during the work environment measurement results omitted\n   6. General health exams for all employees not performed for less than 10%\n   7. No work procedure for managing chemicals(hazardous material) management established\n       - Shipping and warehousing, storage, supply, use, discarding\n   8. No procedure for reviewing hazards when implementing new chemical materials\n   9. Installation standards of chemicals(hazardous materials) storage location not observed\n       ① Storage area: Check for chemical-resistant structure, installation of firewalls, sunlight, lighting, ventilation facility installation\n       ② Storage area floor: Check that the material does not allow permeation and check for oil collection equipment that is on a slope\n       ③ Check installation of leak prevention facility and furnishing of emergency response goods within the storage area\n       ④ Installation of explosion proof electric facilities within the hazardous material storage area (lights, switches, outlets, signal lights, detectors)\n       ⑤ Check for leak detection facilities and installation of lightning rods (hazardous material storage area)\n       ⑥ Separate storage by phase, MSDS, safety and health label attachment\n        * When not included in authorized subjects, minimal items of compliance\n       ① Leak prevention facility, ② Storage by phase, ③ Check storage and health label/MSDS furnishing\n   10. Inventory shipping/warehousing records not managed in the hazardous material storage area\n       (Korea) regular inspection (once a week) storage period 5 years ↑\n\nMinor\n   One or more of the following applicable\n   1. Use of 1 unauthorized or restricted materials in the process\n   2. Local ventilators installed in all processes that generate harmful elements, but 1 area with insufficient wind speed\n   3. MSDS not furnished (latest version, local language, work management guide per process)\n   4. 1 area with work environment results exceeding legal standards\n   5. General health exams for all employees not performed for less than 5%\n   6. One or more from Priority evaluation items 7 ~ 10\n\nNot Applicable\n   1. Not applicable\n   2. Chemicals(Hazardous materials) not used or stored within the workplace\n\nConformance\n   1. No prohibited material or unauthorized or restricted materials used in the process\n   2. Installation of local ventilator in harmful element generating process and satisfy wind speed standard\n   3. Work environment measurement, general health diagnosis, special health diagnosis performed without omissions\n     * Comply with legal standards of the corresponding country\n   4. There are work procedures for managing chemicals(hazardous materials) within the workplace and \n      processes for preventing accidents have been constructed and are being operated\n\n * 2 prohibited materials and 23 restricted materials cannot be used for waster cleaning or as refrigerant, \n    When using other restricted materials, use after approval of G-SRM registration (local ventilator installation, wearing safety protective gear, attachment of safety health labels, etc.) \n    - 2 prohibited materials (normal hexane 110-54-3, benzene 71-43-2) \n    - 23 restricted materials (methanol 67-56-1, TCE 79-01-6, toluene 108-88-3, cyclohexanone 108-94-1, dichloromethane 75-09-2, \n                      nitromethane 75-52-5, dimethylformamide 68-12-2, trichloromethane 67-66-3, perchloroethylene 127-18-4,\n                      Ethylene Oxide 75-21-8, 2-Methoxyethanol 109-86-4, 2-Methoxyethyl acetate 110-49-6, 2-Ethoxyethanol 110-80-5,\n                      2-Ethoxyethyl acetate 111-15-9, Formalin 50-00-0, Diglyme 111-96-6, 1,2-Dichloropropane 78-87-5, 1,3-Butadiene 106-99-0,\n                      N,N-Dimethylacetamide 127-19-5, 1-Bromopropane 106-94-5, 2-Bromopropane 75-26-3, Acrylonitrile 107-13-1, Vinyl chloride 75-01-4)\n\n(Mandatory) ④ Use of prohibited materials in process, use of unauthorized restricted materials\n(Mandatory) ⑥ Installation of local vent for harmful process and whether wind speed is normal\n(Mandatory) ③ Regular work environment measurement not performeds",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 6,
+        "Minor": 4,
+        "Major": 2,
+        "Priority": 0,
+        "N/A": 6
+      },
+      "rule": {
+        "desc": "Kiểm soát phơi nhiễm hóa chất, tác nhân vật lý & sinh học",
+        "priority_kw": [
+          "sử dụng chất bị cấm",
+          "benzene",
+          "n-hexane",
+          "không tiến hành đo lường chất lượng môi trường",
+          "không tiến hành kiểm tra sức khỏe"
+        ],
+        "major_kw": [
+          "msds",
+          "ghs",
+          "kho hóa chất",
+          "kho hoá chất",
+          "chemical storage",
+          "khay chống tràn",
+          "ứng phó sự cố"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 15,
+      "provision": "BH5) Physically Demanding Work",
+      "audit_id": "BH501",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Control for worker exposure to the hazards of physically demanding work",
+      "conformance_statement": "Worker exposure to the hazards of physically demanding work is controlled effectively.",
+      "criteria_vn": "Priority\n    Không điều tra tác nhân gây hại tới cơ xương khớp\n\nMajor\n   Đã xác định những công việc tạo ra gánh nặng cho cơ xương thông qua tổ chức điều tra định kỳ về các nhân tố gây hại nhưng không lập kế hoạch, không có ghi chép thực hiện nhằm cải thiện quy trình\n\nMinor\n    Đã lập kế hoạch cải thiện những công việc tạo ra gánh nặng cho cơ xương khớp được xác định thông qua tổ chức điều tra định kỳ về các nhân tố gây hại nhưng chưa thi hành các đối sách cần thiết\n\nNot Applicable\nKhông áp dụng\n\nConformance\n      Thực hiện các hoạt động cải thiện những quy trình nguy hiểm gây hại được xác định sau khi tổ chức điều tra định kỳ về các nhân tố gây hại của những công việc tạo ra gánh nặng cho cơ xương khớp, đồng thời ghi chép và quản lý chúng",
+      "criteria_en": "Priority\n   Muscular-skeletal harm factor investigations not performed \n\nMajor\n   Muscular-skeletal demanding work identified through regular harm factor surveys, but no plan for improving the process was established or there are no execution records\n\nMinor\n   Established improvement plans for muscular-skeletal demanding work identified through regular harmful factor surveys but process improvements were not conducted\n\nConformance\n   Perform muscular-skeletal demanding work harm factor surveys to identify harmful and dangerous processes to perform improvement activities and manage records",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Kiểm soát công việc nặng nhọc / Ergonomics cơ xương khớp",
+        "priority_kw": [
+          "không điều tra tác nhân gây hại tới cơ xương khớp",
+          "muscular-skeletal harm factor investigations not performed"
+        ],
+        "major_kw": [
+          "không lập kế hoạch cải thiện cơ xương khớp",
+          "no plan for improving"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 16,
+      "provision": "BH6) Machine Safeguarding",
+      "audit_id": "BH601",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Machine-safeguarding program",
+      "conformance_statement": "An adequate and effective machine-safeguarding program is implemented, and workers operate machinery safely.",
+      "criteria_vn": "Priority\nÁp dụng cho một hoặc nhiều nội dung sau đây:\n   1. Bỏ qua việc kiểm tra máy móc nguy hiểm phải được kiểm tra an toàn.\n   2. Không lắp đặt hai hoặc nhiều thiết bị an toàn và bảo vệ cho 15 máy móc nguy hiểm chính có nguy cơ xảy ra tai nạn an toàn.\n   3. Việc tháo rời tùy tiện hai hoặc nhiều thiết bị an toàn và bảo vệ của 15 loại máy móc nguy hiểm lớn, có nguy cơ xảy ra tai nạn an toàn.\n\n ※ 15 máy móc nguy hiểm hạng nặng gồm:\n   1. Presses, 2. Shears, 3. Cranes, 4. Lifts, 5. Pressure vessels, 6. Gondolas, 7. Centrifuges, 8. Rollers, 9. Injection molding machines, \n   10. Aerial work platforms, 11. Conveyors, 12. Industrial robots, 13. Mixers, 14. Crushers (shredders), 15. Foaming machines\n\nMajor\nÁp dụng cho một hoặc nhiều nội dung sau đây:\n   1. Việc kiểm tra an toàn máy móc nguy hiểm đã được thực hiện, nhưng chu kỳ kiểm tra của một số thiết bị đã vượt quá (3 năm sau khi lắp đặt, mỗi 2 năm một lần sau đó)\n   2. Một hoặc ít hơn một thiết bị an toàn và bảo vệ cho 15 máy móc nguy hiểm chính có nguy cơ tai nạn an toàn chưa được lắp đặt\n   3. Một hoặc ít hơn hành vi tháo gỡ tùy tiện các thiết bị an toàn và bảo vệ của máy móc nguy hiểm có nguy cơ tai nạn an toàn.\n\nMinor\n   1. Một hoặc nhiều thiết bị an toàn và bảo vệ cho máy móc nguy hiểm (ngoại trừ loại 15 loại máy chính) có nguy cơ tai nạn an toàn không được lắp đặt.\n   2. Một hoặc ít hơn việc tháo gỡ tùy tiện các thiết bị an toàn và bảo vệ cho máy móc nguy hiểm (ngoại trừ loại 15 loại máy chính) có nguy cơ tai nạn an toàn.   \n   3. Một hoặc nhiều quy trình làm việc an toàn, quy tắc an toàn, biển báo an toàn và sức khỏe không được đăng tải (bằng ngôn ngữ mà người lao động có thể hiểu được).\n\nKhông áp dụng\nKhông áp dụng\n\nConformance\n   1. Thủ tục kiểm tra an toàn định kỳ cho các thiết bị cơ khí nguy hiểm được thiết lập và kết quả kiểm tra được ghi lại\n   2. Lắp đặt các thiết bị an toàn và bảo vệ cho các thiết bị cơ khí nguy hiểm có nguy cơ tai nạn hoặc thảm họa nghiêm trọng\n   3. Không tháo rời thiết bị bảo vệ khi công nhân vận hành thiết bị cơ khí\n   4. Quy trình làm việc an toàn, quy tắc an toàn, biển báo an toàn và sức khỏe tồn tại (bằng ngôn ngữ mà người lao động có thể hiểu)",
+      "criteria_en": "Priority\nOne or more of the following applies:\n   1. Subject to inspection of dangerous mechaninery subject to safety inspection is omitted.\n   2. Two or more safety and protection device for major 15 dangerous mechaninery with risk of safety accidents not installed\n   3. Two or more arbitrary removal of safety and protective devices for major 15 dangerous machinery with a risk of safety accidents.\n\n ※ Major 15 dangerous machinery\n   1. Presses, 2. Shears, 3. Cranes, 4. Lifts, 5. Pressure vessels, 6. Gondolas, 7. Centrifuges, 8. Rollers, 9. Injection molding machines, \n   10. Aerial work platforms, 11. Conveyors, 12. Industrial robots, 13. Mixers, 14. Crushers (shredders), 15. Foaming machines\n\nMajor\nOne or more of the following applies:\n   1. The safety inspection of dangerous machinery was conducted, but the inspection cycle for some equipment was exceeded (3 years after installation, every 2 years after)\n   2. One or less safety and protection device for major 15 dangerous mechaninery with risk of safety accidents not installed\n   3. One or less arbitrary removal of safety and protective devices for dangerous machinery with a risk of safety accidents.\n\nMinor\n   1. One or more safety and protection device for dangerous mechaninery(except major 15) with risk of safety accidents not installed\n   2. One or less arbitrary removal of safety and protective devices for dangerous machinery(except major 15) with a risk of safety accidents.\n   3.   One or more safety work procedures, safety rules, safety and health signs are not posted (in language that the workers can understand)\n\nNot Applicable\nNot applicable\n\nConformance\n   1. Procedures for regularly performing safety inspections for dangerous mechanical instruments established and inspection results procured\n   2. Install safety devices and protection devices for dangerous mechanical instruments with risks of safety accidents or serious disasters\n   3. No protection device disassembly when the worker operates the mechanical equipment \n   4. Safety work procedures, safety rules, safety and health signs exist (in language that the workers can understand)",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 6,
+        "Minor": 4,
+        "Major": -2,
+        "Priority": -6,
+        "N/A": 6
+      },
+      "rule": {
+        "desc": "Chương trình an toàn máy móc thiết bị (Thiết bị áp lực, băng tải, che chắn)",
+        "priority_kw": [
+          "tháo rời tùy tiện hai hoặc nhiều thiết bị an toàn",
+          "bỏ qua việc kiểm tra toàn bộ máy móc nguy hiểm"
+        ],
+        "major_kw": [
+          "chưa được kiểm định",
+          "not tested",
+          "untested",
+          "nút dừng khẩn cấp",
+          "emergency stop",
+          "cover an toàn",
+          "secure cover",
+          "không được lắp cover",
+          "cảm biến va chạm"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 17,
+      "provision": "BH7) Food, Sanitation, and Housing",
+      "audit_id": "BH701",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Infrastructure for workers' living/sanitary facilities (restrooms, corridors, etc.)",
+      "conformance_statement": "Worker housing is clean, safe, well-maintained, and meets international housing standards.",
+      "criteria_vn": "Priority\n  Có hơn 1 nội dung trong các nội dung sau đây: \n1. Không có giấy phép pháp lý để vận hành ký túc xá\n2. Không có kế hoạch dự phòng khẩn cấp, đánh giá tính nguy hiểm trong trường hợp xảy ra tai nạn như hỏa hoạn, tai nạn vệ sinh, v.v. trong ký túc xá và không gian cư trú của công nhân do công ty cung cấp\n- Khi có sự thay đổi, chẳng hạn như thay đổi cơ sở vật chất, cần thực hiện đánh giá lại  tính nguy hiểm và sửa đổi kế hoạch phòng tránh khẩn cấp, vv theo đó\n\nMajor\n    Có hơn 1 nội dung trong các nội dung sau đây: \n   1. Cơ sở hạ tầng ký túc xá không đáp ứng các tiêu chuẩn an toàn/ vệ sinh\n1) Thực hiện vệ sinh, khử trùng và kiểm soát côn trùng  thường xuyên (quản lý ghi chép)\n2) Khu vực chung, nhà vệ sinh hành lang sạch sẽ\n3) Thông gió thích hợp, cung cấp ánh sáng, cung cấp thiết bị điện an toàn\n4) Phân biệt khu vực ở và khu vwujc ăn uống, cung cấp các tiện ích xử lý chất thải sinh hoạt phù hợp\n5) Lắp đặt và bảo trì các thiết bị chống cháy và phòng tránh khẩn cấp (máy thăm dò hỏa hoạn /bình chữa cháy, lối thoát hiểm)\n6) Thực hiện huấn luyện hỏa hoạn/ ứng phó khẩn cấp đối với người sống trong ký túc xá (trên 1 lần/năm, quản lý hồ sơ)\n\nMinor\n   Trường hợp cơ sở hạ tầng ký túc xá đáp ứng các tiêu chuẩn an toàn / vệ sinh, nhưng việc quản lý hồ sơ như kiểm soát khử trùng, huấn luyện sơ tán bị thiếu sót\n\nNot Applicable\n   Không có khu vực cho nhân viên cư trú như ký túc xá...\n\nConformance\n    1. Có giấy phép pháp lý để vận hành ký túc xá\n    2. Xây dựng và vận hành các quy trình quản lý như vệ sinh/an toàn cho ký túc xá và không gian sống do công ty cung cấp, đồng thời quản lý hồ sơ để người sống trong khu vwujc ký túc xá không tiếp xúc với các yếu tố nguy cơ có hại.",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. Legal authorization for operating dormitories not acquired\n   2. No risk assessment, emergency evacuation plans, etc. for accidents such s fires, hygienic accidents, etc. in dorms or worker’s residential spaces provided by company\n   * It is necessary to re-conduct risk assessment and revise emergency evacuation plans when facility change, etc. occurs\n\nMajor\n   One or more of the following applicable:\n   1. Dorms and auxiliary facilities not meets clean and hygiene standards (Records must be managed)\n      1) Perform regular cleaning, disinfection and pest prevention\n      2) Common areas, hallways,  restrooms, etc. are clean  \n      3) Providing adequate ventilation, lighting, and safe electrical facilities\n      4) Separation of lodging and cooking facilities, and providing adequate domestic waste disposal facilities (Fire detection/digestion, evacuation guidance facilities)\n      5) Install and maintain fire response and emergency evacuation facilities\n      6) Conduct fire/emergency evacuation training for residing personnel (at least once a year, records must be managed)\n\nMinor\n   Dorms and auxiliary facilities meets clean and hygiene stadards, but do not manage records such as disinfection/pest prevention, evacuation training, etc.\n\nNot Applicable\n   Employee residential facility such as dorm not operated\n\nConformance\n      1. Acquired legal licensing related to operation of dormitory\n      2. Management procedures such as hygiene and safety of dorms or living spaces provieded by company have been established and operated, and records management is good, so residents are not exposed to harmful risk factors.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Hạ tầng ký túc xá & khu vệ sinh sinh hoạt",
+        "priority_kw": [
+          "không có giấy phép pháp lý để vận hành ký túc xá",
+          "không có kế hoạch dự phòng khẩn cấp trong ký túc xá"
+        ],
+        "major_kw": [
+          "cơ sở hạ tầng ký túc xá không đáp ứng",
+          "dorms and auxiliary facilities not meets"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 18,
+      "provision": "BH7) Food, Sanitation, and Housing",
+      "audit_id": "BH702",
+      "audit_item": "O",
+      "template_significance": "Major",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Workplace infrastructure (toilets, workplaces, restaurants, cafes, etc.)",
+      "conformance_statement": "Bathrooms, employee spaces, cafeterias, and food areas are safe, clean, well-maintained, and well-managed.",
+      "criteria_vn": "Priority\n    Có hơn 1 nội dung trong các nội dung sau đây\n   1. Chưa được phép điều hành nhà ăn (phục vụ bữa ăn tập thể, (Hàn Quốc) 50 người ↑) hoặc ký túc xá\n   2. Đầu bếp  và chuyên gia dinh dưỡng làm việc trong nhà ăn hoặc ký túc xá ((Hàn Quốc) 100 người ↑) không có chứng chỉ hành nghề (bao gồm cả giấy chứng nhận sức khỏe đầu bếp) hoặc đã hết hạn\n   3. Nhà ăn, kho lưu trữ thực phẩm có chứa nguyên liệu, thực phẩm hết hạn sử dụng \n\nMajor\n    Có hơn 2 nội dung trong các nội dung sau đây\n   1. Không giữ vệ sinh khu vực nhà bếp và nhà ăn do không có tiêu chuẩn vệ sinh \n       - Trạng thái vệ sinh dụng cụ nhà bếp, vệ sinh máy hút mùi, máy khử trùng, sử dụng trang phục vệ sinh, thiết bị khử trùng khi xuất nhập, thuốc đuổi côn trùng ... \n   2. Không bảo quản an toàn thwujc phẩm do không phân loại khu vực chuẩn bị, bảo quản thực phẩm tươi, thực phẩm đông lạnh...\n   3. Không chuẩn bị các thiết bị dự phòng ứng phó với tình huống khẩn cấp như hỏa hoạn, rò rỉ khí gas,  (*Hàn Quốc: bình chữa cháy loại K, máy dò khí gas, thiết bị ngắt mạch )\n   4. Không quản lý khu vực bảo quản thức ăn, nguyên liệu (Sau khi lấy mẫu, bảo quản trên 144h )\n   5. Không quản lý ghi chép nhiệt độ tủ đông(-18℃↓), tủ lạnh(4℃↓) \n   6. Không vệ sinh khu vực nhà vệ sinh, khu vực làm việc, nơi cầu nguyện, không cso chỗ rửa tay ở nhà vệ sinh và khu vực ăn uống\n   7. Không thực hiện kiểm tra chất lượng nước ngầm, nước sinh hoạt hoặc không tuân thủ chu kì kiểm tra\n\nMinor\n    Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không có kết quả kiểm tra chất lượng nước từ đơn vị lắp đặt máy lọc nước, máy nước nóng lạnh \n   2. Khó xác nhận tình trạng vệ sinh do chu kì vệ sinh bồn chứa nước quá 6 tháng, chu kì kiểm tra vệ sinh (an toàn thực phẩm) quá 1 tháng\n\nNot Applicable\n  Không vận hành nhà ăn trong công ty \n\nConformance\n   1. Có giấy phép vận hành nhà ăn theo luật định và đầu bếp, chuyên gia dinh dưỡng làm việc tại nhà ăn có chứng chỉ hoạt động \n   2. Duy trì và quản lý vệ sinh khu vực nhà bếp và các thiết bị nấu ăn\n   3. Phân loại và quản lý nguyên liệu nấu ăn theo tình trạng bảo quản, tiến hành kiểm tra chất lượng nước dùng và nước ngầm",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. Legal authorization for operating cafeteria ((Korea) 50 persons↑) not acquired\n   2. Cooks ((Korea) 100 persons↑) and nutritionists working at the cafeteria did not acquire or expired qualifications\n   3. Expired food ingredients stored in cafeterias and food warehouse\n\nMajor\n   Two or more of the following applicable\n   1. No hygiene standard for cafeteria and kitchen, so cleanliness cannot be maintained\n       - Cooking instrument cleanliness, hood cleanliness, hygiene disinfection normal operation, wear clean clothes, entrance disinfection facilities, pest prevention, etc.\n   2. Food storage in cafeteria/kitchen not safe such as differentiation of food refrigeration, freezer, and preparation areas\n   3. Emergency response equipment to prepare for fire, gas leaks, etc. not prepared in cafeterea/kitchen (*Korea: K-grade fire extinguisher, gas leak detector, blocking device)\n   4. Preserved foods not managed (stored for more than 144 hours after sampling)\n   5. Temperature records of freezer (-18℃↓), refrigerator (4℃↓) not managed\n   6. Restroom, worker spaces, prayer spaces, etc. are not clean and hand washing facilities are not provided in restrooms and eating areas\n   7. Water quality inspections for groundwater, surface water, etc. not performed or inspection periods not observed\n\nMinor\n   One or more of the following applicable\n   1. Procure water quality inspection results of water purifiers, water dispensers, etc. (inspected by company of water purifiers/dispensers)\n   2. Company has a water storage tank hygiene is not secured.\n     - Cleaning period is more than 6 months and hygiene status inspection (visually inspection) period longer than 1 month, etc.\n\nConformance\n   1. Acquired legal licensing related to operation of cafeteria, and cooks and nutritionists working at the facilities qualified\n   2. Kitchen and cooking equipment kept clean and managed safely\n   3. Managed by differentiating food ingredient zoning and freezer, refrigerator and room temperature storage per type and water quality inspection was conducted.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Vệ sinh an toàn thực phẩm nhà ăn, bếp nấu & bảo quản thực phẩm",
+        "priority_kw": [
+          "chưa được phép điều hành nhà ăn",
+          "thực phẩm hết hạn sử dụng",
+          "expired food"
+        ],
+        "major_kw": [
+          "tủ sấy dao thớt",
+          "bể tách mỡ",
+          "bảo quản lạnh",
+          "tủ đông",
+          "nhiệt độ",
+          "hư hỏng",
+          "khay khử khuẩn",
+          "bếp điện"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 19,
+      "provision": "BM1) Risk Assessment",
+      "audit_id": "BM101",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Compliance process of Legal/Customer Requirements",
+      "conformance_statement": "An adequate and effective Occupational Health and Safety compliance process is established to monitor, identify, understand, and  ensure compliance with applicable laws, regulations, and customer requirements",
+      "criteria_vn": "Priority\n  Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không lập quy trình tuân thủ các quy định pháp luật về an toàn y tế và không có số đăng ký thông tin y tế theo quy định\n   2. Không tiến hành giám sát việc thực hiện theo quy trình \n\nMajor\n  Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không thực hiện xin giấy phép/ chứng chỉ hành nghề/ thủ tục gia hạn  đăng ký quy trình tuân thủ quy định pháp luật vè an toàn y tế\n   2. Sổ đăng ký y tế thiếu sót một số phần theo luật định \n\nMinor\n   Trường hợp  thực hiện giám sát có hay không thi hành quy định theo chu kỳ trên 6 tháng/ lần \n\nConformance\n   1. Lập quy trình tuân thủ quy định pháp luật về an toàn y tế, đồng thời tìm hiểu tất cả các quy định pháp luật cần thực thi và tiến hành hiện thực hóa thành văn bản   \n   2. Tiến hành giám sát việc thực hiện quy trình thủ tục theo từng quý",
+      "criteria_en": "Priority\n  One or more of the following applicable:\n   1. An adequate and effective Occupational Health and Safety compliance process is not established\n   2. An adequate and effective quarterly compliance process is not conducted and monitoring\n\nMajor\n  One or more of the following applicable:\n   1. A documented process is not in placed to renew permits, licenses, and tests before they expire\n   2. An applicable laws and regulations are not fully identified\n\nMinor\n   A compliance process is not conducted less than once a half year\n\nConformance\n   1. An adequate and effective Occupational Health and Safety compliance process is established with applicable laws, regulations \n   2. An adequate and effective quarterly compliance process is in placed",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình tuân thủ pháp luật & khách hàng về OHS",
+        "priority_kw": [
+          "không lập quy trình tuân thủ"
+        ],
+        "major_kw": [
+          "không thực hiện xin giấy phép",
+          "sổ đăng ký y tế thiếu"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 20,
+      "provision": "BM1) Risk Assessment",
+      "audit_id": "BM102",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Due diligence Process",
+      "conformance_statement": "An adequate and effective due diligence process is established to identify and assess the most significant actual and potential  occupational health and safety risks where the facility caused or contributed to adverse occupational health and safety impacts  (including applicable requirements).",
+      "criteria_vn": "Priority\n Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không có quy trình quản lý rủi ro một cách có hệ thống\n   2. Không tiến hành đánh giá mức độ ruit ro của các yếu tố nguy hiểm \n\nMajor\n  Có hơn 2 nội dung trong các nội dung sau đây\n   1. Khi đánh giá rủi ro, bỏ qua một số đối tượng liên quan \n   2. Khi đánh giá rủi ro, bỏ qua một số tình huống khẩn cấp\n   3. Khi đánh giá rủi ro, bỏ qua một số phạm vi/ yếu tố \n   4. Không chuẩn bị các biện pháp, đối sách phòng ngừa các tai nạn an toàn và các hoạt động cải thiện nguy hiểm nghiêm trọng \n   5. Không tuân thủ chu kỳ đánh giá mức độ rủi ro\n\nMinor\n   1. Có dưới 1 nội dung trong số Major \n   2. Thiết lập các phương án dự phòng và thực hiện đánh giá mức độ rủi ro nhưng khi tiến hành kiểm tra thực tế, xác nhận nhiều trường hợp vi phạm quy trình thực hiện và  nhiều yếu tố nguy hiểm tồn đọng \n\nConformance\n   1. Có sở hữu quy trình quản lý các yếu tố nguy cơ an toàn sức khỏe và nguy hiểm một cách hệ thống có cân nhắc đến các yếu tố liên quan trong và ngoài\n        - Quản lý giảm thiểu nguy hiểm, chẳng hạn như loại bỏ hoặc thay thế các yếu tố nguy hiểm\n   2. Thực hiện đánh giá rủi ro có cân nhắc đến các bên liên quan trong và ngoài , tình trạng khẩn cấp, phạm vi/yếu tố, đồng thời thiết lập và thực hiện các biện pháp phòng ngừa/giảm thiểu  rủi ro các yếu tố có nguy cơ nghiêm trọng\n     - ①Chương trình làm việc trong không gian kín  ②Công việc cần làm việc với lửa như hàn xì... ③ Làm việc với điện  ④Làm việc trên cao ⑤Quản lý năng lượng nguy hiểm (Lockout/Tagout)\n     - ⑥Kế hoạch sử dụng thiết bị xếp dỡ hàng hóa lên xuống xe (xe nâng)  ⑦Kế hoạch làm việc với vật nặng(cần cẩu, ròng rọc kéo...)\n   3. Đánh giá rủi ro định kỳ và thực hiện đánh giá rủi ro đột xuất khi phát sinh điểm thay đổi (chu kỳ thực tế: theo quy định của từng quốc gia)\n\nCác bên liên quan trong và ngoài: người lao động, nhà cung cấp dịch vụ trong công ty, nhà thầu, khách hàng, phụ nữ mang thai\nTình trạng khẩn cấp: hỏa hoạn, rò rỉ hóa chất (khi sử dụng khối lượng lớn, hóa chất độc hại), động đất (khi vị trí địa chấn), khí hậu khắc nghiệt (như mưa, lũ lụt, bão, lạnh, tuyết, khí hậu bất thường theo khu vực khác), bạo lực, bạo loạn, aminat / chì\nPhạm vi/yếu tố: Tất cả công việc/công đoạn/địa điểm, rủi ro (máy móc, dụng cụ, năng lượng, v.v.)/yếu tố độc hại (hóa chất, sinh học, vật lý) được quy định tại quốc gia đó",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. An adequate and effective risk assessment process is not in placed\n   2. A risk assessment is not conducted\n\nMajor\n   Two or more of the following applicable:\n   1. Missing applicable stakeholders in risk assessment\n   2. Missing applicable emergency situations in risk assessment\n   3. Missing applicable scopes in risk assessmen\n   4. Mitigation or prevention plan is not established and implemented\n   5. A risk assessment is not conducted regularly and updated\n\nMinor\n   1. 1 or more from Major evaluation items\n   2. Risk assessment has been conducted and safety accident prevention procedures have been established and operated.\n      however On-site inspection confirmed cases of violation of procedures or risk factors\n\nConformance\n   1. An adequate and effective risk assessment process is in placed to prevent life and properties of internal  and external stakeholders from the most significant actual and  potential occupational health and safety risks\n   2. A risk assessment is conducted for (*)internal  and external stakeholders, (**)all emergency situations and (***)all scopes and mitigation or prevention plan is established and implemented\n   3. A risk assessment should be conducted regularly and updated when there is a significant change\n\n(*) internal  and external stakeholders : workers, On-site service providers, Suppliers, Customers, Pregnant workers and nursing mothers\n(**) all emergency situations : Fire, Chemical spill (if large quantities or especially hazardous chemicals are used), Earthquake (if in an earthquake zone), Severe weather (e.g., rain, flood, typhoon, frost, snow, or other conditions as appropriate to the  facility location, etc.), Workplace violence, Strike, Asbestos/lead\n(***) all scopes : Every task/site operation or process/physical location, machine, Chemical, biological, or physical agents",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Quy trình đánh giá rủi ro an toàn sức khỏe (Due Diligence)",
+        "priority_kw": [
+          "không có quy trình quản lý rủi ro",
+          "a risk assessment is not conducted"
+        ],
+        "major_kw": [
+          "bỏ qua một số đối tượng liên quan",
+          "bỏ qua một số tình huống khẩn cấp"
+        ],
+        "major_min_count": 3
+      }
+    },
+    {
+      "row_num": 21,
+      "provision": "BM2) Control processes",
+      "audit_id": "BM201",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Assigning responsibilities and authorities for all workers(Senior manager to workers)",
+      "conformance_statement": "Occupational health and safety responsibilities and authorities are adequately and effectively defined and assigned for all  employee levels (senior managers to workers) for the implementation of management systems, and for compliance with laws,  regulations, and codes.",
+      "criteria_vn": "Priority\n   Không thành lập đội phản ứng khẩn cấp đối với hỏa hoạn và tình huống khẩn cấp\n\nMajor\n  Có ít nhất 2 trong số các nội dung sau:\n1. Quyền hạn và trách nhiệm của người quản lý để thực thi hệ thống quản lý không được ghi lại bằng văn bản\n2. Đội phản ứng khẩn cấp đã được thành lập nhưng thiếu một số tòa nhà/ đội thay ca\n3. Không có thiết bị bảo hộ cá nhân cho các hoạt động của đội phản ứng khẩn cấp\n4. Thiết bị bảo hộ cá nhân đã được trang bị nhưng không được sử dụng do quản lý kém hoặc nhân viên phản ứng khẩn cấp không thể tiếp cận dễ dàng (nhà kho có thiết bị khóa hư hỏng, v.v.)\n5. Không có hồ sơ ghi chép lịch sử huấn luyện đào tạo xác định vai trò người phụ trách theo từng công việc và yêu cầu của từng vai trò đối với nhân lực phản ứng khẩn cấp \n6. Đội phản ứng khẩn cấp được thành lập nhưng không được thông báo để các giám đốc điều hành và nhân viên biết\n\nMinor\n\n  Có dưới 1 nội dung trong  Major \n\nConformance\n   1. Thẩm quyền và trách nhiệm của người quản lý trong việc thực thi hệ thống quản lý (luật pháp và tuân thủ RBA) đã được văn bản hóa\n   2. Đội phản ứng khẩn cấp được tổ chức theo từng ca của từng tòa nhà và xác định vai trò của nhân lực về từng công việc phụ trách và đảm bảo căn cứ đào tạo được yêu cầu theo từng vai trò\n   3. Có thể sử dụng và trang bị dụng cụ bảo hộ cá nhân cho các thành viên của đội phản ứng khẩn cấp\nVí dụ) Quần áo tản nhiệt chống cháy nổ, máy thở oxi, dụng cụ bảo vệ chống rò rỉ hóa chất (kiểu tinh thể) và còi, thanh dẫn đường, loa phóng thanh, đèn pin, v.v.",
+      "criteria_en": "Priority\n   No ERT and first responders are in placed\n\nMajor\n   1. Occupational health and safety responsibilities and authorities are not defined and assigned for all  employee levels (senior managers to workers) for the implementation of management systems\n   2. An emergency response team (ERT) and first responder are not fully formed at each facility that shall be available during all working  shifts\n   3. No PPE for ERT team\n   4. PPE is provided, but it cannot be used due to poor management, or it is stored in a state that emergency response personnel cannot easily access \n      (warehouse locked, etc.)\n   5. A first responders are not trained or certified\n   6. ERT team is organized, but it is not announced so that employees can know.\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   1. Occupational health and safety responsibilities and authorities are defined and assigned for all  employee levels (senior managers to workers) for the implementation of management systems\n   2. An emergency response team (ERT) and first responder are formed at each facility that shall be available during all working  shifts and workers are aware of them\n   3. PPE for ERT team can be provided and used.\n     Example) Fire heat dissipation clothing, air respirators, protective equipment against chemical leakage (three or more types) and whistles, induction rods, loudspeakers, \n                   lanterns, etc.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Phân công trách nhiệm OHS & Đội ứng phó khẩn cấp (ERT)",
+        "priority_kw": [
+          "không thành lập đội phản ứng khẩn cấp",
+          "no ert and first responders"
+        ],
+        "major_kw": [
+          "không được ghi lại bằng văn bản",
+          "thiếu một số tòa nhà"
+        ],
+        "major_min_count": 3
+      }
+    },
+    {
+      "row_num": 22,
+      "provision": "BM2) Control processes",
+      "audit_id": "BM202",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Policies and Control Process",
+      "conformance_statement": "Adequate and effective occupational health and safety policies and control processes are established",
+      "criteria_vn": "Priority\n   Không có quy trình xây dựng và lập văn bản quản lý chính sách an toàn sức khỏe tại nơi làm việc\n\nMajor\n  Thiếu ít nhất 2 trong số các quy trình quản lý chính sách an toàn sức khỏe\n\nMinor\n   Thiếu ít nhất 1 trong số các quy trình quản lý chính sách an toàn sức khỏe \n\nConformance\n   1. Sở hữu phương châm an toàn y tế phù hợp bao gồm:\n      ① Quy trình và chính sách giảm thiểu rủi ro an toàn sức khỏe đối với phụ nữ mang thai\n      ② Ứng phó ban đầu trong tình huống khẩn cấp\n      ③ Đánh giá sơ bộ tính an toàn với các yếu tố hóa học (hóa chất độc hại), sinh học và vật lý học\n  2. Có quy trình quản lý các nội dung sau phù hợp với phương châm an toàn sức khỏe:\n      ①  Quy trình giảm thiểu rủi ro an toàn sức khỏe nghiêm trọng     ② Quy định, quản lý, cung cấp dụng cụ bảo hộ lao động  \n      ③ Chăm sóc phụ nữ mang thai/Thời gian nghỉ ngơi/Phòng nghỉ ngơi/Phòng hút sữa  ④ Quản lý thiết bị PCCC  ⑤ Quản lý lối thaost hiểm\n      ⑥ Quản lý tai nạn an toàn, tai nạn cận nguy, bệnh nghề nghiệp (ghi chép hồ sơ, điều tra nguyên nhân, thực hiện các biện pháp ngăn ngừa tái phát, v.v.);\n      ⑦ Quy trình quản lý hộp cứu thương, quản lý quy trình sơ cứu và vận chuyển nạn nhân tới các cơ sở y tế bên ngoài\n      ⑧ Quy trình đánh giá sơ bộ mức độ rủi ro của các yếu cố nguy hiểm\n      ⑨ Đánh giá/quản lý cơ xương khớp (công việc chịu trách nhiệm về thể chất) ⑩ Kiểm tra/quản lý an toàn thiết bị\n      ⑪ Quy trình ứng phó khẩn cấp và vệ sinh ký túc xá\n      ⑫ Quản lý vệ sinh nhà hàng, phòng nghỉ, nhà vệ sinh trong công ty",
+      "criteria_en": "Priority\n   Adequate and effective occupational health and safety policies and control processes are not in placed\n\nMajor\n   Missing two or more of occupational health and safety policies\n\nMinor\n   Missing one or more of occupational health and safety policies \n\nConformance\n   1. Adequate and effective occupational health and safety policies and control processes are in placed for : \n      ① Workers can remove themselves from imminent harm and return once the situation is mitigated  without fear of retaliation\n      ② Adequate and effective policies and processes are in place to minimize the occupational health and  safety impact on pregnant women and nursing mothers\n      ③ First response  ④ Selection processes for chemical (including hazardous chemicals), biological, or physical agents\n   2. Effective Control processes are in placed for : \n      ① A mitigation process for all significant actual and potential occupational health and safety risks identified, tracking implementation, and resulting adverse impact  \n      ② PPE process  ③ Gender-responsive measures(health check/break time/shielded place for expressing breast milk  ④fire detection, alarm, and suppression\n      ⑤ Emergency exit access, exits, and exit discharge  ⑥ Occupational accidents, incidents, near-misses, and illnesses\n      ⑦ First aid kits management,  first response process indicating the severity of medical emergency and  response (first aid, infirmary, local external hospital)\n      ⑧ A control processes for chemical (including hazardous chemicals), biological, or physical agents\n      ⑨ A control process for Physically demanding work ⑩ Machine safety\n      ⑪ A cleaning, sanitation and preventive maintenance processes for worker housing\n      ⑫ A hygiene standards for bathrooms, employee spaces, cafeterias, and food areas",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Chính sách & Quy trình kiểm soát OHS",
+        "priority_kw": [
+          "không có quy trình xây dựng và lập văn bản quản lý chính sách an toàn"
+        ],
+        "major_kw": [
+          "thiếu ít nhất 2 trong số các quy trình quản lý chính sách"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 23,
+      "provision": "BM2) Control processes",
+      "audit_id": "BM203",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Training process",
+      "conformance_statement": "An adequate and effective occupational health and safety training process is established for all managers/workers on all  policy/process/job-related aspects and performance targets",
+      "criteria_vn": "Priority\n   Trường hợp quy trình đào tạo an toàn y tế không được thiết lập và không tiến hành đào tạo: \n- Đào tạo an toàn y tế định kỳ, đào tạo an toàn y tế đặc biệt, MSDS, đào tạo khi tuyển dụng, đào tạo khi thay đổi công việc, v.v.\n- Người quản lý an toàn/người quản lý y tế, người chịu trách nhiệm quản lý an toàn sức khỏe, người giám sát quản lý bắt buộc theo luật định\n\nMajor\n   Thiếu ít nhất 2 nội dung đào tạo an toàn y tế\n\nMinor\n   Thiếu ít nhất 1 nội dung đào tạo an toàn y tế\n\nConformance\n   1. Lập quy trình và tiến hành đào tạo an toàn y tế phù hợp để người lao động có thể nhận biết được các yếu tố,nguy cơ nguy hiểm\n       - Loại hình và nội dung đào tạo tối thiểu cần đáp ứng quy định pháp luật quốc gia có liên quan \n   2. Nội dung đào tạo an toàn y tế  ít nhất phải bao gồm các nội dung sau:\n① Cơ khí/điện/hóa chất/hỏa hoạn/ các yếu tố nguy hiểm vật lý\n②  Hướng dẫn sử dụng thiết bị bảo hộ cá nhân đúng cách\n③ Huấn luyện ứng phó khẩn cấp ④ Phương pháp sử dụng thiết bị an toàn và nút dừng khẩn cấp\n⑤ Phương pháp báo cáo tai nạn an toàn và bệnh nghề nghiệp  ⑥  Thủ tục làm việc trong không gian kín (không gian giới hạn)\n⑦ Thủ tục LOTO ⑧ Tổ chức phản ứng khẩn cấp (như hỏa hoạn, rò rỉ hóa chất...), đào tạo đặc biệt cho nhân viên sơ cấp cứu (1 lần/năm)\n⑨ Những yếu tố rủi ro cụ thể theo giới tính/tuổi (nếu cần)",
+      "criteria_en": "Priority\n   An adequate and effective occupational health and safety training process is not established\n   - Regular safety and health education, special safety and health education, MSDS, education when hiring, education when changing work, etc.\n   - Legal compulsory education for safety managers/health managers, safety and health management managers, and management supervisors\n\nMajor\n   Missing two or more of training topics\n\nMinor\n   Missing one or more of training topics \n\nConformance\n   1. An adequate and effective occupational health and safety training process is established including : \n      ① Training plan  ② Training material ③ Training frequency  ④ Training records  ⑤ Training efficiency verification\n      * The types and contents of training should meet the laws and regulations of the country\n   2. Minimum training topics are covered with a minimum of :\n      ① Mechanical, electrical, chemical, fire, and physical hazards  ② The correct use of appropriate PPE\n      ③ Types of potential emergencies  ④ Machine safety and the use of safeguards and emergency stops\n      ⑤ Reporting injuries and illnesses  ⑥ Hazardous atmospheres and confined space work process before entry of confined spaces\n      ⑦ LOTO process  ⑧ Specific training for ERT, first responders, and medical professionals\n      ⑨ Occupational health and safety training for specific risks to relevant demographics,  such as gender and age, if applicable.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Quy trình đào tạo an toàn vệ sinh lao động",
+        "priority_kw": [
+          "quy trình đào tạo an toàn y tế không được thiết lập"
+        ],
+        "major_kw": [
+          "thiếu ít nhất 2 nội dung đào tạo an toàn"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 24,
+      "provision": "BM3) Communications",
+      "audit_id": "BM301",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Worker, stakeholder communication",
+      "conformance_statement": "An adequate and effective ongoing two-way communication process with workers, and internal and external stakeholders, where  relevant or necessary, is established to obtain feedback on operational occupational health and safety practices and conditions  and to foster continuous improvement",
+      "criteria_vn": "Priority\n   Không thiết lập quy trình giao tiếp để truyền đạt các nội dung, thông tin về an toàn y tế\n\nMajor\n   Có ít nhất hai trong số các nội dung sau:\n1. Trường hợp thiếu các bên liên quan cần truyền đạt thông tin (nhà cung cấp, khách hàng, người lao động, khách tới thăm, nhà cung cấp dịch vụ, người lao động nước ngoài, v.v.)\n2. Thiếu nội dung thông tin cần được truyền đạt\n- Chia sẻ và đăng tải thông tin về các yếu tố nguy cơ nguy hiểm tại nơi làm việc và các biển báo an toàn nhận dạng nguy hiểm (hóa học, vật lý) , dán nhãn, v.v.\n* Quy chế quản lý an toàn sức khỏe, kết quả đo lường môi trường làm việc, đánh giá tính nguy hiểm, kết quả kiểm tra của Ủy ban an toàn sức khỏe nghề nghiệp, thông báo pháp lệnh;\n- Sử dụng biển báo hướng dẫn sử dụng dụng cụ bảo hộ lao động có liên quan và công nhân sử dụng chúng\n- Thông báo về tổ chức ứng phó khẩn cấp/ liên lạc và kế hoạch sơ tán\n3. Thiếu các  nội dung cân nhắc về chủng tộc, giới tính, tuổi tác, v.v. trong thông tin an toàn y tế\n4. Không có quy trình nào được thiết lập để nhận phản hồi và ý kiến của các bên liên quan về các nội dung thông tin được truyền đạt  (như hòm thư kiến nghị).\n\nMinor\n   Có ít nhất 1 nội dung trong Major \n\nConformance\n   1. Thiết lập quy trình truyền đạt/báo cáo để người lao động/khách viếng thăm/nhà cung cấp/khách hàng bên trong và bên ngoài có thể xác định rõ ràng thông tin an toàn y tế tại nơi làm việc\n   2. Thông tin an toàn y tế được cung cấp bao gồm thông tin thống kê xem xét các loại rủi ro cụ thể như chủng tộc, giới tính, tuổi tác, v.v.",
+      "criteria_en": "Priority\n   Health and safety  communication process is not establsihed.  \n\nMajor\n   Two or more of the following applicable:\n   1. Internal and external stakeholders who needs to communicate is omitted  (suppliers, customers, workers, visitors, service providers, migrant workers etc)\n   2. If the contents to be communicated is missing\n     - Potential workplace hazards  that workers are exposed to  are clearly posted in the facility  or placed\n       (EHS standard, work environment, risk assesment etc) , signs, placards and labels identifying hazards etc\n     - PPE requirements should be  communicated to employees  via posted signs and worn by  all affected people \n     - Emergency  number(s), emergency team,  emergency evacuation and response plan.\n     - Exit routes and Internal and external muster points \n   3. Information not including content on specific risks to relevant demographics,  such as gender, age etc\n   4. Feedback channels and a process for obtaining the opinion of stakeholders are not clearly communicated and visible (e.g.,  suggestion box..)\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   1. Health and safety communication process with workers, and internal and external stakeholders, where  relevant or necessary, is established\n   2. Occupational health and safety information shall include content on specific risks to relevant demographics,  such as gender, age",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Giao tiếp thông tin OHS với người lao động & các bên liên quan",
+        "priority_kw": [
+          "không thiết lập quy trình giao tiếp"
+        ],
+        "major_kw": [
+          "thiếu các bên liên quan cần truyền đạt"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 25,
+      "provision": "BM3) Communications",
+      "audit_id": "BM302",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Worker grievance/complaint process",
+      "conformance_statement": "An adequate and effective process is established to anonymously report occupational health and safety grievances confidentially  without fear of reprisal or intimidation",
+      "criteria_vn": "Priority\n    Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Không thiết lập quy trình xử lý khiếu nại các vấn đề an toàn, không có kế hoạch khắc phục vấn đề\n   2. Khiếu nại không được xử lý trong vòng 3 tháng sau khi nhận được báo cáo ban đầu hoặc không được ghi nhận\n\nMajor\n     Có hơn 2 nội dung trong các nội dung sau đây:\n   1. Trường hợp quy trình khiếu nại không được xử lý dưới dạng ẩn danh (không sợ bị trả thù)\n   2. Trường hợp giám đốc điều hành và người quản lý không hướng dẫn hoặc trình bày quy trình xử lý khiếu nại một cách rõ ràng để nhân viên nhận biết \n   3. Trường hợp việc bắt đầu các biện pháp xử lý khiếu nại bị trì hoãn trong hơn hai tuần sau khi nhận được ý kiến khiếu nại\n\nMinor\n   Có ít nhất 1 nội dung trong số Major \n\nConformance\n   Thiết lập quy trình xử lý khiếu nại các vấn đề an toàn (các quy phạm liên quan đến RBA) và vận hành đúng quy trình",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. Grievance process is not established and Confirmed grievance without a corrective action plan\n   2. Grievance has not been  investigated/addressed within 3 months  after being received.\n\nMajor\n   Two or more of the following applicable:\n   1. Process not to anonymously report grievances without fear of reprisal\n   2. Internal communication of the grievance mechanism is not clearly visible\n   3. The auditee shall not investigate the validity of any grievance within 2weeks.\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   Communication of the Health and safety grievance(RBA standard) process is established and operating normally",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình giải quyết khiếu nại/góp ý về OHS",
+        "priority_kw": [
+          "không thiết lập quy trình xử lý khiếu nại",
+          "quá 3 tháng"
+        ],
+        "major_kw": [
+          "không được xử lý dưới dạng ẩn danh",
+          "trì hoãn trong hơn hai tuần"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 26,
+      "provision": "BM4) Performance Review and Continuous Improvement",
+      "audit_id": "BM401",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Performance Review and Continuous Improvement",
+      "conformance_statement": "An adequate and effective occupational health and safety management performance review and continuous improvement process  is established.",
+      "criteria_vn": "Priority\n   Ban giám đốc không thiết lập quy trình kiểm tra kết quả an toàn y tế doanh nghiệp\n  \nMajor\n  Có ít nhất 2 trong số các nội dung sau:\n1.Trường hợp không có mục tiêu chi tiết về an toàn y tế hoặc  mục tiêu không rõ ràng, không xây dựng quy trình theo dõi tiến độ thực hiện mục tiêu, và không có kế hoạch hành động bổ sung khi không đạt mục tiêu\n2. Trường hợp mục tiêu đạt được không được thiết lập theo đơn vị hàng năm hoặc mục tiêu không được thiết lập theo hướng tăng dài hạn\n3. Trường hợp khi có phát sinh các thay đổi quan trọng,  không được sửa đổi và phản ánh trong quá trình quản lý hoặc thời hạn đánh giá vượt quá hai năm\n4. Nếu nội dung trong báo cáo đánh giá của ban quản trị bị thiếu\n- Xu hướng sự cố, kế hoạch đào tạo ERP, hiệu quả quản lý an toàn môi trường, đào tạo, giao tiếp, xử lý khiếu nại\n\nMinor\n   Có ít nhất 1 nội dung trong số Major \n\nConformance\n   Ban quản trị tiến hành hội nghị định kỳ ít nhất 1 lần/năm để xem xét về kết quả thực hiện an toàn y tế doanh nghiệp và có quy trình xử lý cải tiến các vấn đề",
+      "criteria_en": "Priority\n   Health and safety management performance review and continuous improvement process is established.\n  \nMajor\n   Two or more of the following applicable:\n   1. Formal indicators, objectives, and targets is missing or unclear, Target tracking process not established, No additional action plans if objective is off track \n   2. Goals shall not clearly define the period of one year, The target is not set in a long-term incremental direction.\n   3. Regular evaluation not exceeding 2 years but earlier if there is a Significant Change\n   4. If the following information is omitted in the management review\n     - Accidents, incidents, medical surveillance, and trend analysis, ERP drill plan, EHS control effectiveness , training, communication, Grievance and safety concerns \n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   Conducting regular meetings at least once a year to review safety and health management performance by semior management, \n   and there is an improvement / corrective action process.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Đánh giá kết quả thực hiện của lãnh đạo & Cải tiến liên tục OHS",
+        "priority_kw": [
+          "không thiết lập quy trình kiểm tra kết quả an toàn y tế"
+        ],
+        "major_kw": [
+          "không có mục tiêu chi tiết",
+          "vượt quá hai năm"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 27,
+      "provision": "BM4) Performance Review and Continuous Improvement",
+      "audit_id": "BM402",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Self-audit process",
+      "conformance_statement": "An adequate and effective occupational health and safety self-audit process is established to assess conformance with the RBA  Code and customer requirements periodically.",
+      "criteria_vn": "Priority\n   Không thiết lập quy trình tự quản lý các yêu cầu của khách hàng và tuân thủ các hạng mục an toàn sức khỏe trong danh sách kiểm tra RBA\n  \nMajor\n   Có ít nhất 1 trong các nội dung sau:\n1. Trường hợp đối tượng quản lý có thay đổi về địa điểm, chính sách, v.v.  nhưng không được phản ánh\n2. Trường hợp ban quản trị không tiến hành kiểm tra, đánh giá kế quả tự quản lý\n3. Trường hợp không xem xét và phản ánh các yêu cầu của khách hàng \n\nMinor\n  Quy trình được thiết lập, được quản lý thường xuyên, nhưng một số hạng mục quản lý bị thiếu hoặc không được lập thành văn bản\n\nConformance\n   Thiết lập quy trình xác nhận và quản lý thường xuyên các yêu cầu của khách hàng và tuân thủ các hạng mục an toàn sức khỏe trong danh sách kiểm tra RBA",
+      "criteria_en": "Priority\n   Health and safety self-audit process is not established\n  \nMajor\n   One or more of the following applicable:\n   1. Changes to All policies, processes, physical conditions, and work practices have occurred, but are not reflected.\n   2. Audit findings are not reviewed by senior management   \n   3. The review and reflection of the customer's request is missing\n\nMinor\n  Process is established, regularly managed, but some items are missing or not documented\n\nConformance\n  Health and safety self-audit process is established  to check and manage compliance with RBA checklists and customer requests",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình tự đánh giá nội bộ (Self-audit OHS)",
+        "priority_kw": [
+          "không thiết lập quy trình tự quản lý",
+          "self-audit process is not established"
+        ],
+        "major_kw": [
+          "không tiến hành kiểm tra, đánh giá kết quả tự quản lý"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 28,
+      "provision": "BM4) Performance Review and Continuous Improvement",
+      "audit_id": "BM403",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Corrective action process",
+      "conformance_statement": "Has established an adequate and effective occupational health and safety corrective action process is established to rectify and  close non-conformances",
+      "criteria_vn": "Priority\n   Không thiết lập quy trình xử lý khắc phục các vấn đề không phù hợp về an toàn sức khỏe (quy định pháp luật) như đánh giá đối ngoại, đánh giá khách hàng, kiểm tra cơ quan ...\n   Ngay cả khi nội dung không phù hợp đã được phát hiện hoặc được đánh giá, không thiết lập quy trình hành động khắc phục \n  \nMajor\n  Có ít nhất 2 trong số các nội dung sau:\n   1. Trường hợp quy trình xử lý khắc phục không đầy đủ hoặc không phù hợp\n    - Trường hợp thiếu 1 phần nội dung khắc phục các hạng mục không phù hợp \n    - Xác nhận có hay không đạt mục tiêu khắc phục vấn đề và khi không đạt mục tiêu thfi có hay không biện pháp bổ sung\n    -  Trường hợp không lập kế hoạch xử lý các vấn đề không phù hợp trong báo cáo của cơ quan bảo hiểm liên quan đến nguồn nhân lực/cơ sở vật chất/ hỏa hoạn\n   2. Trường hợp  không thực hiện các biện pháp phòng ngừa và bồi thường thích hợp trong trường hợp tai nạn lao động và bị thương khi làm việc xảy ra \n    - Không có biện pháp thay đổi công việc trong trường hợp có chẩn đoán y tế là không thể thực heiejn công việc hiện tại\n    - Cấm thay đổi hợp đồng lao động theo kết quả của các biện pháp y tế\n    - Cung cấp các biện pháp y tế thích hợp, kiểm tra và chịu chi phí (tiêu chuẩn pháp lý)\n   3. Trường hợp quản lý không thỏa đáng các hồ sơ về vấn đề liên quan không phù hợp\n- Kiểm tra người chỉ đạo /người quản lý và quản lý ghi chép bằng văn bản  (cho đến khi kết thúc)\n- Lập kế hoạch hành động khắc phục nội dung không phù hợp và báo cáo kết quả hành động\n- Lưu giữ hồ sơ lịch sử kiểm tra và các biện pháp khắc phục nhận được từ cơ quan nhà nước trong 3 năm qua.\n\nMinor\n   Có nhiều hơn 1 nội dung trong số Major    \n\nConformance\n   Thiết lập quy trình xử lý, khắc phục các vấn đề không phù hợp về an toàn sức khỏe (quy định pháp luật) như đánh giá đối ngoại, đánh giá khách hàng, kiểm tra cơ quan...",
+      "criteria_en": "Priority\n    Corrective action process is not established for findings with safety and health (legal matters)\n    Corrective action process is not implemented even though non-conformances are evaluated\n  \nMajor\n   Two or more of the following applicable:\n   1. Corrective action process is not adequate and effective\n    - non-conformances requiring corrective action are omitted\n    - Objective of corrective action has not been achieved and additional actions are not taken when a corrective action is off track\n    - Any issues/concerns noted in the insurance inspection report regarding people, fire, or facility don't have an agreed corrective action plan.\n   2. Appropriate preventive action and compensation is not taken because of medical surveillance or injury\n    - Worker shall be removed from the current job if unable to work due to medical surveillance results. \n    - Prohibition of changes in labor contracts based on medical surveillance results.\n    - Not provide medical treatment  and cost to the worker (according to local law)\n   3. Records management of non-conformance is not appropriate\n    - No records documented and review  by senior management (until closed)\n    - No corrective action plan of non-conformance and closure verification reports \n    - No records of inspection history and corrective action inspected from the goverment over the past three years\n\nMinor\n   1 or more from Major evaluation items   \n\nConformance\n   Corrective action process is established for findings with safety and health (legal matters), such as external audit, customer audit, and inspection of goverment institutions.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình hành động khắc phục phòng ngừa (CAPA OHS)",
+        "priority_kw": [
+          "không thiết lập quy trình xử lý khắc phục"
+        ],
+        "major_kw": [
+          "quy trình xử lý khắc phục không đầy đủ"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 29,
+      "provision": "CE1) Environmental Permits and Reporting",
+      "audit_id": "CE101",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Environmental permits, approvals, licenses and registrations for facilities",
+      "conformance_statement": "All required permits, licenses, and test reports for the environment are in place and communicated timely to the government (if  required).",
+      "criteria_vn": "Priority\n    Có ít nhất 1 trong số các nội dung sau:\n1. (Bắt buộc) không có ít nhất một trong số các giấy phép được quy định trong Luật Môi trường dưới đây, hoặc giấy phép không được gia hạn trước khi hết hạn\n2. (Bắt buộc) Không thực hiện nghĩa vụ đo lường, báo cáo môi trường theo quy định của pháp luật về môi trường như nội dung dưới đây\n     1) Chất ô nhiễm không khí, phát thải không axit, bụi không axit, VOC (thuốc hữu cơ dễ bay hơi) (luật bảo vệ môi trường không khí)\n     2) Nước thải, nguồn ô nhiễm không điểm (Luật bảo vệ môi trường nước)\n     3) Chất thải (Quản lý chất thải)\n     4) Giấy phép để bảo quản và xử lý các hóa chất độc hại (Luật an ninh sản xuất, Luật ống dẫn lửa, v.v.)\n* Kiểm tra các tài liệu cấp phép khác liên quan đến luật môi trường ở các quốc gia khác nhau\n\nMajor   \n    Có ít nhất 1 trong số các nội dung sau:\n1. Mặc dù đã có giấy phép môi trường nhưng khi có thay đổi thiết bị, cơ sở xả thải thì không báo cáo thay đổi\n2. Thực hiện nghĩa vụ đo lường, báo cáo môi trường theo quy định của Luật nhưng một số hạng mục bị thiếu hoặc không tuân thủ chu kỳ kiếm tra, báo cáo\n\nMinor\n   Việc quản lý hồ sơ cấp phép môi trường không phù hợp\n\nNot Applicable\n  Không có nghĩa vụ xin cấp giấy phép môi trường và không có cơ sở vật chất môi trường thuộc đối tượng báo cáo\n\nConformance\n   Có  tất cả các giấy phép cần thiết liên quan đến môi trường và quản lý chúng trong tình trạng còn hạn và hợp lệ, các báo cáo và chu kỳ báo cáo / các hạng mục có liên quan đến môi trường là phù hợp với quy định\n\n(Bắt buộc) ⑦ Vi phạm cấp phép cho các cơ sở môi trường\n(Bắt buộc) ⑦ Không thực hiện đo lường thiết bị môi trường",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. (Mandatory) Authorizations prescribed by the following environmental laws has been not acquired, or has not been renewed before expiration\n   2. (Mandatory) Environmental measurement and reporting prescribed by the following environmental laws not executed\n      1) Air pollutants, scattering discharge, scattering dust, VOC (volatile organic compound)\n      2) Waste water, non-point pollutant source\n      3) Wastes\n      4) Hazardous materials storage and use\n         * Check authorization documents related to environment laws of each country\n\nMajor\n   One or more of the following applicable:\n   1. Environmental authorization acquired, but change report not made when there were changes to discharge facilities\n   2. Environmental measurement and reporting prescribed by the following environmental laws are executed, but partially omitted or cycle is not followed. \n\nMinor\n   Inadequate management of environmental documents\n\nNot Applicable\n   Not responsible for acquiring authorization and reporting\n\nConformance\n   Acquire all authorizations requiring evnironment-related and manage in valid state, and environment-related reports and reporting period/items are appropriate\n\n(Mandatory) ⑦ Environmental Authorizations not acquired\n(Mandatory) ⑦ Environmental measurements are not conducted",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 6,
+        "Minor": 4,
+        "Major": 2,
+        "Priority": 0,
+        "N/A": 6
+      },
+      "rule": {
+        "desc": "Giấy phép môi trường & Báo cáo quan trắc định kỳ",
+        "priority_kw": [
+          "không có giấy phép môi trường",
+          "không thực hiện nghĩa vụ đo lường, báo cáo môi trường",
+          "environmental authorizations not acquired"
+        ],
+        "major_kw": [
+          "không báo cáo thay đổi",
+          "không tuân thủ chu kỳ kiểm tra, báo cáo"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 30,
+      "provision": "CE2) Hazardous Substances",
+      "audit_id": "CE201",
+      "audit_item": "O",
+      "template_significance": "Priority",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Assessing Hazardous waste disposal supplier",
+      "conformance_statement": "Hazardous waste is responsibly disposed of using government-approved and/or licensed vendors.",
+      "criteria_vn": "Priority\n Có ít nhất 1 trong số các nội dung sau:\n   1. (Bắt buộc)  Xả thải bất hợp pháp, không ký kết hợp đồng xả thải với doanh nghiệp chuyên môn được cấp chứng nhận xử lý và vận chuyển chất thải chỉ định,\n   2. (Bắt buộc) Không thiết lập khu vực lư trữ chất thải được chỉ định tại nơi làm việc\n\nMajor\n Có ít nhất 1 trong số các nội dung sau:\n   1. Thiết lập khu vực lư trữ chất thải được chỉ định tại nơi làm việc, nhưng không phân loại và lưu trữ chất thải theo đặc tính \n   2. Không tiến hành kiểm tra thực tế doanh nghiệp xử lý chất thải chỉ định\n     * Dù liên tục gia hạn và duy trì hợp đồng với cùng một doanh nghiệp nhưng cần phải gia hạn bảo hiểm bảo hành ít nhất 3 năm một lần, yêu cầu kiểm tra thực tế\n\nMinor\n   Thiết lập kho lưu trữ chất thải được chỉ định tại khu vực làm việc và phân loại chất thải theo đặc tính nhưng trang thiết bị phòng chống rò rỉ không được quản lý phù hợp\n\nNot Applicable\n   Khu vực làm việc không phát sinh chất thải chị đỉnh\n\nConformance\n   Chất thải được chỉ định được thải ra thông qua các doanh nghiệp xử lý hợp pháp, quy trình xả thải rõ ràng và thiết bị lưu trữ chất thải được chỉ định cũng được lắp đặt/ quản lý hợp pháp\n\n(Bắt buộc) ⑨ Xử lý chất thải dạng không hợp đốngt hợp pháp; không lắp đặt nơi lưu trữ chất thải được chỉ định",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. (Mandatory) Illegal discharge of hazardous waste without contracting with a company authorized for transporting and handling hazardous wastes\n   2. (Mandatory) Hazardous waste storage facility not installed within the workplace\n\nMajor\n   One or more of the following applicable\n   1. Hazardous waste storage facility has been installed within the workplace, but waste is not separated by type\n   2. No on-site inspection of hazardous waste disposal company\n   *Even if the contract is continuously renewed with the same company, the warranty insurance must be renewed and an on-site inspection must be conducted at least every 3 years.\n\nMinor\n   Hazardous waste storage facility has been installed within the workplace and waste is separated and stored by type, but leak prevention facilities are not properly managed\n\nNot Applicable\n   Hazardous wastes not generated at the workplace\n\nConformance\n   Hazardous waste is disposed of through a legal company, the diposal process is clear, and hazardous waste storage facilities are also installed/managed legally\n\n(Mandatory) ⑨ Illegal disposal of hazardous waste without a contract, hazardous waste storage facility not installed within the workplace",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 5,
+        "Minor": 3,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 5
+      },
+      "rule": {
+        "desc": "Quản lý chất thải nguy hại & đánh giá nhà thầu xử lý chất thải",
+        "priority_kw": [
+          "chưa có kho chứa rác thải nguy hại",
+          "hazardous waste storage facility not installed",
+          "xả thải bất hợp pháp",
+          "tập kết chung với kho hoá chất",
+          "tập kết chung với kho hóa chất"
+        ],
+        "major_kw": [
+          "không tiến hành kiểm tra thực tế doanh nghiệp xử lý chất thải",
+          "không phân loại và lưu trữ chất thải theo đặc tính",
+          "urenco"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 31,
+      "provision": "CE3) Solid Waste",
+      "audit_id": "CE301",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Solid waste management and disposal",
+      "conformance_statement": "Solid waste is managed and disposed of responsibly.",
+      "criteria_vn": "Priority\n  Xả thải bất hợp pháp, không ký hợp đồng với doanh nghiệp có giấy phép vận chuyển, xử lý chất thải thông thường \n\nMajor\n   Có ít nhất 1 trong số các nội dung sau:\n1. Không có kho bảo quản chất thải thông thường tại nơi làm việc, không phân loại và bảo quản theo đặc tính từng loại\n2. Không tiến hành thẩm định, kiểm tra thực tế đối với doanh nghiệp xử lý chất thải thông thường\n * Dù liên tục gia hạn và duy trì hợp đồng với cùng một doanh nghiệp nhưng cần phải gia hạn bảo hiểm bảo hành ít nhất 3 năm một lần, yêu cầu kiểm tra thực tế\n\nMinor\n    Lắp đặt kho lưu trữ chất thải thông thường tại nơi làm việc và bảo quản chất thải riêng biệt theo đặc tính từng loại, nhưng có khả năng nước thải sẽ chảy ra ngoài theo đường nước mưa\n\nNot Applicable\n   Không phát sinh chất thải thông thường tại nơi làm việc\n\nConformance\n   Chất thải thông thường được thải ra thông qua các doanh nghiệp xử lý hợp pháp và các cơ sở vật chất lưu trữ chất thải thông thường được lắp đặt và quản lý hợp pháp theo quy định",
+      "criteria_en": "Priority\n   Illegal discharge of general waste without contracting with a company authorized for transporting and handling wastes\n\nMajor\n   One or more of the following applicable:\n   1. General waste storage facility not installed within the workplace, and waste is not separated by type\n   2. No on-site inspection of general waste dosposal company\n   *Even if the contract is continuously renewed with the same company, the warranty insurance must be renewed and an on-site inspection must be conducted at least every 3 years.\n\nMinor\n   Hazardous waste storage facility has been installed within the workplace and waste is separated and stored by type, but there is a possibility that contaminated water from the waste may flow into the sewer\n\nNot Applicable\n   General wastes not generated at the workplace\n\nConformance\n   General waste is disposed of through a legal company and general waste storage facilities are also intalled/managed legally",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Quản lý và xử lý chất thải rắn công nghiệp / sinh hoạt",
+        "priority_kw": [
+          "xả thải bất hợp pháp",
+          "không ký hợp đồng với doanh nghiệp có giấy phép vận chuyển, xử lý chất thải thông thường"
+        ],
+        "major_kw": [
+          "không có kho bảo quản chất thải thông thường tại nơi làm việc",
+          "không tiến hành thẩm định, kiểm tra thực tế đối với doanh nghiệp xử lý chất thải thông thường"
+        ],
+        "major_min_count": 5
+      }
+    },
+    {
+      "row_num": 32,
+      "provision": "CE4) Air Emissions",
+      "audit_id": "CE401",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "X",
+      "penalty_criteria": "Priority",
+      "sub_category": "Air emissions control system",
+      "conformance_statement": "Air emissions and the performance of air emission control systems are routinely monitored.",
+      "criteria_vn": "Priority\n  (Bắt buộc) Phát thải vào không khí lượng khí thải vượt quá tiêu chuẩn cho phép phát thải các chất ô nhiễm không khí hoặc phát thải trái phép mà không được xử lý bằng cách sử dụng các thiết bị phòng chống ô nhiễm không khí\n\nMajor\n    Có ít nhất 1 trong số các nội dung sau:\n   1. Quản lý không hợp lý về thiết bị ngăn chặn phát thải vào không khí (dây đai quạt, than hoạt tính, bộ lọc….)\n   2. Cán bộ phụ trách về xử lý chất gây ô nhiễm môi trường không khí chưa hoàn thành chương trình giáo dục bắt buộc\n\nMinor\n   Không có hoặc bỏ sót một phần nhật ký vận hành của thiết bị ngăn chặn phát thải vào không khí\n\nNot Applicable\n   Không có thiết bị phát thải ô nhiễm vào không khí; hoặc nơi làm việc nằm ở trong khu công nghiệp nên không chịu quy chế về ô nhiễm không khí.\n\nConformance\n    Quản lý hợp lý về việc đo lường định kỳ, quản lý thiết bị, nhật ký vận hành về thiết bị phát thải chất ô nhiễm không khí \n\n(Bắt buộc) ⑧ Kết quả đo việc phát thải vào không khí cho thấy đã không tuân thủ các tiêu chuẩn pháp luật",
+      "criteria_en": "Priority\n   (Mandatory) Exceeding the emission approval level for air pollutants or illegally discharging them without using air pollution prevention facilities\n\nMajor\n   One or more of the following applicable\n   1. Improper management of air pollution prevention facilities (fan belts, activated carbon, filters, etc.)\n   2. Persons in charge of air pollutant treatment have not completed required training\n\nMinor\n   The operation records of the air pollution prevention facility have not written or have written with some omissions\n\nNot Applicable\n   There are no air pollutant emission facilities or the workplace is located within an industrial complex, thus not subject to air pollutant regulations.\n\nConformance\n   Appropriately manage result of regular measurements, facility management, and operation records for air pollutant emission facilities \n\n(Mandatory) ⑧ Results of air pollutant emission measurements do not comply with legal satnadards",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 5,
+        "Minor": 3,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 5
+      },
+      "rule": {
+        "desc": "Hệ thống kiểm soát khí thải (Penalty Item = X khi Priority)",
+        "priority_kw": [
+          "vượt quá tiêu chuẩn cho phép phát thải",
+          "phát thải trái phép mà không được xử lý",
+          "exceeding the emission approval level"
+        ],
+        "major_kw": [
+          "quản lý không hợp lý về thiết bị ngăn chặn phát thải",
+          "than hoạt tính",
+          "bộ lọc",
+          "chưa hoàn thành chương trình giáo dục bắt buộc"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 33,
+      "provision": "CE4) Air Emissions",
+      "audit_id": "CE402",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "X",
+      "penalty_criteria": "Priority",
+      "sub_category": "Environmental noise levels",
+      "conformance_statement": "Environmental noise levels are within regulatory limits.",
+      "criteria_vn": "Priority\n    Có ít nhất 1 trong số các nội dung sau:\n   1.  Là nơi làm việc thuộc đối tượng chịu quy chế về tiếng ồn môi trường  nhwung không tiến hành đo lường mức độ tiếng ồn\n   2. Khi nhận được khiếu nại của người dân về tiếng ồn trong khu vực , tiến hành đó lường mức độ tiếng ồn nhưng không có biện pháp khắc phục\n\nMajor\n    Là nơi làm việc thuộc đối tượng chịu quy chế về tiếng ồn môi trường nên có tiến hành đo lường nhưng mức độ tiếng ồn vượt quá tiêu chuẩn quy định của pháp luật \n\nMinor\n   Thiếu sót trong việc quản lý tài liệu ghi chép kiểm tra đo lường tiếng ồn môi trường \n\nNot Applicable\n   Không có tiếng ồn môi trường được phát sinh ở nơi làm việc; hoặc nơi làm việc nằm ở trong khu công nghiệp nên không chịu quy chế về tiếng ồn môi trường\n\nConformance\n   Tuân thủ theo quy định của pháp luật về chu kỳ đo lường tiếng ồn nơi làm viejc và kết quả đo lường ( tiến hành đo lường ít nhất 1 lần/ năm)",
+      "criteria_en": "Priority\n   One or more of the following applicable\n   1. Although the workplace is subject to environmental noise regulations, boundary noise is not measured\n   2. Community noise complaints received, but no boundary noise was measured or action taken\n\nMajor\n   As the workplace is subject to environmental noise regulations, boundary noise measurements are being conducted, but the noise level exceeds the legal standards\n\nMinor\n  Insufficient documentation management of environmental noise measurement and inspection records\n\nNot Applicable\n   Environmental noise not generated in the workplace, or the workplace is located within a national/local industrial complex, and is therefore not subject to environmental noise regulations\n\nConformance\n   Compliance with legal standards for workplace environmental noise measurement cycle and measurement results (measurement conducted at least once a year)",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Kiểm soát tiếng ồn môi trường xung quanh (Penalty Item = X khi Priority)",
+        "priority_kw": [
+          "không tiến hành đo lường mức độ tiếng ồn",
+          "khiếu nại của người dân về tiếng ồn"
+        ],
+        "major_kw": [
+          "tiếng ồn vượt quá tiêu chuẩn quy định"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 34,
+      "provision": "CE5) Water Management",
+      "audit_id": "CE501",
+      "audit_item": "O",
+      "template_significance": "Minor",
+      "penalty_item": "X",
+      "penalty_criteria": "Priority",
+      "sub_category": "Water management process",
+      "conformance_statement": "Adequate and effective processes are in place to record, characterize, and monitor water sources, water discharge, and control  channels of contamination.",
+      "criteria_vn": "Priority\n   (Bắt buộc) Xả nước thải vượt quá tiêu chuẩn cho phép hoặc xả trái phép mà không qua xử lý bằng thiết bị xử lý nước ( qua đường nước mưa...)\n\nMajor\n   Có hơn 2 nội dung trong các nội dung sau đây\n    1. Quản lý không hợp lý về thiết bị xử lý nước thải (chất hóa học, than hoạt tính, bộ lọc, quản lý độ PH….)\n    2. Cán bộ phụ trách về xử lý nước thải chưa hoàn thành chương trình giáo dục bắt buộc\n\nMinor\n   Không có hoặc bỏ sót một phần nhật ký vận hành của thiết xử lý nước thải \n\nNot Applicable\n   Không xả nước thải hoặc hóa chất\n\nConformance\n   Quản lý hợp lý về việc đo định kỳ, quản lý thiết bị, nhật ký vận hành về thiết bị xử lý nước thải\n \n(Bắt buộc)  ⑧ Kết quả đo việc xả nước thải cho thấy đã không tuân thủ các tiêu chuẩn pháp luật",
+      "criteria_en": "Priority\n   (Mandatory) Exceeding of the wastewater discharge standards or withdrawing illegally without treatment using water pollution prevention facilities\n\nMajor\n   One or more of the following applicable\n   1. Improper management of water pollution prevention facilities (chemicals, activated carbon, filters, pH etc.)\n   2. Persons in charge of water pollutant treatment have not completed required training\n\nMinor\n   The operation records of the water pollution prevention facility have not written or have written with some omissions\n\nNot Applicable\n   No wastewater or chemical emissions\n\nConformance\n   Appropriately manage result of regular measurements, facility management, and operation records for water pollutant emission facilities \n\n(Mandatory) ⑧ Results of water pollutant emission measurements do not comply with legal satnadards",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 5,
+        "Minor": 3,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 5
+      },
+      "rule": {
+        "desc": "Quản lý nước & Hệ thống xử lý nước thải (Penalty Item = X khi Priority)",
+        "priority_kw": [
+          "xả nước thải vượt quá tiêu chuẩn",
+          "xả trái phép mà không qua xử lý",
+          "exceeding of the wastewater discharge standards"
+        ],
+        "major_kw": [
+          "quản lý không hợp lý về thiết bị xử lý nước thải",
+          "chưa hoàn thành chương trình giáo dục bắt buộc về nước thải"
+        ],
+        "major_min_count": 5
+      }
+    },
+    {
+      "row_num": 35,
+      "provision": "CE6) Energy Consumption and Greenhouse Gas Emissions",
+      "audit_id": "CE601",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Energy Consumption, Greenhouse Gas Emission Control",
+      "conformance_statement": "Energy consumption and all scopes 1, 2, and significant categories of Scope 3 Greenhouse gas (GHG) emissions are tracked,  documented, and publicly reported against an absolute corporate-wide GHG reduction goal.",
+      "criteria_vn": "Priority\n   Có hơn 1 nội dung trong các nội dung sau đây\n1. Không quản lý hoặc sơ sót trong việc quản lý kiểm tra các hạng mục lượng sử dụng năng lượng và lượng phát thải khí nhà kính \n    * Đối với các cơ sở được sử dụng chung bởi các công ty khác nhau, chẳng hạn như tòa nhà cho thuê, cần kiểm tra xem công ty có thể quản lý việc sử dụng năng lượng riêng biệt hay không.\n2. Không lập kế hoạch và mục tiêu tiết kiệm năng lượng và giảm thiết phát thải khí nhà kính, hoặc đã lập kế hoạch và mục tiêu tiết kiệm nhưng không thực hiện \n    * Kết quả hoạt động giảm thiếu phát thải khí nhà kính được báo cáo ít nhất 1 lần/năm, bao gồm phạm vi hoạt động (trong nước/toàn cầu...)/năm tiêu chuẩn/năm mục tiêu/lượng giảm mục tiêu\n\nMajor\n     Có hơn 1 nội dung trong các nội dung sau đây\n 1. Lượng sử dụng năng lượng được quản lý nhưng không được chuyển đổi thành lượng phát thải khí nhà kính\n 2. Lập kế hoạch và thi hành các biện pháp để giảm lượng sử dụng năng lượng và lượng phát thải khí nhà kính, nhưng không ghi chép quản lý hiệu suất tiết kiệm năng lượng và phát thải khí nhà kính trong quá trình thực hiện\n\nMinor\n  Quản lý việc sử dụng và tiết kiệm năng lượng/khí nhà kính nhưng thiếu sót trong việc quản lý hồ sơ ghi chép\n\nNot Applicable\n     Không thể kiểm tra lượng năng lượng tiêu thụ thực tế vì không phải chi trả chi phí năng lượng mà nơi làm việc đã sử dụng hoặc chi phí năng lượng được tính theo giá cố định (chứ không phải là được tính dựa trên lượng tiêu thụ thực tế) khi chuyển vào tòa nhà cho thuê\n\nConformance\n   1. Văn bản hóa việc quản lý lượng năng lượng tiêu thụ và lượng phát thải khí nhà kính \n  2. Thiết lập kế hoạch giảm lượng năng lượng tiêu thụ và lượng phát thải khí nhà kính, ghi chép và quản lý  hiệu suất tiết kiệm",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. Energy usage and greenhouse gas emissions are not managed or omissions found\n    *In the case of facilities shared by multiple companies, such as rental buildings, it is necessary to check whether the energy usage of each company can be managed separately.\n   2. Energy usage and greenhouse gas reduction goals/plans have not been established, or reduction goals/plans have been established but reduction activities have not been implemented.\n    *The results of greenhouse gas reduction activities are reported at least once a year, including the scope of activity(domestic/global, etc.)/base year/target year/target value\n\nMajor\n  One or more of the following applicable:\n   1. Energy usage is managed, but not converted into greenhouse gas emissions\n   2. Plans to reduce energy usage and greenhouse gas emissions are being established and implemented, but the results of energy and greenhouse gas emissions reductions are not recorded and managed\n\nMinor\n   Energy usage/greenhouse gas emissions and reduction activities are in progress, but record management is inadequate\n\nNot Applicable\n   The actual amount of energy used in the workplace cannot be confirmed because the business does not directly pay for the energy costs, or the energy costs are not calculated based on the amount of energy used when occupying a rental building, but rather are calculated as a flat rate\n\nConformance\n   1. Energy usage and greenhouse gas emissions managed and documented\n   2. Established energy usage and greenhouse gas reduction plans and record record and manage reduction performance",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 3,
+        "Minor": 2,
+        "Major": 1,
+        "Priority": 0,
+        "N/A": 3
+      },
+      "rule": {
+        "desc": "Tiêu thụ năng lượng & Kiểm soát phát thải khí nhà kính (GHG)",
+        "priority_kw": [
+          "không quản lý lượng sử dụng năng lượng và lượng phát thải khí nhà kính",
+          "không lập kế hoạch và mục tiêu tiết kiệm năng lượng"
+        ],
+        "major_kw": [
+          "không được chuyển đổi thành lượng phát thải khí nhà kính",
+          "không ghi chép quản lý hiệu suất tiết kiệm năng lượng"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 36,
+      "provision": "CM1) Risk Assessment",
+      "audit_id": "CM101",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Compliance process of Legal/Customer Requirements",
+      "conformance_statement": "An adequate and effective environment compliance process is established to monitor, identify, understand, and ensure compliance  with applicable laws, regulations, and customer requirements.",
+      "criteria_vn": "Priority\n  Có hơn 1 nội dung trong các nội dung sau đây\n1. Không thành lập quy trình để tuân thủ quy định luật môi trường và không có sổ đăng ký quy phạm pháp luật\n2. Không giám sát việc thực hiện quy trình \n\nMajor\n  Có hơn 1 nội dung trong các nội dung sau đây\n   1. Thiếu thủ tục gia hạn giấy phép/giấy chứng nhận /kiểm tra pháp lý đối với quy trình tuân thủ luật môi trường\n   2. Thiếu một số quy định pháp luật trong sổ đăng ký quy định pháp luật\n\nMinor\n   Chu kỳ giám sát có hay không thi hành 6 tháng / lần \n\nNot Applicable\n   Không áp dụng\n\nConformance\n   1. Thiết lập quy trình để tuân thủ các quy định pháp luật về môi trường, đồng thời tìm hiểu tất cả các luật định có thể áp dụng và tiến hành văn bản hóa\n   2. Tiến hành giám sát có hay không thực hiện quy trình theo từng quý",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. An adequate and effective environment compliance process is not established\n   2. An adequate and effective quarterly compliance process is not conducted\n\nMajor\n   One or more of the following applicable:\n   1. A documented process is not in placed to renew permits, licenses, and tests before they expired\n   2. An applicable laws and regulations are not fully identified\n\nMinor\n   A compliance process is not conducted less than once a half year\n\nConformance\n   1. An adequate and effective environment compliance process is established with applicable laws, regulations \n   2. An adequate and effective quarterly compliance process is in placed",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình tuân thủ pháp luật & khách hàng về Môi trường",
+        "priority_kw": [
+          "không thành lập quy trình để tuân thủ quy định luật môi trường"
+        ],
+        "major_kw": [
+          "thiếu thủ tục gia hạn giấy phép môi trường"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 37,
+      "provision": "CM1) Risk Assessment",
+      "audit_id": "CM102",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Due diligence Process",
+      "conformance_statement": "An adequate and effective due diligence process is established to identify and assess the most significant actual and potential  environmental risks where the facility caused or contributed to adverse environmental impacts for internal and external  stakeholders (including applicable requirements).",
+      "criteria_vn": "Priority\n   Có hơn 1 nội dung trong các nội dung sau đây\n   1. Không có quy trình đánh giá ảnh hưởng tới môi trường \n   2. Không thực hiện đánh giá ảnh hưởng tới môi trường \n\nMajor\n   Có hơn 2 nội dung trong các nội dung sau đây\n   1. Khi đánh giá ảnh hưởng tới môi trường, bỏ qua một số bên liên quan\n   2. Khi đánh giá ảnh hưởng tới môi trường, bỏ qua 1 số yếu tố ảnh hưởng tới môi trường \n   3. Khi đánh giá ảnh hưởng tới môi trường, bỏ qua 1 số phạm vi\n   4. Không thực hiện các biện pháp để ngăn ngừa tai nạn môi trường và hoạt động cải thiện nguy cơ nghiêm trọng\n   5. KHông tuân thủ chu kỳ đánh giá ảnh hưởng tới môi trường \n\nMinor\n  1. Có 1 hoặc ít hơn các nội dung trong Major\n  2. Tiến hành đánh giá tác động môi trường, đồng thời thiết lập và vận hành các thủ tục phòng ngừa tai nạn an toàn, nhưng khi kiểm tra tại chỗ, xác nhận các trường hợp vi phạm quy trình hoặc còn tiềm ấn các yếu tố nguy cơ.\n\nConformance\n   1. Sở hữu quy trình hệ thống quản lý các yếu tố nguy cơ nguy hiểm môi trường có tính đến các bên liên quan trong và ngoài.\n     - Quản lý giảm nguy cơ, chẳng hạn như loại bỏ hoặc thay thế các yếu tố nguy hiểm\n   2. Thực hiện đánh giá tác động môi trường có tính đến các bên liên quan bên trong và bên ngoài, tình trạng khẩn cấp, phạm vi/yếu tố, đồng thời thiết lập và thi hành các biện pháp giảm nguy cơ/phòng ngừa các yếu tố nguy cơ nghiêm trọng\n   3. Đánh giá rủi ro định kỳ và thực hiện đánh giá rủi ro đột xuất khi phát sinh điểm thay đổi (chu kỳ thực tế: theo quy định của từng quốc gia)\n\nCác bên liên quan trong và ngoài: người lao động, nhà cung cấp dịch vụ trong công ty, nhà thầu, công ty đối tác, khách hàng\nCác yếu tố ảnh hưởng đến môi trường: đất, chất lượng nước, không khí, động thực vật, các yếu tố môi trường có khả năng chứa các chất ô nhiễm khác, khí nhà kính, chất phá hủy tầng ozon\nPhạm vi: Tất cả các yếu tố ảnh hưởng đến môi trường, tất cả các quy trình, tất cả các địa điểm, tất cả các hóa chất / nguyên liệu được xử lý",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. An adequate and effective risk assessment process is not in placed\n   2. A risk assessment is not conducted\n\nMajor\n   Two or more of the following applicable:\n   1. Missing applicable stakeholders in risk assessment\n   2. Missing applicable environmental medium in risk assessment\n   3. Missing applicable scopes in risk assessment\n   4. Mitigation or prevention plan is not established and implemented\n   5. A risk assessment is not conducted regularly and updated\n\nMinor\n   1. 1 or more from Major evaluation items\n   2. Environmental risk assessment is conducted and safety accident prevention procedures are established and operated,\n      however On-site inspection confirmed cases of violation of procedures or exposure of risk factors\n\nConformance\n   1. An adequate and effective risk assessment process is in placed to identify the most actual and potential  environmental risks and prevent the adverse environmental impacts for internal  and external stakeholders\n   2. A risk assessment is conducted for (*)internal  and external stakeholders, (**)every environmental medium, (***)all scopes and mitigation or prevention plan is established and implemented\n   3. A risk assessment should be conducted regularly and updated when there is a significant change\n(*) internal  and external stakeholders : workers, On-site service providers, Suppliers, Customers, Pregnant workers and nursing mothers\n(**) every environmental medium : Soil, water, air, biota (plants and animals), or any other parts of the environment that  can contain contaminants, Greenhouse Gas impact, Ozone depleting substances (ODS)\n(***) all scopes : every environmental medium, every site operation/process, every Physical location, every Chemical or material used",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Quy trình đánh giá tác động/rủi ro Môi trường",
+        "priority_kw": [
+          "không có quy trình đánh giá ảnh hưởng tới môi trường"
+        ],
+        "major_kw": [
+          "bỏ qua một số bên liên quan",
+          "bỏ qua 1 số yếu tố ảnh hưởng tới môi trường"
+        ],
+        "major_min_count": 3
+      }
+    },
+    {
+      "row_num": 38,
+      "provision": "CM2) Control processes",
+      "audit_id": "CM201",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Assigning responsibilities and authorities for all workers(Senior manager to workers)",
+      "conformance_statement": "Environment responsibilities and authorities are adequately and effectively defined and assigned for all employee levels (senior  managers to workers) for the implementation of management systems, and for compliance with laws, regulations, and codes",
+      "criteria_vn": "Priority\n   Để vận hành hệ thống quản lý kinh doanh( quân thủ pháp luật và RBA), không tiến hành văn bản hóa quyền hạn và trách nhiệm của người lao động, hoặc không chỉ định người phụ trách\n\nMajor\n   Thiếu ít nhất hai người phụ trách liên quan đến các yếu tố ảnh hưởng đến môi trường (chất độc hại, chất thải, không khí, chất lượng nước, tiếng ồn môi trường, năng lượng, khí nhà kính, chất phá hủy tầng ozone)\n\nMinor\n    Thiếu dưới một người phụ trách liên quan đến các yếu tố ảnh hưởng đến môi trường (chất độc hại, chất thải, không khí, chất lượng nước, tiếng ồn môi trường, năng lượng, khí nhà kính, chất phá hủy tầng ozone)\n\nConformance\n   1. Thẩm quyền và trách nhiệm của người quản lý trong việc thực hiện hệ thống quản lý linh doanh (tuân thủ luật pháp và  RBA) đã được văn bản hóa\n   2. Người phụ trách tất cả các yếu tố ảnh hưởng đến môi trường (các chất độc hại, chất thải, không khí, chất lượng nước, tiếng ồn môi trường, năng lượng, khí nhà kính, chất phá hủy tầng ozone) được chỉ định",
+      "criteria_en": "Priority\n   Environment responsibilities and authorities are not defined and assigned for all  employee levels (senior managers to workers) for the implementation of management systems\n\nMajor\n    Two or more persons in charge of environmental impact factors are missing\nMinor\n    One or more persons in charge of environmental impact factors are missing\n\nNot Applicable\n\nConformance\n   1. Environment responsibilities and authorities are defined and assigned for all  employee levels (senior managers to workers) for the implementation of management systems\n   2. A specific individuals assigned for all applicable environmental aspects(Soil, water, air, biota (plants and animals), or any other parts of the environment that  can contain contaminants, Greenhouse Gas impact, Ozone depleting substances (ODS))",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Phân công trách nhiệm quản lý Môi trường",
+        "priority_kw": [
+          "không tiến hành văn bản hóa quyền hạn và trách nhiệm môi trường"
+        ],
+        "major_kw": [
+          "thiếu ít nhất hai người phụ trách liên quan đến các yếu tố ảnh hưởng đến môi trường"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 39,
+      "provision": "CM2) Control processes",
+      "audit_id": "CM202",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Policies and Control Process",
+      "conformance_statement": "Adequate and effective environment policies and control processes are established",
+      "criteria_vn": "Priority\n   Không có quy trình xây dựng, quản lý và văn bản hóa chính sách môi trường của nơi làm việc\n\nMajor\n  Có ít nhất 1 trong số các nội dung sau:\n1. Thiếu ít nhất một trong các nội dung bao gồm chính sách môi trường\n2. Thiếu ít nhất 2 trong số các quy trình quản lý chính sách môi trường\n\nMinor\n  Thiếu ít nhất 1 trong số các quy trình quản lý chính sách môi trường\n\n\nConformance\n   1. 1. Có chính sách môi trường thích hợp bao gồm:\n      ① Giảm/loại bỏ (chất phá hủy tầng ozone, năng lượng/khí nhà kính, sử dụng tài nguyên thiên nhiên, nguyên liệu thô và chất thải kèm theo)\n      ② Bảo tồn tài nguyên thiên nhiên\n   2.Có các quy trình sau phù hợp với chính sách môi trường:\n      ① Quản lý rác thải   ② Quy trình giảm thiểu tác động lớn tới môi trường\n      ③Quy trình bảo dưỡng thiết bị xử lý chất ô nhiễm  ④ Quy trình điều tra sự cố môi trường\n      ⑤ Quy trình ứng phó tình huống khẩn cấp ⑥ Quản lý chất độc hại/ chất phá hủy tầng ôzôn\n      ⑦ Bảo quản hồ sơ ghi chép vật chất phá hủy tầng ôzôn",
+      "criteria_en": "Priority\n   Adequate and effective environment policies and control processes are not in placed\n\nMajor\n   1. Missing one or more of environment policies\n   2.  Missing two or more of effective Control processes\n\nMinor\n   Missing one or more of effective Control processes \n\nConformance\n   1. Adequate and effective environment policies are in placed for :\n      ① Reduction (and elimination) of Ozone depleting substance (ODS), Energy and GHG, Use of natural resources and Raw materials and resulting waste\n      ② Conservation of natural resources\n   2. Effective Control processes are in placed for :\n      ① An adequate and effective waste management process(Reception → Disposal)  ② A mitigation process for all significant actual and potential environmental risks identified, \n          tracking implementation, and resulting adverse impact\n      ③ A preventive maintenance process for all treatment equipment for each environmental medium  ④ A Investigation process of each environmental incident (e.g., spill, etc.) \n         resulting in a preventive and corrective  action plan\n      ⑤ A emergency response process  ⑥ A safe return and disposal process for Hazardous/ozone depleting substances\n      ⑦ Ozone depleting substances Record keeping",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Chính sách & Quy trình kiểm soát Môi trường",
+        "priority_kw": [
+          "không có quy trình xây dựng, quản lý và văn bản hóa chính sách môi trường"
+        ],
+        "major_kw": [
+          "thiếu ít nhất một trong các nội dung bao gồm chính sách môi trường"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 40,
+      "provision": "CM2) Control processes",
+      "audit_id": "CM203",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Training process",
+      "conformance_statement": "An adequate and effective environment training process is established for all managers/workers on all policy/process/job-related  aspects and performance targets.",
+      "criteria_vn": "Priority\n   Trường hợp không thiết lập quy trình đào tạo về môi trường, không tiến hành huấn luyện, đào tạo\n    - Đào tạo định kỳ, đào tạo đặc biệt, đào tạo cho nhân viên mới, đào tạo khi thay đổi công việc ... \n    - Đào tạo bắt buộc theo luật định cho các kỹ sư môi trường, giám sát viên quản lý\n\nMajor\n   Thiếu ít nhất 2 nội dung đào tạo về môi trường trở lên \n\nMinor\n   Thiếu ít nhất 1 nội dung đào tạo về môi trường trở lên \n\nNot Applicable\n   Không áp dụng\n\nConformance\n   1.  Thiêt lập quy trình và thực hiện đào tạo về môi trường một cách thích hợp để người lao động nhận thức được các yếu tố gây hại\n      -  Loại hình và nội dung đào tạo cần ít nhất đáp ứng quy định pháp luật quốc gia có liên quan \n   2. Nội dung giáo dục môi trường phải bao gồm các nội dung sau:\n      ① Chương trình cắt giảm   ②  Xử lý, lưu trữ và tiêu hủy chất thải được chỉ định\n      ③ Xử lý, lưu trữ và tiêu hủy chất thải thông thường \n      ④ Hệ thống quản lý và phát thải không khí  ⑤ Các chất bị hạn chế\n      ⑥ Sử dụng nước, ngăn ngừa ô nhiễm đường ống dẫn nước bên trong, thải ra \n      ⑦Giảm thiểu sử dụng năng lượng, phát thải khí nhà kính; và quản lý thiết bị tiêu thụ năng lượng/nhiên liệu",
+      "criteria_en": "Priority\n   An adequate and effective environment training process is not established\n      - Regular education, special education, MSDS, education when hiring, education when changing work, etc.\n      - Legal compulsory education for environmental managers, environmental management managers, and management supervisors\n\nMajor\n   Missing three or more of training topics\n\nMinor\n   Missing training topicsless than two \n\nNot Applicable\n\nConformance\n   1. An adequate and effective environment training process is established including : \n      ① Training plan  ② Training material ③ Training frequency  ④ Training records  ⑤ Training efficiency verification\n   2. Minimum training topics are covered with a minimum of :\n      ① Reduction programs  ② Hazardous waste handling, storage, and disposal\n      ③ Solid waste handling, storage and disposal  \n      ④ Air emissions and air emission control systems  ⑤ Material restriction  \n      ⑥ Water use, discharge, and internal water channel contamination protection\n      ⑦ GHG/ Energy use, reduction, and maintaining energy and fuel-consuming operations",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 2,
+        "Minor": 1,
+        "Major": 0.5,
+        "Priority": 0,
+        "N/A": 2
+      },
+      "rule": {
+        "desc": "Quy trình đào tạo về Môi trường",
+        "priority_kw": [
+          "không thiết lập quy trình đào tạo về môi trường"
+        ],
+        "major_kw": [
+          "thiếu ít nhất 2 nội dung đào tạo về môi trường"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 41,
+      "provision": "CM3) Communications",
+      "audit_id": "CM301",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Worker, stakeholder communication",
+      "conformance_statement": "An adequate and effective ongoing two-way communication process with workers, internal and external stakeholders, where  relevant or necessary, is established to obtain feedback on operational environmental practices and conditions and to foster  continuous improvement.",
+      "criteria_vn": "Priority\n   Không thiết lập quy trình giao tiếp, truyền đạt nội dung về các thông tin môi trường\n\nMajor\n    Có ít nhất hai trong số các nội dung sau:\n1. Trường hợp thiếu các bên liên quan cần truyền đạt thông tin (nhà cung cấp, khách hàng, người lao động, khách tới thăm, nhà cung cấp dịch vụ, người lao động nước ngoài, v.v.)\n2. Thiếu nội dung thông tin cần được truyền đạt\n- Chia sẻ và đăng tải thông tin về các yếu tố nguy cơ nguy hiểm tại nơi làm việc và các biển báo an toàn nhận dạng nguy hiểm (tài liệu an toàn sức khỏe vật chất MSDS, đặc tính chất thải nguy hiểm)\n- Công khai lượng khí thải nhà kính toàn công ty ( biểu hiện lượng khí thải hàng năm, không cho phép dùng ký hiệu tỷ lệ phần trăm)\n3. Không có quy trình nào được thiết lập để nhận phản hồi và ý kiến của các bên liên quan về các nội dung thông tin được truyền đạt  (như hòm thư kiến nghị).등)\n\nMinor\n   Có ít nhất 1 nội dung trong Major \n\nConformance\n   Thiết lập quy trình truyền đạt/báo cáo để người lao động/khách viếng thăm/nhà cung cấp/khách hàng bên trong và bên ngoài có thể xác định rõ ràng thông tin môi trường nơi làm việc",
+      "criteria_en": "Priority\n   Environmental communication process is not establsihed.  \n\nMajor\n   Two or more of the following applicable:\n   1. Internal and external stakeholders who needs to communicate is omitted  (suppliers, customers, workers, visitors, service providers, migrant workers etc)\n   2. If the contents to be communicated is missing\n     - Potential workplace hazards  that workers are exposed to are clearly posted in the facility  or placed (signage, labels, MSDS, hazardous waste etc)\n     - GHG footprint as a quantitative value of total emissions. (annual emissions, A percentage is unacceptable)\n   3. Feedback channels and a process for obtaining the opinion of stakeholders are not clearly communicated and visible (e.g.,  suggestion box..)\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   Environmental communication process with workers, and internal and external stakeholders, where  relevant or necessary, is established",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Giao tiếp thông tin Môi trường với người lao động & bên liên quan",
+        "priority_kw": [
+          "không thiết lập quy trình giao tiếp, truyền đạt nội dung về các thông tin môi trường"
+        ],
+        "major_kw": [
+          "công khai lượng khí thải nhà kính",
+          "thiếu các bên liên quan"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 42,
+      "provision": "CM3) Communications",
+      "audit_id": "CM302",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Worker grievance/complaint process",
+      "conformance_statement": "An adequate and effective process is established to anonymously report environmental grievances confidentially without fear of  reprisal or intimidation.",
+      "criteria_vn": "Priority\n   Có hơn 1 nội dung trong các nội dung sau đây:\n   1. Không thiết lập quy trình xử lý khiếu nại các vấn đề môi trường, không có kế hoạch khắc phục vấn đề\n   2. Khiếu nại không được xử lý trong vòng 3 tháng sau khi nhận được báo cáo ban đầu hoặc không được ghi nhận\n\nMajor\n  Có hơn 2 nội dung trong các nội dung sau đây:\n   1. Trường hợp quy trình khiếu nại không được xử lý dưới dạng ẩn danh (không sợ bị trả thù)\n   2. Trường hợp giám đốc điều hành và người quản lý không hướng dẫn hoặc trình bày quy trình xử lý khiếu nại một cách rõ ràng để nhân viên nhận biết \n   3. Trường hợp việc bắt đầu các biện pháp xử lý khiếu nại bị trì hoãn trong hơn hai tuần sau khi nhận được ý kiến khiếu nại\n\nMinor\n  Có ít nhất 1 nội dung trong số Major \n\nConformance\n   Thiết lập quy trình xử lý khiếu nại các vấn đề môi trường (các quy phạm liên quan đến RBA) và vận hành đúng quy trình",
+      "criteria_en": "Priority\n   One or more of the following applicable:\n   1. Grievance process is not established and Confirmed grievance without a corrective action plan\n   2. Grievance has not been  investigated/addressed within 3 months  after being received.\n\nMajor\n   Two or more of the following applicable:\n   1. Process not to anonymously report grievances without fear of reprisal\n   2. Internal communication of the grievance mechanism is not clearly visible\n   3. The auditee shall not investigate the validity of any grievance within 2weeks.\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   Communication of the environmental grievance(RBA standard) process is established and operating normally",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình giải quyết khiếu nại về Môi trường",
+        "priority_kw": [
+          "không thiết lập quy trình xử lý khiếu nại các vấn đề môi trường"
+        ],
+        "major_kw": [
+          "không được xử lý dưới dạng ẩn danh",
+          "trì hoãn trong hơn hai tuần"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 43,
+      "provision": "CM4) Performance Review and Continuous Improvement",
+      "audit_id": "CM401",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Performance Review and Continuous Improvement",
+      "conformance_statement": "An adequate and effective environment management performance review and continuous improvement process is established.",
+      "criteria_vn": "Priority\n    Ban giám đốc không thiết lập quy trình kiểm tra kết quả môi trường doanh nghiệp\n   \n  \nMajor\n   Có ít nhất 2 trong số các nội dung sau:\n  1. Trường hợp mục tiêu giảm thiểu sử dụng nguồn ô nhiễm / chất thải / tài nguyên thiên nhiên / khí thải nhà kính và mục tiêu chi tiết bị thiếu hoặc không chắc chắn, không xây dựng quy trình theo dõi mục tiêu, không có kế hoạch hành động bổ sung khi không đạt mục tiêu\n  2. Trường hợp mục tiêu đạt được không được thiết lập theo đơn vị hàng năm hoặc mục tiêu không được thiết lập theo hướng tăng dài hạn\n  3. Trường hợp các thay đổi quan trọng không được sửa đổi và phản ánh trong quá trình quản lý hoặc thời hạn đánh giá vượt quá hai năm\n  4. Trường hợp nội dung trong báo cáo đánh giá của ban quản trị bị thiếu\n    - Dữ liệu phát thải chất ô nhiễm/chất thải, tài nguyên thiên nhiên\n\nMinor\n  Có ít nhất 1 nội dung trong số Major \n\nConformance\n   Ban quản trị tiến hành hội nghị tư vấn định kỳ ít nhất 1 lần/năm để xem xét về kết quả thực hiện hoạt động môi trường doanh nghiệp và có quy trình xử lý cải tiến các vấn đề \n   *Trong nước: Hội nghị quản lý trong công ty, Ủy ban An toàn và Sức khỏe nghề nghiệp, v.v.",
+      "criteria_en": "Priority\n   Environmental management performance review and continuous improvement process is established.\n  \nMajor\n   Two or more of the following applicable:\n   1. If the objective of minimizing the use of pollutants/waste/natural resources/greenhouse gas emissions and detailed goals are missing or uncertain\n      the target tracking process is not established, and there is no additional action plan if the objective is off track\n   2. Goals shall not clearly define the period of one year, The target is not set in a long-term incremental direction.\n   3. Regular evaluation not exceeding 2 years but earlier if there is a Significant Change   \n   4. If the following information is omitted in the management review\n     - Risk assessments are conducted for maternity, discharges of pollutants, generation of waste, and conserve the use of natural resources\n\nMinor\n   1 or more from Major evaluation items\n\nConformance\n   Conducting regular meetings at least once a year to review Environmental management performance by semior management, \n   and there is an improvement / corrective action process.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Đánh giá kết quả thực hiện của lãnh đạo & Cải tiến liên tục Môi trường",
+        "priority_kw": [
+          "không thiết lập quy trình kiểm tra kết quả môi trường doanh nghiệp"
+        ],
+        "major_kw": [
+          "mục tiêu giảm thiểu sử dụng nguồn ô nhiễm",
+          "vượt quá hai năm"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 44,
+      "provision": "CM4) Performance Review and Continuous Improvement",
+      "audit_id": "CM402",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Self-audit process",
+      "conformance_statement": "An adequate and effective environmental self-audit process is established to assess conformance with the RBA Code and  customer requirements periodically.",
+      "criteria_vn": "Priority\n    Không thiết lập quy trình tự quản lý các yêu cầu của khách hàng và tuân thủ các hạng mục môi trường trong danh sách kiểm tra RBA\n  \nMajor\n   Có ít nhất 1 trong các nội dung sau:\n1. Trường hợp đối tượng quản lý có thay đổi về địa điểm, chính sách, v.v.  nhưng không được phản ánh\n2. Trường hợp ban quản trị không tiến hành kiểm tra, đánh giá kế quả tự quản lý\n3. Trường hợp không xem xét và phản ánh các yêu cầu của khách hàng \n\nMinor\n  Quy trình được thiết lập, được quản lý thường xuyên, nhưng một số hạng mục quản lý bị thiếu hoặc không được lập thành văn bản\n\nConformance\n   Thiết lập quy trình xác nhận và quản lý thường xuyên các yêu cầu của khách hàng và tuân thủ các hạng mục môi trường trong danh sách kiểm tra RBA",
+      "criteria_en": "Priority\n   Environmental self-audit process is not established\n  \nMajor\n   One or more of the following applicable:\n   1. Changes to All policies, processes, physical conditions, and work practices have occurred, but are not reflected.\n   2. Audit findings are not reviewed by senior management   \n   3. The review and reflection of the customer's request is missing\n\nMinor\n  Process is established, regularly managed, but some items are missing or not documented\n\nConformance\n  Environmental self-audit process is established  to check and manage compliance with RBA checklists and customer requests",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình tự đánh giá nội bộ (Self-audit Môi trường)",
+        "priority_kw": [
+          "không thiết lập quy trình tự quản lý các yêu cầu của khách hàng và tuân thủ các hạng mục môi trường"
+        ],
+        "major_kw": [
+          "không tiến hành kiểm tra, đánh giá kết quả tự quản lý"
+        ],
+        "major_min_count": 2
+      }
+    },
+    {
+      "row_num": 45,
+      "provision": "CM4) Performance Review and Continuous Improvement",
+      "audit_id": "CM403",
+      "audit_item": "O",
+      "template_significance": "Conformance",
+      "penalty_item": "",
+      "penalty_criteria": "",
+      "sub_category": "Corrective action process",
+      "conformance_statement": "An adequate and effective environmental corrective action process is established to rectify and close non-conformances.",
+      "criteria_vn": "Priority\n    Có ít nhất 1 trong số các nội dung sau:\n   1. Không thiết lập quy trình xử lý khắc phục các vấn đề không phù hợp về môi trường (quy định pháp luật) như đánh giá đối ngoại, đánh giá khách hàng, kiểm tra cơ quan ...\n   2. Ngay cả khi nội dung không phù hợp đã được phát hiện hoặc được đánh giá, không thiết lập quy trình hành động khắc phục\n  \nMajor\n   Có ít nhất 2 trong số các nội dung sau:\n   1. Trường hợp quy trình xử lý khắc phục không đầy đủ hoặc không phù hợp\n    - Trường hợp thiếu 1 phần nội dung khắc phục các hạng mục không phù hợp \n    - Xác nhận có hay không đạt mục tiêu khắc phục vấn đề và khi không đạt mục tiêu thfi có hay không biện pháp bổ sung\n    - Trường hợp không có kế hoạch cho các biện pháp phòng ngừa / khắc phục sự cố rò rỉ/ ô nhiễm  môi trường\n   2. Trường hợp quản lý không thỏa đáng các hồ sơ về vấn đề liên quan không phù hợp\n- Kiểm tra người chỉ đạo /người quản lý và quản lý ghi chép bằng văn bản  (cho đến khi kết thúc)\n- Lập kế hoạch hành động khắc phục nội dung không phù hợp và báo cáo kết quả hành động\n- Lưu giữ hồ sơ lịch sử kiểm tra và các biện pháp khắc phục nhận được từ cơ quan nhà nước trong 3 năm qua.\n\nMinor\n    Có nhiều hơn 1 nội dung trong số Major    \n\nConformance\n   Thiết lập quy trình xử lý, khắc phục các vấn đề không phù hợp về môi trường (quy định pháp luật) như đánh giá đối ngoại, đánh giá khách hàng, kiểm tra cơ quan...",
+      "criteria_en": "Priority\n   One or more of the following applicable\n    1. Corrective action process is not established for findings with environmental (legal matters)\n    2. Corrective action process is not implemented even though non-conformances are evaluated  \nMajor\n   Two or more of the following applicable:\n   1. Corrective action process is not adequate and effective\n    - non-conformances requiring corrective action are omitted\n    - Objective of corrective action has not been achieved and additional actions are not taken when a corrective action is off track\n    - Any issues/concerns noted in the insurance inspection report regarding people, fire, or facility don't have an agreed corrective action plan.    \n    - No Preventive/corrective actions plan past spills, contamination, and environmental incidents\n   2. Records management of non-conformance is not appropriate\n    - No records documented and review  by senior management (until closed)\n    - No corrective action plan of non-conformance and closure verification reports\n    - No records of inspection history and corrective action inspected from the goverment over the past three years\n\nMinor\n   1 or more from Major evaluation items   \n\nConformance\n   Corrective action process is established for findings with environmental (legal matters), such as external audit, customer audit, and inspection of goverment institutions.",
+      "section": "EHS",
+      "scores": {
+        "Conformance": 1,
+        "Minor": 0.5,
+        "Major": 0.2,
+        "Priority": 0,
+        "N/A": 1
+      },
+      "rule": {
+        "desc": "Quy trình hành động khắc phục phòng ngừa (CAPA Môi trường)",
+        "priority_kw": [
+          "không thiết lập quy trình xử lý khắc phục các vấn đề không phù hợp về môi trường"
+        ],
+        "major_kw": [
+          "quy trình xử lý khắc phục không đầy đủ"
+        ],
+        "major_min_count": 2
+      }
+    }
+  ],
+  "general_info_defaults": {
+    "D2": "",
+    "D3": "Công ty TNHH You Sung Vina",
+    "D4": "Lô CN02 (Khu A), KCN Điềm Thụy, xã Điềm Thụy, tỉnh Thái Nguyên",
+    "D5": "RBA 8.0.1",
+    "D6": "Nguyễn Hải Nam",
+    "D7": "Triệu Đức Lanh, Nguyễn Bình Biên",
+    "D8": "Initial",
+    "D9": "46133",
+    "D10": "46134",
+    "D11": "",
+    "D12": "Assembly",
+    "D13": "Linh kiện điện thoại",
+    "D14": "Jang Hwa Su",
+    "D15": "CEO",
+    "D16": "0866821004",
+    "D17": "hero8888@yousungvn.com",
+    "D18": "Nguyễn Thị Thủy",
+    "D19": "Nhân viên",
+    "D20": "0981013820",
+    "D21": "hr.ehs@yousung.com",
+    "D22": "900",
+    "D23": "700",
+    "D24": "200",
+    "D25": "4",
+    "D26": "0",
+    "D27": "0",
+    "D28": "0",
+    "D29": "Công ty TNHH IE E&C",
+    "D30": "Yes",
+    "D31": "Yes",
+    "D32": "ISO 14001, ISO 45001",
+    "D33": "No",
+    "D34": "N/A",
+    "D35": "5"
+  }
+}

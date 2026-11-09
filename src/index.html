@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>RBA 8.0.1 · EHS Audit | © NGUYỄN NGỌC NGÔN</title>
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background:#f4f6fa; color:#0f172a; }
+    .hero { background: linear-gradient(120deg,#0b1220 0%,#111c35 55%,#1a2350 100%); }
+    .gold { background: linear-gradient(135deg,#f59e0b,#b45309); }
+    .card { background:#fff; border:1px solid #e5e9f0; border-radius:16px; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .scroll::-webkit-scrollbar{width:6px;height:6px}.scroll::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+    .seg button{transition:all .15s}
+    .sev-Conformance{background:#ecfdf5;color:#047857;border-color:#6ee7b7}
+    .sev-Minor{background:#fefce8;color:#a16207;border-color:#fde047}
+    .sev-Major{background:#fff7ed;color:#c2410c;border-color:#fdba74}
+    .sev-Priority{background:#fef2f2;color:#b91c1c;border-color:#fca5a5}
+    .sev-NA{background:#f8fafc;color:#475569;border-color:#cbd5e1}
+    .seg-on-Conformance{background:#059669!important;color:#fff!important;border-color:#059669!important}
+    .seg-on-Minor{background:#eab308!important;color:#fff!important;border-color:#eab308!important}
+    .seg-on-Major{background:#ea580c!important;color:#fff!important;border-color:#ea580c!important}
+    .seg-on-Priority{background:#dc2626!important;color:#fff!important;border-color:#dc2626!important}
+    .seg-on-NA{background:#64748b!important;color:#fff!important;border-color:#64748b!important}
+    .word-page{background:#fff;padding:34px 42px;box-shadow:0 18px 40px -18px rgba(15,23,42,.25);border-radius:6px;font-family:"Times New Roman",serif;color:#000;line-height:1.42}
+    .word-table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:13.5px}
+    .word-table th,.word-table td{border:1px solid #334155;padding:5px 7px;vertical-align:middle}
+    .word-table th{background:#e2e8f0;font-weight:bold;text-align:center}
+    .inp{width:100%;border:1px solid #d6dce6;border-radius:10px;padding:8px 11px;font-size:13px;background:#fff;outline:none}
+    .inp:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+    .inp:disabled{background:#f6f8fb;color:#475569}
+    .lbl{display:block;font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.03em}
+    .action-card{transition:transform .15s, box-shadow .15s}
+    .action-card:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(15,23,42,.35)}
+    .action-card.locked{opacity:.45;pointer-events:none}
+    html{-webkit-text-size-adjust:100%}
+    button,a{-webkit-tap-highlight-color:transparent}
+    .hscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .hscroll::-webkit-scrollbar{display:none}
+    .tab-short{display:none}
+    /* ---------- MOBILE (<768px) ---------- */
+    @media (max-width: 767px){
+      body{background:#eef1f6}
+      header .h-16{height:56px}
+      header .px-5{padding-left:12px;padding-right:12px}
+      header h1{font-size:14px}
+      header .text-amber-300{display:none}
+      header .lang-select{padding:6px 2px;font-size:12px!important;max-width:64px}
+      header h1 + span{display:none}
+      .up-sev{flex-basis:100%}
+      main{padding:12px 10px!important}
+      main.space-y-5 > * + *, #workspace.space-y-5 > * + *{margin-top:12px!important}
+      .card{border-radius:14px}
+      #welcome .card.p-8{padding:20px 14px}
+      /* action buttons: 2 columns, compact */
+      #workspace .action-card{padding:10px!important;gap:8px!important;border-radius:14px}
+      #workspace .action-card > span:first-child{width:34px;height:34px}
+      #workspace .action-card .text-\[11px\]{font-size:10px;line-height:1.25}
+      /* status board */
+      #workspace .card.p-5{padding:14px}
+      #sevCounters{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      #actPack .flex.gap-1{flex-wrap:wrap}
+      .tab-panel{scroll-margin-top:66px}
+      /* bottom navigation */
+      #tabNav{position:fixed;left:0;right:0;bottom:0;z-index:45;margin:0!important;background:rgba(255,255,255,.97);
+        backdrop-filter:blur(8px);border-top:1px solid #e2e8f0;box-shadow:0 -6px 20px -10px rgba(15,23,42,.25);
+        display:flex!important;flex-wrap:nowrap!important;gap:0!important;padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+      #tabNav > button{flex:1 1 0;min-width:0;flex-direction:column;gap:1px!important;padding:6px 2px!important;font-size:10px!important;
+        border-radius:10px;box-shadow:none!important;border:0!important;position:relative;line-height:1.1}
+      #tabNav > button > span:first-child{font-size:19px}
+      #tabNav .tab-lbl{display:none}
+      #tabNav .tab-short{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+      #tabNav > button > span:nth-child(4){position:absolute;top:2px;right:calc(50% - 22px);margin:0!important;padding:0 4px!important;font-size:9px!important}
+      body:has(#workspace:not(.hidden)) main{padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}
+      body:has(#workspace:not(.hidden)) footer{display:none}
+      body:has(#workspace:not(.hidden)) #toasts{bottom:calc(76px + env(safe-area-inset-bottom))}
+      #r2Confirm{bottom:calc(72px + env(safe-area-inset-bottom))!important}
+      /* filters & search */
+      #catChips,#r2Chips,#qaChips,#sevChips{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:100%}
+      #catChips::-webkit-scrollbar,#r2Chips::-webkit-scrollbar,#qaChips::-webkit-scrollbar{display:none}
+      #catChips > *,#r2Chips > *,#qaChips > *,#sevChips > *{flex-shrink:0}
+      #tab-checklist > .card > div,#tab-qa > .card > div{width:100%}
+      #clSearch,#r2Search,#qaSearch{width:100%!important;flex:1 1 auto}
+      /* inputs: 16px prevents iOS zoom */
+      .inp,select,textarea,input[type=text],input[type=password],input[type=email],input[type=date],input[type=number]{font-size:16px!important}
+      /* word preview */
+      #wordPreview{padding:16px 14px;overflow-x:auto;font-size:13px}
+      #wordPreview table{font-size:11.5px}
+      /* storage table -> cards */
+      .sto-table thead{display:none}
+      .sto-table,.sto-table tbody,.sto-table tr,.sto-table td{display:block;width:100%}
+      .sto-table tr{padding:10px 12px;border-bottom:8px solid #eef1f6}
+      .sto-table td{padding:3px 0!important;text-align:left!important;white-space:normal!important;border:0}
+      .sto-table td[data-lbl]::before{content:attr(data-lbl);display:inline-block;min-width:88px;font-size:10px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.03em}
+      .sto-table td.sto-actions{padding-top:8px!important}
+      .sto-table td.sto-actions > div,.sto-table .sto-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start!important}
+      .sto-table .sto-actions button,.sto-table .sto-actions a{min-height:34px;padding-left:10px;padding-right:10px}
+      #folderGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      /* account center */
+      #accountPanel .hero{padding:10px 12px}
+      #accountPanel > .flex-1{flex-direction:column}
+      #accNav{width:100%!important;display:flex;gap:6px;overflow-x:auto;border-right:0!important;border-bottom:1px solid #e2e8f0;padding:8px!important;scrollbar-width:none}
+      #accNav::-webkit-scrollbar{display:none}
+      #accNav > *{flex-shrink:0;margin:0!important;white-space:nowrap;width:auto!important}
+      #accBody{padding:12px!important}
+      #accBody table{display:block;overflow-x:auto;white-space:nowrap}
+      /* dialogs / modals as bottom sheets */
+      #dialog,#findModal,#upModal,.sheet-m{align-items:flex-end!important;padding:0!important}
+      #dialog > .relative,#findModal > .relative,#upModal > .relative,.sheet-m > .relative{max-width:100%!important;width:100%;border-radius:20px 20px 0 0!important;
+        max-height:92vh;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom);animation:sheetUp .22s ease-out}
+      #toasts{left:12px;right:12px;bottom:16px}
+      #toasts > *{max-width:100%}
+      button{touch-action:manipulation}
+    }
+    @keyframes sheetUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+    @media (min-width:768px) and (max-width:1023px){
+      main{padding-left:14px!important;padding-right:14px!important}
+      #workspace .grid.lg\:grid-cols-6{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+  </style>
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="RBA EHS" />
+  <link rel="manifest" href="/static/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg" />
+  <link rel="apple-touch-icon" href="/static/icon-192.png" />
+  <link rel="stylesheet" href="/static/tailwind.css?v=57cb1ea8d6" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- ============ LOGIN ============ -->
+<div id="loginModal" class="fixed inset-0 z-[60] hero flex items-center justify-center p-4">
+  <div class="absolute top-4 right-4"><select class="lang-select bg-slate-800 text-white text-xs font-bold rounded-lg px-2.5 py-1.5 border border-slate-600" onchange="setLang(this.value)"></select></div>
+  <div class="max-w-sm w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
+    <div class="px-7 pt-8 pb-6 text-center">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-black flex items-center justify-center text-base shadow-lg">RBA</div>
+      <h2 class="mt-4 text-lg font-black text-slate-900" data-i18n="login_title"></h2>
+      <p class="text-xs text-slate-500 mt-1" data-i18n="login_sub"></p>
+    </div>
+    <form onsubmit="handleLogin(event)" class="px-7 space-y-3.5">
+      <div id="loginError" class="hidden text-xs font-semibold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></div>
+      <div><label class="lbl" data-i18n="username"></label><input id="loginUsername" class="inp" required autocomplete="username"/></div>
+      <div><label class="lbl" data-i18n="password"></label>
+        <div class="relative"><input id="loginPassword" type="password" class="inp pr-14" required autocomplete="current-password"/>
+          <button type="button" onclick="loginPassword.type=loginPassword.type==='password'?'text':'password'" class="absolute right-3 top-2 text-xs font-bold text-slate-400 hover:text-slate-700" data-i18n="show"></button></div>
+      </div>
+      <button class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm" data-i18n="login_btn"></button>
+    </form>
+    <div id="quickGuestBox" class="px-7 mt-3">
+      <div class="flex items-center gap-3 text-[11px] text-slate-400 my-2"><div class="flex-1 h-px bg-slate-200"></div><span data-i18n="or"></span><div class="flex-1 h-px bg-slate-200"></div></div>
+      <button onclick="handleGuestLogin()" class="w-full py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-sm" data-i18n="guest_btn"></button>
+    </div>
+    <div class="mt-6 px-7 py-3 bg-slate-50 border-t text-[11px] text-slate-500 flex justify-between">
+      <span>RBA 8.0.1</span><span>© <b class="text-slate-800">NGUYỄN NGỌC NGÔN</b></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="hero text-white sticky top-0 z-40">
+  <div class="max-w-[1400px] mx-auto px-5 h-16 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-black text-sm shrink-0">RBA</div>
+      <div class="min-w-0">
+        <div class="flex items-center gap-2">
+          <h1 class="text-[15px] font-extrabold truncate" data-i18n="app_title"></h1>
+          <span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-blue-500/20 text-blue-200 border border-blue-400/30">RBA 8.0.1</span>
+        </div>
+        <div class="text-[11px] text-amber-300 font-semibold">© <span data-i18n="copyright"></span>: NGUYỄN NGỌC NGÔN</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2.5">
+      <select class="lang-select bg-slate-800/80 text-white text-xs font-bold rounded-lg px-2.5 py-2 border border-slate-600" onchange="setLang(this.value)"></select>
+      <button onclick="openAccount()" class="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10">
+        <span id="hdrAvatar" class="w-8 h-8 rounded-lg gold flex items-center justify-center font-black text-sm">N</span>
+        <span class="text-left leading-tight hidden sm:block">
+          <span id="hdrName" class="block text-xs font-bold">—</span>
+          <span id="hdrRole" class="block text-[10px] text-slate-300">—</span>
+        </span>
+        <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<input type="file" id="fileInput" accept=".xlsm,.xlsx" class="hidden" onchange="handleUpload(event, 1)"/>
+<input type="file" id="fileInput2" accept=".xlsm,.xlsx" class="hidden" onchange="handleUpload(event, 2)"/>
+<input type="file" id="fileSlot" accept=".xlsm,.xlsx" class="hidden" onchange="onSlotFile(event)"/>
+<input type="file" id="fileSupp" accept=".xlsm,.xlsx" class="hidden" onchange="onSuppFile(event)"/>
+
+<main class="max-w-[1400px] w-full mx-auto px-5 py-5 space-y-5 flex-1">
+
+  <!-- ============ WELCOME (no input data yet) ============ -->
+  <section id="welcome" class="hidden space-y-5">
+    <div id="resumeBox" class="hidden card p-4 border-amber-300 bg-amber-50/70 flex flex-wrap items-center justify-between gap-3"></div>
+    <div class="card p-8 text-center">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center text-2xl">📋</div>
+      <h2 class="mt-4 text-xl font-black" data-i18n="welcome_title"></h2>
+      <p class="text-sm text-slate-500 mt-1" data-i18n="welcome_sub"></p>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto text-left">
+        <button id="wR1" onclick="openFindingUpload()" class="action-card rounded-2xl p-5 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+          <div class="text-xs font-black uppercase text-blue-200" data-i18n="round1"></div>
+          <div class="font-extrabold text-base mt-1" data-i18n="act_upload"></div>
+          <div class="text-xs text-blue-100 mt-1" data-i18n="w_r1_d"></div>
+        </button>
+        <button id="wR2" onclick="startRound2()" class="action-card rounded-2xl p-5 bg-gradient-to-br from-violet-600 to-fuchsia-700 text-white">
+          <div class="text-xs font-black uppercase text-violet-200" data-i18n="round2"></div>
+          <div class="font-extrabold text-base mt-1" data-i18n="act_upload2"></div>
+          <div class="text-xs text-violet-100 mt-1" data-i18n="w_r2_d"></div>
+        </button>
+        <button id="wOpen" onclick="document.getElementById('tab-storage').scrollIntoView({behavior:'smooth'})" class="action-card rounded-2xl p-5 bg-white border border-slate-200">
+          <div class="text-xs font-black uppercase text-slate-400" data-i18n="tab_storage"></div>
+          <div class="font-extrabold text-base mt-1 text-slate-900" data-i18n="w_open"></div>
+          <div class="text-xs text-slate-500 mt-1" data-i18n="w_open_d"></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORKSPACE ============ -->
+  <section id="workspace" class="hidden space-y-5">
+    <!-- workspace bar -->
+    <div id="wsBar" class="flex flex-wrap items-center justify-between gap-3"></div>
+    <!-- sources: File hiện trường + File tài liệu -->
+    <div id="srcBar" class="hidden"></div>
+
+    <!-- primary actions -->
+    <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
+      <button id="actUpload" onclick="openFindingUpload()" class="action-card text-left rounded-2xl p-3.5 bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center gap-3 shadow-md">
+        <span class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 text-lg">⬆</span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm" data-i18n="act_upload"></span><span class="block text-[11px] text-blue-100" data-i18n="act_upload_sub"></span></span>
+      </button>
+      <button id="actUpload2" onclick="startRound2()" class="action-card text-left rounded-2xl p-3.5 bg-gradient-to-br from-violet-600 to-fuchsia-700 text-white flex items-center gap-3 shadow-md">
+        <span class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0 font-black text-xs">L2</span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm" data-i18n="act_upload2"></span><span class="block text-[11px] text-violet-100" data-i18n="act_upload2_sub"></span></span>
+      </button>
+      <button id="actSave" onclick="saveReport()" class="action-card text-left rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
+        <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-lg">💾</span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_save"></span><span class="block text-[11px] text-slate-500" data-i18n="act_save_sub"></span></span>
+      </button>
+      <button id="actXlsx" onclick="downloadFile('/api/download/xlsx')" class="action-card text-left rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
+        <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-black text-[10px]">XLSX</span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_xlsx"></span><span class="block text-[11px] text-slate-500" id="actXlsxSub"></span></span>
+      </button>
+      <button id="actDocx" onclick="downloadFile('/api/download/docx')" class="action-card text-left rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
+        <span class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 font-black text-[10px]">DOCX</span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_docx"></span><span class="block text-[11px] text-slate-500" id="actDocxSub"></span></span>
+      </button>
+      <div id="actPack" class="action-card rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
+        <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 font-black text-[10px]">PDF</span>
+        <span class="min-w-0 flex-1"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_pack"></span>
+          <span class="flex gap-1 mt-1"><button onclick="downloadFile('/api/download/pdf')" class="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-black">PDF</button><button onclick="downloadFile('/api/download/zip')" class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-black">ZIP</button><button onclick="downloadFile('/api/download/finding')" class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-black">FINDING</button></span></span>
+      </div>
+    </div>
+
+    <!-- status board -->
+    <div class="card p-5 grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+      <div class="lg:col-span-5 flex items-center gap-5">
+        <div class="relative w-24 h-24 shrink-0">
+          <svg class="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" stroke="#eef2f7" stroke-width="10" fill="none"/>
+            <circle id="gauge" cx="50" cy="50" r="42" stroke="#2563eb" stroke-width="10" fill="none" stroke-dasharray="263.89" stroke-dashoffset="263.89" stroke-linecap="round" style="transition:all .6s"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span id="stScore" class="text-2xl font-black leading-none">—</span>
+            <span class="text-[10px] text-slate-400 font-bold">/100</span>
+          </div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2"><span id="stRound" class="px-2 py-0.5 rounded-md text-[10px] font-black"></span><span id="stVendor" class="font-extrabold text-slate-900 truncate">—</span></div>
+          <div id="stMeta" class="text-xs text-slate-500 truncate mt-0.5">—</div>
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <div class="rounded-xl bg-slate-50 border border-slate-100 px-2.5 py-2"><div class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="st_grade"></div><div id="stGrade" class="text-lg font-black">—</div></div>
+            <div class="rounded-xl bg-slate-50 border border-slate-100 px-2.5 py-2"><div class="text-[10px] font-bold text-slate-400 uppercase" data-i18n="st_violated"></div><div id="stViolated" class="text-lg font-black">—</div></div>
+            <div class="rounded-xl bg-slate-50 border border-slate-100 px-2.5 py-2"><div class="text-[10px] font-bold text-slate-400 uppercase" id="stFindLbl"></div><div id="stFindings" class="text-lg font-black">—</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-7 lg:border-l lg:pl-5 border-slate-100">
+        <div class="flex items-center justify-between mb-2.5">
+          <span class="text-xs font-extrabold uppercase tracking-wide text-slate-500" data-i18n="st_severity"></span>
+          <span class="text-xs font-bold text-slate-600"><span data-i18n="st_compliance"></span>: <b id="stCompliance" class="text-emerald-700">—</b> · <span data-i18n="st_mandatory"></span>: <b id="stMandatory" class="text-red-600">—</b></span>
+        </div>
+        <div id="sevBar" class="h-3 w-full rounded-full overflow-hidden flex bg-slate-100 mb-3"></div>
+        <div id="sevCounters" class="grid grid-cols-4 gap-2.5"></div>
+      </div>
+    </div>
+
+    <nav class="flex flex-wrap items-center gap-2" id="tabNav"></nav>
+
+    <!-- TAB: CHECKLIST (round 1) -->
+    <section id="tab-checklist" class="tab-panel space-y-3">
+      <div class="card p-3.5 flex flex-wrap items-center gap-2.5 justify-between">
+        <div id="catChips" class="flex flex-wrap gap-1.5"></div>
+        <div class="flex items-center gap-2">
+          <div id="sevChips" class="flex gap-1"></div>
+          <input id="clSearch" oninput="renderChecklist()" class="inp !w-56 !py-1.5" data-i18n-ph="search_ph"/>
+        </div>
+      </div>
+      <div id="checklistList" class="space-y-2"></div>
+    </section>
+
+    <!-- TAB: ROUND 2 REVIEW -->
+    <section id="tab-round2" class="tab-panel hidden space-y-3">
+      <div id="r2Head"></div>
+      <div class="card p-3.5 flex flex-wrap items-center gap-2 justify-between">
+        <div id="r2Chips" class="flex flex-wrap gap-1.5"></div>
+        <input id="r2Search" oninput="renderRound2()" class="inp !w-56 !py-1.5" data-i18n-ph="search_ph"/>
+      </div>
+      <div id="r2List" class="space-y-2"></div>
+      <div id="r2New"></div>
+      <div id="r2Confirm" class="sticky bottom-3 z-30"></div>
+    </section>
+
+    <!-- TAB: WORD -->
+    <section id="tab-word" class="tab-panel hidden grid grid-cols-1 xl:grid-cols-12 gap-5">
+      <div class="xl:col-span-5 space-y-4">
+        <div class="card p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-slate-900" data-i18n="word_content"></h3>
+            <button id="btnSaveWord" onclick="saveWord()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold" data-i18n="save_update"></button>
+          </div>
+          <div id="wNote" class="hidden text-xs font-semibold text-violet-800 bg-violet-50 border border-violet-200 rounded-lg px-3 py-2" data-i18n="r2_word_note"></div>
+          <div><label class="lbl"><span data-i18n="doc_viol"></span> <span class="normal-case font-medium text-slate-400">· <span data-i18n="one_per_line"></span></span></label><textarea id="wDoc" rows="4" class="inp leading-relaxed"></textarea></div>
+          <div><label class="lbl"><span data-i18n="fac_viol"></span> <span class="normal-case font-medium text-slate-400">· <span data-i18n="one_per_line"></span></span></label><textarea id="wFac" rows="6" class="inp leading-relaxed"></textarea></div>
+          <div><label class="lbl" data-i18n="key_photos"></label><div id="wKeys" class="space-y-2"></div></div>
+        </div>
+      </div>
+      <div class="xl:col-span-7">
+        <div class="text-xs font-extrabold uppercase tracking-wide text-slate-500 mb-2" data-i18n="preview"></div>
+        <div id="wordPreview" class="word-page"></div>
+      </div>
+    </section>
+
+    <!-- TAB: FACTORY INFO -->
+    <section id="tab-factory" class="tab-panel hidden">
+      <div class="card p-5">
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+          <h3 class="font-extrabold text-slate-900" data-i18n="tab_factory"></h3>
+          <button id="btnSaveInfo" onclick="saveFactoryInfo()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold" data-i18n="save_info"></button>
+        </div>
+        <div id="factoryForm" class="space-y-6"></div>
+      </div>
+    </section>
+
+    <!-- TAB: QA -->
+    <section id="tab-qa" class="tab-panel hidden space-y-3">
+      <div class="card p-4 flex flex-wrap items-center justify-between gap-3">
+        <div id="qaChips" class="flex flex-wrap gap-2"></div>
+        <div class="flex items-center gap-2">
+          <input id="qaSearch" oninput="renderQa()" class="inp !w-52 !py-1.5" data-i18n-ph="search_ph"/>
+          <button id="btnFixAll" onclick="runFix(null)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-black shadow"></button>
+        </div>
+      </div>
+      <div id="qaList" class="card divide-y divide-slate-100 overflow-hidden"></div>
+    </section>
+  </section>
+
+  <!-- TAB: STORAGE (also shown on the welcome screen) -->
+  <section id="tab-storage" class="tab-panel hidden space-y-3">
+    <div id="folderBox" class="card p-4 hidden">
+      <div class="text-xs font-extrabold uppercase tracking-wide text-slate-500 mb-2.5" data-i18n="sto_folders"></div>
+      <div id="folderGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-2.5"></div>
+    </div>
+    <div class="card overflow-hidden">
+      <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <h3 class="font-extrabold text-slate-900" data-i18n="sto_title"></h3>
+          <p class="text-[11px] text-slate-500" data-i18n="only_owner_hint"></p>
+        </div>
+        <button onclick="loadStorage()" class="text-xs font-bold text-blue-600 hover:underline" data-i18n="refresh"></button>
+      </div>
+      <div class="overflow-x-auto scroll">
+        <table class="w-full text-xs sto-table">
+          <thead class="bg-slate-50 text-slate-500 uppercase text-[10px]">
+            <tr><th class="text-left px-4 py-2.5" data-i18n="col_record"></th><th class="text-left px-4 py-2.5" data-i18n="col_vendor"></th><th class="text-center px-4 py-2.5" data-i18n="col_result"></th><th class="text-left px-4 py-2.5" data-i18n="col_owner"></th><th class="text-left px-4 py-2.5" data-i18n="col_files"></th><th class="text-right px-4 py-2.5" data-i18n="col_actions"></th></tr>
+          </thead>
+          <tbody id="storageBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-slate-200 bg-white">
+  <div class="max-w-[1400px] mx-auto px-5 py-3 flex flex-wrap justify-between gap-2 text-[11px] text-slate-500">
+    <span>© 2026 <span data-i18n="copyright"></span>: <b class="text-slate-800">NGUYỄN NGỌC NGÔN</b></span>
+    <span>RBA 8.0.1 EHS Standard</span>
+  </div>
+</footer>
+
+<!-- ============ ACCOUNT CENTER ============ -->
+<div id="accountOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="closeAccount()"></div>
+  <div id="accountPanel" class="absolute right-0 top-0 h-full w-full bg-[#f4f6fa] shadow-2xl flex flex-col">
+    <div class="hero text-white px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span id="accAvatar" class="w-11 h-11 rounded-xl gold flex items-center justify-center font-black">N</span>
+        <div><div id="accName" class="font-extrabold">—</div><div id="accRole" class="text-xs text-slate-300">—</div></div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="logout()" class="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-red-600 text-xs font-bold" data-i18n="logout"></button>
+        <button onclick="closeAccount()" class="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 font-bold">✕</button>
+      </div>
+    </div>
+    <div class="flex-1 flex min-h-0">
+      <aside id="accNav" class="w-60 shrink-0 bg-white border-r border-slate-200 p-3 space-y-1"></aside>
+      <div id="accBody" class="flex-1 overflow-y-auto scroll p-6"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DIALOG ============ -->
+<div id="dialog" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/50"></div>
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+    <div class="p-5">
+      <div class="flex items-start gap-3">
+        <div id="dlgIcon" class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg"></div>
+        <div class="flex-1 min-w-0">
+          <h3 id="dlgTitle" class="font-extrabold text-slate-900"></h3>
+          <p id="dlgMsg" class="text-sm text-slate-600 mt-1 whitespace-pre-line"></p>
+        </div>
+      </div>
+      <div id="dlgFields" class="mt-4 space-y-3"></div>
+    </div>
+    <div class="px-5 py-3 bg-slate-50 border-t flex justify-end gap-2">
+      <button id="dlgCancel" class="px-4 py-2 rounded-lg border border-slate-300 bg-white text-sm font-semibold"></button>
+      <button id="dlgOk" class="px-4 py-2 rounded-lg text-white text-sm font-bold"></button>
+    </div>
+  </div>
+</div>
+
+<!-- FINDING UPLOAD: 2 slots (File hiện trường + File tài liệu) -->
+<div id="findModal" class="fixed inset-0 z-[74] hidden items-end sm:items-center justify-center sm:p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeFindModal()"></div>
+  <div class="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden max-h-[92vh] flex flex-col">
+    <div class="hero text-white px-5 py-4 flex items-start justify-between gap-3">
+      <div><div class="text-xs font-bold text-blue-200 uppercase tracking-wide" data-i18n="fu_kicker"></div>
+        <div class="font-extrabold text-lg mt-0.5" data-i18n="up_title"></div></div>
+      <button onclick="closeFindModal()" class="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 font-bold shrink-0">✕</button>
+    </div>
+    <div class="p-4 sm:p-5 overflow-y-auto scroll">
+      <p class="text-[13px] text-slate-600 mb-4" data-i18n="fu_desc"></p>
+      <div id="findSlots" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+      <div class="mt-4 text-[12px] text-slate-500 bg-slate-50 border border-slate-200 rounded-xl p-3" data-i18n="fu_hint"></div>
+    </div>
+    <div class="px-4 sm:px-5 py-3 bg-slate-50 border-t flex items-center justify-between gap-2" style="padding-bottom:max(.75rem,env(safe-area-inset-bottom))">
+      <span id="findCount" class="text-xs font-semibold text-slate-500"></span>
+      <div class="flex gap-2">
+        <button onclick="closeFindModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold" data-i18n="cancel"></button>
+        <button id="findGo" onclick="submitFindings()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-sm font-extrabold" data-i18n="fu_go"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD STATUS -->
+<div id="upModal" class="fixed inset-0 z-[75] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+    <div class="hero text-white px-5 py-4">
+      <div id="upTitle" class="text-xs font-bold text-blue-200 uppercase tracking-wide"></div>
+      <div id="upFile" class="font-extrabold truncate mt-0.5">—</div>
+    </div>
+    <div class="p-5">
+      <div id="upSteps" class="space-y-3"></div>
+      <div id="upBarWrap" class="mt-4">
+        <div class="h-2 rounded-full bg-slate-100 overflow-hidden"><div id="upBar" class="h-full bg-blue-600 transition-all" style="width:0%"></div></div>
+        <div id="upPct" class="text-[11px] text-slate-500 mt-1 text-right">0%</div>
+      </div>
+      <div id="upResult" class="hidden mt-4"></div>
+      <div id="upError" class="hidden mt-4 text-sm font-semibold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></div>
+    </div>
+    <div id="upFoot" class="hidden px-5 py-3 bg-slate-50 border-t flex justify-end gap-2">
+      <button onclick="closeUpModal()" class="px-4 py-2 rounded-lg border border-slate-300 bg-white text-sm font-semibold" data-i18n="up_close"></button>
+      <button id="upView" onclick="closeUpModal();showTab(STATE._ws.mode==='round2'?'round2':'checklist');tabNav.scrollIntoView({behavior:'smooth'})" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold"></button>
+    </div>
+  </div>
+</div>
+
+<!-- FORCED PASSWORD CHANGE -->
+<div id="pwModal" class="fixed inset-0 z-[85] hidden items-center justify-center p-4 hero">
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-sm w-full overflow-hidden">
+    <div class="p-6">
+      <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl">🔒</div>
+      <h3 class="mt-3 font-black text-lg" data-i18n="pw_title"></h3>
+      <p class="text-xs text-slate-500 mt-1" data-i18n="pw_desc"></p>
+      <div id="pwError" class="hidden mt-3 text-xs font-semibold text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2"></div>
+      <div class="mt-4 space-y-3">
+        <div><label class="lbl" data-i18n="pw_current"></label><input id="pwOld" type="password" class="inp" autocomplete="current-password"/></div>
+        <div><label class="lbl" data-i18n="new_pw"></label><input id="pwNew" type="password" class="inp" autocomplete="new-password"/></div>
+        <div><label class="lbl" data-i18n="pw_confirm"></label><input id="pwNew2" type="password" class="inp" autocomplete="new-password"/></div>
+        <p class="text-[11px] text-slate-500" data-i18n="pw_rule"></p>
+      </div>
+    </div>
+    <div class="px-6 py-3 bg-slate-50 border-t flex justify-between gap-2">
+      <button onclick="logout()" class="px-4 py-2 rounded-lg border border-slate-300 bg-white text-sm font-semibold" data-i18n="logout"></button>
+      <button onclick="submitPwChange()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold" data-i18n="change_pw"></button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL MODAL (revision history etc.) -->
+<div id="panelModal" class="fixed inset-0 z-[72] hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-slate-900/50" onclick="closePanel()"></div>
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+    <div class="px-5 py-4 border-b flex items-center justify-between"><h3 id="panelTitle" class="font-extrabold"></h3><button onclick="closePanel()" class="w-8 h-8 rounded-lg hover:bg-slate-100 font-bold">✕</button></div>
+    <div id="panelBody" class="p-5 overflow-y-auto scroll"></div>
+  </div>
+</div>
+
+<!-- RESTART OVERLAY -->
+<div id="restartOverlay" class="fixed inset-0 z-[95] hidden hero items-center justify-center text-white text-center p-6">
+  <div><div class="w-12 h-12 mx-auto rounded-full border-4 border-white/20 border-t-white animate-spin"></div><div class="mt-4 font-bold" data-i18n="bk_restarting"></div></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="this.classList.add('hidden');this.classList.remove('flex')" class="fixed inset-0 z-[80] bg-slate-950/85 hidden items-center justify-center p-6">
+  <div class="max-w-4xl" onclick="event.stopPropagation()">
+    <img id="lbImg" class="max-h-[78vh] rounded-xl shadow-2xl mx-auto"/>
+    <p id="lbCap" class="text-white text-sm text-center mt-3"></p>
+  </div>
+</div>
+
+<div id="toasts" class="fixed bottom-5 right-5 z-[90] space-y-2"></div>
+
+<script>
+const I18N = {
+ vi: {
+  loading:'Đang tải dữ liệu chấm điểm...', load_failed:'Không tải được dữ liệu. Vui lòng kiểm tra kết nối.', retry:'Thử lại',
+  up_title:'Nạp file Finding', up_s1:'Tải file lên máy chủ', up_s2:'Đọc & phân tích dữ liệu Finding', up_s3:'Chấm điểm 41 hạng mục RBA 8.0.1', up_s4:'Tạo Checklist, Báo cáo & lưu vào kho',
+  up_done:'Hoàn tất chấm điểm 41 hạng mục', up_view:'Xem bảng chấm điểm 41 hạng mục', up_close:'Đóng', up_failed:'Không thể xử lý file', up_busy:'Đang xử lý...', up_main_viol:'Hạng mục vi phạm chính', up_qa:'Mục cần kiểm tra ngôn ngữ', up_warn:'Cảnh báo dữ liệu',
+  app_title:'Hệ thống báo cáo đánh giá EHS', copyright:'Bản quyền',
+  login_title:'Đăng nhập hệ thống', login_sub:'Tự động hóa báo cáo đánh giá EHS theo chuẩn RBA 8.0.1',
+  username:'Tên đăng nhập', password:'Mật khẩu', login_btn:'Đăng nhập', or:'hoặc', guest_btn:'Truy cập với tư cách Khách', show:'Hiện',
+  role_admin:'Quản trị viên', role_guest:'Khách',
+  act_upload:'Nạp file Finding', act_upload_sub:'Excel .xlsm / .xlsx', act_save:'Lưu báo cáo', act_save_sub:'Lưu vào kho hệ thống',
+  act_xlsx:'Xuất Checklist', act_xlsx_sub:'RBA 8.0.1 · Excel', act_docx:'Xuất Báo cáo', act_docx_sub:'Tóm tắt · Word',
+  st_grade:'Xếp hạng', st_findings:'Phát hiện', st_violated:'Mục vi phạm', st_mandatory:'Vi phạm bắt buộc', st_severity:'Phân bố mức độ lỗi', st_compliance:'Tuân thủ',
+  sev_Conformance:'Đạt', sev_Minor:'Minor', sev_Major:'Major', sev_Priority:'Priority', 'sev_N/A':'N/A',
+  tab_checklist:'Chấm điểm 41 hạng mục', tab_word:'Báo cáo Word', tab_factory:'Thông tin nhà máy', tab_qa:'Kiểm tra ngôn ngữ', tab_storage:'Kho báo cáo',
+  search_ph:'Tìm mã hoặc nội dung...', all:'Tất cả', only_violated:'Có lỗi', findings_unit:'lỗi', score:'Điểm',
+  evidence:'Bằng chứng đánh giá (Cột L)', auto_reason:'Lý do phân loại tự động', related_findings:'Phát hiện liên quan', save_evidence:'Lưu bằng chứng',
+  no_items:'Không có hạng mục phù hợp', no_findings:'Không có phát hiện', penalty:'Penalty',
+  word_content:'Nội dung báo cáo', doc_viol:'Lỗi vi phạm tài liệu', fac_viol:'Lỗi vi phạm hiện trường', one_per_line:'mỗi dòng một ý',
+  key_photos:'5 hình ảnh tiêu biểu (Bảng 4)', photo:'Ảnh', save_update:'Lưu & cập nhật', preview:'Xem trước tài liệu',
+  sec_partner:'Thông tin đối tác', sec_audit:'Đợt đánh giá', sec_people:'Lãnh đạo & liên hệ', sec_workforce:'Nhân lực', save_info:'Lưu thông tin',
+  qa_fix_all:'Sửa tất cả', qa_total:'Tổng', qa_spelling:'Chính tả', qa_punct:'Dấu câu', qa_subtitle:'Phụ đề song ngữ',
+  qa_original:'Bản gốc', qa_suggest:'Đề xuất', qa_fix_one:'Sửa mục này', qa_none:'Không còn lỗi cần xử lý', field:'Trường', finding:'Lỗi',
+  fld_location:'Vị trí', fld_issue:'Nội dung lỗi', fld_improvement:'Kế hoạch cải thiện', fld_photo:'Ảnh hiện trường',
+  sto_title:'Báo cáo đã lưu', sto_folders:'Cấu trúc thư mục lưu trữ', only_owner_hint:'Chỉ Admin hoặc người lưu mới được sửa / xóa báo cáo',
+  col_record:'Báo cáo', col_vendor:'Nhà máy', col_result:'Kết quả', col_owner:'Người lưu', col_files:'Tệp', col_actions:'Thao tác',
+  btn_open:'Mở', btn_edit:'Sửa', btn_delete:'Xóa', sto_empty:'Chưa có báo cáo nào', refresh:'Làm mới', files_unit:'tệp',
+  confirm:'Xác nhận', cancel:'Hủy', save:'Lưu', title_lbl:'Tiêu đề báo cáo', note:'Ghi chú',
+  del_title:'Xác nhận xóa báo cáo', del_msg:'Báo cáo và toàn bộ tệp đính kèm sẽ bị xóa vĩnh viễn. Bạn có chắc chắn?',
+  edit_title:'Chỉnh sửa báo cáo', edit_msg:'Cập nhật tiêu đề và ghi chú. Thay đổi sẽ được ghi vào nhật ký hệ thống.',
+  save_title:'Lưu báo cáo vào kho', save_msg:'Toàn bộ File Finding, Checklist (.xlsx) và Báo cáo (.docx) sẽ được lưu cùng nhau.',
+  open_title:'Mở báo cáo này?', open_msg:'Dữ liệu đang làm việc hiện tại sẽ được thay thế bằng báo cáo đã chọn.',
+  acc_profile:'Thông tin tài khoản', acc_perms:'Phân quyền khách', acc_users:'Quản lý người dùng', acc_master:'Dữ liệu gốc RBA 8.0.1', acc_logs:'Nhật ký hệ thống',
+  admin_area:'Bảng điều khiển Admin', logout:'Đăng xuất', my_perms:'Quyền được cấp', login_at:'Đăng nhập lúc', change_pw:'Đổi mật khẩu', new_pw:'Mật khẩu mới',
+  allow_quick_guest:'Cho phép đăng nhập Khách nhanh', allow_quick_guest_d:'Hiển thị nút "Truy cập với tư cách Khách" tại màn hình đăng nhập',
+  save_perms:'Lưu phân quyền', create_user:'Tạo tài khoản', display_name:'Tên hiển thị', role:'Vai trò', active:'Hoạt động', locked:'Đã khóa',
+  lock:'Khóa', unlock:'Mở khóa', root_admin:'Admin gốc', reset_pw:'Đặt lại MK',
+  del_user_title:'Xóa tài khoản?', del_user_msg:'Tài khoản sẽ bị xóa khỏi hệ thống.',
+  m_save:'Lưu & áp dụng', m_reset:'Khôi phục mặc định', m_groups:'Gom nhóm 6 chuyên đề', m_rules:'Quy tắc phân loại & điểm VLOOKUP · 41 mã',
+  m_desc:'Mô tả', m_thr:'Ngưỡng Major', m_pkw:'Từ khóa Priority', m_mkw:'Từ khóa Major', m_codes:'mã',
+  m_reset_title:'Khôi phục dữ liệu gốc?', m_reset_msg:'Toàn bộ 41 mã sẽ trở về quy tắc & điểm mặc định RBA 8.0.1.',
+  m_save_title:'Áp dụng dữ liệu gốc mới?', m_save_msg:'Hệ thống sẽ lưu quy tắc và chấm điểm lại báo cáo hiện tại.',
+  perm_can_upload_findings:'Nạp & phân tích file Finding', perm_can_edit_checklist:'Chỉnh sửa chấm điểm, thông tin nhà máy & báo cáo',
+  perm_can_use_qa_autofix:'Kiểm tra & sửa lỗi ngôn ngữ', perm_can_export_excel:'Xuất Checklist (.xlsx)', perm_can_export_word:'Xuất Báo cáo (.docx)',
+  perm_can_view_storage:'Xem & tải từ Kho báo cáo', perm_can_save_to_storage:'Lưu báo cáo vào kho',
+  msg_saved:'Đã lưu thay đổi', msg_uploading:'Đang phân tích file...', msg_uploaded:'Đã phân tích & lưu báo cáo', msg_report_saved:'Đã lưu báo cáo vào kho',
+  msg_deleted:'Đã xóa báo cáo', msg_loaded:'Đã mở báo cáo', msg_fixed:'Đã sửa {n} mục', msg_no_perm:'Bạn chưa được cấp quyền thực hiện thao tác này',
+  msg_welcome:'Xin chào', msg_updated:'Đã cập nhật', read_only:'Chỉ xem',
+  f_vendor_short:'Tên viết tắt', f_vendor_full:'Tên công ty đầy đủ', f_vendor_code:'Mã Vendor', f_subsidiary:'Pháp nhân', f_gbm:'GBM', f_address:'Địa chỉ',
+  f_main_process:'Công đoạn chính (EN)', f_main_process_vn:'Công đoạn chính (VN)', f_product:'Sản phẩm', f_samsung_Revenue_ratio:'Tỷ trọng giao dịch Samsung', f_certifications:'Chứng nhận',
+  f_audit_criteria:'Tiêu chuẩn đánh giá', f_audit_date_raw:'Ngày đánh giá', f_report_date:'Ngày báo cáo', f_auditor_raw:'Đoàn đánh giá', f_auditor_1:'Trưởng đoàn',
+  f_auditor_2:'Thành viên', f_auditor_short:'Tên rút gọn (Word)', f_interview_count:'Số người phỏng vấn',
+  f_ceo_name:'Tên CEO', f_ceo_position:'Chức vụ', f_ceo_phone:'Điện thoại CEO', f_ceo_email:'Email CEO',
+  f_contact_name:'Người liên hệ', f_contact_position:'Chức vụ người liên hệ', f_contact_phone:'Điện thoại liên hệ', f_contact_email:'Email liên hệ',
+  f_total_workers:'Tổng lao động', f_permanent_workers:'Lao động chính thức', f_temp_workers:'Lao động thời vụ', f_foreign_workers:'Lao động nước ngoài',
+  f_subcontract_info:'Nhà thầu phụ', f_subcontract_count:'Số nhà thầu phụ',
+  edit_vn:'Sửa tiếng Việt', edit_vn_lbl:'Nội dung tiếng Việt trên báo cáo', edit_vn_missing:'Chưa có bản tiếng Việt'
+ },
+ en: {
+  loading:'Loading scoring data...', load_failed:'Could not load data. Please check your connection.', retry:'Retry',
+  up_title:'Upload Findings', up_s1:'Upload file to server', up_s2:'Read & analyze Findings', up_s3:'Score 41 RBA 8.0.1 items', up_s4:'Build Checklist, Report & archive',
+  up_done:'41-item scoring complete', up_view:'Open 41-item scoring', up_close:'Close', up_failed:'Could not process file', up_busy:'Processing...', up_main_viol:'Main violated items', up_qa:'Language QA items', up_warn:'Data warnings',
+  app_title:'EHS Audit Reporting System', copyright:'Copyright',
+  login_title:'Sign in', login_sub:'Automated EHS audit reporting per RBA 8.0.1',
+  username:'Username', password:'Password', login_btn:'Sign in', or:'or', guest_btn:'Continue as Guest', show:'Show',
+  role_admin:'Administrator', role_guest:'Guest',
+  act_upload:'Upload Findings', act_upload_sub:'Excel .xlsm / .xlsx', act_save:'Save Report', act_save_sub:'Store in system archive',
+  act_xlsx:'Export Checklist', act_xlsx_sub:'RBA 8.0.1 · Excel', act_docx:'Export Report', act_docx_sub:'Summary · Word',
+  st_grade:'Grade', st_findings:'Findings', st_violated:'Violated', st_mandatory:'Mandatory', st_severity:'Severity distribution', st_compliance:'Compliance',
+  sev_Conformance:'Conformance', sev_Minor:'Minor', sev_Major:'Major', sev_Priority:'Priority', 'sev_N/A':'N/A',
+  tab_checklist:'41-Item Scoring', tab_word:'Word Report', tab_factory:'Factory Info', tab_qa:'Language QA', tab_storage:'Report Archive',
+  search_ph:'Search code or content...', all:'All', only_violated:'With findings', findings_unit:'findings', score:'Score',
+  evidence:'Audit evidence (Col L)', auto_reason:'Auto-classification reason', related_findings:'Related findings', save_evidence:'Save evidence',
+  no_items:'No matching items', no_findings:'No findings', penalty:'Penalty',
+  word_content:'Report content', doc_viol:'Document violations', fac_viol:'On-site violations', one_per_line:'one item per line',
+  key_photos:'5 key photos (Table 4)', photo:'Photo', save_update:'Save & update', preview:'Document preview',
+  sec_partner:'Partner information', sec_audit:'Audit session', sec_people:'Management & contacts', sec_workforce:'Workforce', save_info:'Save information',
+  qa_fix_all:'Fix all', qa_total:'Total', qa_spelling:'Spelling', qa_punct:'Punctuation', qa_subtitle:'Bilingual subtitles',
+  qa_original:'Original', qa_suggest:'Suggested', qa_fix_one:'Fix this', qa_none:'No issues remaining', field:'Field', finding:'Finding',
+  fld_location:'Location', fld_issue:'Finding text', fld_improvement:'Improvement plan', fld_photo:'Site photo',
+  sto_title:'Saved reports', sto_folders:'Storage folder structure', only_owner_hint:'Only the admin or the owner can edit / delete a report',
+  col_record:'Report', col_vendor:'Factory', col_result:'Result', col_owner:'Saved by', col_files:'Files', col_actions:'Actions',
+  btn_open:'Open', btn_edit:'Edit', btn_delete:'Delete', sto_empty:'No reports yet', refresh:'Refresh', files_unit:'files',
+  confirm:'Confirm', cancel:'Cancel', save:'Save', title_lbl:'Report title', note:'Note',
+  del_title:'Delete this report?', del_msg:'The report and all attached files will be permanently deleted. Are you sure?',
+  edit_title:'Edit report', edit_msg:'Update the title and note. The change will be recorded in the activity log.',
+  save_title:'Save report to archive', save_msg:'The Findings file, Checklist (.xlsx) and Report (.docx) will be stored together.',
+  open_title:'Open this report?', open_msg:'The current working data will be replaced by the selected report.',
+  acc_profile:'Profile', acc_perms:'Guest permissions', acc_users:'User management', acc_master:'RBA 8.0.1 master data', acc_logs:'Activity log',
+  admin_area:'Admin console', logout:'Sign out', my_perms:'Granted permissions', login_at:'Signed in at', change_pw:'Change password', new_pw:'New password',
+  allow_quick_guest:'Allow quick guest sign-in', allow_quick_guest_d:'Show the "Continue as Guest" button on the sign-in screen',
+  save_perms:'Save permissions', create_user:'Create account', display_name:'Display name', role:'Role', active:'Active', locked:'Locked',
+  lock:'Lock', unlock:'Unlock', root_admin:'Root admin', reset_pw:'Reset PW',
+  del_user_title:'Delete account?', del_user_msg:'The account will be removed from the system.',
+  m_save:'Save & apply', m_reset:'Restore defaults', m_groups:'6 category groups', m_rules:'Classification rules & VLOOKUP scores · 41 codes',
+  m_desc:'Description', m_thr:'Major threshold', m_pkw:'Priority keywords', m_mkw:'Major keywords', m_codes:'codes',
+  m_reset_title:'Restore master data?', m_reset_msg:'All 41 codes will revert to the default RBA 8.0.1 rules & scores.',
+  m_save_title:'Apply new master data?', m_save_msg:'Rules will be saved and the current report re-scored.',
+  perm_can_upload_findings:'Upload & analyze Findings', perm_can_edit_checklist:'Edit scoring, factory info & report',
+  perm_can_use_qa_autofix:'Language QA & auto-fix', perm_can_export_excel:'Export Checklist (.xlsx)', perm_can_export_word:'Export Report (.docx)',
+  perm_can_view_storage:'View & download archive', perm_can_save_to_storage:'Save reports to archive',
+  msg_saved:'Changes saved', msg_uploading:'Analyzing file...', msg_uploaded:'File analyzed and archived', msg_report_saved:'Report saved to archive',
+  msg_deleted:'Report deleted', msg_loaded:'Report opened', msg_fixed:'Fixed {n} items', msg_no_perm:"You don't have permission for this action",
+  msg_welcome:'Welcome', msg_updated:'Updated', read_only:'Read only',
+  f_vendor_short:'Short name', f_vendor_full:'Full company name', f_vendor_code:'Vendor code', f_subsidiary:'Subsidiary', f_gbm:'GBM', f_address:'Address',
+  f_main_process:'Main process (EN)', f_main_process_vn:'Main process (VN)', f_product:'Product', f_samsung_Revenue_ratio:'Samsung revenue ratio', f_certifications:'Certifications',
+  f_audit_criteria:'Audit criteria', f_audit_date_raw:'Audit date', f_report_date:'Report date', f_auditor_raw:'Audit team', f_auditor_1:'Lead auditor',
+  f_auditor_2:'Team members', f_auditor_short:'Short names (Word)', f_interview_count:'Interviews',
+  f_ceo_name:'CEO name', f_ceo_position:'Position', f_ceo_phone:'CEO phone', f_ceo_email:'CEO email',
+  f_contact_name:'Contact person', f_contact_position:'Contact position', f_contact_phone:'Contact phone', f_contact_email:'Contact email',
+  f_total_workers:'Total workers', f_permanent_workers:'Permanent', f_temp_workers:'Temporary', f_foreign_workers:'Foreign workers',
+  f_subcontract_info:'Subcontractors', f_subcontract_count:'Subcontractor count',
+  edit_vn:'Edit Vietnamese', edit_vn_lbl:'Vietnamese wording in the report', edit_vn_missing:'No Vietnamese version yet'
+ },
+ ko: {
+  loading:'평가 데이터를 불러오는 중...', load_failed:'데이터를 불러올 수 없습니다. 연결을 확인하세요.', retry:'다시 시도',
+  up_title:'Finding 업로드', up_s1:'서버로 파일 업로드', up_s2:'Finding 데이터 분석', up_s3:'RBA 8.0.1 41개 항목 평가', up_s4:'체크리스트·보고서 생성 및 보관',
+  up_done:'41개 항목 평가 완료', up_view:'41개 항목 평가 보기', up_close:'닫기', up_failed:'파일을 처리할 수 없습니다', up_busy:'처리 중...', up_main_viol:'주요 위반 항목', up_qa:'언어 검수 항목', up_warn:'데이터 경고',
+  app_title:'EHS 감사 보고 시스템', copyright:'저작권',
+  login_title:'시스템 로그인', login_sub:'RBA 8.0.1 기준 EHS 감사 보고 자동화',
+  username:'아이디', password:'비밀번호', login_btn:'로그인', or:'또는', guest_btn:'게스트로 계속', show:'보기',
+  role_admin:'관리자', role_guest:'게스트',
+  act_upload:'Finding 업로드', act_upload_sub:'Excel .xlsm / .xlsx', act_save:'보고서 저장', act_save_sub:'시스템 보관함에 저장',
+  act_xlsx:'체크리스트 내보내기', act_xlsx_sub:'RBA 8.0.1 · Excel', act_docx:'보고서 내보내기', act_docx_sub:'요약 · Word',
+  st_grade:'등급', st_findings:'지적 사항', st_violated:'위반 항목', st_mandatory:'필수 위반', st_severity:'심각도 분포', st_compliance:'준수율',
+  sev_Conformance:'적합', sev_Minor:'경미', sev_Major:'중대', sev_Priority:'최우선', 'sev_N/A':'해당없음',
+  tab_checklist:'41개 항목 평가', tab_word:'Word 보고서', tab_factory:'공장 정보', tab_qa:'언어 검수', tab_storage:'보고서 보관함',
+  search_ph:'코드 또는 내용 검색...', all:'전체', only_violated:'지적 있음', findings_unit:'건', score:'점수',
+  evidence:'감사 증거 (L열)', auto_reason:'자동 분류 근거', related_findings:'관련 지적 사항', save_evidence:'증거 저장',
+  no_items:'일치하는 항목이 없습니다', no_findings:'지적 사항 없음', penalty:'페널티',
+  word_content:'보고서 내용', doc_viol:'문서 위반 사항', fac_viol:'현장 위반 사항', one_per_line:'한 줄에 한 항목',
+  key_photos:'대표 사진 5장 (표 4)', photo:'사진', save_update:'저장 및 업데이트', preview:'문서 미리보기',
+  sec_partner:'협력사 정보', sec_audit:'감사 정보', sec_people:'대표자 및 담당자', sec_workforce:'인력 현황', save_info:'정보 저장',
+  qa_fix_all:'모두 수정', qa_total:'전체', qa_spelling:'맞춤법', qa_punct:'문장부호', qa_subtitle:'이중 언어 자막',
+  qa_original:'원문', qa_suggest:'수정안', qa_fix_one:'이 항목 수정', qa_none:'남은 문제가 없습니다', field:'필드', finding:'지적',
+  fld_location:'위치', fld_issue:'지적 내용', fld_improvement:'개선 계획', fld_photo:'현장 사진',
+  sto_title:'저장된 보고서', sto_folders:'보관 폴더 구조', only_owner_hint:'관리자 또는 저장자만 보고서를 편집/삭제할 수 있습니다',
+  col_record:'보고서', col_vendor:'공장', col_result:'결과', col_owner:'저장자', col_files:'파일', col_actions:'작업',
+  btn_open:'열기', btn_edit:'편집', btn_delete:'삭제', sto_empty:'저장된 보고서가 없습니다', refresh:'새로고침', files_unit:'파일',
+  confirm:'확인', cancel:'취소', save:'저장', title_lbl:'보고서 제목', note:'메모',
+  del_title:'보고서를 삭제하시겠습니까?', del_msg:'보고서와 모든 첨부 파일이 영구적으로 삭제됩니다. 계속하시겠습니까?',
+  edit_title:'보고서 편집', edit_msg:'제목과 메모를 수정합니다. 변경 내용은 활동 로그에 기록됩니다.',
+  save_title:'보고서 보관함 저장', save_msg:'Finding 파일, 체크리스트(.xlsx), 보고서(.docx)가 함께 저장됩니다.',
+  open_title:'이 보고서를 여시겠습니까?', open_msg:'현재 작업 중인 데이터가 선택한 보고서로 대체됩니다.',
+  acc_profile:'계정 정보', acc_perms:'게스트 권한', acc_users:'사용자 관리', acc_master:'RBA 8.0.1 기준 데이터', acc_logs:'활동 로그',
+  admin_area:'관리자 콘솔', logout:'로그아웃', my_perms:'부여된 권한', login_at:'로그인 시간', change_pw:'비밀번호 변경', new_pw:'새 비밀번호',
+  allow_quick_guest:'빠른 게스트 로그인 허용', allow_quick_guest_d:'로그인 화면에 "게스트로 계속" 버튼 표시',
+  save_perms:'권한 저장', create_user:'계정 생성', display_name:'표시 이름', role:'역할', active:'활성', locked:'잠김',
+  lock:'잠금', unlock:'잠금 해제', root_admin:'최고 관리자', reset_pw:'비밀번호 재설정',
+  del_user_title:'계정을 삭제하시겠습니까?', del_user_msg:'계정이 시스템에서 삭제됩니다.',
+  m_save:'저장 및 적용', m_reset:'기본값 복원', m_groups:'6개 분야 그룹', m_rules:'분류 규칙 및 VLOOKUP 점수 · 41개 코드',
+  m_desc:'설명', m_thr:'중대 기준', m_pkw:'최우선 키워드', m_mkw:'중대 키워드', m_codes:'개 코드',
+  m_reset_title:'기준 데이터를 복원하시겠습니까?', m_reset_msg:'41개 코드 전체가 RBA 8.0.1 기본 규칙 및 점수로 돌아갑니다.',
+  m_save_title:'새 기준 데이터를 적용하시겠습니까?', m_save_msg:'규칙이 저장되고 현재 보고서가 재평가됩니다.',
+  perm_can_upload_findings:'Finding 업로드 및 분석', perm_can_edit_checklist:'평가·공장 정보·보고서 편집',
+  perm_can_use_qa_autofix:'언어 검수 및 자동 수정', perm_can_export_excel:'체크리스트 내보내기 (.xlsx)', perm_can_export_word:'보고서 내보내기 (.docx)',
+  perm_can_view_storage:'보관함 조회 및 다운로드', perm_can_save_to_storage:'보고서 보관함 저장',
+  msg_saved:'변경 사항이 저장되었습니다', msg_uploading:'파일 분석 중...', msg_uploaded:'파일 분석 및 보관 완료', msg_report_saved:'보고서가 보관함에 저장되었습니다',
+  msg_deleted:'보고서가 삭제되었습니다', msg_loaded:'보고서를 열었습니다', msg_fixed:'{n}개 항목 수정됨', msg_no_perm:'이 작업에 대한 권한이 없습니다',
+  msg_welcome:'환영합니다', msg_updated:'업데이트되었습니다', read_only:'읽기 전용',
+  f_vendor_short:'약칭', f_vendor_full:'회사 정식 명칭', f_vendor_code:'협력사 코드', f_subsidiary:'법인', f_gbm:'GBM', f_address:'주소',
+  f_main_process:'주요 공정 (EN)', f_main_process_vn:'주요 공정 (VN)', f_product:'제품', f_samsung_Revenue_ratio:'삼성 거래 비중', f_certifications:'인증',
+  f_audit_criteria:'평가 기준', f_audit_date_raw:'감사 일자', f_report_date:'보고 일자', f_auditor_raw:'감사팀', f_auditor_1:'선임 감사원',
+  f_auditor_2:'감사원', f_auditor_short:'약식 이름 (Word)', f_interview_count:'인터뷰 인원',
+  f_ceo_name:'대표자 성명', f_ceo_position:'직위', f_ceo_phone:'대표자 연락처', f_ceo_email:'대표자 이메일',
+  f_contact_name:'담당자', f_contact_position:'담당자 직위', f_contact_phone:'담당자 연락처', f_contact_email:'담당자 이메일',
+  f_total_workers:'총 인원', f_permanent_workers:'정규직', f_temp_workers:'임시직', f_foreign_workers:'외국인 근로자',
+  f_subcontract_info:'하도급사', f_subcontract_count:'하도급사 수',
+  edit_vn:'베트남어 수정', edit_vn_lbl:'보고서의 베트남어 내용', edit_vn_missing:'베트남어 번역 없음'
+ }
+};
+
+const I18N_EXTRA = {
+ vi: {
+  pw_title:'Đổi mật khẩu để tiếp tục', pw_desc:'Tài khoản đang dùng mật khẩu mặc định hoặc mật khẩu do Admin cấp. Vì lý do bảo mật, vui lòng đặt mật khẩu mới.', pw_current:'Mật khẩu hiện tại', pw_confirm:'Nhập lại mật khẩu mới', pw_rule:'Ít nhất 8 ký tự, gồm cả chữ và số, không trùng tên đăng nhập.', pw_mismatch:'Mật khẩu nhập lại không khớp.', pw_changed:'Đã đổi mật khẩu. Các thiết bị khác đã được đăng xuất.', session_expired:'Phiên đăng nhập đã hết hạn do không sử dụng. Vui lòng đăng nhập lại.', sec_title:'Bảo mật đăng nhập', sec_idle:'Tự đăng xuất khi không dùng (phút)', sec_max:'Thời gian tối đa một phiên (giờ)', sec_fail:'Số lần nhập sai trước khi khóa', sec_lock:'Thời gian khóa (phút)',
+  act_pack:'Xuất PDF / Trọn bộ ZIP', pdf_busy:'Đang tạo file, vui lòng chờ...', btn_history:'Lịch sử', rev_title:'Lịch sử phiên bản', rev_current:'Phiên bản hiện tại', rev_restore:'Khôi phục phiên bản này',
+  rev_restore_title:'Khôi phục phiên bản {n}?', rev_restore_msg:'Phiên bản hiện tại sẽ được lưu vào lịch sử trước khi khôi phục, nên không mất dữ liệu.', rev_empty:'Chưa có phiên bản cũ', rev_restored:'Đã khôi phục phiên bản',
+  rec_badge:'Lặp lại', rec_from:'Lặp lại từ', rec_suggest:'Đề xuất nâng lên', rec_apply:'Nâng lên {s}', rec_count:'lỗi lặp lại từ đợt đánh giá trước', rec_none_prev:'Không có đợt đánh giá trước của nhà máy này',
+  acc_notify:'Thông báo Email / Zalo', acc_learning:'Gợi ý dữ liệu gốc', n_email:'Email (SMTP)', n_zalo:'Zalo OA', n_webhook:'Webhook (Teams, Slack, Telegram bot...)', n_enabled:'Bật',
+  n_host:'Máy chủ SMTP', n_port:'Cổng', n_security:'Bảo mật', n_user:'Tài khoản', n_pass:'Mật khẩu / App password', n_sender:'Địa chỉ gửi', n_recipients:'Người nhận (cách nhau dấu phẩy)', n_attach:'Đính kèm Checklist & Báo cáo',
+  n_token:'Access token Zalo OA', n_uids:'User ID người nhận (cách nhau dấu phẩy)', n_url:'Địa chỉ Webhook', n_events:'Sự kiện gửi thông báo', n_save:'Lưu cấu hình', n_test:'Gửi thử', n_log:'Nhật ký gửi', n_test_sent:'Đã gửi thử — xem nhật ký bên dưới',
+  ev_report_saved:'Lưu báo cáo mới', ev_report_updated:'Cập nhật / khôi phục báo cáo', ev_round2_confirmed:'Xác nhận kết quả lần 2', ev_report_deleted:'Xóa báo cáo', ev_system_restore:'Khôi phục hệ thống', ev_test:'Gửi thử',
+  n_hint:'Gmail: dùng smtp.gmail.com, cổng 587, STARTTLS và "Mật khẩu ứng dụng". Zalo: cần Official Account và access token từ Zalo for Developers.',
+  l_intro:'Khi người dùng nhiều lần đổi mức độ khác với đề xuất của hệ thống ở cùng một mã, hệ thống gợi ý chỉnh Dữ liệu gốc. Dữ liệu gốc chỉ thay đổi khi bạn bấm Áp dụng.',
+  l_apply:'Áp dụng', l_dismiss:'Bỏ qua', l_none:'Chưa có gợi ý nào', l_events:'Lần điều chỉnh thủ công gần đây', l_applied:'Đã áp dụng', l_times:'lần', l_auto:'Hệ thống', l_manual:'Người dùng',
+  l_apply_title:'Áp dụng gợi ý vào Dữ liệu gốc?', pdf_engine_lbl:'Công cụ tạo PDF', pdf_none:'Chưa có (cần LibreOffice hoặc Google Chrome)',
+  act_upload2:'Nạp kết quả lần 2', act_upload2_sub:'Đối chiếu với lần 1', round1:'Lần 1', round2:'Lần 2',
+  welcome_title:'Bắt đầu một đợt đánh giá', welcome_sub:'Chưa có dữ liệu đầu vào. Chọn một thao tác để bắt đầu.',
+  w_r1_d:'Nạp file EHS Audit Findings để chấm điểm 41 hạng mục', w_r2_d:'Nạp file vendor gửi lại sau khắc phục để chấm điểm lại', w_open:'Mở báo cáo từ kho', w_open_d:'Xem lại hoặc tiếp tục chỉnh sửa báo cáo đã lưu',
+  resume_title:'Có tiến trình đang làm dở', resume_btn:'Tiếp tục làm', discard_btn:'Bỏ qua', autosaved:'Tự động lưu lúc', autosave_now:'Lưu ngay', unsaved:'Có thay đổi chưa lưu', not_saved_yet:'Chưa tự động lưu',
+  close_ws:'Đóng báo cáo', close_ws_title:'Đóng báo cáo đang làm việc?', close_ws_msg:'Dữ liệu đang làm việc và bản tự động lưu sẽ bị xóa. Các báo cáo đã lưu trong kho không bị ảnh hưởng.',
+  editing:'Đang sửa', working:'Đang làm việc', new_report:'Báo cáo mới (chưa lưu vào kho)',
+  tab_round2:'Đối chiếu & xác nhận lần 2', r2_compare_with:'Đối chiếu với', r2_closed:'Đã khắc phục', r2_open:'Chưa khắc phục', r2_missing:'Không có trong file lần 2',
+  r2_new:'Phát hiện mới trong file lần 2', r2_new_d:'Không khớp với lỗi nào của lần 1. Chọn "Tính vào lần 2" nếu cần tính điểm.', r2_include:'Tính vào lần 2', r2_changed:'Mã thay đổi',
+  r2_confirm:'Xác nhận kết quả lần 2', r2_unconfirm:'Hủy xác nhận', r2_confirmed_by:'Đã xác nhận bởi', r2_need_confirm:'Kiểm tra trạng thái từng lỗi, sau đó bấm Xác nhận để mở khóa xuất file và lưu báo cáo.',
+  r2_confirm_title:'Xác nhận kết quả đánh giá lần 2?', r2_confirm_msg:'Lần 1: {a} điểm ({ga}) → Lần 2: {b} điểm ({gb})\nĐã khắc phục {c}/{t} lỗi. Sau khi xác nhận có thể xuất Checklist, Báo cáo và lưu vào kho.',
+  r2_complete_date:'Ngày hoàn thành', r2_after:'Ảnh sau cải tiến', r2_select_parent:'Chọn báo cáo lần 1 để đối chiếu', r2_no_parent:'Chưa có báo cáo lần 1 nào trong kho. Hãy nạp và lưu báo cáo lần 1 trước.',
+  r2_locked:'Cần xác nhận lần 2', r2_word_note:'Mục 1 hiển thị bảng kết quả lần 1 và lần 2 để so sánh; các mục 2–4 chỉ liệt kê các lỗi còn tồn đọng sau lần 2.',
+  r2_auto:'Hệ thống đề xuất', r2_findings_lbl:'Lỗi còn lại', r2_view:'Xem đối chiếu lần 2', r2_done:'Đã đối chiếu với lần 1', r2_score_change:'Thay đổi điểm',
+  btn_upload_r2:'Nạp lần 2', save_mode:'Cách lưu', save_overwrite:'Cập nhật báo cáo đang sửa', save_new:'Lưu thành báo cáo mới', edit_content:'Mở báo cáo để chỉnh sửa nội dung chấm điểm',
+  del_cascade:'Các báo cáo lần 2 liên kết cũng sẽ bị xóa.', revision:'Phiên bản', up_s3b:'Đối chiếu với lần 1 & chấm điểm lại',
+  acc_backup:'Sao lưu & khôi phục', bk_create:'Tạo bản sao lưu', bk_include_storage:'Kèm toàn bộ kho báo cáo (dung lượng lớn)', bk_restore:'Khôi phục', bk_download:'Tải về', bk_good:'Ổn định',
+  bk_kind_manual:'Thủ công', bk_kind_startup:'Khởi động', bk_kind_daily:'Hằng ngày', bk_kind_pre_restore:'Trước khôi phục',
+  bk_restore_title:'Khôi phục hệ thống?', bk_restore_msg:'Trạng thái hiện tại sẽ được tự động sao lưu trước khi khôi phục.', bk_r_code:'Mã nguồn (giao diện & chức năng)',
+  bk_r_data:'Dữ liệu hệ thống (tài khoản, phân quyền, dữ liệu gốc, danh mục kho)', bk_r_storage:'Tệp trong kho báo cáo (nếu bản sao lưu có kèm)',
+  bk_restarting:'Hệ thống đang khởi động lại...', bk_manual_restart:'Đã khôi phục. Vui lòng khởi động lại máy chủ để áp dụng mã nguồn.', bk_restored:'Đã khôi phục dữ liệu',
+  bk_info:'Hệ thống tự sao lưu mỗi khi khởi động với phiên bản mới và mỗi ngày một lần. Nếu bản cập nhật lỗi khiến máy chủ không khởi động được, hệ thống tự khôi phục bản ổn định gần nhất.',
+  bk_del_title:'Xóa bản sao lưu?', bk_empty:'Chưa có bản sao lưu', bk_note:'Ghi chú',
+  perm_can_edit_storage:'Sửa báo cáo trong kho (báo cáo do mình lưu)', perm_can_delete_storage:'Xóa báo cáo trong kho (báo cáo do mình lưu)', perm_can_upload_round2:'Nạp & xác nhận kết quả lần 2',
+  msg_confirmed:'Đã xác nhận kết quả lần 2', msg_closed_ws:'Đã đóng báo cáo', up_title2:'Nạp kết quả lần 2', msg_restored_ws:'Đã khôi phục tiến trình đang làm dở'
+ },
+ en: {
+  pw_title:'Change your password to continue', pw_desc:'This account uses a default or admin-issued password. For security, please set a new password.', pw_current:'Current password', pw_confirm:'Confirm new password', pw_rule:'At least 8 characters, letters and digits, not equal to the username.', pw_mismatch:'Passwords do not match.', pw_changed:'Password changed. Other devices were signed out.', session_expired:'Your session expired due to inactivity. Please sign in again.', sec_title:'Sign-in security', sec_idle:'Auto sign-out when idle (minutes)', sec_max:'Maximum session length (hours)', sec_fail:'Failed attempts before lock', sec_lock:'Lock duration (minutes)',
+  act_pack:'Export PDF / ZIP bundle', pdf_busy:'Generating file, please wait...', btn_history:'History', rev_title:'Revision history', rev_current:'Current revision', rev_restore:'Restore this revision',
+  rev_restore_title:'Restore revision {n}?', rev_restore_msg:'The current revision is saved to history before restoring, so nothing is lost.', rev_empty:'No earlier revisions', rev_restored:'Revision restored',
+  rec_badge:'Recurring', rec_from:'Recurring from', rec_suggest:'Suggest raising to', rec_apply:'Raise to {s}', rec_count:'findings recurring from earlier audits', rec_none_prev:'No earlier audits of this factory',
+  acc_notify:'Email / Zalo notifications', acc_learning:'Master-data suggestions', n_email:'Email (SMTP)', n_zalo:'Zalo OA', n_webhook:'Webhook (Teams, Slack, Telegram bot...)', n_enabled:'Enabled',
+  n_host:'SMTP server', n_port:'Port', n_security:'Security', n_user:'Username', n_pass:'Password / App password', n_sender:'Sender address', n_recipients:'Recipients (comma separated)', n_attach:'Attach Checklist & Report',
+  n_token:'Zalo OA access token', n_uids:'Recipient user IDs (comma separated)', n_url:'Webhook URL', n_events:'Events to notify', n_save:'Save settings', n_test:'Send test', n_log:'Delivery log', n_test_sent:'Test sent — see the log below',
+  ev_report_saved:'New report saved', ev_report_updated:'Report updated / restored', ev_round2_confirmed:'Round-2 result confirmed', ev_report_deleted:'Report deleted', ev_system_restore:'System restored', ev_test:'Test',
+  n_hint:'Gmail: smtp.gmail.com, port 587, STARTTLS and an "App password". Zalo: requires an Official Account and an access token from Zalo for Developers.',
+  l_intro:'When users repeatedly change the proposed severity of the same code, the system suggests a master-data change. Master data changes only when you click Apply.',
+  l_apply:'Apply', l_dismiss:'Dismiss', l_none:'No suggestions yet', l_events:'Recent manual overrides', l_applied:'Applied', l_times:'times', l_auto:'System', l_manual:'User',
+  l_apply_title:'Apply this suggestion to the master data?', pdf_engine_lbl:'PDF engine', pdf_none:'None (requires LibreOffice or Google Chrome)',
+  act_upload2:'Upload Round-2 Results', act_upload2_sub:'Compare with round 1', round1:'Round 1', round2:'Round 2',
+  welcome_title:'Start an audit', welcome_sub:'No input data yet. Choose an action to begin.',
+  w_r1_d:'Upload EHS Audit Findings to score the 41 items', w_r2_d:"Upload the vendor's corrective-action file to re-score", w_open:'Open a saved report', w_open_d:'Review or continue editing a saved report',
+  resume_title:'Unfinished work found', resume_btn:'Resume', discard_btn:'Discard', autosaved:'Autosaved at', autosave_now:'Save now', unsaved:'Unsaved changes', not_saved_yet:'Not autosaved yet',
+  close_ws:'Close report', close_ws_title:'Close the current report?', close_ws_msg:'Working data and its autosave will be removed. Saved reports in the archive are not affected.',
+  editing:'Editing', working:'Working on', new_report:'New report (not saved to archive)',
+  tab_round2:'Round-2 review & confirm', r2_compare_with:'Compared with', r2_closed:'Corrected', r2_open:'Not corrected', r2_missing:'Not in round-2 file',
+  r2_new:'New findings in round-2 file', r2_new_d:'These do not match any round-1 finding. Tick "Count in round 2" to include them in scoring.', r2_include:'Count in round 2', r2_changed:'Changed items',
+  r2_confirm:'Confirm round-2 result', r2_unconfirm:'Revoke confirmation', r2_confirmed_by:'Confirmed by', r2_need_confirm:'Review each finding, then Confirm to unlock export and saving.',
+  r2_confirm_title:'Confirm the round-2 result?', r2_confirm_msg:'Round 1: {a} pts ({ga}) → Round 2: {b} pts ({gb})\n{c}/{t} findings corrected. After confirming you can export the Checklist, Report and save to the archive.',
+  r2_complete_date:'Completed', r2_after:'After photos', r2_select_parent:'Select the round-1 report to compare', r2_no_parent:'No round-1 reports in the archive yet. Upload and save a round-1 report first.',
+  r2_locked:'Round 2 must be confirmed', r2_word_note:'Section 1 shows the round-1 and round-2 result tables for comparison; sections 2–4 list only the findings still open after round 2.',
+  r2_auto:'System proposal', r2_findings_lbl:'Remaining', r2_view:'Open round-2 review', r2_done:'Compared with round 1', r2_score_change:'Score change',
+  btn_upload_r2:'Upload R2', save_mode:'Save mode', save_overwrite:'Update the report being edited', save_new:'Save as a new report', edit_content:'Open the report to edit its scoring content',
+  del_cascade:'Linked round-2 reports will also be deleted.', revision:'Revision', up_s3b:'Compare with round 1 & re-score',
+  acc_backup:'Backup & restore', bk_create:'Create backup', bk_include_storage:'Include the full report archive (large)', bk_restore:'Restore', bk_download:'Download', bk_good:'Known good',
+  bk_kind_manual:'Manual', bk_kind_startup:'Startup', bk_kind_daily:'Daily', bk_kind_pre_restore:'Pre-restore',
+  bk_restore_title:'Restore the system?', bk_restore_msg:'The current state is backed up automatically before restoring.', bk_r_code:'Source code (UI & features)',
+  bk_r_data:'System data (accounts, permissions, master data, archive index)', bk_r_storage:'Archive files (if included in the backup)',
+  bk_restarting:'The system is restarting...', bk_manual_restart:'Restored. Please restart the server to apply the code.', bk_restored:'Data restored',
+  bk_info:'The system backs up automatically whenever a new version starts and once a day. If an update prevents the server from starting, the latest known-good version is restored automatically.',
+  bk_del_title:'Delete this backup?', bk_empty:'No backups yet', bk_note:'Note',
+  perm_can_edit_storage:'Edit archived reports (own reports)', perm_can_delete_storage:'Delete archived reports (own reports)', perm_can_upload_round2:'Upload & confirm round-2 results',
+  msg_confirmed:'Round-2 result confirmed', msg_closed_ws:'Report closed', up_title2:'Upload round-2 results', msg_restored_ws:'Unfinished work restored'
+ },
+ ko: {
+  pw_title:'계속하려면 비밀번호를 변경하세요', pw_desc:'기본 비밀번호 또는 관리자가 발급한 비밀번호를 사용 중입니다. 보안을 위해 새 비밀번호를 설정하세요.', pw_current:'현재 비밀번호', pw_confirm:'새 비밀번호 확인', pw_rule:'8자 이상, 문자와 숫자 포함, 아이디와 같을 수 없음.', pw_mismatch:'비밀번호가 일치하지 않습니다.', pw_changed:'비밀번호가 변경되었습니다. 다른 기기는 로그아웃되었습니다.', session_expired:'사용하지 않아 세션이 만료되었습니다. 다시 로그인하세요.', sec_title:'로그인 보안', sec_idle:'미사용 시 자동 로그아웃 (분)', sec_max:'세션 최대 시간 (시간)', sec_fail:'잠금 전 허용 실패 횟수', sec_lock:'잠금 시간 (분)',
+  act_pack:'PDF / 전체 ZIP 내보내기', pdf_busy:'파일 생성 중입니다. 잠시 기다려 주세요...', btn_history:'이력', rev_title:'버전 이력', rev_current:'현재 버전', rev_restore:'이 버전으로 복원',
+  rev_restore_title:'버전 {n}(으)로 복원하시겠습니까?', rev_restore_msg:'복원 전에 현재 버전이 이력에 저장되므로 데이터가 손실되지 않습니다.', rev_empty:'이전 버전이 없습니다', rev_restored:'버전이 복원되었습니다',
+  rec_badge:'반복', rec_from:'반복 출처', rec_suggest:'상향 제안', rec_apply:'{s}(으)로 상향', rec_count:'건이 이전 감사에서 반복됨', rec_none_prev:'이 공장의 이전 감사가 없습니다',
+  acc_notify:'이메일 / Zalo 알림', acc_learning:'기준 데이터 제안', n_email:'이메일 (SMTP)', n_zalo:'Zalo OA', n_webhook:'웹훅 (Teams, Slack, Telegram 봇...)', n_enabled:'사용',
+  n_host:'SMTP 서버', n_port:'포트', n_security:'보안', n_user:'계정', n_pass:'비밀번호 / 앱 비밀번호', n_sender:'발신 주소', n_recipients:'수신자 (쉼표로 구분)', n_attach:'체크리스트·보고서 첨부',
+  n_token:'Zalo OA 액세스 토큰', n_uids:'수신자 사용자 ID (쉼표로 구분)', n_url:'웹훅 URL', n_events:'알림 이벤트', n_save:'설정 저장', n_test:'테스트 발송', n_log:'발송 기록', n_test_sent:'테스트를 보냈습니다 — 아래 기록을 확인하세요',
+  ev_report_saved:'새 보고서 저장', ev_report_updated:'보고서 업데이트 / 복원', ev_round2_confirmed:'2차 결과 확인', ev_report_deleted:'보고서 삭제', ev_system_restore:'시스템 복원', ev_test:'테스트',
+  n_hint:'Gmail: smtp.gmail.com, 포트 587, STARTTLS 및 "앱 비밀번호" 사용. Zalo: Official Account와 Zalo for Developers의 액세스 토큰이 필요합니다.',
+  l_intro:'사용자가 같은 코드의 제안 심각도를 반복해서 변경하면 시스템이 기준 데이터 수정을 제안합니다. 적용을 눌러야만 기준 데이터가 변경됩니다.',
+  l_apply:'적용', l_dismiss:'무시', l_none:'제안이 없습니다', l_events:'최근 수동 변경', l_applied:'적용됨', l_times:'회', l_auto:'시스템', l_manual:'사용자',
+  l_apply_title:'이 제안을 기준 데이터에 적용하시겠습니까?', pdf_engine_lbl:'PDF 생성 도구', pdf_none:'없음 (LibreOffice 또는 Google Chrome 필요)',
+  act_upload2:'2차 결과 업로드', act_upload2_sub:'1차와 대조', round1:'1차', round2:'2차',
+  welcome_title:'감사 시작', welcome_sub:'입력 데이터가 없습니다. 시작할 작업을 선택하세요.',
+  w_r1_d:'EHS Audit Findings를 업로드하여 41개 항목 평가', w_r2_d:'협력사가 보낸 개선 결과 파일을 업로드하여 재평가', w_open:'저장된 보고서 열기', w_open_d:'저장된 보고서를 검토하거나 계속 편집',
+  resume_title:'작업 중이던 내용이 있습니다', resume_btn:'계속하기', discard_btn:'삭제', autosaved:'자동 저장 시각', autosave_now:'지금 저장', unsaved:'저장되지 않은 변경 사항', not_saved_yet:'아직 자동 저장 안 됨',
+  close_ws:'보고서 닫기', close_ws_title:'현재 보고서를 닫으시겠습니까?', close_ws_msg:'작업 데이터와 자동 저장본이 삭제됩니다. 보관함에 저장된 보고서는 영향을 받지 않습니다.',
+  editing:'편집 중', working:'작업 중', new_report:'새 보고서 (보관함 미저장)',
+  tab_round2:'2차 대조 및 확인', r2_compare_with:'대조 대상', r2_closed:'개선 완료', r2_open:'미개선', r2_missing:'2차 파일에 없음',
+  r2_new:'2차 파일의 신규 지적', r2_new_d:'1차 지적과 일치하지 않습니다. 점수에 반영하려면 "2차에 포함"을 선택하세요.', r2_include:'2차에 포함', r2_changed:'변경 항목',
+  r2_confirm:'2차 결과 확인', r2_unconfirm:'확인 취소', r2_confirmed_by:'확인자', r2_need_confirm:'각 지적 사항을 검토한 후 확인을 눌러 내보내기와 저장을 활성화하세요.',
+  r2_confirm_title:'2차 평가 결과를 확인하시겠습니까?', r2_confirm_msg:'1차: {a}점 ({ga}) → 2차: {b}점 ({gb})\n{c}/{t}건 개선 완료. 확인 후 체크리스트·보고서 내보내기 및 보관함 저장이 가능합니다.',
+  r2_complete_date:'완료일', r2_after:'개선 후 사진', r2_select_parent:'대조할 1차 보고서 선택', r2_no_parent:'보관함에 1차 보고서가 없습니다. 먼저 1차 보고서를 업로드하고 저장하세요.',
+  r2_locked:'2차 확인 필요', r2_word_note:'1항에는 비교를 위해 1차·2차 결과표가 함께 표시되며, 2~4항에는 2차 이후 남은 지적 사항만 표시됩니다.',
+  r2_auto:'시스템 제안', r2_findings_lbl:'남은 지적', r2_view:'2차 대조 보기', r2_done:'1차와 대조 완료', r2_score_change:'점수 변화',
+  btn_upload_r2:'2차 업로드', save_mode:'저장 방식', save_overwrite:'편집 중인 보고서 업데이트', save_new:'새 보고서로 저장', edit_content:'평가 내용을 편집하도록 보고서 열기',
+  del_cascade:'연결된 2차 보고서도 함께 삭제됩니다.', revision:'버전', up_s3b:'1차와 대조 및 재평가',
+  acc_backup:'백업 및 복원', bk_create:'백업 생성', bk_include_storage:'전체 보고서 보관함 포함 (대용량)', bk_restore:'복원', bk_download:'다운로드', bk_good:'안정 버전',
+  bk_kind_manual:'수동', bk_kind_startup:'시작 시', bk_kind_daily:'매일', bk_kind_pre_restore:'복원 전',
+  bk_restore_title:'시스템을 복원하시겠습니까?', bk_restore_msg:'복원 전에 현재 상태가 자동으로 백업됩니다.', bk_r_code:'소스 코드 (화면 및 기능)',
+  bk_r_data:'시스템 데이터 (계정, 권한, 기준 데이터, 보관함 목록)', bk_r_storage:'보관함 파일 (백업에 포함된 경우)',
+  bk_restarting:'시스템을 다시 시작하는 중...', bk_manual_restart:'복원되었습니다. 코드를 적용하려면 서버를 다시 시작하세요.', bk_restored:'데이터가 복원되었습니다',
+  bk_info:'새 버전으로 시작할 때마다, 그리고 하루에 한 번 자동으로 백업합니다. 업데이트로 서버가 시작되지 않으면 최근 안정 버전으로 자동 복원됩니다.',
+  bk_del_title:'이 백업을 삭제하시겠습니까?', bk_empty:'백업이 없습니다', bk_note:'메모',
+  perm_can_edit_storage:'보관함 보고서 편집 (본인 보고서)', perm_can_delete_storage:'보관함 보고서 삭제 (본인 보고서)', perm_can_upload_round2:'2차 결과 업로드 및 확인',
+  msg_confirmed:'2차 결과가 확인되었습니다', msg_closed_ws:'보고서를 닫았습니다', up_title2:'2차 결과 업로드', msg_restored_ws:'작업 중이던 내용을 복원했습니다'
+ }
+};
+Object.keys(I18N_EXTRA).forEach(l => Object.assign(I18N[l], I18N_EXTRA[l]));
+const I18N_DUAL = {
+ vi: {
+  tabs_checklist:'Chấm điểm', tabs_round2:'Lần 2', tabs_word:'Báo cáo', tabs_factory:'Nhà máy', tabs_qa:'Ngôn ngữ', tabs_storage:'Kho',
+  bk_upload:'Tải lên bản sao lưu', bk_uploaded:'Đã tải lên bản sao lưu', web_pdf_print:'Hộp thoại In đã mở — chọn "Lưu thành PDF"', web_popup:'Trình duyệt chặn cửa sổ mới — đang in trực tiếp',
+  fu_kicker:'Bước 1 · Chọn file', fu_desc:'Chọn File hiện trường và/hoặc File tài liệu (cùng mẫu EHS Audit Findings). Hệ thống sẽ tổng hợp cả 2 file thành một kết quả chấm điểm.',
+  fu_hint:'💡 Thiếu 1 file vẫn tổng hợp được. File còn thiếu có thể bổ sung sau tại thanh "Nguồn dữ liệu" hoặc trong Kho lưu trữ — kết quả sẽ được tổng hợp lại và lưu thành phiên bản mới.',
+  fu_go:'Tổng hợp & chấm điểm', fu_both:'Đã chọn đủ 2 file', fu_one:'Đã chọn 1 file — vẫn tổng hợp được', fu_none:'Chưa chọn file nào',
+  slot_field:'File hiện trường', slot_doc:'File tài liệu', slot_field_short:'Hiện trường', slot_doc_short:'Tài liệu',
+  slot_field_d:'Lỗi quan sát tại hiện trường (facility), kèm ảnh', slot_doc_d:'Lỗi hồ sơ, tài liệu, quy trình (Administrative)',
+  slot_pick:'Chọn file', slot_change:'Đổi file khác', slot_optional:'Không bắt buộc · .xlsm / .xlsx', slot_bad_file:'Chỉ nhận file Excel .xlsm / .xlsx',
+  supp_title:'Bổ sung file Finding', supp_msg:'Chọn loại file cần bổ sung hoặc thay thế. Kết quả sẽ được tổng hợp lại từ cả 2 file.', supp_which:'Loại file',
+  supp_replace:'Thay file', supp_btn:'Bổ sung', supp_missing:'Chưa có — kết quả đang tổng hợp từ 1 file', supp_missing_short:'thiếu',
+  supp_done:'Đã bổ sung và tổng hợp lại kết quả', supp_done_saved:'Đã bổ sung, tổng hợp lại và lưu phiên bản mới vào kho',
+  act_upload_sub:'Hiện trường + Tài liệu', w_r1_d:'Nạp File hiện trường và File tài liệu để tổng hợp, chấm điểm 41 hạng mục',
+  web_engine:'Đang khởi động hệ thống...', web_engine_sub:'Lần đầu có thể mất 10–20 giây để tải bộ xử lý.'
+ },
+ en: {
+  tabs_checklist:'Scoring', tabs_round2:'Round 2', tabs_word:'Report', tabs_factory:'Factory', tabs_qa:'Language', tabs_storage:'Archive',
+  bk_upload:'Upload backup', bk_uploaded:'Backup uploaded', web_pdf_print:'Print dialog opened — choose "Save as PDF"', web_popup:'Pop-up blocked — printing in place',
+  fu_kicker:'Step 1 · Choose files', fu_desc:'Choose the Site file and/or the Document file (same EHS Audit Findings template). Both are combined into one scoring result.',
+  fu_hint:'💡 One file is enough to start. The missing file can be added later from the "Data sources" bar or the Archive — results are recombined and saved as a new revision.',
+  fu_go:'Combine & score', fu_both:'Both files selected', fu_one:'1 file selected — can still combine', fu_none:'No file selected',
+  slot_field:'Site file', slot_doc:'Document file', slot_field_short:'Site', slot_doc_short:'Docs',
+  slot_field_d:'On-site (facility) findings with photos', slot_doc_d:'Records, documents and procedures (Administrative)',
+  slot_pick:'Choose file', slot_change:'Choose another file', slot_optional:'Optional · .xlsm / .xlsx', slot_bad_file:'Only Excel .xlsm / .xlsx files',
+  supp_title:'Add Finding file', supp_msg:'Choose which file to add or replace. Results are recombined from both files.', supp_which:'File type',
+  supp_replace:'Replace', supp_btn:'Add file', supp_missing:'Missing — results use one file only', supp_missing_short:'missing',
+  supp_done:'File added and results recombined', supp_done_saved:'File added, results recombined and saved as a new revision',
+  act_upload_sub:'Site + Documents', w_r1_d:'Upload the Site and Document files to combine and score the 41 items',
+  web_engine:'Starting the system...', web_engine_sub:'First start may take 10–20 seconds.'
+ },
+ ko: {
+  tabs_checklist:'평가', tabs_round2:'2차', tabs_word:'보고서', tabs_factory:'공장', tabs_qa:'언어', tabs_storage:'보관함',
+  bk_upload:'백업 업로드', bk_uploaded:'백업을 업로드했습니다', web_pdf_print:'인쇄 창이 열렸습니다 — "PDF로 저장"을 선택하세요', web_popup:'팝업이 차단되어 현재 창에서 인쇄합니다',
+  fu_kicker:'1단계 · 파일 선택', fu_desc:'현장 파일 및/또는 문서 파일(동일 EHS Audit Findings 양식)을 선택하세요. 두 파일을 하나의 평가 결과로 통합합니다.',
+  fu_hint:'💡 파일 1개만으로도 통합할 수 있습니다. 누락된 파일은 나중에 "데이터 소스" 또는 보관함에서 추가할 수 있으며, 결과가 다시 통합되어 새 버전으로 저장됩니다.',
+  fu_go:'통합 및 평가', fu_both:'2개 파일 선택됨', fu_one:'1개 파일 선택됨 — 통합 가능', fu_none:'선택된 파일 없음',
+  slot_field:'현장 파일', slot_doc:'문서 파일', slot_field_short:'현장', slot_doc_short:'문서',
+  slot_field_d:'현장 관찰 지적사항(facility), 사진 포함', slot_doc_d:'기록·문서·절차 지적사항(Administrative)',
+  slot_pick:'파일 선택', slot_change:'다른 파일 선택', slot_optional:'선택 사항 · .xlsm / .xlsx', slot_bad_file:'Excel .xlsm / .xlsx 파일만 가능합니다',
+  supp_title:'Finding 파일 추가', supp_msg:'추가하거나 교체할 파일 종류를 선택하세요. 두 파일로 결과를 다시 통합합니다.', supp_which:'파일 종류',
+  supp_replace:'교체', supp_btn:'추가', supp_missing:'없음 — 1개 파일로만 통합됨', supp_missing_short:'없음',
+  supp_done:'파일을 추가하고 결과를 다시 통합했습니다', supp_done_saved:'파일 추가, 재통합 후 새 버전으로 저장했습니다',
+  act_upload_sub:'현장 + 문서', w_r1_d:'현장 파일과 문서 파일을 업로드하여 41개 항목 통합 평가',
+  web_engine:'시스템 시작 중...', web_engine_sub:'처음에는 10–20초 정도 걸릴 수 있습니다.'
+ }
+};
+Object.keys(I18N_DUAL).forEach(l => Object.assign(I18N[l], I18N_DUAL[l]));
+const PERMS = ['can_upload_findings','can_upload_round2','can_edit_checklist','can_use_qa_autofix','can_export_excel','can_export_word','can_view_storage','can_save_to_storage','can_edit_storage','can_delete_storage'];
+const LANG_NAMES = { vi:'🇻🇳 Tiếng Việt', ko:'🇰🇷 한국어', en:'🇬🇧 English' };
+let LANG = localStorage.getItem('RBA_LANG') || 'vi';
+const t = (k, vars) => { let s = (I18N[LANG] && I18N[LANG][k]) ?? I18N.vi[k] ?? k; if (vars) Object.keys(vars).forEach(v => s = s.split(`{${v}}`).join(vars[v])); return s; };
+
+function applyI18n() {
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => el.placeholder = t(el.dataset.i18nPh));
+  document.querySelectorAll('.lang-select').forEach(sel => {
+    sel.innerHTML = Object.keys(LANG_NAMES).map(k => `<option value="${k}" ${k === LANG ? 'selected' : ''}>${LANG_NAMES[k]}</option>`).join('');
+  });
+}
+function setLang(l) { LANG = l; localStorage.setItem('RBA_LANG', l); applyI18n(); renderHeader(); renderAll(); if (ACC_OPEN) renderAccount(); }
+
+/* =================================================================
+   STATE & HELPERS
+   ================================================================= */
+let TOKEN = localStorage.getItem('RBA801_AUTH_TOKEN') || '';
+let SESSION = { authenticated:false, user:null, permissions:{} };
+let STATE = null, MASTER = null, STORAGE = null, BACKUPS = null;
+let TAB = 'checklist', CAT = 'ALL', SEVF = 'ALL', QAF = 'ALL', R2F = 'ALL', ACC_TAB = 'profile', ACC_OPEN = false;
+let PENDING_R2_PARENT = null;
+const EXPANDED = new Set(), R2_EXPANDED = new Set();
+const SEVS = ['Conformance','Minor','Major','Priority','N/A'];
+const SEV_COLORS = { Conformance:'#10b981', Minor:'#eab308', Major:'#f97316', Priority:'#dc2626' };
+const CATS = ['Safety','Firefighting','Chemical','Safety System','Environment','Environment System'];
+const CODE_CAT = {};
+[['Safety',['BH101','BH102','BH103','BH501','BH601']],['Firefighting',['BH201','BH202','BH203','BH204']],['Chemical',['BH301','BH302','BH401','BH701','BH702']],
+ ['Safety System',['BM101','BM102','BM201','BM202','BM203','BM301','BM302','BM401','BM402','BM403']],['Environment',['CE101','CE201','CE301','CE401','CE402','CE501','CE601']],
+ ['Environment System',['CM101','CM102','CM201','CM202','CM203','CM301','CM302','CM401','CM402','CM403']]].forEach(([c, codes]) => codes.forEach(x => CODE_CAT[x] = c));
+
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const sevCls = s => s === 'N/A' ? 'NA' : s;
+const isAdmin = () => !!(SESSION.user && SESSION.user.role === 'admin');
+const can = k => SESSION.authenticated && (isAdmin() || !!(SESSION.permissions || {})[k]);
+const H = () => ({ 'Content-Type':'application/json', 'X-Auth-Token':TOKEN });
+const partnerProfile = m => {
+  const parts = [m.main_process_vn, Number(m.total_workers) ? `${m.total_workers} người` : '', m.samsung_Revenue_ratio ? `tỷ trọng giao dịch vs Samsung: ${m.samsung_Revenue_ratio}` : ''].filter(Boolean);
+  return parts.length ? `(${parts.join('/ ')})` : '';
+};
+const workforceNote = m => {
+  const parts = [Number(m.foreign_workers) ? `NLĐ nước ngoài ${m.foreign_workers} người` : '', Number(m.subcontract_count) ? `Vendor Sub contract: ${m.subcontract_count}` : ''].filter(Boolean);
+  return parts.length ? `* ${parts.join(', ')}` : '';
+};
+const VN_CHARS = /[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]/i;
+const img = u => (u && u.startsWith('/api/photo')) ? `${u}&token=${encodeURIComponent(TOKEN)}` : u;
+const isR2 = () => !!(STATE && STATE._ws && STATE._ws.mode === 'round2');
+const isEmpty = () => !STATE || STATE.empty;
+const r2Confirmed = () => isR2() && STATE.round2 && STATE.round2.confirmed;
+
+async function api(path, body) {
+  const opt = body === undefined ? { headers:H() } : { method:'POST', headers:H(), body:JSON.stringify(body) };
+  try {
+    const res = await fetch(path, opt);
+    const json = await res.json().catch(() => ({ status:'error', message:'HTTP ' + res.status }));
+    if (res.status === 401 && SESSION.authenticated && !path.includes('/api/auth/')) { SESSION.authenticated = false; await logout(true); loginError.textContent = t('session_expired'); loginError.classList.remove('hidden'); }
+    if (!res.ok && json.status !== 'error') json.status = 'error';
+    return json;
+  } catch (e) { return { status:'error', message:e.message }; }
+}
+
+function toast(msg, type = 'ok') {
+  const el = document.createElement('div');
+  el.className = `px-4 py-3 rounded-xl shadow-lg text-sm font-semibold max-w-sm border ${type === 'err' ? 'bg-red-50 text-red-800 border-red-200' : 'bg-slate-900 text-white border-slate-800'}`;
+  el.textContent = msg;
+  toasts.appendChild(el);
+  setTimeout(() => el.remove(), 4500);
+}
+
+/* Generic dialog. fields: {label, value, type:text|password|textarea|checkbox|select, options:[{v,l}]} */
+function dialog({ title, message = '', danger = false, okText, fields = [], icon }) {
+  return new Promise(resolve => {
+    dlgTitle.textContent = title; dlgMsg.textContent = message;
+    dlgIcon.className = `w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-lg ${danger ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`;
+    dlgIcon.textContent = icon || (danger ? '⚠' : '✎');
+    dlgFields.innerHTML = fields.map((f, i) => {
+      if (f.type === 'checkbox') return `<label class="flex items-start gap-2.5 text-sm cursor-pointer"><input id="dlgF${i}" type="checkbox" class="w-4 h-4 mt-0.5 accent-blue-600" ${f.value ? 'checked' : ''}/><span>${esc(f.label)}</span></label>`;
+      if (f.type === 'radio') return `<div><div class="lbl">${esc(f.label)}</div>${f.options.map((o, j) => `<label class="flex items-start gap-2.5 text-sm cursor-pointer py-1"><input type="radio" name="dlgR${i}" value="${esc(o.v)}" class="w-4 h-4 mt-0.5 accent-blue-600" ${o.v === f.value ? 'checked' : ''}/><span>${esc(o.l)}</span></label>`).join('')}</div>`;
+      if (f.type === 'select') return `<div><label class="lbl">${esc(f.label)}</label><select id="dlgF${i}" class="inp">${f.options.map(o => `<option value="${esc(o.v)}" ${o.v === f.value ? 'selected' : ''}>${esc(o.l)}</option>`).join('')}</select></div>`;
+      if (f.type === 'textarea') return `<div><label class="lbl">${esc(f.label)}</label><textarea id="dlgF${i}" rows="3" class="inp">${esc(f.value || '')}</textarea></div>`;
+      return `<div><label class="lbl">${esc(f.label)}</label><input id="dlgF${i}" type="${f.type || 'text'}" class="inp" value="${esc(f.value || '')}"/></div>`;
+    }).join('');
+    dlgOk.textContent = okText || t('confirm'); dlgCancel.textContent = t('cancel');
+    dlgOk.className = `px-4 py-2 rounded-lg text-white text-sm font-bold ${danger ? 'bg-red-600 hover:bg-red-500' : 'bg-blue-600 hover:bg-blue-500'}`;
+    dialog_el().classList.remove('hidden'); dialog_el().classList.add('flex');
+    const close = r => { dialog_el().classList.add('hidden'); dialog_el().classList.remove('flex'); dlgOk.onclick = dlgCancel.onclick = null; resolve(r); };
+    dlgOk.onclick = () => close({ ok:true, values:fields.map((f, i) => {
+      if (f.type === 'checkbox') return document.getElementById('dlgF' + i).checked;
+      if (f.type === 'radio') return (document.querySelector(`input[name="dlgR${i}"]:checked`) || {}).value;
+      return document.getElementById('dlgF' + i).value;
+    }) });
+    dlgCancel.onclick = () => close({ ok:false });
+    const first = document.getElementById('dlgF0'); if (first && first.type !== 'checkbox') setTimeout(() => first.focus(), 50);
+  });
+}
+const dialog_el = () => document.getElementById('dialog');
+function lightbox(src, cap) { lbImg.src = src; lbCap.textContent = cap || ''; const l = document.getElementById('lightbox'); l.classList.remove('hidden'); l.classList.add('flex'); }
+
+/* =================================================================
+   AUTH
+   ================================================================= */
+async function boot() {
+  applyI18n();
+  const manualOut = sessionStorage.getItem('RBA_MANUAL_LOGOUT') === '1';
+  const ctx = await api('/api/auth/session' + (manualOut ? '?manual_logout=1' : ''));
+  if (ctx && ctx.token) {
+    TOKEN = ctx.token; localStorage.setItem('RBA801_AUTH_TOKEN', TOKEN);
+  }
+  SESSION = ctx.authenticated !== undefined ? ctx : SESSION;
+  quickGuestBox.classList.toggle('hidden', !ctx.allow_quick_guest_login);
+  if (ctx.authenticated) { loginModal.classList.add('hidden'); await afterLogin(); return; }
+  loginModal.classList.remove('hidden');
+  if (TOKEN && ctx.expired) { loginError.textContent = t('session_expired'); loginError.classList.remove('hidden'); TOKEN = ''; localStorage.removeItem('RBA801_AUTH_TOKEN'); }
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  loginError.classList.add('hidden');
+  const r = await api('/api/auth/login', { username:loginUsername.value.trim(), password:loginPassword.value });
+  if (r.status !== 'ok') { loginError.textContent = r.message; loginError.classList.remove('hidden'); return; }
+  sessionStorage.removeItem('RBA_MANUAL_LOGOUT');
+  TOKEN = r.session.token; localStorage.setItem('RBA801_AUTH_TOKEN', TOKEN); SESSION = r.session;
+  loginModal.classList.add('hidden'); await afterLogin();
+  toast(`${t('msg_welcome')}, ${SESSION.user.display_name}`);
+}
+
+async function handleGuestLogin() {
+  const r = await api('/api/auth/login', { quick_guest:true });
+  if (r.status !== 'ok') { loginError.textContent = r.message; loginError.classList.remove('hidden'); return; }
+  sessionStorage.removeItem('RBA_MANUAL_LOGOUT');
+  TOKEN = r.session.token; localStorage.setItem('RBA801_AUTH_TOKEN', TOKEN); SESSION = r.session;
+  loginModal.classList.add('hidden'); await afterLogin();
+}
+
+async function logout(expired) {
+  if (!expired) sessionStorage.setItem('RBA_MANUAL_LOGOUT', '1');
+  if (!expired && STATE && !STATE.empty && SESSION.authenticated) await autosaveNow(true);
+  if (!expired) await api('/api/auth/logout', {});
+  pwModal.classList.add('hidden'); pwModal.classList.remove('flex');
+  TOKEN = ''; localStorage.removeItem('RBA801_AUTH_TOKEN');
+  SESSION = { authenticated:false, user:null, permissions:{} }; MASTER = null; STORAGE = null; STATE = null;
+  closeAccount(); loginPassword.value = ''; loginModal.classList.remove('hidden');
+}
+
+async function afterLogin() {
+  renderHeader();
+  if (SESSION.user && SESSION.user.must_change_password) { showPwModal(); return; }
+  welcome.classList.add('hidden'); workspace.classList.remove('hidden'); showLoading();
+  const st = await api('/api/state');
+  if (st.status === 'error') { showLoadError(); return; }
+  STATE = st;
+  renderAll();
+  if (can('can_view_storage')) loadStorage();
+}
+
+function showPwModal() {
+  pwError.classList.add('hidden'); pwOld.value = ''; pwNew.value = ''; pwNew2.value = '';
+  pwModal.classList.remove('hidden'); pwModal.classList.add('flex'); setTimeout(() => pwOld.focus(), 50);
+}
+async function submitPwChange() {
+  pwError.classList.add('hidden');
+  if (pwNew.value !== pwNew2.value) { pwError.textContent = t('pw_mismatch'); pwError.classList.remove('hidden'); return; }
+  const r = await api('/api/auth/change_password', { old_password:pwOld.value, new_password:pwNew.value });
+  if (r.status !== 'ok') { pwError.textContent = r.message; pwError.classList.remove('hidden'); return; }
+  SESSION = Object.assign(SESSION, r.session);
+  pwModal.classList.add('hidden'); pwModal.classList.remove('flex');
+  toast(t('pw_changed')); await afterLogin();
+}
+
+function showLoading() {
+  checklistList.innerHTML = `<div class="card p-12 text-center"><div class="w-9 h-9 mx-auto rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin"></div><div class="mt-3 text-sm font-semibold text-slate-500">${t('loading')}</div></div>`;
+}
+function showLoadError() {
+  checklistList.innerHTML = `<div class="card p-10 text-center"><div class="text-sm font-semibold text-red-600">${t('load_failed')}</div><button onclick="afterLogin()" class="mt-3 px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-bold">${t('retry')}</button></div>`;
+}
+
+function renderHeader() {
+  if (!SESSION.user) return;
+  hdrAvatar.textContent = (SESSION.user.display_name || '?').trim().charAt(0).toUpperCase();
+  hdrName.textContent = SESSION.user.display_name;
+  hdrRole.textContent = isAdmin() ? t('role_admin') : t('role_guest');
+  hdrAvatar.className = `w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm ${isAdmin() ? 'gold' : 'bg-slate-500'}`;
+}
+
+async function downloadFile(ep) {
+  if (isR2() && !r2Confirmed()) return toast(t('r2_need_confirm'), 'err');
+  return downloadBlob(ep + (ep.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(TOKEN));
+}
+async function downloadBlob(url) {
+  const slow = /pdf|zip/.test(url);
+  if (slow) toast(t('pdf_busy'));
+  try {
+    const res = await fetch(url, { headers:H() });
+    if (!res.ok) { const j = await res.json().catch(() => ({ message:'HTTP ' + res.status })); return toast(j.message, 'err'); }
+    const cd = res.headers.get('Content-Disposition') || '';
+    const m = cd.match(/filename\*=UTF-8''([^;]+)/) || cd.match(/filename="?([^";]+)"?/);
+    const name = m ? decodeURIComponent(m[1]) : 'download';
+    const blob = await res.blob();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  } catch (e) { toast(e.message, 'err'); }
+}
+function openPanel(title, html) { panelTitle.textContent = title; panelBody.innerHTML = html; panelModal.classList.remove('hidden'); panelModal.classList.add('flex'); }
+function closePanel() { panelModal.classList.add('hidden'); panelModal.classList.remove('flex'); }
+
+/* =================================================================
+   TOP-LEVEL RENDER
+   ================================================================= */
+function renderAll() {
+  if (!STATE) return;
+  if (isEmpty()) { renderWelcome(); return; }
+  welcome.classList.add('hidden'); workspace.classList.remove('hidden');
+  renderWsBar(); renderSources(); renderActions(); renderStatus(); renderTabs();
+  if (isR2()) renderRound2(); else { renderChecklist(); renderQa(); }
+  renderWord(); renderFactory(); if (STORAGE) renderStorage();
+}
+
+function renderWelcome() {
+  workspace.classList.add('hidden'); welcome.classList.remove('hidden');
+  wR1.classList.toggle('hidden', !can('can_upload_findings'));
+  wR2.classList.toggle('hidden', !can('can_upload_round2'));
+  wOpen.classList.toggle('hidden', !can('can_view_storage'));
+  const a = STATE.autosave;
+  resumeBox.classList.toggle('hidden', !a);
+  if (a) resumeBox.innerHTML = `
+    <div class="flex items-center gap-3"><span class="text-2xl">⏳</span><div>
+      <div class="font-extrabold text-amber-900">${t('resume_title')}</div>
+      <div class="text-xs text-amber-800">${esc(a.vendor)} · ${esc(a.audit_date)} · ${a.mode === 'round2' ? t('round2') : t('round1')} · ${t('autosaved')} ${esc(a.saved_at)}</div>
+    </div></div>
+    <div class="flex gap-2"><button onclick="discardAutosave()" class="px-3.5 py-2 rounded-lg border border-amber-300 bg-white text-xs font-bold text-amber-800">${t('discard_btn')}</button>
+    <button onclick="restoreAutosave()" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold">${t('resume_btn')}</button></div>`;
+  document.getElementById('tab-storage').classList.toggle('hidden', !can('can_view_storage'));
+  if (STORAGE) renderStorage();
+}
+
+function renderWsBar() {
+  const w = STATE._ws || {};
+  const title = w.bound_record_id ? `<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[10px] font-black uppercase">${t('editing')}</span> <b>${esc(w.bound_title || w.bound_record_id)}</b>` : `<span class="text-slate-500">${t('new_report')}</span>`;
+  const saveState = w.dirty ? `<span class="text-amber-600">● ${t('unsaved')}</span>` : (w.autosaved_at ? `<span class="text-emerald-600">● ${t('autosaved')} ${esc(w.autosaved_at.slice(11, 16))}</span>` : `<span class="text-slate-400">● ${t('not_saved_yet')}</span>`);
+  wsBar.innerHTML = `
+    <div class="text-sm flex items-center gap-2 flex-wrap"><span class="text-slate-400 text-xs font-bold uppercase">${t('working')}:</span>${title}</div>
+    <div class="flex items-center gap-3 text-xs font-semibold">${saveState}
+      <button onclick="autosaveNow()" class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-slate-50">${t('autosave_now')}</button>
+      <button onclick="closeWorkspace()" class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-red-50 hover:text-red-700">${t('close_ws')}</button></div>`;
+}
+
+function renderActions() {
+  actUpload.classList.toggle('hidden', !can('can_upload_findings'));
+  actUpload2.classList.toggle('hidden', !can('can_upload_round2'));
+  actSave.classList.toggle('hidden', !can('can_save_to_storage'));
+  actXlsx.classList.toggle('hidden', !can('can_export_excel'));
+  actDocx.classList.toggle('hidden', !can('can_export_word'));
+  actPack.classList.toggle('hidden', !can('can_export_word'));
+  const locked = isR2() && !r2Confirmed();
+  [actSave, actXlsx, actDocx, actPack].forEach(b => b.classList.toggle('locked', locked));
+  actXlsxSub.textContent = locked ? '🔒 ' + t('r2_locked') : (isR2() ? 'RBA 8.0.1 · ' + t('round2') : t('act_xlsx_sub'));
+  actDocxSub.textContent = locked ? '🔒 ' + t('r2_locked') : (isR2() ? 'Word · ' + t('round1') + ' + ' + t('round2') : t('act_docx_sub'));
+}
+
+function renderStatus() {
+  const m = STATE.metadata;
+  const s = isR2() ? STATE.round2.summary2 : STATE.summary;
+  const c = s.counts;
+  stVendor.textContent = m.vendor_full || m.vendor_short;
+  stRound.textContent = isR2() ? t('round2') : t('round1');
+  stRound.className = `px-2 py-0.5 rounded-md text-[10px] font-black ${isR2() ? 'bg-violet-100 text-violet-700' : 'bg-blue-100 text-blue-700'}`;
+  stMeta.innerHTML = isR2()
+    ? `${esc(m.vendor_code)} · ${t('round1')}: <b>${STATE.summary.total_score}</b> (${STATE.summary.grade_level}) → ${t('round2')}: <b class="text-violet-700">${s.total_score}</b> (${s.grade_level})`
+    : `${esc(m.vendor_code)} · ${esc(m.audit_date_raw)}`;
+  stScore.textContent = s.total_score;
+  const pct = Math.max(0, Math.min(100, +s.total_score || 0));
+  gauge.style.strokeDashoffset = 263.89 - pct / 100 * 263.89;
+  gauge.setAttribute('stroke', pct >= 80 ? '#10b981' : pct >= 70 ? '#f59e0b' : '#dc2626');
+  stGrade.textContent = s.grade_level;
+  stGrade.className = `text-lg font-black ${['A','B'].includes(s.grade_level) ? 'text-emerald-600' : s.grade_level === 'C' ? 'text-amber-600' : 'text-red-600'}`;
+  stViolated.textContent = `${s.violated_items_count}/${s.total_items}`;
+  stFindLbl.textContent = isR2() ? t('r2_findings_lbl') : t('st_findings');
+  stFindings.textContent = isR2() ? `${s.total_findings}/${s.r1_findings}` : s.total_findings;
+  stCompliance.textContent = s.compliance_rate + '%';
+  stMandatory.textContent = s.mandatory_count;
+  const tot = s.total_items || 41, order = ['Priority','Major','Minor','Conformance'];
+  sevBar.innerHTML = order.map(k => `<div style="width:${c[k] / tot * 100}%;background:${SEV_COLORS[k]}" title="${k}: ${c[k]}"></div>`).join('');
+  sevCounters.innerHTML = order.map(k => `
+    <button onclick="${isR2() ? '' : `SEVF='${k}';TAB='checklist';renderTabs();renderChecklist()`}" class="text-left rounded-xl border px-3 py-2 sev-${k} hover:brightness-95">
+      <div class="text-[10px] font-extrabold uppercase">${t('sev_' + k)}</div>
+      <div class="flex items-baseline gap-1"><span class="text-xl font-black">${c[k]}</span><span class="text-[10px] opacity-70">${(c[k] / tot * 100).toFixed(0)}%</span></div>
+    </button>`).join('');
+}
+
+function renderTabs() {
+  const qaN = (STATE.qa_report || {}).total_issues || 0;
+  const tabs = isR2() ? [
+    { k:'round2', primary:true, icon:'🔁', badge: r2Confirmed() ? '✓' : '!' },
+    { k:'word', primary:true, icon:'📄' },
+    { k:'factory', icon:'🏭' },
+    { k:'storage', icon:'🗂️', hide:!can('can_view_storage') },
+  ] : [
+    { k:'checklist', primary:true, icon:'📋', badge:'41' },
+    { k:'word', primary:true, icon:'📄' },
+    { k:'factory', icon:'🏭' },
+    { k:'qa', icon:'✍️', badge: qaN ? String(qaN) : '' },
+    { k:'storage', icon:'🗂️', hide:!can('can_view_storage') },
+  ];
+  const visible = tabs.filter(x => !x.hide);
+  if (!visible.some(x => x.k === TAB)) TAB = visible[0].k;
+  tabNav.innerHTML = visible.map(x => {
+    const on = TAB === x.k;
+    const base = x.primary ? 'px-5 py-3 text-sm font-extrabold' : 'px-4 py-2.5 text-[13px] font-bold';
+    const style = on ? 'bg-slate-900 text-white shadow-md' : (x.primary ? 'bg-white text-slate-800 border border-slate-200 hover:border-slate-400' : 'text-slate-600 hover:bg-white');
+    const bcol = x.k === 'qa' || x.badge === '!' ? 'bg-amber-500 text-white' : x.badge === '✓' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600';
+    const badge = x.badge ? `<span class="ml-1.5 px-1.5 py-0.5 rounded-md text-[10px] font-black ${on && !['!','✓'].includes(x.badge) ? 'bg-white/20' : bcol}">${x.badge}</span>` : '';
+    return `<button onclick="showTab('${x.k}')" class="rounded-xl ${base} ${style} transition flex items-center gap-2"><span>${x.icon}</span><span class="tab-lbl">${t('tab_' + x.k)}</span><span class="tab-short">${t('tabs_' + x.k)}</span>${badge}</button>`;
+  }).join('');
+  ['checklist','round2','word','factory','qa'].forEach(k => document.getElementById('tab-' + k).classList.toggle('hidden', TAB !== k));
+  // storage panel lives outside the workspace container
+  document.getElementById('tab-storage').classList.toggle('hidden', TAB !== 'storage');
+}
+function showTab(k) {
+  TAB = k; renderTabs(); if (k === 'storage') loadStorage();
+  // mobile: bottom navigation jumps straight to the selected panel
+  if (window.matchMedia && matchMedia('(max-width: 767px)').matches && !workspace.classList.contains('hidden')) {
+    const el = document.getElementById('tab-' + k); if (el) setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'start' }), 30);
+  }
+}
+
+/* =================================================================
+   AUTOSAVE (every 2 minutes) & WORKSPACE
+   ================================================================= */
+async function autosaveNow(silent) {
+  if (!STATE || STATE.empty) return;
+  const r = await api('/api/workspace/autosave', { force: !silent });
+  if (r.status === 'ok' && r.saved_at) { STATE._ws.dirty = false; STATE._ws.autosaved_at = r.saved_at; renderWsBar(); if (!silent) toast(`${t('autosaved')} ${r.saved_at.slice(11, 16)}`); }
+}
+setInterval(() => { if (SESSION.authenticated && STATE && !STATE.empty && STATE._ws.dirty) autosaveNow(true); }, 120000);
+window.addEventListener('beforeunload', () => {
+  if (SESSION.authenticated && STATE && !STATE.empty && STATE._ws.dirty)
+    fetch('/api/workspace/autosave', { method:'POST', keepalive:true, headers:H(), body:'{}' });
+});
+function markDirty(data) { STATE = data; if (STATE._ws) STATE._ws.dirty = true; }
+
+async function restoreAutosave() {
+  const r = await api('/api/workspace/restore', {});
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STATE = r.data; TAB = isR2() ? 'round2' : 'checklist'; renderAll(); toast(t('msg_restored_ws'));
+}
+async function discardAutosave() {
+  const d = await dialog({ title:t('close_ws_title'), message:t('close_ws_msg'), danger:true, okText:t('discard_btn') });
+  if (!d.ok) return;
+  await api('/api/workspace/discard', {});
+  STATE = { empty:true, autosave:null }; renderAll();
+}
+async function closeWorkspace() {
+  const d = await dialog({ title:t('close_ws_title'), message:t('close_ws_msg'), danger:true, okText:t('close_ws') });
+  if (!d.ok) return;
+  await api('/api/workspace/close', {});
+  STATE = { empty:true, autosave:null }; EXPANDED.clear(); R2_EXPANDED.clear(); renderAll(); toast(t('msg_closed_ws'));
+}
+
+/* =================================================================
+   TAB: 41 CHECKLIST (round 1)
+   ================================================================= */
+function renderChecklist() {
+  const list = STATE.checklist;
+  const catCount = c => list.filter(i => CODE_CAT[i.audit_id] === c).length;
+  catChips.innerHTML = ['ALL', ...CATS].map(c => `<button onclick="CAT='${c}';renderChecklist()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${CAT === c ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">${c === 'ALL' ? t('all') : c} <span class="opacity-60">${c === 'ALL' ? list.length : catCount(c)}</span></button>`).join('');
+  sevChips.innerHTML = ['ALL','VIOL','Priority','Major','Minor','Conformance'].map(s => `<button onclick="SEVF='${s}';renderChecklist()" class="px-2.5 py-1.5 rounded-lg text-[11px] font-bold border ${SEVF === s ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}">${s === 'ALL' ? t('all') : s === 'VIOL' ? t('only_violated') : t('sev_' + s)}</button>`).join('');
+  const q = clSearch.value.trim().toLowerCase();
+  const editable = can('can_edit_checklist');
+  const rows = list.filter(it => {
+    if (CAT !== 'ALL' && CODE_CAT[it.audit_id] !== CAT) return false;
+    if (SEVF === 'VIOL' && !['Minor','Major','Priority'].includes(it.significance)) return false;
+    if (['Priority','Major','Minor','Conformance'].includes(SEVF) && it.significance !== SEVF) return false;
+    return !q || `${it.audit_id} ${it.sub_category} ${it.provision} ${it.evidence_text}`.toLowerCase().includes(q);
+  });
+  if (!rows.length) { checklistList.innerHTML = `<div class="card p-10 text-center text-sm text-slate-400">${t('no_items')}</div>`; return; }
+  checklistList.innerHTML = rows.map(it => {
+    const open = EXPANDED.has(it.audit_id);
+    const seg = SEVS.map(s => `<button ${editable ? `onclick="event.stopPropagation();setSig('${it.audit_id}','${s}')"` : 'disabled'} class="px-2.5 py-1.5 text-[11px] font-bold border -ml-px first:ml-0 first:rounded-l-lg last:rounded-r-lg ${it.significance === s ? 'seg-on-' + sevCls(s) : 'bg-white text-slate-500 border-slate-200 ' + (editable ? 'hover:bg-slate-50' : 'opacity-60')}">${t('sev_' + s)}</button>`).join('');
+    const pen = it.penalty_item === 'X' ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${it.penalty_violation === 'X' ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-500'}">${t('penalty')}${it.penalty_violation === 'X' ? ' ✕' : ''}</span>` : '';
+    const accent = { Priority:'border-l-red-500', Major:'border-l-orange-500', Minor:'border-l-yellow-400', Conformance:'border-l-emerald-400', 'N/A':'border-l-slate-300' }[it.significance];
+    const recN = ((STATE.recurring || {}).by_code || {})[it.audit_id] || 0;
+    const recB = recN ? `<span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-fuchsia-100 text-fuchsia-700 border border-fuchsia-200" title="${t('rec_count')}">🔁 ${t('rec_badge')} ${recN}</span>` : '';
+    return `<div class="card border-l-4 ${accent} overflow-hidden">
+      <div onclick="toggleRow('${it.audit_id}')" class="px-4 py-3 flex flex-wrap lg:flex-nowrap items-center gap-3 cursor-pointer hover:bg-slate-50/70">
+        <div class="w-24 shrink-0"><div class="font-mono font-black text-slate-900">${it.audit_id}</div><div class="text-[10px] font-semibold text-slate-400 truncate">${CODE_CAT[it.audit_id] || ''}</div></div>
+        <div class="flex-1 min-w-[200px]"><div class="font-bold text-sm text-slate-800 leading-snug">${esc(it.sub_category)}</div><div class="text-[11px] text-slate-400 truncate">${esc(it.provision)}</div></div>
+        <div class="flex items-center gap-2 shrink-0">${recB}${pen}<span class="px-2 py-1 rounded-lg text-[11px] font-bold ${it.finding_count ? 'bg-blue-50 text-blue-700' : 'bg-slate-50 text-slate-400'}">${it.finding_count} ${t('findings_unit')}</span></div>
+        <div class="seg flex shrink-0">${seg}</div>
+        <div class="w-16 text-right shrink-0"><div class="text-[10px] text-slate-400 font-bold uppercase">${t('score')}</div><div class="font-mono font-black text-lg ${it.score < 0 ? 'text-red-600' : it.score === 0 ? 'text-orange-600' : 'text-slate-900'}">${it.score}</div></div>
+        <svg class="w-5 h-5 text-slate-400 shrink-0 transition ${open ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </div>${open ? renderRowDetail(it, editable) : ''}</div>`;
+  }).join('');
+}
+function renderRowDetail(it, editable) {
+  const recBy = (STATE.recurring || {}).by_no || {};
+  const sug = ((STATE.recurring || {}).suggestions || {})[it.audit_id];
+  const fs = (it.findings || []).map(f => { const rc = recBy[String(f.no)]; const hasEn = f.issue_en && f.issue_en !== f.issue_vn; return `<div class="flex gap-2.5 p-2 rounded-lg bg-white border ${rc ? 'border-fuchsia-200' : 'border-slate-200'}">
+      ${f.photos && f.photos[0] ? `<img src="${img(f.photos[0].data_url)}" data-cap="#${f.no} · ${esc(f.issue_vn.replace(/\n/g, ' '))}" onclick="lightbox(this.src,this.dataset.cap)" class="w-16 h-12 object-cover rounded cursor-zoom-in shrink-0"/>` : ''}
+      <div class="text-xs min-w-0"><b class="text-slate-500">#${f.no}</b> <span class="font-semibold text-slate-800">${esc(f.issue_vn)}</span>${hasEn ? `<div class="text-[11px] text-slate-500 italic mt-0.5">${esc(f.issue_en)}</div>` : ''}<div class="text-[11px] text-slate-400 truncate mt-0.5">${esc(f.location_vn)}${f.location_en && f.location_en !== f.location_vn ? ` / ${esc(f.location_en)}` : ''}</div>
+      ${rc ? `<div class="text-[10px] text-fuchsia-700 mt-0.5">🔁 ${t('rec_from')}: <b>${esc(rc.title)}</b> (${esc(rc.date)}) · #${esc(rc.prev_no)} · ${Math.round(rc.similarity * 100)}%</div>` : ''}
+      ${!hasEn && !VN_CHARS.test(f.issue_vn) ? `<div class="text-[11px] font-bold text-amber-700 mt-0.5">⚠ ${t('edit_vn_missing')}</div>` : ''}
+      ${can('can_use_qa_autofix') && !isR2() ? `<button onclick="event.stopPropagation();editFindingVn(${Number(f.no)})" class="mt-1 text-[11px] font-bold text-blue-700 hover:underline">✎ ${t('edit_vn')}</button>` : ''}</div></div>`; }).join('') || `<div class="text-xs text-slate-400">${t('no_findings')}</div>`;
+  const sugBox = sug && sug.from === it.significance ? `<div class="mb-3 p-2.5 rounded-lg bg-fuchsia-50 border border-fuchsia-200 flex items-center justify-between gap-2 text-xs"><span class="text-fuchsia-800">🔁 ${sug.count} ${t('rec_count')} · ${t('rec_suggest')} <b>${t('sev_' + sug.to)}</b></span>
+      ${editable ? `<button onclick="setSig('${it.audit_id}','${sug.to}')" class="px-2.5 py-1 rounded-md bg-fuchsia-600 text-white font-bold whitespace-nowrap">${t('rec_apply', { s:t('sev_' + sug.to) })}</button>` : ''}</div>` : '';
+  return `<div class="border-t border-slate-100 bg-slate-50/60 p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div><label class="lbl">${t('evidence')}</label><textarea id="ev_${it.audit_id}" rows="5" class="inp font-mono text-xs" ${editable ? '' : 'disabled'}>${esc(it.evidence_text)}</textarea>
+        ${editable ? `<button onclick="saveEvidence('${it.audit_id}')" class="mt-2 px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold">${t('save_evidence')}</button>` : ''}
+        <div class="mt-3"><label class="lbl">${t('auto_reason')}</label><div class="text-xs text-slate-600 bg-white border border-slate-200 rounded-lg p-2.5">${esc(it.auto_reason)}</div></div></div>
+      <div>${sugBox}<label class="lbl">${t('related_findings')} (${it.finding_count})</label><div class="space-y-1.5 max-h-80 overflow-y-auto scroll pr-1">${fs}</div></div></div>`;
+}
+function toggleRow(code) { EXPANDED.has(code) ? EXPANDED.delete(code) : EXPANDED.add(code); renderChecklist(); }
+
+async function editFindingVn(no) {
+  const f = STATE.findings.find(x => x.no === no);
+  if (!f) return;
+  const d = await dialog({ title:`${t('edit_vn')} · #${no}`, message:f.issue_en, icon:'✎', okText:t('save'), fields:[{ type:'textarea', label:t('edit_vn_lbl'), value:f.issue_vn }] });
+  if (!d.ok || !d.values[0].trim()) return;
+  const r = await api('/api/finding/vietnamese', { no, vn:d.values[0].trim() });
+  if (r.status !== 'ok') { toast(r.message, 'err'); return; }
+  markDirty(r.data); renderAll(); toast(t('msg_saved'));
+}
+async function postUpdate(body) {
+  if (!can('can_edit_checklist')) { toast(t('msg_no_perm'), 'err'); return false; }
+  const r = await api('/api/update', body);
+  if (r.status !== 'ok') { toast(r.message, 'err'); return false; }
+  markDirty(r.data); renderAll(); return true;
+}
+async function setSig(code, sig) { if (await postUpdate({ checklist_overrides:{ [code]:{ significance:sig } } })) toast(`${code} → ${t('sev_' + sig)}`); }
+async function saveEvidence(code) { if (await postUpdate({ checklist_overrides:{ [code]:{ evidence_text:document.getElementById('ev_' + code).value } } })) toast(t('msg_saved')); }
+
+/* =================================================================
+   TAB: ROUND 2 REVIEW
+   ================================================================= */
+function renderRound2() {
+  const r2 = STATE.round2, s1 = STATE.summary, s2 = r2.summary2;
+  const delta = Math.round((s2.total_score - s1.total_score) * 100) / 100;
+  const box = (lbl, s, col) => `<div class="flex-1 rounded-xl border ${col} p-3.5"><div class="text-[10px] font-black uppercase opacity-70">${lbl}</div>
+      <div class="flex items-baseline gap-2 mt-1"><span class="text-3xl font-black">${s.total_score}</span><span class="text-sm font-bold">${t('st_grade')} ${s.grade_level}</span></div>
+      <div class="flex gap-1 mt-2">${['Priority','Major','Minor','Conformance'].map(k => `<span class="px-1.5 py-0.5 rounded border text-[10px] font-bold sev-${k}">${t('sev_' + k)} ${s.counts[k]}</span>`).join('')}</div></div>`;
+  r2Head.innerHTML = `<div class="card p-4">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+      <div class="text-sm"><span class="px-2 py-0.5 rounded-md bg-violet-100 text-violet-700 text-[10px] font-black uppercase">${t('round2')}</span> <span class="text-slate-500">${t('r2_compare_with')}:</span> <b>${esc(r2.parent_title)}</b></div>
+      <div class="text-xs font-semibold text-slate-500">${t('r2_closed')}: <b class="text-emerald-600">${s2.closed_findings}/${s2.r1_findings}</b>${s2.missing_count ? ` · <span class="text-amber-600">${t('r2_missing')}: ${s2.missing_count}</span>` : ''}${s2.new_count ? ` · <span class="text-indigo-600">${t('r2_new')}: ${s2.new_count}</span>` : ''}</div>
+    </div>
+    <div class="flex flex-col md:flex-row items-stretch gap-3">${box(t('round1'), s1, 'border-slate-200 bg-slate-50')}
+      <div class="flex md:flex-col items-center justify-center px-2 text-center"><div class="text-2xl">→</div><div class="text-xs font-black ${delta >= 0 ? 'text-emerald-600' : 'text-red-600'}">${delta >= 0 ? '+' : ''}${delta}</div></div>
+      ${box(t('round2'), s2, 'border-violet-200 bg-violet-50/60 text-violet-950')}</div></div>`;
+
+  const changed = r => r.sig1 !== r.sig2;
+  const chips = [['ALL', t('all')], ['CHANGED', t('r2_changed')], ['OPEN', t('r2_open')], ['CLOSED', t('r2_closed')], ['MISSING', t('r2_missing')]];
+  r2Chips.innerHTML = chips.map(([k, l]) => `<button onclick="R2F='${k}';renderRound2()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${R2F === k ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">${l}</button>`).join('');
+  const q = r2Search.value.trim().toLowerCase();
+  const itemsBy = {};
+  r2.items.forEach(i => (itemsBy[i.audit_id] = itemsBy[i.audit_id] || []).push(i));
+  const editable = can('can_upload_round2');
+  const rows = r2.checklist2.filter(r => {
+    const its = itemsBy[r.audit_id] || [];
+    if (!its.length && r.sig1 === 'Conformance' && !r.new && R2F !== 'ALL') return false;
+    if (R2F === 'CHANGED' && !changed(r)) return false;
+    if (R2F === 'OPEN' && !its.some(i => !i.closed)) return false;
+    if (R2F === 'CLOSED' && !its.some(i => i.closed)) return false;
+    if (R2F === 'MISSING' && !its.some(i => i.auto_status === 'missing')) return false;
+    return !q || `${r.audit_id} ${r.sub_category} ${its.map(i => i.issue_vn).join(' ')}`.toLowerCase().includes(q);
+  }).filter(r => R2F !== 'ALL' || (itemsBy[r.audit_id] || []).length || r.new || r.sig1 !== 'Conformance');
+
+  r2List.innerHTML = rows.length ? rows.map(r => {
+    const its = itemsBy[r.audit_id] || [];
+    const open = R2_EXPANDED.has(r.audit_id);
+    const pct = r.total ? Math.round(r.closed / r.total * 100) : 100;
+    return `<div class="card overflow-hidden border-l-4 ${changed(r) ? 'border-l-violet-500' : 'border-l-slate-200'}">
+      <div onclick="R2_EXPANDED.has('${r.audit_id}')?R2_EXPANDED.delete('${r.audit_id}'):R2_EXPANDED.add('${r.audit_id}');renderRound2()" class="px-4 py-3 flex flex-wrap lg:flex-nowrap items-center gap-3 cursor-pointer hover:bg-slate-50/70">
+        <div class="w-20 shrink-0 font-mono font-black">${r.audit_id}</div>
+        <div class="flex-1 min-w-[180px] text-sm font-bold text-slate-800">${esc(r.sub_category)}</div>
+        <div class="w-36 shrink-0"><div class="h-1.5 rounded-full bg-slate-100 overflow-hidden"><div class="h-full bg-emerald-500" style="width:${pct}%"></div></div><div class="text-[10px] text-slate-500 mt-0.5">${t('r2_closed')} ${r.closed}/${r.total}${r.new ? ` · +${r.new}` : ''}</div></div>
+        <div class="flex items-center gap-1.5 shrink-0"><span class="px-2 py-1 rounded-md border text-[11px] font-bold sev-${sevCls(r.sig1)}">${t('sev_' + r.sig1)}</span><span class="text-slate-400">→</span><span class="px-2 py-1 rounded-md border text-[11px] font-black sev-${sevCls(r.sig2)}">${t('sev_' + r.sig2)}</span></div>
+        <div class="w-24 text-right shrink-0 font-mono"><span class="text-slate-400">${r.score1}</span> → <b class="${r.score2 > r.score1 ? 'text-emerald-600' : ''}">${r.score2}</b></div>
+        <svg class="w-5 h-5 text-slate-400 shrink-0 ${open ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+      ${open ? `<div class="border-t border-slate-100 bg-slate-50/60 p-3 space-y-2">
+        <div class="text-[11px] text-slate-500 px-1">${esc(r.reason2)}</div>
+        ${its.map(i => `<div class="flex flex-wrap lg:flex-nowrap items-center gap-3 p-2.5 rounded-xl bg-white border ${i.closed ? 'border-emerald-200' : i.auto_status === 'missing' ? 'border-amber-300' : 'border-slate-200'}">
+          <div class="flex-1 min-w-[220px] text-xs"><b class="text-slate-500">#${i.r1_no}</b> ${esc(i.issue_vn)}
+            <div class="text-[11px] text-slate-400 mt-0.5">${esc(i.location_vn)}${i.improvement_vn ? ` · ${esc(i.improvement_vn)}` : ''}</div>
+            <div class="text-[10px] mt-1"><span class="px-1.5 py-0.5 rounded ${i.auto_status === 'closed' ? 'bg-emerald-50 text-emerald-700' : i.auto_status === 'missing' ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'} font-bold">${t('r2_auto')}: ${i.auto_status === 'closed' ? t('r2_closed') : i.auto_status === 'missing' ? t('r2_missing') : t('r2_open')}</span>
+            ${i.complete_date ? `<span class="ml-1 text-slate-500">${t('r2_complete_date')}: <b>${esc(i.complete_date)}</b></span>` : ''}</div></div>
+          <div class="flex gap-1 shrink-0">${(i.after_photos || []).slice(0, 3).map(p => `<img src="${img(p.data_url)}" data-cap="${t('r2_after')} #${i.r1_no}" onclick="lightbox(this.src,this.dataset.cap)" class="w-14 h-11 object-cover rounded border border-emerald-200 cursor-zoom-in"/>`).join('')}</div>
+          <label class="flex items-center gap-2 shrink-0 px-3 py-2 rounded-lg ${i.closed ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-700'} text-xs font-bold ${editable ? 'cursor-pointer' : 'opacity-60'}">
+            <input type="checkbox" ${i.closed ? 'checked' : ''} ${editable ? '' : 'disabled'} onchange="setR2Item(${i.r1_no}, this.checked)" class="w-4 h-4 accent-emerald-700"/>${t('r2_closed')}</label>
+        </div>`).join('') || `<div class="text-xs text-slate-400 px-1">${t('no_findings')}</div>`}
+      </div>` : ''}</div>`;
+  }).join('') : `<div class="card p-10 text-center text-sm text-slate-400">${t('no_items')}</div>`;
+
+  r2New.innerHTML = r2.new_findings.length ? `<div class="card p-4 border-indigo-200">
+    <div class="font-extrabold text-indigo-900">${t('r2_new')} (${r2.new_findings.length})</div><div class="text-xs text-slate-500 mb-3">${t('r2_new_d')}</div>
+    <div class="space-y-2">${r2.new_findings.map(n => `<div class="flex items-center gap-3 p-2.5 rounded-xl border border-slate-200">
+      <span class="font-mono font-black text-xs w-16">${n.audit_id}</span><div class="flex-1 text-xs"><b class="text-slate-500">#${n.r2_no}</b> ${esc(n.issue_vn)}</div>
+      <label class="flex items-center gap-2 text-xs font-bold ${editable ? 'cursor-pointer' : 'opacity-60'}"><input type="checkbox" ${n.include ? 'checked' : ''} ${editable ? '' : 'disabled'} onchange="setR2New(${n.r2_no}, this.checked)" class="w-4 h-4 accent-indigo-600"/>${t('r2_include')}</label></div>`).join('')}</div></div>` : '';
+
+  r2Confirm.innerHTML = r2.confirmed
+    ? `<div class="card p-3.5 bg-emerald-50 border-emerald-300 flex flex-wrap items-center justify-between gap-2 shadow-lg"><div class="text-sm font-bold text-emerald-800">✓ ${t('r2_confirmed_by')} ${esc(r2.confirmed_by)} · ${esc(r2.confirmed_at)}</div>
+       ${editable ? `<button onclick="confirmR2(false)" class="px-3.5 py-2 rounded-lg border border-emerald-300 bg-white text-xs font-bold text-emerald-800">${t('r2_unconfirm')}</button>` : ''}</div>`
+    : `<div class="card p-3.5 bg-white border-violet-300 flex flex-wrap items-center justify-between gap-2 shadow-lg"><div class="text-sm font-semibold text-violet-900">🔒 ${t('r2_need_confirm')}</div>
+       ${editable ? `<button onclick="confirmR2(true)" class="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-black">✓ ${t('r2_confirm')}</button>` : ''}</div>`;
+}
+async function setR2Item(no, closed) {
+  const r = await api('/api/round2/update', { items:{ [no]:closed } });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  markDirty(r.data); renderAll();
+}
+async function setR2New(no, include) {
+  const r = await api('/api/round2/update', { new_findings:{ [no]:include } });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  markDirty(r.data); renderAll();
+}
+async function confirmR2(on) {
+  if (on) {
+    const s1 = STATE.summary, s2 = STATE.round2.summary2;
+    const d = await dialog({ title:t('r2_confirm_title'), icon:'✓', okText:t('r2_confirm'),
+      message:t('r2_confirm_msg', { a:s1.total_score, ga:s1.grade_level, b:s2.total_score, gb:s2.grade_level, c:s2.closed_findings, t:s2.r1_findings }) });
+    if (!d.ok) return;
+  }
+  const r = await api('/api/round2/confirm', { confirmed:on });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  markDirty(r.data); renderAll(); if (on) toast(t('msg_confirmed'));
+}
+
+/* =================================================================
+   TAB: WORD (preview mirrors the template; round 2 adds a 2nd result table)
+   ================================================================= */
+function renderWord() {
+  const editable = can('can_edit_checklist') && !isR2();
+  wNote.classList.toggle('hidden', !isR2());
+  wDoc.value = (STATE.doc_violations || []).join('\n'); wFac.value = (STATE.facility_violations || []).join('\n');
+  wDoc.disabled = wFac.disabled = !editable;
+  btnSaveWord.classList.toggle('hidden', !editable);
+  const withPhotos = STATE.findings.filter(f => f.photos && f.photos.length);
+  const kis = STATE.key_issues || [];
+  wKeys.innerHTML = [0,1,2,3,4].map(i => {
+    const cur = kis[i] ? kis[i].no : (withPhotos[i] || {}).no;
+    return `<div class="flex items-center gap-2"><span class="text-xs font-bold text-slate-400 w-14">${t('photo')} ${i + 1}</span>
+      <select data-ki="${i}" class="inp !py-1.5 text-xs" ${editable ? '' : 'disabled'}>${withPhotos.map(f => `<option value="${f.no}" ${f.no === cur ? 'selected' : ''}>#${f.no} [${f.audit_id}] ${esc(f.issue_vn.slice(0, 70))}</option>`).join('')}</select></div>`;
+  }).join('');
+
+  const m = STATE.metadata, s = STATE.summary, c = s.counts;
+  const resTable = (sum, gbm) => `<table class="word-table" style="text-align:center"><thead><tr><th rowspan="2">GBM</th><th colspan="3">Số hạng mục vi phạm</th><th rowspan="2">Kết quả đánh giá<br/>(Số vấn đề/Số vi phạm HMBB)</th><th rowspan="2">Điểm đánh giá</th><th rowspan="2">Level xếp hạng</th></tr>
+    <tr><th style="color:#FF0000">Priority</th><th style="background:#ff0000">Major</th><th style="background:#ffff00">Minor</th></tr></thead>
+    <tbody><tr><td><b>${esc(gbm)}</b></td><td><b>${sum.counts.Priority}</b></td><td><b>${sum.counts.Major}</b></td><td><b>${sum.counts.Minor}</b></td><td>${sum.violated_items_count} items/HMBB: ${sum.mandatory_count}</td><td><b>${sum.total_score} điểm</b></td><td><b>${sum.grade_level}</b></td></tr></tbody></table>`;
+  const V = isR2() && STATE.round2_doc ? STATE.round2_doc : null;
+  const clist = V ? V.checklist : STATE.checklist.map(x => ({ audit_id:x.audit_id, significance:x.significance, evidence_text:x.evidence_text, issues:x.findings.map(f => f.issue_vn) }));
+  let docV = (V ? V.doc_violations : (STATE.doc_violations || [])).slice(0, 3);
+  let facV = (V ? V.facility_violations : (STATE.facility_violations || [])).slice(0, 3);
+  if (docV.length + facV.length > 5) { docV = docV.slice(0, 2); facV = facV.slice(0, 3); }
+  const keyV = V ? V.key_issues : kis;
+  const clip = (s, n = 140) => { const c = String(s || '').replace(/\s+/g, ' ').trim(); return c.length > n ? c.slice(0, n) + '...' : c; };
+  const yr = ((m.audit_date_raw || '').match(/20\d{2}/) || [new Date().getFullYear()])[0];
+  let t3 = '';
+  ['Priority','Major','Minor'].forEach(sev => {
+    const items = clist.filter(x => x.significance === sev);
+    items.forEach((x, i) => {
+      const lbl = sev === 'Priority' ? `(${items.length})` : `(${String(items.length).padStart(2, '0')})`;
+      const b = x.issues.length ? x.issues.slice(0, 2).map(v => '- ' + esc(clip(v, 140))).join('<br/>') : '- ' + esc(clip(x.evidence_text, 140));
+      t3 += `<tr>${i === 0 ? `<td rowspan="${items.length}" style="text-align:center">${sev}<br/>${lbl}</td>` : ''}<td>${b}</td><td style="text-align:center">${x.audit_id}</td></tr>`;
+    });
+  });
+  if (!t3) t3 = `<tr><td style="text-align:center">—</td><td>${V ? 'Đã khắc phục toàn bộ các lỗi vi phạm sau đánh giá lần 2' : 'Không có lỗi vi phạm'}</td><td style="text-align:center">—</td></tr>`;
+  const t4 = (keyV.length ? '' : `<tr><td></td><td>${V ? 'Không còn vấn đề tồn đọng sau đánh giá lần 2' : 'Không có vấn đề tồn đọng'}</td></tr>`) + keyV.slice(0, 5).map(k => `<tr><td style="width:180px;text-align:center">${k.photos && k.photos[0] ? `<img src="${img(k.photos[0].data_url)}" onclick="lightbox(this.src,'#${k.no}')" style="width:150px;height:95px;object-fit:cover;margin:auto;cursor:zoom-in"/>` : ''}</td><td>[<span style="color:#FF0000">${k.significance}</span>] ${esc(clip(k.issue_vn, 165))}</td></tr>`).join('');
+  let section1 = `<div style="font-size:14px;margin-left:8px">□ Kết quả${isR2() ? ' lần 1' : ''}: Tổng <b>${s.total_score} điểm</b></div>
+    <div style="font-size:14px;margin-left:20px">* Checklist RBA 41 hạng mục EHS</div>${resTable(s, (m.gbm || 'Mobile') + (isR2() ? ' (Lần 1)' : ''))}`;
+  if (isR2()) {
+    const s2 = STATE.round2.summary2, d = Math.round((s2.total_score - s.total_score) * 100) / 100;
+    section1 += `<div style="font-size:14px;margin-left:8px;margin-top:6px">□ Kết quả lần 2 (đánh giá lại): Tổng <b>${s2.total_score} điểm</b> (${d >= 0 ? '+' : ''}${d} điểm so với lần 1)</div>${resTable(s2, (m.gbm || 'Mobile') + ' (Lần 2)')}`;
+  }
+  wordPreview.innerHTML = `
+    <div style="text-align:center;font-weight:bold;font-size:21px;text-decoration:underline">${esc(STATE.report_title || 'Kết quả đánh giá định kỳ RBA 8.0.1 Lần 1')}</div>
+    <div style="text-align:center;font-weight:bold;font-size:21px;text-decoration:underline;margin-bottom:4px">đối tác (${esc(m.vendor_short)})</div>
+    <div style="text-align:right;font-size:13px">${esc(m.report_date)}</div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>${esc(workforceNote(m))}</span><span>Samsung Vietnam EHS</span></div>
+    <div style="font-weight:bold;font-size:15px;margin-top:6px">1. Khái quát</div>
+    <div style="font-size:14px;margin-left:8px">□ Tên đối tác: ${esc(m.vendor_short)} ${esc(partnerProfile(m))}</div>
+    <div style="font-size:14px;margin-left:8px">□ Ngày kiểm tra: ${esc(m.audit_date_raw)} &nbsp;&nbsp; * Người kiểm tra: ${esc(m.auditor_short)}</div>
+    ${section1}
+    <div style="font-size:12px;margin:2px 0 4px 16px">※[Chú thích] Level xếp hạng : A(90 điểm↑), B(80 ~ 89 điểm), C(70 ~79 điểm), D(dưới 70 điểm↓)</div>
+    <div style="font-weight:bold;font-size:15px;margin-top:8px">2. Kết quả đánh giá</div>
+    <div style="font-weight:bold;font-size:14px;margin-left:8px">① Lỗi vi phạm Tài liệu:</div><ul style="list-style:disc;margin-left:32px;font-size:13.5px">${docV.map(v => `<li>${esc(v)}</li>`).join('')}</ul>
+    <div style="font-weight:bold;font-size:14px;margin-left:8px;margin-top:4px">② Lỗi vi phạm Hiện trường:</div><ul style="list-style:disc;margin-left:32px;font-size:13.5px">${facV.map(v => `<li>${esc(v)}</li>`).join('')}</ul>
+    <div style="font-weight:bold;font-size:15px;margin-top:8px">3. Kế hoạch sau này</div>
+    <div style="font-size:14px;margin-left:8px">□ Theo dõi tình hình cải tiến của đối tác &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~ hàng tuần</div>
+    <div style="font-size:14px;margin-left:24px">- Triển khai đốc thúc, theo dõi tiến độ và hướng dẫn cải tiến</div>
+    <div style="font-size:14px;margin-left:8px">※ Đính kèm: □ Kết quả đánh giá theo Checklist 41 hạng mục RBA.${esc(yr)} ~1 bộ</div>
+    <div style="font-size:14px;margin-left:92px">□ Kết quả kiểm tra hiện trường và lịch trình cải tiến RBA.${esc(yr)} ~1 bộ</div>
+    <div style="text-align:center;font-weight:bold;font-size:14px;margin:6px 0">– Hết –</div>
+    <div style="text-align:center;font-weight:bold;font-size:15px;margin:6px 0">【Nội dung vi phạm theo từng mức độ lỗi RBA 8.0.1】</div>
+    <table class="word-table" style="font-size:12.5px"><thead><tr><th style="width:95px">Phân loại</th><th>Nội dung chính</th><th style="width:65px">Code</th></tr></thead><tbody>${t3}</tbody></table>
+    <div style="font-weight:bold;font-size:15px;margin-top:8px">□ Vấn đề chính</div>
+    <table class="word-table"><tbody>${t4}</tbody></table>
+    <div style="text-align:center;font-weight:bold;color:#0000FF;font-size:14px;margin-top:8px">--- Thank you ---</div>`;
+}
+async function saveWord() {
+  const lines = el => el.value.split('\n').map(x => x.trim()).filter(Boolean);
+  const key_issue_nos = [...document.querySelectorAll('[data-ki]')].map(s => parseInt(s.value, 10));
+  if (await postUpdate({ doc_violations:lines(wDoc), facility_violations:lines(wFac), key_issue_nos })) toast(t('msg_saved'));
+}
+
+/* =================================================================
+   TAB: FACTORY INFO
+   ================================================================= */
+const FACTORY_SECTIONS = [
+  { k:'sec_partner', icon:'🏢', f:['vendor_short','vendor_full','vendor_code','subsidiary','gbm','address','main_process','main_process_vn','product','samsung_Revenue_ratio','certifications'] },
+  { k:'sec_audit', icon:'📅', f:['audit_criteria','audit_date_raw','report_date','auditor_raw','auditor_1','auditor_2','auditor_short','interview_count'] },
+  { k:'sec_people', icon:'👤', f:['ceo_name','ceo_position','ceo_phone','ceo_email','contact_name','contact_position','contact_phone','contact_email'] },
+  { k:'sec_workforce', icon:'👥', f:['total_workers','permanent_workers','temp_workers','foreign_workers','subcontract_info','subcontract_count'] },
+];
+const NUM_FIELDS = ['total_workers','permanent_workers','temp_workers','foreign_workers','subcontract_count','interview_count'];
+const WIDE_FIELDS = ['vendor_full','address','auditor_raw','certifications','subcontract_info'];
+function renderFactory() {
+  const m = STATE.metadata, editable = can('can_edit_checklist');
+  btnSaveInfo.classList.toggle('hidden', !editable);
+  factoryForm.innerHTML = FACTORY_SECTIONS.map(sec => `<div>
+      <div class="flex items-center gap-2 mb-3"><span>${sec.icon}</span><h4 class="text-sm font-extrabold text-slate-800">${t(sec.k)}</h4>${editable ? '' : `<span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">${t('read_only')}</span>`}</div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">${sec.f.map(k => `<div class="${WIDE_FIELDS.includes(k) ? 'sm:col-span-2' : ''}"><label class="lbl">${t('f_' + k)}</label>
+        <input data-meta="${k}" type="${NUM_FIELDS.includes(k) ? 'number' : 'text'}" value="${esc(m[k] ?? '')}" class="inp" ${editable ? '' : 'disabled'}/></div>`).join('')}</div></div>`).join('<div class="h-px bg-slate-100"></div>');
+}
+async function saveFactoryInfo() {
+  const metadata = {};
+  document.querySelectorAll('[data-meta]').forEach(el => metadata[el.dataset.meta] = NUM_FIELDS.includes(el.dataset.meta) ? Number(el.value || 0) : el.value.trim());
+  if (await postUpdate({ metadata })) toast(t('msg_saved'));
+}
+
+/* =================================================================
+   TAB: QA
+   ================================================================= */
+function renderQa() {
+  const qa = STATE.qa_report || { total_issues:0, fixable_count:0, counts_by_category:{}, issues:[] };
+  const cc = qa.counts_by_category || {};
+  const chips = [['ALL', t('qa_total'), qa.total_issues, 'slate'], ['SPELLING', t('qa_spelling'), cc.SPELLING || 0, 'red'], ['PUNCTUATION', t('qa_punct'), cc.PUNCTUATION || 0, 'amber'], ['SUBTITLE_BILINGUAL', t('qa_subtitle'), cc.SUBTITLE_BILINGUAL || 0, 'indigo']];
+  qaChips.innerHTML = chips.map(([k, l, n, col]) => `<button onclick="QAF='${k}';renderQa()" class="px-3.5 py-2 rounded-xl border text-xs font-bold flex items-center gap-2 ${QAF === k ? 'bg-slate-900 text-white border-slate-900' : `bg-${col}-50 text-${col}-700 border-${col}-200`}">${l}<span class="text-base font-black">${n}</span></button>`).join('');
+  const canFix = can('can_use_qa_autofix');
+  btnFixAll.textContent = `✨ ${t('qa_fix_all')} (${qa.fixable_count})`;
+  btnFixAll.classList.toggle('hidden', !canFix || !qa.fixable_count);
+  const q = qaSearch.value.trim().toLowerCase();
+  const items = (qa.issues || []).filter(i => (QAF === 'ALL' || i.category === QAF) && (!q || `#${i.finding_no} ${i.audit_id} ${i.original_vn} ${i.original_en}`.toLowerCase().includes(q)));
+  if (!items.length) { qaList.innerHTML = `<div class="p-10 text-center text-sm font-semibold text-emerald-700">✓ ${t('qa_none')}</div>`; return; }
+  const catLbl = { SPELLING:t('qa_spelling'), PUNCTUATION:t('qa_punct'), SUBTITLE_BILINGUAL:t('qa_subtitle') };
+  const catCol = { SPELLING:'bg-red-100 text-red-700', PUNCTUATION:'bg-amber-100 text-amber-800', SUBTITLE_BILINGUAL:'bg-indigo-100 text-indigo-700' };
+  qaList.innerHTML = items.map(i => `<div class="p-4 flex flex-col lg:flex-row gap-4 lg:items-center">
+      <div class="flex-1 min-w-0 space-y-2">
+        <div class="flex flex-wrap items-center gap-2 text-xs"><span class="px-2 py-0.5 rounded bg-slate-900 text-white font-mono font-bold">${t('finding')} #${i.finding_no}</span><span class="px-2 py-0.5 rounded bg-slate-100 font-mono font-bold">${i.audit_id}</span><span class="px-2 py-0.5 rounded font-bold ${catCol[i.category]}">${catLbl[i.category]}</span><span class="text-slate-400">${t('field')}: <b class="text-slate-600">${t('fld_' + i.field)}</b></span></div>
+        <div class="text-xs text-amber-800">${i.reasons.map(esc).join(' · ')}</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-lg bg-red-50/60 border border-red-100"><div class="text-[10px] font-black uppercase text-red-500 mb-1">${t('qa_original')}</div><div class="font-semibold">${esc(i.original_vn)}</div><div class="text-slate-500 italic mt-0.5">${esc(i.original_en)}</div></div>
+          <div class="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100"><div class="text-[10px] font-black uppercase text-emerald-600 mb-1">${t('qa_suggest')}</div><div class="font-bold text-emerald-900">${esc(i.final_vn)}</div><div class="text-emerald-800 italic mt-0.5">${esc(i.final_en)}</div></div>
+        </div></div>
+      ${i.auto_fixable && canFix ? `<button onclick="runFix(['${i.id}'])" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold whitespace-nowrap self-end lg:self-center">✓ ${t('qa_fix_one')}</button>` : ''}</div>`).join('');
+}
+async function runFix(ids) {
+  const r = await api('/api/qa/autofix', { issue_ids:ids });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  markDirty(r.data); renderAll(); toast(t('msg_fixed', { n:r.applied_count }));
+}
+
+/* =================================================================
+   UPLOAD (round 1 / round 2) with live status
+   ================================================================= */
+const UP = { step:0, error:false, round:1 };
+function renderUpSteps() {
+  upSteps.innerHTML = [1,2,3,4].map(i => {
+    const done = UP.step > i, active = UP.step === i && !UP.error, err = UP.error && UP.step === i;
+    const icon = err ? '<span class="w-6 h-6 rounded-full bg-red-600 text-white text-xs font-black flex items-center justify-center">✕</span>'
+      : done ? '<span class="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-black flex items-center justify-center">✓</span>'
+      : active ? '<span class="w-6 h-6 rounded-full border-[3px] border-blue-200 border-t-blue-600 animate-spin"></span>'
+      : '<span class="w-6 h-6 rounded-full border-2 border-slate-200"></span>';
+    const lbl = i === 3 && UP.round === 2 ? t('up_s3b') : t('up_s' + i);
+    return `<div class="flex items-center gap-3">${icon}<span class="text-sm ${done ? 'text-slate-800 font-semibold' : active ? 'text-blue-700 font-bold' : err ? 'text-red-700 font-bold' : 'text-slate-400'}">${lbl}</span></div>`;
+  }).join('');
+}
+function setUpStep(n) { UP.step = n; renderUpSteps(); }
+function closeUpModal() { upModal.classList.add('hidden'); upModal.classList.remove('flex'); }
+function uploadXHR(url, body, onProgress) {
+  return new Promise(resolve => {
+    const x = new XMLHttpRequest();
+    x.open('POST', url);
+    x.setRequestHeader('Content-Type', 'application/json');
+    x.setRequestHeader('X-Auth-Token', TOKEN);
+    x.upload.onprogress = e => { if (e.lengthComputable) onProgress(e.loaded / e.total); };
+    x.upload.onload = () => onProgress(1, true);
+    x.onload = () => { let j; try { j = JSON.parse(x.responseText); } catch (e) { j = { status:'error', message:'HTTP ' + x.status }; } resolve(j); };
+    x.onerror = () => resolve({ status:'error', message:'Network error' });
+    x.send(JSON.stringify(body));
+  });
+}
+
+async function startRound2(parentId) {
+  if (!can('can_upload_round2')) return toast(t('msg_no_perm'), 'err');
+  if (!parentId) {
+    if (!STORAGE) await loadStorage();
+    const parents = ((STORAGE || {}).records || []).filter(r => (r.round || 1) === 1);
+    if (!parents.length) return dialog({ title:t('act_upload2'), message:t('r2_no_parent'), icon:'ℹ', okText:'OK' });
+    const preset = STATE && STATE._ws && STATE._ws.mode === 'round1' && STATE._ws.bound_record_id;
+    const d = await dialog({ title:t('act_upload2'), icon:'🔁', okText:t('btn_upload_r2'),
+      fields:[{ type:'select', label:t('r2_select_parent'), value:preset || parents[0].record_id,
+        options:parents.map(p => ({ v:p.record_id, l:`${p.title || p.record_id} · ${p.total_score} ${t('score').toLowerCase()} · ${p.created_at}` })) }] });
+    if (!d.ok) return;
+    parentId = d.values[0];
+  }
+  PENDING_R2_PARENT = parentId;
+  fileInput2.click();
+}
+
+const readB64 = file => new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result.split(',')[1]); r.readAsDataURL(file); });
+
+async function handleUpload(ev, round) {
+  const file = ev.target.files[0]; ev.target.value = '';
+  if (!file) return;
+  if (!can(round === 2 ? 'can_upload_round2' : 'can_upload_findings')) return toast(t('msg_no_perm'), 'err');
+  if (round !== 2) { FUP.field = file; FUP.doc = null; return submitFindings(); }
+  const b64 = await readB64(file);
+  return runUpload({ round:2, url:'/api/round2/upload', label:file.name,
+    payload:{ filename:file.name, file_base64:b64, parent_record_id:PENDING_R2_PARENT } });
+}
+
+/* Generic upload flow with the step modal (round 1, round 2, supplement) */
+async function runUpload({ round, url, payload, label, title }) {
+  UP.error = false; UP.round = round;
+  upTitle.textContent = title || (round === 2 ? t('up_title2') : t('up_title'));
+  upFile.textContent = label;
+  upResult.classList.add('hidden'); upError.classList.add('hidden'); upFoot.classList.add('hidden'); upBarWrap.classList.remove('hidden');
+  upBar.style.width = '0%'; upPct.textContent = '0%';
+  upModal.classList.remove('hidden'); upModal.classList.add('flex');
+  setUpStep(1);
+  const timers = [];
+  const r = await uploadXHR(url, payload, (p, done) => {
+    const pct = Math.round(p * 100); upBar.style.width = pct + '%'; upPct.textContent = pct + '%';
+    if (done && UP.step === 1) {
+      setUpStep(2); upBarWrap.classList.add('hidden');
+      timers.push(setTimeout(() => UP.step === 2 && setUpStep(3), 1200));
+      timers.push(setTimeout(() => UP.step === 3 && setUpStep(4), 3000));
+    }
+  });
+  timers.forEach(clearTimeout);
+  upBarWrap.classList.add('hidden');
+  upFoot.classList.remove('hidden');
+  if (r.status !== 'ok') {
+    UP.error = true; if (UP.step < 2) UP.step = 2; renderUpSteps();
+    upError.textContent = `${t('up_failed')}: ${r.message || ''}`; upError.classList.remove('hidden');
+    upView.classList.add('hidden'); return r;
+  }
+  STATE = r.data; EXPANDED.clear(); R2_EXPANDED.clear(); CAT = 'ALL'; SEVF = 'ALL'; R2F = 'ALL';
+  TAB = round === 2 ? 'round2' : 'checklist';
+  if (r.storage) STORAGE = r.storage;
+  setUpStep(5); renderUpResult(); upResult.classList.remove('hidden'); upView.classList.remove('hidden');
+  upView.textContent = round === 2 ? t('r2_view') : t('up_view');
+  renderAll(); if (can('can_view_storage')) loadStorage();
+  return r;
+}
+
+/* ---------- Two-slot Finding upload: File hiện trường + File tài liệu ---------- */
+const FUP = { field:null, doc:null, pick:null };
+const SLOT_META = { field:{ icon:'🏭', cls:'from-blue-600 to-indigo-700', ring:'border-blue-300 bg-blue-50/60' },
+                    doc:{ icon:'📑', cls:'from-emerald-600 to-teal-700', ring:'border-emerald-300 bg-emerald-50/60' } };
+function openFindingUpload() {
+  if (!can('can_upload_findings')) return toast(t('msg_no_perm'), 'err');
+  FUP.field = FUP.doc = null; renderFindSlots();
+  findModal.classList.remove('hidden'); findModal.classList.add('flex');
+}
+function closeFindModal() { findModal.classList.add('hidden'); findModal.classList.remove('flex'); }
+function renderFindSlots() {
+  findSlots.innerHTML = ['field', 'doc'].map(k => {
+    const f = FUP[k], m = SLOT_META[k];
+    return `<div data-slot="${k}" ondragover="event.preventDefault();this.classList.add('ring-2')" ondragleave="this.classList.remove('ring-2')" ondrop="dropSlot(event,'${k}')"
+      class="rounded-2xl border-2 ${f ? m.ring : 'border-dashed border-slate-300 bg-white'} p-4 transition ring-blue-400">
+      <div class="flex items-center gap-3">
+        <span class="w-11 h-11 rounded-xl bg-gradient-to-br ${m.cls} text-white flex items-center justify-center text-xl shrink-0">${m.icon}</span>
+        <div class="min-w-0 flex-1"><div class="font-extrabold text-slate-900">${t('slot_' + k)}</div><div class="text-[11px] text-slate-500">${t('slot_' + k + '_d')}</div></div>
+      </div>
+      ${f ? `<div class="mt-3 flex items-center gap-2 rounded-xl bg-white border border-slate-200 px-3 py-2">
+          <span class="text-emerald-600 font-black">✓</span><span class="text-[13px] font-semibold truncate flex-1" title="${esc(f.name)}">${esc(f.name)}</span>
+          <span class="text-[10px] text-slate-400 shrink-0">${(f.size / 1048576).toFixed(1)} MB</span>
+          <button onclick="FUP['${k}']=null;renderFindSlots()" class="w-7 h-7 rounded-lg hover:bg-red-50 text-red-600 font-bold shrink-0" title="${t('btn_delete')}">✕</button></div>
+          <button onclick="pickSlot('${k}')" class="mt-2 w-full py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-white">${t('slot_change')}</button>`
+        : `<button onclick="pickSlot('${k}')" class="mt-3 w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold">＋ ${t('slot_pick')}</button>
+           <div class="mt-1.5 text-[11px] text-center text-slate-400">${t('slot_optional')}</div>`}
+    </div>`;
+  }).join('');
+  const n = (FUP.field ? 1 : 0) + (FUP.doc ? 1 : 0);
+  findGo.disabled = !n;
+  findCount.textContent = n === 2 ? t('fu_both') : n === 1 ? t('fu_one') : t('fu_none');
+}
+function pickSlot(k) { FUP.pick = k; fileSlot.click(); }
+function onSlotFile(ev) { const f = ev.target.files[0]; ev.target.value = ''; if (f && FUP.pick) { FUP[FUP.pick] = f; renderFindSlots(); } }
+function dropSlot(ev, k) { ev.preventDefault(); const f = ev.dataTransfer.files[0]; if (f && /\.xls[xm]$/i.test(f.name)) { FUP[k] = f; renderFindSlots(); } else toast(t('slot_bad_file'), 'err'); }
+async function submitFindings() {
+  if (!FUP.field && !FUP.doc) return;
+  closeFindModal();
+  const payload = {};
+  for (const k of ['field', 'doc']) if (FUP[k]) payload[k] = { filename:FUP[k].name, file_base64:await readB64(FUP[k]) };
+  const label = ['field', 'doc'].filter(k => FUP[k]).map(k => `${t('slot_' + k)}: ${FUP[k].name}`).join(' · ');
+  return runUpload({ round:1, url:'/api/upload_xlsm', payload, label });
+}
+
+/* ---------- Supplement a missing (or replace an existing) slot later ---------- */
+const SUPP = { slot:null, record_id:null };
+function supplementFile(slot, recordId) {
+  if (!can('can_upload_findings')) return toast(t('msg_no_perm'), 'err');
+  SUPP.slot = slot; SUPP.record_id = recordId || null; fileSupp.click();
+}
+async function supplementPick(recordId) {
+  const r = findRec(recordId), src = r.sources || {};
+  const def = src.field === false ? 'field' : 'doc';
+  const d = await dialog({ title:t('supp_title'), message:t('supp_msg'), icon:'📎', okText:t('slot_pick'),
+    fields:[{ type:'radio', label:t('supp_which'), value:def, options:[{ v:'field', l:t('slot_field') + (src.field ? ' · ' + t('supp_replace') : '') }, { v:'doc', l:t('slot_doc') + (src.doc ? ' · ' + t('supp_replace') : '') }] }] });
+  if (d.ok && d.values[0]) supplementFile(d.values[0], recordId);
+}
+async function onSuppFile(ev) {
+  const f = ev.target.files[0]; ev.target.value = '';
+  if (!f || !SUPP.slot) return;
+  const payload = { slot:SUPP.slot, filename:f.name, file_base64:await readB64(f) };
+  if (SUPP.record_id) payload.record_id = SUPP.record_id;
+  const r = await runUpload({ round:1, url:'/api/finding/supplement', payload, label:`${t('slot_' + SUPP.slot)}: ${f.name}`, title:t('supp_title') });
+  if (r && r.status === 'ok') toast(r.record ? t('supp_done_saved') : t('supp_done'));
+}
+function renderSources() {
+  const show = STATE && !isEmpty() && !isR2() && STATE.sources;
+  srcBar.classList.toggle('hidden', !show);
+  if (!show) return;
+  const src = STATE.sources, up = can('can_upload_findings');
+  srcBar.innerHTML = `<div class="card p-3 sm:p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">${['field', 'doc'].map(k => {
+    const x = src[k], m = SLOT_META[k];
+    return x ? `<div class="flex items-center gap-3 rounded-xl border ${m.ring} px-3 py-2.5 min-w-0">
+        <span class="text-lg shrink-0">${m.icon}</span>
+        <div class="min-w-0 flex-1"><div class="text-[11px] font-black uppercase text-slate-500">${t('slot_' + k)} · <span class="text-emerald-700">✓ ${x.findings ?? '—'} ${t('st_findings').toLowerCase()}</span></div>
+          <div class="text-[13px] font-semibold truncate" title="${esc(x.filename)}">${esc(x.filename)}</div></div>
+        ${up ? `<button onclick="supplementFile('${k}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-[11px] font-bold shrink-0">${t('supp_replace')}</button>` : ''}</div>`
+      : `<div class="flex items-center gap-3 rounded-xl border-2 border-dashed border-amber-300 bg-amber-50 px-3 py-2.5 min-w-0">
+        <span class="text-lg shrink-0">⚠</span>
+        <div class="min-w-0 flex-1"><div class="text-[11px] font-black uppercase text-amber-800">${t('slot_' + k)}</div>
+          <div class="text-[12px] text-amber-800">${t('supp_missing')}</div></div>
+        ${up ? `<button onclick="supplementFile('${k}')" class="px-3 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-[12px] font-extrabold shrink-0">＋ ${t('supp_btn')}</button>` : ''}</div>`;
+  }).join('')}</div>`;
+}
+
+function renderUpResult() {
+  if (isR2()) {
+    const s1 = STATE.summary, s2 = STATE.round2.summary2, d = Math.round((s2.total_score - s1.total_score) * 100) / 100;
+    upResult.innerHTML = `<div class="rounded-xl border border-violet-200 bg-violet-50/60 p-4">
+      <div class="text-xs font-black uppercase text-violet-700 mb-3">✓ ${t('r2_done')}</div>
+      <div class="flex items-center justify-around text-center">
+        <div><div class="text-[10px] font-bold uppercase text-slate-400">${t('round1')}</div><div class="text-3xl font-black">${s1.total_score}</div><div class="text-xs font-bold">${s1.grade_level}</div></div>
+        <div class="text-xl font-black ${d >= 0 ? 'text-emerald-600' : 'text-red-600'}">→ ${d >= 0 ? '+' : ''}${d}</div>
+        <div><div class="text-[10px] font-bold uppercase text-violet-500">${t('round2')}</div><div class="text-3xl font-black text-violet-800">${s2.total_score}</div><div class="text-xs font-bold">${s2.grade_level}</div></div>
+      </div>
+      <div class="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="bg-white rounded-lg border py-1.5"><b class="text-emerald-600">${s2.closed_findings}/${s2.r1_findings}</b><div class="text-[10px] text-slate-400">${t('r2_closed')}</div></div>
+        <div class="bg-white rounded-lg border py-1.5"><b class="text-amber-600">${s2.missing_count}</b><div class="text-[10px] text-slate-400">${t('r2_missing')}</div></div>
+        <div class="bg-white rounded-lg border py-1.5"><b class="text-indigo-600">${s2.new_count}</b><div class="text-[10px] text-slate-400">${t('r2_new')}</div></div>
+      </div>
+      <div class="mt-3 text-xs font-semibold text-violet-900">🔒 ${t('r2_need_confirm')}</div></div>`;
+    return;
+  }
+  const s = STATE.summary, c = s.counts, qa = (STATE.qa_report || {}).total_issues || 0;
+  const main = STATE.checklist.filter(i => ['Priority','Major'].includes(i.significance));
+  const warns = s.audit_warnings || [];
+  upResult.innerHTML = `<div class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+      <div class="text-xs font-black uppercase text-emerald-700 mb-3">✓ ${t('up_done')}</div>
+      <div class="flex flex-wrap items-center gap-4">
+        <div class="text-center"><div class="text-4xl font-black text-slate-900 leading-none">${s.total_score}</div><div class="text-[10px] font-bold text-slate-400">/100</div></div>
+        <div class="text-center px-3 border-l border-emerald-200"><div class="text-[10px] font-bold uppercase text-slate-400">${t('st_grade')}</div><div class="text-2xl font-black ${['A','B'].includes(s.grade_level) ? 'text-emerald-600' : 'text-red-600'}">${s.grade_level}</div></div>
+        <div class="up-sev flex-1 grid grid-cols-4 gap-1.5">${['Priority','Major','Minor','Conformance'].map(k => `<div class="rounded-lg border sev-${k} px-1.5 py-1.5 text-center"><div class="text-lg font-black leading-none">${c[k]}</div><div class="text-[9px] font-bold uppercase mt-0.5">${t('sev_' + k)}</div></div>`).join('')}</div>
+      </div>
+      <div class="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="bg-white rounded-lg border border-slate-200 py-1.5"><b>${s.violated_items_count}/${s.total_items}</b><div class="text-[10px] text-slate-400">${t('st_violated')}</div></div>
+        <div class="bg-white rounded-lg border border-slate-200 py-1.5"><b>${s.total_findings}</b><div class="text-[10px] text-slate-400">${t('st_findings')}</div></div>
+        <div class="bg-white rounded-lg border border-slate-200 py-1.5"><b class="text-amber-600">${qa}</b><div class="text-[10px] text-slate-400">${t('up_qa')}</div></div>
+      </div>
+      ${(STATE.recurring || {}).count ? `<div class="mt-3 text-xs font-semibold text-fuchsia-800 bg-fuchsia-50 border border-fuchsia-200 rounded-lg p-2">🔁 ${STATE.recurring.count} ${t('rec_count')}</div>` : ''}
+      ${main.length ? `<div class="mt-3"><div class="text-[10px] font-bold uppercase text-slate-500 mb-1">${t('up_main_viol')}</div><div class="flex flex-wrap gap-1">${main.map(i => `<span class="px-2 py-0.5 rounded-md border text-[11px] font-mono font-bold sev-${i.significance}">${i.audit_id}</span>`).join('')}</div></div>` : ''}
+      ${warns.length ? `<div class="mt-3 text-[11px] text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-2"><b>${t('up_warn')} (${warns.length}):</b> ${warns.slice(0, 3).map(esc).join(' · ')}</div>` : ''}</div>`;
+}
+
+/* =================================================================
+   SAVE REPORT (new record, or update the record being edited)
+   ================================================================= */
+async function saveReport() {
+  if (!can('can_save_to_storage')) return toast(t('msg_no_perm'), 'err');
+  if (isR2() && !r2Confirmed()) return toast(t('r2_need_confirm'), 'err');
+  const m = STATE.metadata, w = STATE._ws || {};
+  let bound = null;
+  if (w.bound_record_id) { if (!STORAGE) await loadStorage(); bound = ((STORAGE || {}).records || []).find(r => r.record_id === w.bound_record_id); }
+  const canOverwrite = bound && bound.can_edit;
+  const fields = [];
+  if (canOverwrite) fields.push({ type:'radio', label:t('save_mode'), value:'overwrite', options:[{ v:'overwrite', l:`${t('save_overwrite')}: ${bound.title || bound.record_id}` }, { v:'new', l:t('save_new') }] });
+  fields.push({ label:t('title_lbl'), value: canOverwrite ? (bound.title || '') : `${m.vendor_short} · ${m.audit_date_raw}${isR2() ? ' · ' + t('round2') : ''}` });
+  fields.push({ label:t('note'), value: canOverwrite ? (bound.note || '') : '', type:'textarea' });
+  const d = await dialog({ title:t('save_title'), message:t('save_msg'), icon:'💾', okText:t('save'), fields });
+  if (!d.ok) return;
+  const off = canOverwrite ? 1 : 0;
+  const r = await api('/api/storage/save_session', { overwrite: canOverwrite && d.values[0] === 'overwrite', title:d.values[off], note:d.values[off + 1] });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STATE = r.data; STORAGE = r.storage; renderAll(); toast(t('msg_report_saved'));
+}
+
+/* =================================================================
+   TAB: STORAGE (round-2 reports grouped under their round-1 report)
+   ================================================================= */
+async function loadStorage() {
+  if (!can('can_view_storage')) return;
+  const r = await api('/api/storage/list');
+  if (r.status === 'error') return;
+  STORAGE = r; renderStorage();
+}
+function renderStorage() {
+  if (!STORAGE) return;
+  const folders = STORAGE.folders || [];
+  folderBox.classList.toggle('hidden', !isAdmin() || !folders.length);
+  folderGrid.innerHTML = folders.map(f => `<div class="rounded-xl bg-slate-50 border border-slate-200 p-3"><div class="flex justify-between text-[11px]"><span>📁</span><b class="text-slate-600">${f.file_count} ${t('files_unit')}</b></div><div class="font-mono text-[11px] font-bold text-slate-800 mt-1 truncate" title="${esc(f.folder_name)}">${esc(f.folder_name)}</div><div class="text-[10px] text-slate-400">${f.size_kb} KB</div></div>`).join('');
+  const recs = STORAGE.records || [];
+  if (!recs.length) { storageBody.innerHTML = `<tr><td colspan="6" class="p-10 text-center text-slate-400">${t('sto_empty')}</td></tr>`; return; }
+  const ids = new Set(recs.map(r => r.record_id));
+  const children = {};
+  recs.filter(r => r.parent_record_id && ids.has(r.parent_record_id)).forEach(r => (children[r.parent_record_id] = children[r.parent_record_id] || []).push(r));
+  const ordered = [];
+  recs.filter(r => !(r.parent_record_id && ids.has(r.parent_record_id))).forEach(r => { ordered.push([r, false]); (children[r.record_id] || []).forEach(c => ordered.push([c, true])); });
+  const fileBtn = (fm, lbl, cls) => fm && fm.rel_path ? `<a href="/api/storage/download?rel_path=${encodeURIComponent(fm.rel_path)}&token=${encodeURIComponent(TOKEN)}" class="px-2 py-1 rounded-md text-[10px] font-bold ${cls}">${lbl}</a>` : '';
+  const active = STATE && STATE._ws ? STATE._ws.bound_record_id : null;
+  storageBody.innerHTML = ordered.map(([r, child]) => {
+    const f = r.files || {}, rnd = r.round || 1;
+    return `<tr class="${child ? 'bg-violet-50/40' : ''} ${active === r.record_id ? 'ring-2 ring-inset ring-amber-300' : ''} hover:bg-slate-50/70">
+      <td class="px-4 py-3 ${child ? 'pl-10' : ''}"><div class="flex items-center gap-1.5">${child ? '<span class="text-violet-400">↳</span>' : ''}<span class="px-1.5 py-0.5 rounded text-[9px] font-black ${rnd > 1 ? 'bg-violet-600 text-white' : 'bg-blue-100 text-blue-700'}">${rnd > 1 ? t('round2') : t('round1')}</span><b class="text-slate-900">${esc(r.title || r.record_id)}</b></div>
+        <div class="text-[10px] text-slate-400 font-mono mt-0.5">${esc(r.record_id)} · ${esc(r.created_at)}${(r.revision || 1) > 1 ? ` · ${t('revision')} ${r.revision}` : ''}</div>${r.note ? `<div class="text-[11px] text-slate-500 mt-0.5">${esc(r.note)}</div>` : ''}${rnd === 1 && r.sources ? `<div class="flex flex-wrap gap-1 mt-1">${['field', 'doc'].map(k => `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${r.sources[k] ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-300'}">${r.sources[k] ? '✓' : '⚠'} ${t('slot_' + k)}${r.sources[k] ? '' : ' · ' + t('supp_missing_short')}</span>`).join('')}</div>` : ''}</td>
+      <td class="px-4 py-3" data-lbl="${t('col_vendor')}"><div class="font-bold">${esc(r.vendor_short)}</div><div class="text-[10px] text-slate-400">${esc(r.vendor_code)} · ${esc(r.audit_date)}</div></td>
+      <td class="px-4 py-3 text-center" data-lbl="${t('col_result')}"><span class="font-black text-slate-900">${r.total_score}</span> · <b class="${['A','B'].includes(r.grade_level) ? 'text-emerald-600' : 'text-red-600'}">${r.grade_level}</b><div class="text-[10px] text-slate-400">${r.violated_items_count}/41</div></td>
+      <td class="px-4 py-3 text-slate-600" data-lbl="${t('col_owner')}">${esc(r.created_by)}${r.updated_by ? `<div class="text-[10px] text-slate-400">✎ ${esc(r.updated_by)}</div>` : ''}</td>
+      <td class="px-4 py-3" data-lbl="${t('col_files')}"><div class="flex flex-wrap gap-1">${f.finding ? `<a href="/api/storage/finding?record_id=${r.record_id}&token=${encodeURIComponent(TOKEN)}" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700">Finding</a>` : ''}${fileBtn(f.checklist, 'XLSX', 'bg-emerald-50 text-emerald-700')}${fileBtn(f.report, 'DOCX', 'bg-sky-50 text-sky-700')}${fileBtn(f.finding_field, '🏭 ' + t('slot_field_short'), 'bg-blue-50 text-blue-700')}${fileBtn(f.finding_doc, '📑 ' + t('slot_doc_short'), 'bg-teal-50 text-teal-700')}
+        <button onclick="downloadBlob('/api/storage/pdf?record_id=${r.record_id}&token='+encodeURIComponent(TOKEN))" class="px-2 py-1 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700">PDF</button>
+        <button onclick="downloadBlob('/api/storage/zip?record_id=${r.record_id}&token='+encodeURIComponent(TOKEN))" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-800 text-white">ZIP</button></div></td>
+      <td class="px-4 py-3 text-right whitespace-nowrap space-x-1 sto-actions">
+        <button onclick="openRecord('${r.record_id}', false)" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white text-[11px] font-bold">${t('btn_open')}</button>
+        ${rnd === 1 && can('can_upload_round2') ? `<button onclick="startRound2('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg bg-violet-50 text-violet-700 border border-violet-200 text-[11px] font-bold hover:bg-violet-100">${t('btn_upload_r2')}</button>` : ''}
+        ${rnd === 1 && r.can_edit && can('can_upload_findings') ? `<button onclick="supplementPick('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg ${r.sources && (!r.sources.field || !r.sources.doc) ? 'bg-amber-600 text-white' : 'bg-amber-50 text-amber-800 border border-amber-200'} text-[11px] font-bold">📎 ${t('supp_btn')}</button>` : ''}
+        ${(r.revisions || []).length ? `<button onclick="showHistory('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold hover:bg-slate-100">🕘 ${t('btn_history')} (${r.revisions.length})</button>` : ''}
+        ${r.can_edit ? `<button onclick="editRecord('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold hover:bg-slate-100">${t('btn_edit')}</button>` : ''}
+        ${r.can_delete ? `<button onclick="deleteRecord('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 text-red-700 border border-red-200 text-[11px] font-bold hover:bg-red-100">${t('btn_delete')}</button>` : ''}
+      </td></tr>`;
+  }).join('');
+}
+function showHistory(id) {
+  const r = findRec(id);
+  const row = (e, current) => `<div class="p-3 rounded-xl border ${current ? 'border-blue-300 bg-blue-50/50' : 'border-slate-200'} flex flex-wrap items-center justify-between gap-3">
+    <div><div class="font-extrabold text-sm">${t('revision')} ${e.revision}${current ? ` · <span class="text-blue-700">${t('rev_current')}</span>` : ''}</div>
+      <div class="text-[11px] text-slate-500">${esc(e.saved_at)} · ${esc(e.saved_by)} · <b>${e.total_score}</b> (${e.grade_level}) · ${e.violated_items_count}/41</div>
+      ${e.note ? `<div class="text-[11px] text-slate-500">${esc(e.note)}</div>` : ''}</div>
+    <div class="flex flex-wrap gap-1">${Object.entries(e.files || {}).filter(([k]) => k !== 'bundle').map(([k, fm]) => `<a href="/api/storage/download?rel_path=${encodeURIComponent(fm.rel_path)}&token=${encodeURIComponent(TOKEN)}" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-100">${k.toUpperCase()}</a>`).join('')}
+      ${!current && r.can_edit ? `<button onclick="restoreRevision('${id}', ${e.revision})" class="px-2.5 py-1 rounded-md bg-amber-500 text-white text-[10px] font-black">${t('rev_restore')}</button>` : ''}</div></div>`;
+  const cur = { revision:r.revision || 1, saved_at:r.updated_at || r.created_at, saved_by:r.updated_by || r.created_by, total_score:r.total_score, grade_level:r.grade_level, violated_items_count:r.violated_items_count, note:r.note, files:r.files };
+  openPanel(`${t('rev_title')} · ${r.title || id}`, `<div class="space-y-2">${row(cur, true)}${(r.revisions || []).map(e => row(e, false)).join('') || `<div class="text-sm text-slate-400">${t('rev_empty')}</div>`}</div>`);
+}
+async function restoreRevision(id, rev) {
+  const d = await dialog({ title:t('rev_restore_title', { n:rev }), message:t('rev_restore_msg'), okText:t('rev_restore') });
+  if (!d.ok) return;
+  const r = await api('/api/storage/revision_restore', { record_id:id, revision:rev });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STORAGE = r.storage; renderStorage(); showHistory(id); toast(t('rev_restored'));
+}
+const findRec = id => ((STORAGE || {}).records || []).find(r => r.record_id === id) || {};
+async function openRecord(id, edit) {
+  if (!edit) {
+    const d = await dialog({ title:t('open_title'), message:`${findRec(id).title || id}\n${t('open_msg')}`, icon:'📂', okText:t('btn_open') });
+    if (!d.ok) return;
+  }
+  if (STATE && !STATE.empty && STATE._ws.dirty) await autosaveNow(true);
+  const r = await api('/api/storage/load_session', { record_id:id, edit:!!edit });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STATE = r.data; EXPANDED.clear(); R2_EXPANDED.clear(); TAB = isR2() ? 'round2' : 'checklist'; renderAll();
+  window.scrollTo({ top:0, behavior:'smooth' }); toast(t('msg_loaded'));
+}
+async function editRecord(id) {
+  const rec = findRec(id);
+  const d = await dialog({ title:t('edit_title'), message:t('edit_msg'), okText:t('save'),
+    fields:[{ label:t('title_lbl'), value:rec.title || rec.record_id }, { label:t('note'), value:rec.note || '', type:'textarea' }, { type:'checkbox', label:t('edit_content'), value:false }] });
+  if (!d.ok) return;
+  const r = await api('/api/storage/update_record', { record_id:id, title:d.values[0], note:d.values[1] });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STORAGE = r.storage; renderStorage(); toast(t('msg_updated'));
+  if (d.values[2]) openRecord(id, true);
+}
+async function deleteRecord(id) {
+  const rec = findRec(id);
+  const hasChildren = ((STORAGE || {}).records || []).some(r => r.parent_record_id === id);
+  const d = await dialog({ title:t('del_title'), message:`"${rec.title || id}"\n${t('del_msg')}${hasChildren ? '\n' + t('del_cascade') : ''}`, danger:true, okText:t('btn_delete') });
+  if (!d.ok) return;
+  const r = await api('/api/storage/delete_record', { record_id:id });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  STORAGE = r.storage;
+  if (STATE && STATE._ws && STATE._ws.bound_record_id === id) { STATE._ws.bound_record_id = null; STATE._ws.bound_title = ''; }
+  renderAll(); renderStorage(); toast(t('msg_deleted'));
+}
+
+/* =================================================================
+   ACCOUNT CENTER
+   ================================================================= */
+async function openAccount() {
+  ACC_OPEN = true;
+  accountOverlay.classList.remove('hidden');
+  accountPanel.style.maxWidth = isAdmin() ? '1280px' : '640px';
+  if (isAdmin()) SESSION = Object.assign(SESSION, await api('/api/auth/session'));
+  if (!isAdmin()) ACC_TAB = 'profile';
+  renderAccount();
+}
+function closeAccount() { ACC_OPEN = false; accountOverlay.classList.add('hidden'); }
+function renderAccount() {
+  const u = SESSION.user || {};
+  accAvatar.textContent = (u.display_name || '?').charAt(0).toUpperCase();
+  accAvatar.className = `w-11 h-11 rounded-xl flex items-center justify-center font-black ${isAdmin() ? 'gold' : 'bg-slate-500'}`;
+  accName.textContent = u.display_name; accRole.textContent = `@${u.username} · ${isAdmin() ? t('role_admin') : t('role_guest')}`;
+  const adminItems = [['perms','🔐'],['users','👥'],['master','🗄️'],['learning','💡'],['notify','🔔'],['backup','🛟'],['logs','📜']];
+  accNav.innerHTML = navBtn(['profile','👤']) + (isAdmin() ? `<div class="pt-4 pb-1.5 px-3 text-[10px] font-black uppercase tracking-wider text-amber-600">${t('admin_area')}</div>` + adminItems.map(navBtn).join('') : '');
+  accNav.classList.toggle('hidden', !isAdmin());
+  ({ profile:accProfile, perms:accPerms, users:accUsers, master:accMaster, learning:accLearning, notify:accNotify, backup:accBackup, logs:accLogs }[ACC_TAB] || accProfile)();
+}
+const navBtn = ([k, ic]) => `<button onclick="ACC_TAB='${k}';renderAccount()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2.5 ${ACC_TAB === k ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'}"><span>${ic}</span>${t('acc_' + k)}</button>`;
+
+function accProfile() {
+  const u = SESSION.user || {};
+  accBody.innerHTML = `<h3 class="text-lg font-black mb-4">${t('acc_profile')}</h3>
+    <div class="card p-5 grid grid-cols-2 gap-4 text-sm">
+      <div><div class="lbl">${t('display_name')}</div><div class="font-bold">${esc(u.display_name)}</div></div>
+      <div><div class="lbl">${t('username')}</div><div class="font-mono font-bold">${esc(u.username)}</div></div>
+      <div><div class="lbl">${t('role')}</div><div class="font-bold">${isAdmin() ? '👑 ' + t('role_admin') : t('role_guest')}</div></div>
+      <div><div class="lbl">${t('login_at')}</div><div>${esc((u.login_at || '').replace('T', ' ').slice(0, 19))}</div></div></div>
+    ${!u.quick_guest ? `<div class="card p-5 mt-4"><div class="lbl">${t('change_pw')}</div><div class="grid grid-cols-1 md:grid-cols-4 gap-2">
+      <input id="myOldPw" type="password" class="inp" placeholder="${t('pw_current')}"/><input id="myNewPw" type="password" class="inp" placeholder="${t('new_pw')}"/>
+      <input id="myNewPw2" type="password" class="inp" placeholder="${t('pw_confirm')}"/><button onclick="changeMyPw()" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">${t('save')}</button></div>
+      <p class="text-[11px] text-slate-500 mt-2">${t('pw_rule')}</p></div>` : ''}
+    ${isAdmin() ? `<div class="card p-4 mt-4 text-sm"><span class="lbl inline">${t('pdf_engine_lbl')}:</span> <b>${esc(SESSION.pdf_engine || t('pdf_none'))}</b></div>` : `
+    <div class="card p-5 mt-4"><div class="lbl mb-2">${t('my_perms')}</div><div class="space-y-1.5">${PERMS.map(p => `<div class="flex items-center justify-between text-sm py-1.5 border-b border-slate-100 last:border-0"><span>${t('perm_' + p)}</span><span class="${can(p) ? 'text-emerald-600' : 'text-slate-300'} font-black">${can(p) ? '✓' : '✕'}</span></div>`).join('')}</div></div>`}`;
+}
+async function changeMyPw() {
+  if (myNewPw.value !== myNewPw2.value) return toast(t('pw_mismatch'), 'err');
+  const r = await api('/api/auth/change_password', { old_password:myOldPw.value, new_password:myNewPw.value });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  SESSION = Object.assign(SESSION, r.session); myOldPw.value = myNewPw.value = myNewPw2.value = ''; toast(t('pw_changed'));
+}
+function accPerms() {
+  const ad = SESSION.admin_data || {}, gp = ad.guest_permissions || {};
+  accBody.innerHTML = `<div class="flex items-center justify-between mb-4"><h3 class="text-lg font-black">${t('acc_perms')}</h3><button onclick="savePerms()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">${t('save_perms')}</button></div>
+    <label class="card p-4 mb-3 flex items-center justify-between gap-4 cursor-pointer border-amber-200 bg-amber-50/50"><div><div class="font-bold text-sm">${t('allow_quick_guest')}</div><div class="text-xs text-slate-500">${t('allow_quick_guest_d')}</div></div><input id="pQuick" type="checkbox" class="w-5 h-5 accent-blue-600" ${ad.allow_quick_guest_login ? 'checked' : ''}/></label>
+    <div class="card divide-y divide-slate-100">${PERMS.map(p => `<label class="flex items-center justify-between px-4 py-3.5 cursor-pointer hover:bg-slate-50"><span class="text-sm font-semibold">${t('perm_' + p)}</span><input type="checkbox" data-perm="${p}" class="w-5 h-5 accent-blue-600" ${gp[p] ? 'checked' : ''}/></label>`).join('')}</div>
+    <div class="card p-4 mt-4"><div class="lbl">🛡 ${t('sec_title')}</div><div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      ${[['session_idle_minutes','sec_idle'],['session_max_hours','sec_max'],['max_failed_logins','sec_fail'],['lock_minutes','sec_lock']].map(([k, l]) => `<div><label class="text-[11px] font-semibold text-slate-500">${t(l)}</label><input type="number" data-sec="${k}" class="inp" value="${(SESSION.security || {})[k] ?? ''}"/></div>`).join('')}
+    </div></div>`;
+}
+async function savePerms() {
+  const guest_permissions = {}; document.querySelectorAll('[data-perm]').forEach(c => guest_permissions[c.dataset.perm] = c.checked);
+  const security = {}; document.querySelectorAll('[data-sec]').forEach(i => security[i.dataset.sec] = Number(i.value));
+  const r = await api('/api/admin/permissions', { guest_permissions, allow_quick_guest_login:pQuick.checked, security });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  SESSION = Object.assign(SESSION, await api('/api/auth/session')); toast(t('msg_saved'));
+}
+function accUsers() {
+  const users = (SESSION.admin_data || {}).users || [];
+  accBody.innerHTML = `<h3 class="text-lg font-black mb-4">${t('acc_users')}</h3>
+    <form onsubmit="createUser(event)" class="card p-4 grid grid-cols-1 md:grid-cols-5 gap-2.5 items-end mb-4">
+      <div><label class="lbl">${t('username')}</label><input id="nuU" class="inp" required/></div>
+      <div><label class="lbl">${t('password')}</label><input id="nuP" class="inp" required/></div>
+      <div><label class="lbl">${t('display_name')}</label><input id="nuN" class="inp"/></div>
+      <div><label class="lbl">${t('role')}</label><select id="nuR" class="inp"><option value="guest">${t('role_guest')}</option><option value="admin">${t('role_admin')}</option></select></div>
+      <button class="py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold">+ ${t('create_user')}</button></form>
+    <div class="card divide-y divide-slate-100">${users.map(u => {
+      const root = u.username === 'ngocngon';
+      return `<div class="px-4 py-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg flex items-center justify-center font-black text-white ${u.role === 'admin' ? 'gold' : 'bg-slate-400'}">${esc(u.display_name.charAt(0).toUpperCase())}</span>
+          <div><div class="font-bold text-sm">${esc(u.display_name)} <span class="font-mono text-xs text-slate-400">@${esc(u.username)}</span></div>
+          <div class="text-[11px] text-slate-500">${u.role === 'admin' ? t('role_admin') : t('role_guest')} · <span class="${u.active ? 'text-emerald-600' : 'text-red-600'} font-bold">${u.active ? t('active') : t('locked')}</span></div></div></div>
+        <div class="flex gap-1.5"><button onclick="resetPw('${esc(u.username)}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold">${t('reset_pw')}</button>
+          ${root ? `<span class="px-2.5 py-1.5 text-[11px] font-black text-amber-600">${t('root_admin')}</span>` : `
+          <button onclick="userAction('toggle_active','${esc(u.username)}')" class="px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-bold">${u.active ? t('lock') : t('unlock')}</button>
+          <button onclick="deleteUser('${esc(u.username)}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 text-red-700 border border-red-200 text-[11px] font-bold">${t('btn_delete')}</button>`}</div></div>`;
+    }).join('')}</div>`;
+}
+async function refreshAdmin() { SESSION = Object.assign(SESSION, await api('/api/auth/session')); renderAccount(); }
+async function createUser(e) {
+  e.preventDefault();
+  const r = await api('/api/admin/users', { action:'create', username:nuU.value.trim(), password:nuP.value.trim(), display_name:nuN.value.trim() || nuU.value.trim(), role:nuR.value });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  toast(t('msg_saved')); refreshAdmin();
+}
+async function userAction(action, username, extra = {}) {
+  const r = await api('/api/admin/users', Object.assign({ action, username }, extra));
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  toast(t('msg_updated')); refreshAdmin();
+}
+async function resetPw(username) {
+  const d = await dialog({ title:`${t('reset_pw')} · @${username}`, okText:t('save'), fields:[{ label:t('new_pw'), type:'password' }] });
+  if (d.ok && d.values[0].trim()) userAction('reset_password', username, { password:d.values[0].trim() });
+}
+async function deleteUser(username) {
+  const d = await dialog({ title:t('del_user_title'), message:`@${username} — ${t('del_user_msg')}`, danger:true, okText:t('btn_delete') });
+  if (d.ok) userAction('delete', username);
+}
+
+async function accMaster() {
+  if (!MASTER) { accBody.innerHTML = '<div class="p-10 text-center text-slate-400">…</div>'; const r = await api('/api/master_rules'); if (r.status === 'error') return toast(r.message, 'err'); MASTER = r; }
+  const sc = (it, g, col) => `<input type="number" step="0.1" data-mc="${it.audit_id}" data-ms="${g}" value="${(it.scores || {})[g] ?? 0}" class="w-14 text-center border rounded-md py-1 font-mono font-bold text-xs ${col}"/>`;
+  accBody.innerHTML = `<div class="flex items-center justify-between mb-4">
+      <div><h3 class="text-lg font-black">${t('acc_master')}</h3><p class="text-[11px] text-slate-400 font-mono">database/rba_801_master_rules.json · ${esc((MASTER.updated_at || '').replace('T', ' ').slice(0, 16))}</p></div>
+      <div class="flex gap-2"><button onclick="resetMaster()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold">↺ ${t('m_reset')}</button><button onclick="saveMaster()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">💾 ${t('m_save')}</button></div></div>
+    <div class="lbl">${t('m_groups')}</div>
+    <div class="grid grid-cols-2 lg:grid-cols-6 gap-2 mb-5">${(MASTER.category_groups || []).map(g => `<div class="card p-3"><div class="flex justify-between text-xs"><b>${esc(g.category)}</b><span class="text-blue-700 font-bold">${g.standard_items} ${t('m_codes')}</span></div><div class="text-[10px] font-mono text-slate-500 mt-1 leading-relaxed">${g.codes.join(' ')}</div></div>`).join('')}</div>
+    <div class="flex items-center justify-between mb-2"><div class="lbl !mb-0">${t('m_rules')}</div><input id="mSearch" oninput="filterMaster()" class="inp !w-52 !py-1.5" placeholder="${t('search_ph')}"/></div>
+    <div class="card overflow-x-auto scroll"><table class="w-full text-xs"><thead class="bg-slate-50 text-[10px] uppercase text-slate-500"><tr>
+        <th class="px-3 py-2.5 text-left">Code</th><th class="px-3 py-2.5 text-left">${t('m_desc')}</th><th class="px-1 py-2.5 text-emerald-700">${t('sev_Conformance')}</th><th class="px-1 py-2.5 text-yellow-700">Minor</th><th class="px-1 py-2.5 text-orange-700">Major</th><th class="px-1 py-2.5 text-red-700">Priority</th>
+        <th class="px-2 py-2.5">${t('penalty')} F/G</th><th class="px-2 py-2.5">${t('m_thr')}</th><th class="px-3 py-2.5 text-left">${t('m_pkw')}</th><th class="px-3 py-2.5 text-left">${t('m_mkw')}</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">${(MASTER.items || []).map(it => { const r = it.rule || {}; return `<tr data-mrow="${it.audit_id} ${esc((r.desc || '') + ' ' + it.sub_category).toLowerCase()}" class="hover:bg-slate-50">
+          <td class="px-3 py-2 font-mono font-black">${it.audit_id}</td>
+          <td class="px-3 py-2 min-w-[200px]"><input data-mc="${it.audit_id}" data-mf="desc" value="${esc(r.desc || it.sub_category)}" class="w-full border border-slate-200 rounded-md px-2 py-1 text-xs"/></td>
+          <td class="px-1 py-2 text-center">${sc(it, 'Conformance', 'border-emerald-200')}</td><td class="px-1 py-2 text-center">${sc(it, 'Minor', 'border-yellow-200')}</td><td class="px-1 py-2 text-center">${sc(it, 'Major', 'border-orange-200')}</td><td class="px-1 py-2 text-center">${sc(it, 'Priority', 'border-red-200')}</td>
+          <td class="px-2 py-2 text-center whitespace-nowrap"><input data-mc="${it.audit_id}" data-mf="penalty_item" value="${esc(it.penalty_item || '')}" class="w-8 text-center border border-slate-200 rounded-md py-1 text-xs font-bold"/> <input data-mc="${it.audit_id}" data-mf="penalty_criteria" value="${esc(it.penalty_criteria || '')}" class="w-16 text-center border border-slate-200 rounded-md py-1 text-[10px]"/></td>
+          <td class="px-2 py-2 text-center"><input type="number" min="1" data-mc="${it.audit_id}" data-mf="major_min_count" value="${r.major_min_count ?? 2}" class="w-12 text-center border border-slate-200 rounded-md py-1 text-xs font-bold"/></td>
+          <td class="px-3 py-2 min-w-[220px]"><input data-mc="${it.audit_id}" data-mf="priority_kw" value="${esc((r.priority_kw || []).join(', '))}" class="w-full border border-red-100 bg-red-50/30 rounded-md px-2 py-1 text-[11px]"/></td>
+          <td class="px-3 py-2 min-w-[220px]"><input data-mc="${it.audit_id}" data-mf="major_kw" value="${esc((r.major_kw || []).join(', '))}" class="w-full border border-orange-100 bg-orange-50/30 rounded-md px-2 py-1 text-[11px]"/></td></tr>`; }).join('')}</tbody></table></div>`;
+}
+function filterMaster() { const q = mSearch.value.trim().toLowerCase(); document.querySelectorAll('[data-mrow]').forEach(tr => tr.style.display = !q || tr.dataset.mrow.toLowerCase().includes(q) ? '' : 'none'); }
+async function saveMaster() {
+  const d = await dialog({ title:t('m_save_title'), message:t('m_save_msg'), okText:t('m_save') });
+  if (!d.ok) return;
+  const up = {};
+  document.querySelectorAll('[data-mc]').forEach(el => {
+    const c = el.dataset.mc; up[c] = up[c] || { scores:{}, rule:{} };
+    if (el.dataset.ms) up[c].scores[el.dataset.ms] = parseFloat(el.value || '0');
+    const f = el.dataset.mf;
+    if (f === 'penalty_item' || f === 'penalty_criteria') up[c][f] = el.value.trim();
+    else if (f === 'desc') up[c].rule.desc = el.value.trim();
+    else if (f === 'major_min_count') up[c].rule.major_min_count = parseInt(el.value || '2', 10);
+    else if (f === 'priority_kw' || f === 'major_kw') up[c].rule[f] = el.value.split(',').map(s => s.trim()).filter(Boolean);
+  });
+  const r = await api('/api/master_rules/update', { item_updates:up });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  MASTER = r.master_rules; if (r.data) STATE = r.data; renderAll(); accMaster(); toast(t('msg_saved'));
+}
+async function resetMaster() {
+  const d = await dialog({ title:t('m_reset_title'), message:t('m_reset_msg'), danger:true, okText:t('m_reset') });
+  if (!d.ok) return;
+  const r = await api('/api/master_rules/reset', {});
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  MASTER = r.master_rules; if (r.data) STATE = r.data; renderAll(); accMaster(); toast(t('msg_updated'));
+}
+
+async function accBackup() {
+  const r = await api('/api/admin/backups');
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  BACKUPS = r.backups;
+  accBody.innerHTML = `<div class="flex items-center justify-between mb-2"><h3 class="text-lg font-black">${t('acc_backup')}</h3></div>
+    <div class="text-xs text-slate-600 bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">🛟 ${t('bk_info')}</div>
+    <div class="card p-4 mb-4 flex flex-wrap items-end gap-3">
+      <div class="flex-1 min-w-[200px]"><label class="lbl">${t('bk_note')}</label><input id="bkNote" class="inp"/></div>
+      <label class="flex items-center gap-2 text-sm pb-2"><input id="bkFull" type="checkbox" class="w-4 h-4 accent-blue-600"/>${t('bk_include_storage')}</label>
+      <button onclick="createBackup()" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold">+ ${t('bk_create')}</button>
+      <button onclick="bkUpload.click()" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-800 text-xs font-bold">⬆ ${t('bk_upload')}</button>
+      <input id="bkUpload" type="file" accept=".zip" class="hidden" onchange="uploadBackup(event)"/></div>
+    <div class="card divide-y divide-slate-100">${BACKUPS.length ? BACKUPS.map(b => `<div class="px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div><div class="font-mono text-xs font-bold">${esc(b.name)}</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">${esc(b.created_at)} · ${b.size_mb} MB · <span class="px-1.5 py-0.5 rounded bg-slate-100 font-bold">${t('bk_kind_' + b.kind)}</span>
+        ${b.include_storage ? '<span class="px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 font-bold">+ storage</span>' : ''}${b.known_good ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">✓ ${t('bk_good')}</span>` : ''}
+        ${b.note ? ` · ${esc(b.note)}` : ''}</div></div>
+      <div class="flex gap-1.5"><button onclick="downloadBlob('/api/admin/backups/download?name=${encodeURIComponent(b.name)}&token=${encodeURIComponent(TOKEN)}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-[11px] font-bold">${t('bk_download')}</button>
+        <button onclick="restoreBackup('${esc(b.name)}', ${!!b.include_storage})" class="px-2.5 py-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-bold">${t('bk_restore')}</button>
+        <button onclick="deleteBackup('${esc(b.name)}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 text-red-700 border border-red-200 text-[11px] font-bold">${t('btn_delete')}</button></div></div>`).join('') : `<div class="p-8 text-center text-sm text-slate-400">${t('bk_empty')}</div>`}</div>`;
+}
+async function createBackup() {
+  toast(t('up_busy'));
+  const r = await api('/api/admin/backups/create', { include_storage:bkFull.checked, note:bkNote.value.trim() });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  toast(`${t('msg_saved')}: ${r.backup.name}`); accBackup();
+}
+async function uploadBackup(e) {
+  const f = e.target.files[0]; e.target.value = '';
+  if (!f) return;
+  toast(t('up_busy'));
+  const r = await api('/api/admin/backups/upload', { filename:f.name, file_base64:await readB64(f) });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  toast(`${t('bk_uploaded')}: ${r.name}`); accBackup();
+}
+async function restoreBackup(name, hasStorage) {
+  const fields = [{ type:'checkbox', label:t('bk_r_code'), value:true }, { type:'checkbox', label:t('bk_r_data'), value:true }];
+  if (hasStorage) fields.push({ type:'checkbox', label:t('bk_r_storage'), value:true });
+  const d = await dialog({ title:t('bk_restore_title'), message:`${name}\n${t('bk_restore_msg')}`, danger:true, okText:t('bk_restore'), fields });
+  if (!d.ok) return;
+  const r = await api('/api/admin/backups/restore', { name, restore_code:d.values[0], restore_data:d.values[1], restore_storage:!!d.values[2] });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  if (r.restarting) {
+    restartOverlay.classList.remove('hidden'); restartOverlay.classList.add('flex');
+    setTimeout(function poll() { fetch('/api/auth/session').then(x => x.ok ? location.reload() : setTimeout(poll, 1500)).catch(() => setTimeout(poll, 1500)); }, 2500);
+  } else { toast(r.manual_restart_required ? t('bk_manual_restart') : t('bk_restored')); accBackup(); }
+}
+async function deleteBackup(name) {
+  const d = await dialog({ title:t('bk_del_title'), message:name, danger:true, okText:t('btn_delete') });
+  if (!d.ok) return;
+  const r = await api('/api/admin/backups/delete', { name });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  accBackup();
+}
+
+let NOTIFY = null;
+async function accNotify() {
+  const r = await api('/api/admin/notify');
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  NOTIFY = r.config; const e = NOTIFY.email, z = NOTIFY.zalo, w = NOTIFY.webhook;
+  const inp = (id, v, type = 'text') => `<input id="${id}" type="${type}" class="inp" value="${esc(v ?? '')}"/>`;
+  const sw = (id, v, lbl) => `<label class="flex items-center gap-2 text-sm font-bold cursor-pointer"><input id="${id}" type="checkbox" class="w-4 h-4 accent-blue-600" ${v ? 'checked' : ''}/>${lbl}</label>`;
+  accBody.innerHTML = `<div class="flex items-center justify-between mb-2"><h3 class="text-lg font-black">${t('acc_notify')}</h3>
+      <div class="flex gap-2"><button onclick="testNotify()" class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold">✉ ${t('n_test')}</button><button onclick="saveNotify()" class="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">💾 ${t('n_save')}</button></div></div>
+    <div class="text-xs text-slate-600 bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">ℹ ${t('n_hint')}</div>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+      <div class="card p-4 space-y-3"><div class="flex items-center justify-between"><b>📧 ${t('n_email')}</b>${sw('nE', e.enabled, t('n_enabled'))}</div>
+        <div class="grid grid-cols-3 gap-2"><div class="col-span-2"><label class="lbl">${t('n_host')}</label>${inp('nHost', e.host)}</div><div><label class="lbl">${t('n_port')}</label>${inp('nPort', e.port, 'number')}</div></div>
+        <div class="grid grid-cols-2 gap-2"><div><label class="lbl">${t('n_security')}</label><select id="nSec" class="inp">${['starttls','ssl','none'].map(x => `<option ${e.security === x ? 'selected' : ''}>${x}</option>`).join('')}</select></div><div><label class="lbl">${t('n_sender')}</label>${inp('nSender', e.sender)}</div></div>
+        <div class="grid grid-cols-2 gap-2"><div><label class="lbl">${t('n_user')}</label>${inp('nUser', e.username)}</div><div><label class="lbl">${t('n_pass')}</label>${inp('nPass', e.password, 'password')}</div></div>
+        <div><label class="lbl">${t('n_recipients')}</label><textarea id="nRcpt" rows="2" class="inp">${esc((e.recipients || []).join(', '))}</textarea></div>${sw('nAttach', e.attach_files, t('n_attach'))}</div>
+      <div class="space-y-4">
+        <div class="card p-4 space-y-3"><div class="flex items-center justify-between"><b>💬 ${t('n_zalo')}</b>${sw('nZ', z.enabled, t('n_enabled'))}</div>
+          <div><label class="lbl">${t('n_token')}</label>${inp('nZTok', z.access_token, 'password')}</div><div><label class="lbl">${t('n_uids')}</label>${inp('nZUid', (z.user_ids || []).join(', '))}</div></div>
+        <div class="card p-4 space-y-3"><div class="flex items-center justify-between"><b>🔗 ${t('n_webhook')}</b>${sw('nW', w.enabled, t('n_enabled'))}</div><div><label class="lbl">${t('n_url')}</label>${inp('nWUrl', w.url)}</div></div>
+        <div class="card p-4"><div class="lbl">${t('n_events')}</div><div class="space-y-1.5">${r.events.map(ev => sw('nEv_' + ev, NOTIFY.events[ev], t('ev_' + ev))).join('')}</div></div>
+      </div></div>
+    <div class="card mt-4"><div class="px-4 py-2.5 border-b lbl !mb-0">${t('n_log')}</div><div class="divide-y divide-slate-100 max-h-64 overflow-y-auto scroll">${(NOTIFY.log || []).map(l => `<div class="px-4 py-2 text-xs flex justify-between gap-3"><span><b class="${l.ok ? 'text-emerald-600' : 'text-red-600'}">${l.ok ? '✓' : '✕'} ${esc(l.channel)}</b> · ${t('ev_' + l.event)} · <span class="text-slate-500">${esc(l.detail)}</span></span><span class="font-mono text-slate-400 shrink-0">${esc(l.time)}</span></div>`).join('') || '<div class="p-4 text-xs text-slate-400">—</div>'}</div></div>`;
+}
+function collectNotify() {
+  const events = {}; Object.keys(NOTIFY.events).forEach(ev => { const el = document.getElementById('nEv_' + ev); if (el) events[ev] = el.checked; });
+  return { email:{ enabled:nE.checked, host:nHost.value.trim(), port:Number(nPort.value || 587), security:nSec.value, sender:nSender.value.trim(), username:nUser.value.trim(), password:nPass.value, recipients:nRcpt.value, attach_files:nAttach.checked },
+    zalo:{ enabled:nZ.checked, access_token:nZTok.value, user_ids:nZUid.value }, webhook:{ enabled:nW.checked, url:nWUrl.value.trim() }, events };
+}
+async function saveNotify() { const r = await api('/api/admin/notify/save', { config:collectNotify() }); if (r.status !== 'ok') return toast(r.message, 'err'); toast(t('msg_saved')); accNotify(); }
+async function testNotify() { await api('/api/admin/notify/save', { config:collectNotify() }); toast(t('pdf_busy')); const r = await api('/api/admin/notify/test', {}); if (r.status !== 'ok') return toast(r.message, 'err'); toast(t('n_test_sent')); accNotify(); }
+
+async function accLearning() {
+  const r = await api('/api/admin/learning');
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  const sm = r.summary;
+  accBody.innerHTML = `<h3 class="text-lg font-black mb-2">${t('acc_learning')}</h3>
+    <div class="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4">💡 ${t('l_intro')}</div>
+    <div class="space-y-2 mb-5">${r.suggestions.length ? r.suggestions.map(sg => `<div class="card p-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="min-w-0"><div class="font-bold text-sm">${esc(sg.text)}</div>
+        <div class="text-[11px] text-slate-500 mt-0.5"><b class="font-mono">${sg.audit_id}</b> · ${esc(sg.desc)} · ${sg.events} ${t('l_times')}: ${t('l_auto')} → ${t('l_manual')} <b>${t('sev_' + sg.target)}</b></div>
+        ${sg.examples.map(x => `<div class="text-[11px] text-slate-400 truncate">• ${esc(x.time)} · ${esc(x.actor)} · ${esc(x.vendor)} · ${x.auto} → ${x.manual} · ${esc(x.issue)}</div>`).join('')}</div>
+      <div class="flex gap-1.5"><button onclick="learnAct('dismiss', '${encodeURIComponent(sg.key)}')" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold">${t('l_dismiss')}</button>
+        <button onclick="learnAct('apply', '${encodeURIComponent(sg.key)}', '${encodeURIComponent(sg.text)}')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold">${t('l_apply')}</button></div></div>`).join('') : `<div class="card p-8 text-center text-sm text-slate-400">${t('l_none')}</div>`}</div>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+      <div class="card"><div class="px-4 py-2.5 border-b lbl !mb-0">${t('l_events')} (${sm.total_events})</div><div class="divide-y divide-slate-100 max-h-72 overflow-y-auto scroll">${sm.events.map(e => `<div class="px-4 py-2 text-xs"><b class="font-mono">${e.audit_id}</b> · ${e.auto} → <b>${e.manual}</b> · ${esc(e.actor)} · ${esc(e.vendor)}<div class="text-slate-400">${esc(e.time)}</div></div>`).join('') || '<div class="p-4 text-xs text-slate-400">—</div>'}</div></div>
+      <div class="card"><div class="px-4 py-2.5 border-b lbl !mb-0">${t('l_applied')}</div><div class="divide-y divide-slate-100 max-h-72 overflow-y-auto scroll">${sm.applied.map(a => `<div class="px-4 py-2 text-xs">${esc(a.text)}<div class="text-slate-400">${esc(a.time)} · ${esc(a.by)}</div></div>`).join('') || '<div class="p-4 text-xs text-slate-400">—</div>'}</div></div></div>`;
+}
+async function learnAct(action, keyEnc, textEnc) {
+  if (action === 'apply') { const d = await dialog({ title:t('l_apply_title'), message:decodeURIComponent(textEnc || ''), okText:t('l_apply') }); if (!d.ok) return; }
+  const r = await api('/api/admin/learning/' + action, { key:decodeURIComponent(keyEnc) });
+  if (r.status !== 'ok') return toast(r.message, 'err');
+  MASTER = null; toast(t('msg_saved')); accLearning();
+}
+
+function accLogs() {
+  const logs = (SESSION.admin_data || {}).audit_logs || [];
+  accBody.innerHTML = `<h3 class="text-lg font-black mb-4">${t('acc_logs')}</h3>
+    <div class="card divide-y divide-slate-100">${logs.map(l => `<div class="px-4 py-2.5 flex justify-between gap-4 text-sm"><div><b>${esc(l.actor)}</b> <span class="text-slate-600">${esc(l.action)}</span></div><span class="font-mono text-[11px] text-slate-400 shrink-0">${esc(l.time)}</span></div>`).join('')}</div>`;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && ACC_OPEN) closeAccount(); });
+boot();
+</script>
+</body>
+</html>

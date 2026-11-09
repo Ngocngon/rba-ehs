@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: rba-audit-automation
+    env: python
+    buildCommand: ""
+    startCommand: "HOST=0.0.0.0 RBA_TRUST_PROXY=1 python3 server.py"
+    plan: free
