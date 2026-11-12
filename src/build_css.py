@@ -33,7 +33,8 @@ def compile_css(source, browser):
         src = os.path.join(tmpdir, "page.html")
         with open(src, "w", encoding="utf-8") as f:
             f.write(page)
-        dom = subprocess.run([browser, "--headless=new", "--disable-gpu", f"--user-data-dir={os.path.join(tmpdir, 'profile')}",
+        dom = subprocess.run([browser, "--headless=new", "--no-sandbox", "--disable-dev-shm-usage",
+                              "--disable-gpu", f"--user-data-dir={os.path.join(tmpdir, 'profile')}",
                               "--no-first-run", "--virtual-time-budget=15000", "--dump-dom", pathlib.Path(src).as_uri()],
                              check=True, timeout=120, capture_output=True, text=True, encoding="utf-8").stdout
     finally:

@@ -11,6 +11,19 @@ const queue = [];
 
 const post = (type, extra) => self.postMessage(Object.assign({ type }, extra || {}));
 
+// Synchronous HTTP POST helper for Pyodide (used by translator.py for multi-language GTX batch translation)
+self.rbaHttpPost = function (url, body) {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, false);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    xhr.send(body || '');
+    return (xhr.status >= 200 && xhr.status < 300) ? (xhr.responseText || '') : '';
+  } catch (e) {
+    return '';
+  }
+};
+
 function syncfs(populate) {
   return new Promise((res, rej) => py.FS.syncfs(populate, e => e ? rej(e) : res()));
 }

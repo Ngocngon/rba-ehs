@@ -132,7 +132,8 @@ def _pdf_html(h, parsed):
     data = ws['data']
     r2s = data['round2']['summary2'] if ws['mode'] == 'round2' else None
     title = S.report_title(data.get('metadata', {}), 2 if r2s else 1)
-    html_text = S.build_report_html(S.docx_view_data(ws), r2s, title)
+    lang = qs.get('lang', ['vi_ko'])[0]
+    html_text = S.build_report_html(S.docx_view_data(ws), r2s, title, lang_mode=lang)
     html_text = html_text.replace('<head>', f'<head><title>{title}</title>', 1) if '<title>' not in html_text else html_text
     payload = html_text.encode('utf-8')
     h.send_response(200)
@@ -167,6 +168,14 @@ def handle(method, path, headers_json, body_js=None):
         payload = json.dumps({'status': 'error', 'message': f'Lỗi xử lý: {e}'}, ensure_ascii=False).encode('utf-8')
         return 500, json.dumps([['Content-Type', 'application/json; charset=utf-8']]), payload
     status, hdrs, out = _parse_raw(h.wfile.getvalue())
+    h.wfile = None
+    if parsed.path.startswith(('/api/download/', '/api/storage/')):
+        try:
+            _server.cleanup_output_dir(-1)
+            import gc
+            gc.collect()
+        except Exception:
+            pass
     ctype = next((v for k, v in hdrs if k.lower() == 'content-type'), '')
     if 'json' in ctype:
         # đường dẫn tương đối để chạy được dưới /rba-ehs/ trên GitHub Pages

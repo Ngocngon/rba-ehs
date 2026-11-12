@@ -1,7 +1,7 @@
 /* RBA 8.0.1 — Service Worker: chuyển các request "api/..." tới bộ xử lý Python chạy trong trang.
    Đồng thời lưu đệm giao diện để mở nhanh / dùng khi mất mạng.
    © NGUYỄN NGỌC NGÔN */
-const BUILD = '100b1a43fd';
+const BUILD = 'd8036a42ff';
 const CACHE = 'rba-ehs-' + BUILD;
 const SHELL = ['./', 'index.html', 'web-boot.js', 'engine-worker.js', 'bridge.py', 'app.zip', 'static/tailwind.css',
                'static/icon.svg', 'static/icon-192.png', 'static/icon-512.png', 'static/manifest.webmanifest'];

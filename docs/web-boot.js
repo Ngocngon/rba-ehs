@@ -5,7 +5,7 @@
    © NGUYỄN NGỌC NGÔN */
 (function () {
   'use strict';
-  const BUILD = '100b1a43fd';
+  const BUILD = 'd8036a42ff';
   window.RBA_WEB = true;
   const LANG = localStorage.getItem('RBA_LANG') || 'vi';
   const ALL = {

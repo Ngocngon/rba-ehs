@@ -112,6 +112,8 @@ SUMMARY_CATEGORY_GROUPS = [
     }
 ]
 
+CODE_TO_CATEGORY = {code: grp['category'] for grp in SUMMARY_CATEGORY_GROUPS for code in grp['codes']}
+
 # Complete 41-Item RBA 8.0.1 EHS Rule Matrix (Priority / Major / Minor keywords & count thresholds)
 RBA_801_RULE_MATRIX = {
     # --- BH1: Occupational Health & Safety ---
@@ -711,11 +713,11 @@ def _infer_checklist_finding_cause(audit_id, issue_text):
     return 'facility'
 
 
-def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
+def parse_checklist_xlsx(xlsx_path, checklist_ref=None, default_cause=None):
     """
     Directly parses an RBA Audit Checklist (.xlsx) workbook (containing 'General Information'
     and 'Checklist' sheets), preserving all 41 item ratings (Col D), VLOOKUP scores,
-    evidence texts (Col L), and General Information metadata.
+    evidence texts (Col L), observation columns (O..R), and General Information metadata.
     """
     if checklist_ref is None:
         checklist_ref = load_checklist_reference()
@@ -796,8 +798,11 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
     if not vendor_full:
         vendor_full = f"Công ty TNHH {vendor_short}"
 
-    d9 = _excel_serial_to_date(g_val(9, ''))
-    d10 = _excel_serial_to_date(g_val(10, ''))
+    d9_raw = g_val(9, '')
+    d10_raw = g_val(10, '')
+    d11_raw = g_val(11, '')
+    d9 = _excel_serial_to_date(d9_raw)
+    d10 = _excel_serial_to_date(d10_raw)
     d1_chk = _excel_serial_to_date(str(chk_rows.get(1, {}).get('D', '') or '').strip())
     if d9 and d10 and d9 != d10:
         audit_date_raw = f"{d9.replace('/', '-')} , {d10.replace('/', '-')}"
@@ -822,6 +827,7 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
     valid_sigs = {'conformance': 'Conformance', 'minor': 'Minor', 'major': 'Major', 'priority': 'Priority', 'n/a': 'N/A', 'na': 'N/A'}
     findings = []
     checklist_evaluated = []
+    audit_warnings = []
     for item in checklist_ref['items']:
         code = item['audit_id']
         r_num, c_map = chk_by_code.get(code, (item['row_num'], chk_rows.get(item['row_num'], {})))
@@ -830,20 +836,23 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
         ev_raw = str(c_map.get('L', '') or '').strip()
         ev_lines = _extract_checklist_evidence_lines(ev_raw)
 
+        if sig in ('Conformance', 'N/A') and ev_lines:
+            audit_warnings.append(f"Mã {code}: cột D đang để '{sig}' nhưng cột L có ghi nhận nội dung phát hiện.")
+
         f_list = []
         if sig in ('Minor', 'Major', 'Priority'):
-            lines_to_use = ev_lines
-            for ln in lines_to_use:
+            for l_idx, ln in enumerate(ev_lines):
                 no_val = len(findings) + 1
-                cause = _infer_checklist_finding_cause(code, ln)
+                cause = default_cause or _infer_checklist_finding_cause(code, ln)
                 iss_en, iss_vn, iss_full = split_bilingual(ln, auto_translate=True)
-                loc_vn = 'Nhà máy' if cause == 'facility' else 'Hồ sơ'
-                loc_en = 'Factory' if cause == 'facility' else 'Document'
+                is_fac = str(cause).lower() == 'facility'
+                loc_vn = 'Nhà máy' if is_fac else 'Hồ sơ'
+                loc_en = 'Factory' if is_fac else 'Document'
                 f_obj = {
                     'excel_row': r_num,
                     'no': no_val,
                     'provision': item['provision'],
-                    'category': code[:2],
+                    'category': CODE_TO_CATEGORY.get(code, 'Safety'),
                     'audit_id': code,
                     'raw_audit_id': code,
                     'was_recovered': False,
@@ -855,7 +864,7 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
                     'issue_en': iss_en,
                     'issue_vn': iss_vn,
                     'cause': cause,
-                    'mandatory': 'Mandatory' if sig == 'Priority' else '',
+                    'mandatory': 'Mandatory' if (sig == 'Priority' and l_idx == 0) else '',
                     'eval_grade': sig if sig in ('Minor', 'Major', 'Priority') else '',
                     'improvement_full': '',
                     'improvement_en': '',
@@ -884,6 +893,7 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
             'sub_category': item['sub_category'],
             'finding_count': len(f_list),
             'significance': sig,
+            'doc_significance': sig,
             'auto_significance': sig,
             'auto_reason': f"Đọc trực tiếp từ file RBA Audit Checklist ({sig})",
             'violation_mark': "X" if sig not in ("Conformance", "N/A") else "",
@@ -896,8 +906,10 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
             'evidence_text': evidence_text,
             'criteria_vn': item['criteria_vn'],
             'criteria_en': item['criteria_en'],
-            'site_observation': str(c_map.get('I', 'O') or 'O').strip(),
-            'record_review': str(c_map.get('O', 'O') or 'O').strip(),
+            'site_observation': str(c_map.get('O', '') or '').strip(),
+            'record_review': str(c_map.get('P', 'O') or 'O').strip(),
+            'mgmt_interview': str(c_map.get('Q', '') or '').strip(),
+            'worker_interview': str(c_map.get('R', '') or '').strip(),
             'findings': f_list
         })
 
@@ -952,7 +964,7 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
 
     main_proc = g_val(12, 'Assembly')
     sub_info = g_val(29, '')
-    sub_cnt = 0 if sub_info in ('', '0', 'Không', 'None') else 1
+    sub_cnt = 0 if sub_info in ('', '0', 'Không', 'None', 'No') else 1
 
     result_data = {
         'source_type': 'checklist',
@@ -962,10 +974,12 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
             'vendor_raw': f"{vendor_short} ({vendor_code_chk})" if vendor_code_chk else vendor_short,
             'vendor_short': vendor_short,
             'vendor_full': vendor_full,
-            'vendor_code': vendor_code_chk or 'N/A',
+            'vendor_code': vendor_code_chk,
             'address': g_val(4, ''),
             'audit_criteria': g_val(5, 'RBA 8.0.1') or 'RBA 8.0.1',
+            'audit_type': g_val(8, ''),
             'audit_date_raw': audit_date_raw,
+            'cav_date_serial': _int_or_blank(d11_raw) if d11_raw else '',
             'report_date': audit_date_raw.replace('-', '/'),
             'auditor_raw': auditor_raw,
             'auditor_1': auditor_1,
@@ -986,10 +1000,17 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
             'permanent_workers': g_int(23, 0),
             'temp_workers': g_int(24, 0),
             'foreign_workers': g_int(25, 0),
+            'juvenile_workers': _int_or_blank(g_val(26, '')) if g_val(26, '') != '' else '',
+            'child_workers': _int_or_blank(g_val(27, '')) if g_val(27, '') != '' else '',
+            'intern_workers': _int_or_blank(g_val(28, '')) if g_val(28, '') != '' else '',
             'subcontract_info': sub_info,
             'subcontract_count': sub_cnt,
+            'dormitory': g_val(30, ''),
+            'cafeteria': g_val(31, ''),
             'samsung_Revenue_ratio': '100%',
-            'certifications': g_val(32, 'ISO 14001, ISO 45001'),
+            'certifications': g_val(32, ''),
+            'legal_violation': g_val(33, ''),
+            'legal_violation_desc': g_val(34, ''),
             'interview_count': g_int(35, 0),
         },
         'summary': {
@@ -1003,7 +1024,7 @@ def parse_checklist_xlsx(xlsx_path, checklist_ref=None):
             'counts': counts,
             'compliance_rate': round((counts['Conformance'] / len(checklist_evaluated)) * 100, 2) if checklist_evaluated else 0,
             'category_breakdown': summary_6_cats,
-            'audit_warnings': []
+            'audit_warnings': audit_warnings
         },
         'findings': findings,
         'checklist': checklist_evaluated,
@@ -1472,14 +1493,20 @@ def set_xlsx_cell_value(row_el, col_letter, row_num, val, is_formula=False, form
         t_el.text = str(val) if val is not None else ""
 
 
-def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHECKLIST_TEMPLATE):
+def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHECKLIST_TEMPLATE, lang_mode=None):
     """
     Generates the filled RBA Audit Checklist (.xlsx) file from parsed_data
     while preserving 100% of the template's formatting, styles, formulas, and sheets.
+    Supports optional `lang_mode` ('vi_ko', 'vi_en', 'vi_zh', 'vi').
     """
+    if lang_mode:
+        from translator import apply_export_lang_to_data
+        parsed_data = apply_export_lang_to_data(parsed_data, lang_mode)
+
     meta = parsed_data['metadata']
     summary = parsed_data['summary']
     checklist_items = {it['row_num']: it for it in parsed_data['checklist']}
+    is_yousung = 'YOUSUNG' in str(meta.get('vendor_short', '')).upper()
 
     with zipfile.ZipFile(template_path, 'r') as zin:
         sheet1_xml = ET.fromstring(zin.read('xl/worksheets/sheet1.xml'))
@@ -1488,13 +1515,13 @@ def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHEC
         # 1. Update Sheet 1: General Information
         s1_rows = {int(r.attrib.get('r', 0)): r for r in sheet1_xml.findall(f'.//{XL_NS}row')}
         gen_updates = {
-            3: (meta.get('vendor_full', 'Công ty TNHH You Sung Vina'), False),
+            3: (meta.get('vendor_full', 'Công ty TNHH You Sung Vina' if is_yousung else ''), False),
             4: (meta.get('address', ''), False),
             5: (meta.get('audit_criteria', 'RBA 8.0.1'), False),
             6: (meta.get('auditor_1', ''), False),
             7: (meta.get('auditor_2', ''), False),
             12: (meta.get('main_process', 'Assembly'), False),
-            13: (meta.get('product', 'Linh kiện điện thoại'), False),
+            13: (meta.get('product', 'Linh kiện điện thoại' if is_yousung else meta.get('main_process', '')), False),
             14: (meta.get('ceo_name', ''), False),
             15: (meta.get('ceo_position', 'CEO'), False),
             16: (meta.get('ceo_phone', ''), False),
@@ -1511,12 +1538,32 @@ def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHEC
             32: (meta.get('certifications', ''), False),
             35: (_int_or_blank(meta.get('interview_count')), True),
         }
+        if meta.get('audit_type'):
+            gen_updates[8] = (meta['audit_type'], False)
         audit_days = _audit_day_serials(meta)
         gen_updates[9] = (audit_days[0] if audit_days else '', True)
         gen_updates[10] = (audit_days[-1] if audit_days else '', True)
-        if 'YOUSUNG' not in str(meta.get('vendor_short', '')).upper():
-            # These cells still hold the template vendor's answers and the Findings file has no such data
-            gen_updates.update({r_idx: ('', False) for r_idx in (26, 27, 28, 30, 31, 33, 34)})
+        if meta.get('cav_date_serial') not in (None, ''):
+            gen_updates[11] = (_int_or_blank(meta.get('cav_date_serial')), True)
+        elif not is_yousung:
+            gen_updates[11] = ('', False)
+
+        extra_fields = (
+            (26, 'juvenile_workers', True),
+            (27, 'child_workers', True),
+            (28, 'intern_workers', True),
+            (30, 'dormitory', False),
+            (31, 'cafeteria', False),
+            (33, 'legal_violation', False),
+            (34, 'legal_violation_desc', False),
+        )
+        for r_idx, m_key, is_num in extra_fields:
+            val = meta.get(m_key)
+            if val not in (None, ''):
+                gen_updates[r_idx] = (_int_or_blank(val) if is_num else str(val), is_num)
+            elif not is_yousung:
+                gen_updates[r_idx] = ('', False)
+
         for r_idx, (val, is_num) in gen_updates.items():
             if r_idx in s1_rows:
                 set_xlsx_cell_value(s1_rows[r_idx], 'D', r_idx, val, is_number=is_num and val != '')
@@ -1544,7 +1591,11 @@ def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHEC
             set_xlsx_cell_value(s2_rows[1], 'D', 1, meta.get('audit_date_raw', '').replace(',', '&'))
             set_xlsx_cell_value(s2_rows[1], 'J', 1, counts['Priority'], is_formula=True, formula_str='COUNTIF($D$5:$D$45,"Priority")')
         if 2 in s2_rows:
-            set_xlsx_cell_value(s2_rows[2], 'B', 2, meta.get('vendor_code', 'L10PO5'))
+            raw_vcode = str(meta.get('vendor_code') or '').strip()
+            vcode = '' if raw_vcode in ('', 'N/A') else raw_vcode
+            if not vcode and is_yousung:
+                vcode = 'L10PO5'
+            set_xlsx_cell_value(s2_rows[2], 'B', 2, vcode)
             set_xlsx_cell_value(s2_rows[2], 'D', 2, summary['total_score'], is_formula=True, formula_str='SUMIFS($T$5:$T$45,$S$5:$S$45,"EHS")')
             set_xlsx_cell_value(s2_rows[2], 'J', 2, summary.get('penalty_violation_count', 0), is_formula=True, formula_str='COUNTIF($H$5:$H$45,"X")')
         if 3 in s2_rows:
@@ -1570,6 +1621,9 @@ def generate_checklist_xlsx(parsed_data, output_path, template_path=DEFAULT_CHEC
                 formula_str=f'IF(AND(F{r_num}="X",G{r_num}=D{r_num}),"X",IF(AND(F{r_num}="X",G{r_num}="Major", D{r_num}="Priority"),"X",""))'
             )
             set_xlsx_cell_value(r_el, 'L', r_num, item['evidence_text'])
+            for obs_col, obs_key in (('O', 'site_observation'), ('P', 'record_review'), ('Q', 'mgmt_interview'), ('R', 'worker_interview')):
+                if obs_key in item:
+                    set_xlsx_cell_value(r_el, obs_col, r_num, item.get(obs_key, '') or '')
             set_xlsx_cell_value(
                 r_el, 'T', r_num, item['score'],
                 is_formula=True,
@@ -1622,14 +1676,18 @@ def _findings_sheet_parts(z):
     return sheet_path, None
 
 
-def generate_findings_file(parsed_data, source_path, output_path):
+def generate_findings_file(parsed_data, source_path, output_path, lang_mode=None):
     """
-    Writes the clean Findings workbook from the uploaded file, in the layout auditors use:
-    one row per real finding (the form's instruction row and empty pre-listed rows go, photos
-    move with their rows), location, finding and improvement plan in English then Vietnamese,
-    spelling corrected. Dates and after-photos stay empty: only the auditor can state those.
+    Writes the clean Findings workbook from the uploaded/combined file, in the layout auditors use:
+    one row per real finding (photos move with their rows), formatted according to `lang_mode`
+    ('vi_ko', 'vi_en', 'vi_zh', 'vi') when provided, or legacy English+Vietnamese when None.
     """
+    if lang_mode:
+        from translator import apply_export_lang_to_data
+        parsed_data = apply_export_lang_to_data(parsed_data, lang_mode)
+
     findings = {f['excel_row']: f for f in parsed_data.get('findings', [])}
+    meta = parsed_data.get('metadata') or {}
     with zipfile.ZipFile(source_path, 'r') as zin:
         sheet_path, drawing_path = _findings_sheet_parts(zin)
         sheet_xml = ET.fromstring(zin.read(sheet_path))
@@ -1654,16 +1712,31 @@ def generate_findings_file(parsed_data, source_path, output_path):
             f = findings.get(old)
             if f:
                 no, code = f.get('no'), f.get('audit_id')
-                plan_en, plan_vn = f.get('improvement_en', ''), f.get('improvement_vn', '')
-                if not (plan_en or plan_vn):
-                    plan_en, plan_vn = draft_improvement_plan(f.get('issue_en', ''))
-                set_xlsx_cell_value(row_el, 'F', num, findings_cell_text(f.get('location_en', ''), f.get('location_vn', ''), 'location', no, code))
-                set_xlsx_cell_value(row_el, 'G', num, findings_cell_text(f.get('issue_en', ''), f.get('issue_vn', ''), 'issue', no, code))
-                set_xlsx_cell_value(row_el, 'M', num, findings_cell_text(plan_en, plan_vn, 'improvement', no, code))
-        if 3 in rows and parsed_data.get('metadata', {}).get('audit_date_raw'):
-            set_xlsx_cell_value(rows[3], 'C', 3, parsed_data['metadata']['audit_date_raw'])
+                if 'export_issue_cell' in f:
+                    set_xlsx_cell_value(row_el, 'F', num, f.get('export_location_cell', ''))
+                    set_xlsx_cell_value(row_el, 'G', num, f.get('export_issue_cell', ''))
+                    set_xlsx_cell_value(row_el, 'M', num, f.get('export_improvement_cell', ''))
+                else:
+                    plan_en, plan_vn = f.get('improvement_en', ''), f.get('improvement_vn', '')
+                    if not (plan_en or plan_vn):
+                        plan_en, plan_vn = draft_improvement_plan(f.get('issue_en', ''))
+                    set_xlsx_cell_value(row_el, 'F', num, findings_cell_text(f.get('location_en', ''), f.get('location_vn', ''), 'location', no, code))
+                    set_xlsx_cell_value(row_el, 'G', num, findings_cell_text(f.get('issue_en', ''), f.get('issue_vn', ''), 'issue', no, code))
+                    set_xlsx_cell_value(row_el, 'M', num, findings_cell_text(plan_en, plan_vn, 'improvement', no, code))
 
-        last = 6 + len(keep)
+        # Keep header metadata rows 1-4 synchronized with workspace metadata
+        if 1 in rows and meta.get('subsidiary'):
+            set_xlsx_cell_value(rows[1], 'C', 1, meta['subsidiary'])
+        if 2 in rows and meta.get('vendor_short'):
+            vc = str(meta.get('vendor_code') or '').strip()
+            v_disp = f"{meta['vendor_short']} ({vc})" if vc and vc != 'N/A' else meta['vendor_short']
+            set_xlsx_cell_value(rows[2], 'C', 2, v_disp)
+        if 3 in rows and meta.get('audit_date_raw'):
+            set_xlsx_cell_value(rows[3], 'C', 3, meta['audit_date_raw'])
+        if 4 in rows and (meta.get('auditor_raw') or meta.get('auditor_short')):
+            set_xlsx_cell_value(rows[4], 'C', 4, meta.get('auditor_raw') or meta.get('auditor_short'))
+
+        last = max(7, 6 + len(keep))
         dimension, auto_filter = sheet_xml.find(f'{XL_NS}dimension'), sheet_xml.find(f'{XL_NS}autoFilter')
         for el in (dimension, auto_filter):
             if el is not None:
@@ -1676,18 +1749,39 @@ def generate_findings_file(parsed_data, source_path, output_path):
             if end is not None:
                 end.text = str(int(end.text) + delta)
 
-        # Summary counts come from Findings: drop its stored results so nothing can show the old numbers
+        # Summary counts come from Findings: drop its stored results and ensure COUNTIF covers all rows
         edited = {sheet_path: sheet_xml}
         if drawing_path:
             edited[drawing_path] = drawing_xml
+        cap_row = max(150, last + 10)
+        missing_summary_formulas = {
+            **{f'E{r}': f'+C{r}-D{r}' for r in range(5, 11)},
+            **{f'F{r}': f'+E{r}/C{r}' for r in range(5, 11)},
+            'F11': '+E11/C11',
+        }
         for name in zin.namelist():
             if name.startswith('xl/worksheets/sheet') and name.endswith('.xml') and name != sheet_path:
-                other = ET.fromstring(zin.read(name))
+                raw_other = zin.read(name)
+                other = ET.fromstring(raw_other)
+                is_summary_sh = b'Findings!' in raw_other
                 for c in other.iter(f'{XL_NS}c'):
+                    ref = c.attrib.get('r', '')
+                    f_el = c.find(f'{XL_NS}f')
                     v_el = c.find(f'{XL_NS}v')
-                    if c.find(f'{XL_NS}f') is not None and v_el is not None:
-                        c.remove(v_el)
-                        c.attrib.pop('t', None)
+                    if is_summary_sh and f_el is None and ref in missing_summary_formulas:
+                        f_el = ET.Element(f'{XL_NS}f')
+                        f_el.text = missing_summary_formulas[ref]
+                        c.insert(0, f_el)
+                    if f_el is not None:
+                        if f_el.text and 'Findings!' in f_el.text:
+                            f_el.text = re.sub(
+                                r'(Findings!\$[A-Z]+\$7:\$?[A-Z]+\$?)(\d+)',
+                                lambda m: f"{m.group(1)}{max(int(m.group(2)), cap_row)}",
+                                f_el.text,
+                            )
+                        if v_el is not None:
+                            c.remove(v_el)
+                            c.attrib.pop('t', None)
                 edited[name] = other
         ct_xml = ET.fromstring(zin.read('[Content_Types].xml'))
         for el in list(ct_xml):
@@ -1869,6 +1963,40 @@ def _set_paragraph_text_legacy(p_el, new_text):
     t_el.text = new_text
 
 
+def _apply_run_multiline_and_cjk_font(p_el):
+    """Splits any '\\n' inside <w:t> into <w:br/> within its run and sets w:eastAsia font for Hangul/CJK."""
+    for r in p_el.iter(f'{W_NS}r'):
+        if r.find(f'.//{W_NS}drawing') is not None:
+            continue
+        full_r = ''.join(t.text or '' for t in r.findall(f'{W_NS}t'))
+        if re.search(r'[\uac00-\ud7af\u4e00-\u9fff]', full_r):
+            ea_font = 'Malgun Gothic' if re.search(r'[\uac00-\ud7af]', full_r) else 'Microsoft YaHei'
+            rpr = r.find(f'{W_NS}rPr')
+            if rpr is None:
+                rpr = ET.Element(f'{W_NS}rPr')
+                r.insert(0, rpr)
+            rf = rpr.find(f'{W_NS}rFonts')
+            if rf is None:
+                rf = ET.SubElement(rpr, f'{W_NS}rFonts')
+            rf.attrib[f'{W_NS}eastAsia'] = ea_font
+        for t in list(r.findall(f'{W_NS}t')):
+            txt = t.text or ''
+            if '\n' in txt:
+                idx = list(r).index(t)
+                r.remove(t)
+                segs = txt.split('\n')
+                for s_i, seg in enumerate(segs):
+                    if s_i > 0:
+                        r.insert(idx, ET.Element(f'{W_NS}br'))
+                        idx += 1
+                    nt = ET.Element(f'{W_NS}t')
+                    if seg != seg.strip() or '  ' in seg:
+                        nt.attrib['{http://www.w3.org/XML/1998/namespace}space'] = 'preserve'
+                    nt.text = seg
+                    r.insert(idx, nt)
+                    idx += 1
+
+
 def _set_paragraph_text_preserve_rpr(p_el, new_text):
     """
     Replaces the visible text of a Word paragraph while preserving 100% of the template
@@ -1886,10 +2014,11 @@ def _set_paragraph_text_preserve_rpr(p_el, new_text):
         t_nodes.extend(r.findall(f'{W_NS}t'))
     if not t_nodes:
         _set_paragraph_text_legacy(p_el, new_text)
+        _apply_run_multiline_and_cjk_font(p_el)
         return
 
     old_text = ''.join(t.text or '' for t in t_nodes)
-    if old_text == new_text:
+    if old_text == new_text and '\n' not in new_text:
         return
 
     i = 0
@@ -1930,6 +2059,8 @@ def _set_paragraph_text_preserve_rpr(p_el, new_text):
         if new_seg != new_seg.strip() or '  ' in new_seg:
             t.attrib['{http://www.w3.org/XML/1998/namespace}space'] = 'preserve'
         pos += L
+
+    _apply_run_multiline_and_cjk_font(p_el)
 
 
 def _excel_serial_to_date(val):
@@ -1988,10 +2119,15 @@ def _insert_round2_into_docx(body, tbl1, result_para, r1_summary, r2_summary, gb
     body.insert(pos + 2, r2_tbl)
 
 
-def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_TEMPLATE, source_xlsm_path=DEFAULT_FINDINGS_PATH, round2_summary=None, round_no=None):
+def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_TEMPLATE, source_xlsm_path=DEFAULT_FINDINGS_PATH, round2_summary=None, round_no=None, lang_mode=None):
     """
     Generates the filled Word Executive Summary Report (.docx) from parsed_data.
+    Supports optional `lang_mode` ('vi_ko', 'vi_en', 'vi_zh', 'vi').
     """
+    if lang_mode:
+        from translator import apply_export_lang_to_data
+        parsed_data = apply_export_lang_to_data(parsed_data, lang_mode)
+
     meta = parsed_data['metadata']
     summary = parsed_data['summary']
     counts = summary['counts']
@@ -2048,9 +2184,10 @@ def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_T
                         _set_paragraph_text_preserve_rpr(p_el, val_str)
 
         # The template's conclusion sits in a text box, so look inside nested paragraphs too
+        overall_txt = parsed_data.get('export_overall') or overall_assessment(parsed_data)
         for p_el in body.iter(f'{W_NS}p'):
             if 'Công ty cần cải thiện' in ''.join(t.text or '' for t in p_el.iter(f'{W_NS}t')) and not list(p_el.iter(f'{W_NS}txbxContent')):
-                _set_paragraph_text_preserve_rpr(p_el, overall_assessment(parsed_data))
+                _set_paragraph_text_preserve_rpr(p_el, overall_txt)
 
         idx_doc_hdr = None
         idx_fac_hdr = None
@@ -2075,11 +2212,15 @@ def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_T
             for el in current_children[idx_doc_hdr + 1:idx_sec3_hdr]:
                 body.remove(el)
 
-            doc_capped, fac_capped = cap_violations_pair(
-                parsed_data.get('doc_violations', []),
-                parsed_data.get('facility_violations', []),
-                max_per_type=3, max_total=5
-            )
+            if 'doc_violations_export' in parsed_data or 'facility_violations_export' in parsed_data:
+                doc_capped = parsed_data.get('doc_violations_export', [])
+                fac_capped = parsed_data.get('facility_violations_export', [])
+            else:
+                doc_capped, fac_capped = cap_violations_pair(
+                    parsed_data.get('doc_violations', []),
+                    parsed_data.get('facility_violations', []),
+                    max_per_type=3, max_total=5
+                )
             insert_pos = list(body).index(current_children[idx_doc_hdr]) + 1
             for d_txt in doc_capped:
                 new_p = copy.deepcopy(doc_bullet_proto)
@@ -2171,12 +2312,15 @@ def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_T
             sev_items = [it for it in parsed_data['checklist'] if it['significance'] == sev]
             sev_count = len(sev_items)
             for idx, it in enumerate(sev_items):
-                vn_list = [_compact_violation_text(f['issue_vn'], 140) for f in it['findings'][:2]]
-                if len(it['findings']) > 2:
-                    vn_list[-1] = vn_list[-1].rstrip('.') + "..."
-                if not vn_list:
-                    ev_fallback = _extract_checklist_evidence_lines(it.get('evidence_text', ''))
-                    vn_list = [_compact_violation_text(ev_fallback[0], 140)] if ev_fallback else [it.get('sub_category') or it['audit_id']]
+                if 'export_t3_lines' in it:
+                    vn_list = it['export_t3_lines']
+                else:
+                    vn_list = [_compact_violation_text(f['issue_vn'], 140) for f in it['findings'][:2]]
+                    if len(it['findings']) > 2:
+                        vn_list[-1] = vn_list[-1].rstrip('.') + "..."
+                    if not vn_list:
+                        ev_fallback = _extract_checklist_evidence_lines(it.get('evidence_text', ''))
+                        vn_list = [_compact_violation_text(ev_fallback[0], 140)] if ev_fallback else [it.get('sub_category') or it['audit_id']]
 
                 if sev_count == 1 and sev == 'Priority':
                     tr_new = build_t3_row(proto_single_tr, [sev, f"({sev_count})"], vn_list, it['audit_id'])
@@ -2228,11 +2372,12 @@ def generate_summary_docx(parsed_data, output_path, template_path=DEFAULT_DOCX_T
             if len(tcs) >= 2:
                 ps = tcs[1].findall(f'{W_NS}p')
                 if ki:
+                    ki_txt = ki.get('export_issue_text') or ki['issue_vn'].replace('\n', ' ')
                     if len(ps) >= 2:
                         _set_paragraph_text_preserve_rpr(ps[0], f"[{ki['significance']}] ")
-                        _set_paragraph_text_preserve_rpr(ps[1], ki['issue_vn'].replace('\n', ' '))
+                        _set_paragraph_text_preserve_rpr(ps[1], ki_txt)
                     elif len(ps) == 1:
-                        _set_paragraph_text_preserve_rpr(ps[0], f"[{ki['significance']}] {ki['issue_vn'].replace(chr(10), ' ')}")
+                        _set_paragraph_text_preserve_rpr(ps[0], f"[{ki['significance']}] {ki_txt}")
                 else:
                     empty_txt = parsed_data.get('empty_key_issue_text', 'Không có vấn đề tồn đọng')
                     if len(ps) >= 2:

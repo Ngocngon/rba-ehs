@@ -19,7 +19,7 @@ WEB = os.path.join(ROOT, 'web')
 OUT = os.path.join(ROOT, 'docs')
 
 PY_SKIP = {'build_css.py', 'build_offline.py', 'start_server.py', 'restore_backup.py'}
-DB_SKIP = {'file_repository.json', 'sessions.json', 'auth_config.json'}
+DB_SKIP = {'file_repository.json', 'sessions.json', 'auth_config.json', 'translation_memory_multi.json'}
 
 
 def build_app_zip():

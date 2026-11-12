@@ -48,6 +48,7 @@ import learning
 from history import detect_recurring
 from merge_findings import merge_findings_files
 from report_pdf import pdf_engine, build_report_html, make_pdf, make_zip
+from translator import EXPORT_LANG_MODES, normalize_export_lang
 
 init_auth_config()
 CHECKLIST_REF = load_checklist_reference()
@@ -64,6 +65,7 @@ LOOPBACK_HOSTS = ('127.0.0.1', 'localhost')
 LOOPBACK_IPS = ('127.0.0.1', '::1', '::ffff:127.0.0.1')
 MAX_BODY_BYTES = 100 * 1024 * 1024
 SEVERITIES = ('Conformance', 'Minor', 'Major', 'Priority', 'N/A')
+SEV_ORDER = {'N/A': -1, 'Conformance': 0, 'Minor': 1, 'Major': 2, 'Priority': 3}
 CONTENT_SECURITY_POLICY = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
                            "img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; "
                            "form-action 'self'; frame-ancestors 'none'")
@@ -123,9 +125,16 @@ def recalculate_state(data, reclassify_from_master=False):
             it['penalty_criteria'] = m_item.get('penalty_criteria', it.get('penalty_criteria', ''))
             it['rule'] = m_item.get('rule', it.get('rule', {}))
         if reclassify_from_master and data.get('source_type') != 'checklist':
+            f_for_cid = findings_by_code.get(cid, [])
             sig, reason = auto_classify_significance(
-                cid, findings_by_code.get(cid, []), it.get('criteria_vn', ''), it.get('criteria_en', ''),
+                cid, f_for_cid, it.get('criteria_vn', ''), it.get('criteria_en', ''),
                 custom_rule=it.get('rule'), mandatory_triggers=mand_triggers)
+            base_sig = it.get('checklist_base_sig')
+            if base_sig:
+                if base_sig == 'N/A' and not f_for_cid:
+                    sig = 'N/A'
+                elif base_sig != 'N/A' and SEV_ORDER.get(base_sig, 0) > SEV_ORDER.get(sig, 0):
+                    sig = base_sig
             it['significance'] = sig
             it['auto_reason'] = reason
         sig = it.get('significance', 'Conformance')
@@ -345,10 +354,137 @@ def save_upload(item, tag):
     return up, filename
 
 
+def _merge_checklist_metadata_and_ratings(data, info, ref):
+    """
+    When one or both uploaded files are RBA Audit Checklist (.xlsx) workbooks, merges:
+      1) Rich General Information metadata (workers, address, dormitory, cafeteria, legal, etc.)
+      2) 41-item Checklist significance ratings & observation marks (O..R) with field findings.
+    """
+    chk_map = info.get('checklist_data') or {}
+    if not chk_map:
+        return
+
+    f_meta = dict(data.get('metadata') or {})
+    primary_chk = chk_map.get('doc') or chk_map.get('field')
+    merged_meta = dict(primary_chk.get('metadata') or {})
+    other_chk = chk_map.get('field') if ('doc' in chk_map and 'field' in chk_map) else None
+    if other_chk:
+        for k, v in (other_chk.get('metadata') or {}).items():
+            if merged_meta.get(k) in ('', None) and v not in ('', None):
+                merged_meta[k] = v
+
+    f_is_yousung_sample = (
+        'YOUSUNG' in str(f_meta.get('vendor_short', '')).upper()
+        and 'YOUSUNG' not in str(merged_meta.get('vendor_short', '')).upper()
+        and bool(merged_meta.get('vendor_short'))
+    )
+    for k in ('subsidiary', 'vendor_code', 'vendor_short', 'vendor_full', 'audit_date_raw'):
+        fv = f_meta.get(k)
+        if merged_meta.get(k) in ('', None) and fv not in ('', None):
+            if f_is_yousung_sample and k in ('vendor_code', 'subsidiary', 'vendor_short', 'vendor_full'):
+                continue
+            merged_meta[k] = fv
+
+    if not f_is_yousung_sample and f_meta.get('auditor_raw'):
+        names_seen = []
+        for raw_str in (merged_meta.get('auditor_raw', ''), f_meta.get('auditor_raw', '')):
+            for nm in str(raw_str).split(','):
+                nm = nm.strip()
+                if nm and nm.lower() not in {x.lower() for x in names_seen}:
+                    names_seen.append(nm)
+        if names_seen:
+            merged_meta['auditor_1'] = names_seen[0]
+            merged_meta['auditor_2'] = ', '.join(names_seen[1:])
+            merged_meta['auditor_raw'] = ', '.join(names_seen)
+            if not merged_meta.get('auditor_short') or merged_meta.get('auditor_short') == primary_chk.get('metadata', {}).get('auditor_raw'):
+                merged_meta['auditor_short'] = merged_meta['auditor_raw']
+    data['metadata'] = merged_meta
+
+    mand_triggers = ref.get('mandatory_triggers', ['mandatory', 'bắt buộc', 'hmbb', 'x', 'yes', '1'])
+    chk_items = {
+        slot: {it['audit_id']: it for it in cd.get('checklist', [])}
+        for slot, cd in chk_map.items()
+    }
+    kinds = info.get('kinds') or {}
+    active_slots = [s for s in ('field', 'doc') if s in kinds]
+    single_checklist_only = (len(active_slots) == 1 and active_slots[0] in chk_items)
+    if single_checklist_only:
+        data['source_type'] = 'checklist'
+
+    for it in data.get('checklist', []):
+        code = it['audit_id']
+        all_fs = it.get('findings') or []
+        field_fs = [f for f in all_fs if f.get('source_slot') == 'field']
+        doc_fs = [f for f in all_fs if f.get('source_slot') == 'doc']
+        doc_chk = chk_items.get('doc', {}).get(code)
+        field_chk = chk_items.get('field', {}).get(code)
+
+        for obs_k in ('site_observation', 'record_review', 'mgmt_interview', 'worker_interview'):
+            val = (doc_chk or {}).get(obs_k) or (field_chk or {}).get(obs_k) or it.get(obs_k, '')
+            if val:
+                it[obs_k] = val
+        if field_fs:
+            it['site_observation'] = 'O'
+        if doc_fs:
+            it['record_review'] = 'O'
+
+        if single_checklist_only:
+            only_slot = active_slots[0]
+            c_it = chk_items[only_slot][code]
+            sig = c_it['significance']
+            it['significance'] = sig
+            it['auto_significance'] = sig
+            it['checklist_base_sig'] = sig
+            it['auto_reason'] = c_it.get('auto_reason') or f"Theo đánh giá trên {SLOT_NAMES[only_slot]} ({sig})"
+            if not all_fs and c_it.get('evidence_text'):
+                it['evidence_text'] = c_it['evidence_text']
+            continue
+
+        doc_sig = doc_chk['significance'] if doc_chk else (
+            auto_classify_significance(
+                code, doc_fs, it.get('criteria_vn', ''), it.get('criteria_en', ''),
+                custom_rule=it.get('rule'), mandatory_triggers=mand_triggers
+            )[0] if doc_fs else None
+        )
+        field_sig = field_chk['significance'] if field_chk else (
+            auto_classify_significance(
+                code, field_fs, it.get('criteria_vn', ''), it.get('criteria_en', ''),
+                custom_rule=it.get('rule'), mandatory_triggers=mand_triggers
+            )[0] if field_fs else None
+        )
+        comb_sig = (
+            auto_classify_significance(
+                code, all_fs, it.get('criteria_vn', ''), it.get('criteria_en', ''),
+                custom_rule=it.get('rule'), mandatory_triggers=mand_triggers
+            )[0] if (field_fs and doc_fs) else None
+        )
+
+        if field_sig is None and doc_sig is not None:
+            sig = doc_sig
+            reason = f"Tổng hợp: Tài liệu ({doc_sig}) + Hiện trường (0 lỗi) ➔ {sig}"
+        elif doc_sig is None and field_sig is not None:
+            sig = field_sig
+            reason = f"Tổng hợp: Hiện trường ({field_sig}) + Tài liệu (0 lỗi) ➔ {sig}"
+        else:
+            cands = [s for s in (doc_sig, field_sig, comb_sig) if s and s != 'N/A']
+            sig = max(cands, key=lambda x: SEV_ORDER.get(x, 0)) if cands else 'N/A'
+            reason = f"Tổng hợp: Tài liệu ({doc_sig or '0 lỗi'}) + Hiện trường ({field_sig or '0 lỗi'}) ➔ {sig}"
+
+        it['significance'] = sig
+        it['auto_significance'] = sig
+        it['checklist_base_sig'] = sig
+        it['auto_reason'] = reason
+        if not all_fs:
+            ev_fb = (doc_chk or {}).get('evidence_text') or (field_chk or {}).get('evidence_text')
+            if ev_fb:
+                it['evidence_text'] = ev_fb
+
+
 def combine_and_parse(parts, names=None):
     """
-    parts = {'field': path|None, 'doc': path|None}. Merges both Findings files (either may be
-    missing) and parses the result. Returns (data, combined_path).
+    parts = {'field': path|None, 'doc': path|None}. Merges both files (either may be Findings
+    .xlsm/.xlsx or RBA Audit Checklist .xlsx, and either may be missing) into a unified
+    Findings workbook and parses + scores the combined 41-item audit. Returns (data, combined_path).
     """
     names = names or {}
     field, doc = parts.get('field'), parts.get('doc')
@@ -356,14 +492,52 @@ def combine_and_parse(parts, names=None):
         raise ValueError('Vui lòng chọn ít nhất 1 file: File hiện trường hoặc File tài liệu.')
     combined = os.path.join(OUTPUT_DIR, f"upload_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}_{secrets.token_hex(3)}_TONG_HOP.xlsm")
     out, info = merge_findings_files(field, doc, combined)
-    if out is None:  # single non-Findings file (e.g. RBA Checklist): parse as uploaded
-        combined = field or doc
-        info = {}
-    data = parse_findings_xlsm(combined, load_checklist_reference())
+    combined = out or (field or doc)
+    ref = load_checklist_reference()
+    data = parse_findings_xlsm(combined, ref)
+
+    row_slots = info.get('row_slots') or {}
+    for f in data.get('findings', []):
+        f['source_slot'] = row_slots.get(f.get('excel_row'))
+
+    if info.get('checklist_data'):
+        _merge_checklist_metadata_and_ratings(data, info, ref)
+
+    # Recompute top violations and key issues using the final combined 41-item significances
+    data['doc_violations'], data['facility_violations'] = select_top_violations(
+        data.get('findings', []), data.get('checklist', []), max_per_type=3, max_total=5
+    )
+    code_to_sig = {it['audit_id']: it['significance'] for it in data.get('checklist', [])}
+    photo_kis, text_kis, used_nos = [], [], set()
+    for sig_order in ('Priority', 'Major', 'Minor'):
+        for f_obj in data.get('findings', []):
+            if f_obj['no'] in used_nos or code_to_sig.get(f_obj['audit_id']) != sig_order:
+                continue
+            entry = {
+                'no': f_obj['no'],
+                'excel_row': f_obj['excel_row'],
+                'audit_id': f_obj['audit_id'],
+                'significance': sig_order,
+                'issue_vn': f_obj['issue_vn'],
+                'photos': f_obj.get('photos', []),
+            }
+            if f_obj.get('photos') and len(photo_kis) < 5:
+                photo_kis.append(entry)
+                used_nos.add(f_obj['no'])
+            elif not f_obj.get('photos') and len(text_kis) < 5:
+                text_kis.append(entry)
+                used_nos.add(f_obj['no'])
+    data['key_issues'] = photo_kis if photo_kis else text_kis[:5]
+    recalculate_state(data)
+
     sources = {}
+    kinds = info.get('kinds') or {}
     for slot in ('field', 'doc'):
         p = parts.get(slot)
-        sources[slot] = ({'filename': names.get(slot) or _display_name(p), 'findings': info.get(slot)} if p else None)
+        sources[slot] = (
+            {'filename': names.get(slot) or _display_name(p), 'findings': info.get(slot), 'kind': kinds.get(slot)}
+            if p else None
+        )
     data['sources'] = sources
     warns = data.setdefault('summary', {}).setdefault('audit_warnings', [])
     for slot in ('field', 'doc'):
@@ -452,35 +626,51 @@ def output_paths(ws):
     return (os.path.join(OUTPUT_DIR, f"{stamp}_{xname}"), os.path.join(OUTPUT_DIR, f"{stamp}_{dname}"), xname, dname)
 
 
-def build_outputs(ws):
-    """Generates the Checklist (.xlsx) and Word report (.docx) for the workspace."""
+def build_outputs(ws, lang_mode=None, need_xlsx=True, need_docx=True):
+    """Generates the Checklist (.xlsx) and/or Word report (.docx) for the workspace in `lang_mode`."""
+    mode = normalize_export_lang(lang_mode or 'vi_ko')
     xlsx, docx, xname, dname = output_paths(ws)
     data = ws['data']
     if ws['mode'] == 'round2':
-        generate_checklist_xlsx(build_round2_export_data(data), xlsx)
-        generate_summary_docx(build_round2_docx_data(data), docx,
-                              source_xlsm_path=ws.get('r1_source_xlsm_path') or ws['source_xlsm_path'],
-                              round2_summary=data['round2']['summary2'], round_no=2)
+        if need_xlsx:
+            generate_checklist_xlsx(build_round2_export_data(data), xlsx, lang_mode=mode)
+        if need_docx:
+            generate_summary_docx(build_round2_docx_data(data), docx,
+                                  source_xlsm_path=ws.get('r1_source_xlsm_path') or ws['source_xlsm_path'],
+                                  round2_summary=data['round2']['summary2'], round_no=2, lang_mode=mode)
     else:
         recalculate_state(data)
-        generate_checklist_xlsx(data, xlsx)
-        generate_summary_docx(data, docx, source_xlsm_path=ws['source_xlsm_path'], round_no=1)
+        if need_xlsx:
+            generate_checklist_xlsx(data, xlsx, lang_mode=mode)
+        if need_docx:
+            generate_summary_docx(data, docx, source_xlsm_path=ws['source_xlsm_path'], round_no=1, lang_mode=mode)
     return xlsx, docx, xname, dname
 
 
-def build_findings(ws):
-    """(path, download name) of the bilingual Findings file; the uploaded file when one cannot be built."""
+def build_findings(ws, lang_mode=None):
+    """(path, download name) of the Findings file in `lang_mode`."""
+    mode = normalize_export_lang(lang_mode or 'vi_ko')
     source = ws.get('source_xlsm_path')
     meta = ws['data']['metadata']
     rnd = 2 if ws['mode'] == 'round2' else 1
     year, ymd = audit_period(meta)
-    ext = os.path.splitext(source or '.xlsm')[1]
+    ext = os.path.splitext(source or '.xlsm')[1] or '.xlsm'
     name = f"{ymd}_{str(meta.get('vendor_short', 'VENDOR')).replace('/', '_')}_EHS Audit Findings_Lần {rnd}.{year}{ext}"
     if ws['mode'] == 'round1' and source and os.path.exists(source):
         out = os.path.join(OUTPUT_DIR, f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')}_{name}")
         try:
-            return generate_findings_file(ws['data'], source, out), name
-        except (ValueError, KeyError, OSError) as e:
+            return generate_findings_file(ws['data'], source, out, lang_mode=mode), name
+        except ValueError:
+            # Older Checklist-only record whose source was .xlsx without Findings sheet: synthesize .xlsm
+            try:
+                synth = os.path.join(OUTPUT_DIR, f"synth_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')}.xlsm")
+                merge_findings_files(None, source, synth)
+                name_xlsm = os.path.splitext(name)[0] + '.xlsm'
+                out_xlsm = os.path.splitext(out)[0] + '.xlsm'
+                return generate_findings_file(ws['data'], synth, out_xlsm, lang_mode=mode), name_xlsm
+            except Exception as e2:
+                print('Findings synth export failed:', e2)
+        except (KeyError, OSError) as e:
             print('Findings export failed:', e)
     return source, name
 
@@ -493,11 +683,12 @@ def docx_view_data(ws):
     return build_round2_docx_data(ws['data']) if ws['mode'] == 'round2' else ws['data']
 
 
-def build_pdf_for_ws(ws, docx_path, pdf_name):
+def build_pdf_for_ws(ws, docx_path, pdf_name, lang_mode=None):
+    mode = normalize_export_lang(lang_mode or 'vi_ko')
     data = ws['data']
     r2s = data['round2']['summary2'] if ws['mode'] == 'round2' else None
     title = report_title(data.get('metadata', {}), 2 if r2s else 1)
-    html_text = build_report_html(docx_view_data(ws), r2s, title)
+    html_text = build_report_html(docx_view_data(ws), r2s, title, lang_mode=mode)
     out = os.path.join(OUTPUT_DIR, f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')}_{pdf_name}")
     return make_pdf(docx_path, html_text, out)
 
@@ -757,8 +948,9 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                 return
             if ws['mode'] == 'round2' and not ws['data']['round2'].get('confirmed'):
                 return self._err('Kết quả lần 2 chưa được xác nhận. Vui lòng kiểm tra và bấm "Xác nhận kết quả lần 2" trước khi xuất file.', 409)
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
             with LOCK:
-                xlsx, docx, xname, dname = build_outputs(ws)
+                xlsx, docx, xname, dname = build_outputs(ws, lang_mode=lang, need_xlsx=is_x, need_docx=not is_x)
             if is_x:
                 return self._file(xlsx, xname, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             return self._file(docx, dname, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
@@ -769,9 +961,26 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
             uname, ws = self._ws(token)
             if not ws:
                 return
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
             with LOCK:
-                out, name = build_findings(ws)
+                out, name = build_findings(ws, lang_mode=lang)
             return self._file(out, name, FINDINGS_CTYPE.get(os.path.splitext(name)[1], 'application/octet-stream'))
+
+        if path in ('/api/storage/xlsx', '/api/storage/docx'):
+            if not self._need(token, 'can_view_storage'):
+                return
+            repo, rec = find_record(qs.get('record_id', [''])[0])
+            if not rec:
+                return self._err('Không tìm thấy báo cáo!', 404)
+            if not can_record(token, rec, 'view'):
+                return self._err('Bạn không có quyền xem báo cáo này.', 403)
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
+            is_x = path.endswith('xlsx')
+            with LOCK:
+                xlsx, docx, xname, dname = build_outputs(load_record_into_ws(rec), lang_mode=lang, need_xlsx=is_x, need_docx=not is_x)
+            if is_x:
+                return self._file(xlsx, xname, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            return self._file(docx, dname, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
         if path == '/api/storage/finding':
             if not self._need(token, 'can_view_storage'):
@@ -781,8 +990,9 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                 return self._err('Không tìm thấy báo cáo!', 404)
             if not can_record(token, rec, 'view'):
                 return self._err('Bạn không có quyền xem báo cáo này.', 403)
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
             with LOCK:
-                out, name = build_findings(load_record_into_ws(rec))
+                out, name = build_findings(load_record_into_ws(rec), lang_mode=lang)
             return self._file(out, name, FINDINGS_CTYPE.get(os.path.splitext(name)[1], 'application/octet-stream'))
 
         if path in ('/api/download/pdf', '/api/download/zip'):
@@ -795,12 +1005,13 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                 return
             if ws['mode'] == 'round2' and not ws['data']['round2'].get('confirmed'):
                 return self._err('Kết quả lần 2 chưa được xác nhận. Vui lòng xác nhận trước khi xuất file.', 409)
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
             with LOCK:
-                xlsx, docx, xname, dname = build_outputs(ws)
+                xlsx, docx, xname, dname = build_outputs(ws, lang_mode=lang)
             pdf_name = os.path.splitext(dname)[0] + '.pdf'
             pdf_path, pdf_err = None, None
             try:
-                pdf_path, _ = build_pdf_for_ws(ws, docx, pdf_name)
+                pdf_path, _ = build_pdf_for_ws(ws, docx, pdf_name, lang_mode=lang)
             except Exception as e:
                 pdf_err = str(e)
             if path.endswith('pdf'):
@@ -808,7 +1019,7 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                     return self._err(pdf_err or 'Không tạo được PDF', 500)
                 return self._file(pdf_path, pdf_name, 'application/pdf')
             with LOCK:
-                entries = [build_findings(ws), (xlsx, xname), (docx, dname), (pdf_path, pdf_name)]
+                entries = [build_findings(ws, lang_mode=lang), (xlsx, xname), (docx, dname), (pdf_path, pdf_name)]
             zname = os.path.splitext(dname)[0].replace('Tóm tắt kết quả đánh giá định kỳ RBA 8.0.1', 'Ho so RBA 8.0.1') + '.zip'
             zpath = make_zip(entries, os.path.join(OUTPUT_DIR, f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')}_{zname}"))
             return self._file(zpath, zname, 'application/zip')
@@ -821,37 +1032,23 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                 return self._err('Không tìm thấy báo cáo!', 404)
             if not can_record(token, rec, 'view'):
                 return self._err('Bạn không có quyền xem báo cáo này.', 403)
-            files = rec.get('files') or {}
-            pdf_fm = files.get('pdf')
-            pdf_abs = os.path.join(STORAGE_DIR, pdf_fm['rel_path']) if pdf_fm and pdf_fm.get('rel_path') else None
-            pdf_err = None
-            if not pdf_abs or not os.path.exists(pdf_abs):
-                pdf_abs = None
-                try:
-                    rep_fm = files.get('report') or {}
-                    docx_abs = os.path.join(STORAGE_DIR, rep_fm.get('rel_path', ''))
-                    tmp_ws = load_record_into_ws(rec)
-                    target = os.path.splitext(docx_abs)[0] + '.pdf'
-                    with LOCK:
-                        made, _ = build_pdf_for_ws(tmp_ws, docx_abs, os.path.basename(target))
-                    shutil.move(made, target)
-                    pdf_abs = target
-                    with LOCK:
-                        repo, rec = find_record(rec['record_id'])
-                        rec.setdefault('files', {})['pdf'] = {'filename': os.path.basename(target), 'rel_path': os.path.relpath(target, STORAGE_DIR),
-                                                              'category': STORAGE_FOLDERS['reports'], 'size_kb': round(os.path.getsize(target) / 1024, 1)}
-                        save_file_repository(repo)
-                        files = rec['files']
-                except Exception as e:
-                    pdf_err = str(e)
-            if path.endswith('pdf'):
-                if not pdf_abs:
-                    return self._err(pdf_err or 'Không tạo được PDF', 500)
-                return self._file(pdf_abs, os.path.basename(pdf_abs), 'application/pdf')
-            entries = [(os.path.join(STORAGE_DIR, fm['rel_path']), fm['filename']) for k, fm in files.items()
-                       if fm and fm.get('rel_path') and k in ('checklist', 'report', 'pdf')]
+            lang = normalize_export_lang(qs.get('lang', ['vi_ko'])[0])
             with LOCK:
-                entries.insert(0, build_findings(load_record_into_ws(rec)))
+                tmp_ws = load_record_into_ws(rec)
+                xlsx, docx, xname, dname = build_outputs(tmp_ws, lang_mode=lang)
+            pdf_name = os.path.splitext(dname)[0] + '.pdf'
+            pdf_path, pdf_err = None, None
+            try:
+                with LOCK:
+                    pdf_path, _ = build_pdf_for_ws(tmp_ws, docx, pdf_name, lang_mode=lang)
+            except Exception as e:
+                pdf_err = str(e)
+            if path.endswith('pdf'):
+                if not pdf_path:
+                    return self._err(pdf_err or 'Không tạo được PDF', 500)
+                return self._file(pdf_path, pdf_name, 'application/pdf')
+            with LOCK:
+                entries = [build_findings(tmp_ws, lang_mode=lang), (xlsx, xname), (docx, dname), (pdf_path, pdf_name)]
             zname = f"{rec['record_id']}_Ho_so_RBA_8.0.1.zip"
             zpath = make_zip(entries, os.path.join(OUTPUT_DIR, f"{datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')}_{zname}"))
             return self._file(zpath, zname, 'application/zip')
@@ -1203,7 +1400,7 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
             WS[uname] = ws
             rec = None
             if check_permission(token, 'can_save_to_storage')[0]:
-                xlsx, docx, _, _ = build_outputs(ws)
+                xlsx, docx, _, _ = build_outputs(ws, lang_mode=body.get('lang') or 'vi')
                 rec = archive_audit_session(data, up, xlsx, docx, actor=actor, owner_username=uname,
                                             title=f"{data['metadata'].get('vendor_short', '')} · {data['metadata'].get('audit_date_raw', '')}",
                                             note=f"Tự động lưu khi nạp file '{filename}'", source_parts=parts)
@@ -1263,7 +1460,7 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
             if ws['bound_record_id']:
                 _, brec = find_record(ws['bound_record_id'])
                 if brec and can_record(token, brec, 'edit'):
-                    xlsx, docx, _, _ = build_outputs(ws)
+                    xlsx, docx, _, _ = build_outputs(ws, lang_mode=body.get('lang') or 'vi')
                     rec = archive_audit_session(data, up, xlsx, docx, actor=actor, owner_username=brec.get('owner_username') or uname,
                                                 note=f"Bổ sung {SLOT_NAMES[slot]} '{names[slot]}'",
                                                 overwrite_record_id=brec['record_id'], source_parts=parts)
@@ -1456,7 +1653,7 @@ class RBAAuditHandler(BaseHTTPRequestHandler):
                 if not can_record(token, rec, 'edit'):
                     return self._err('Bạn không có quyền sửa báo cáo này (chỉ Admin hoặc người lưu có quyền Sửa).', 403)
                 overwrite_id = rec['record_id']
-            xlsx, docx, _, _ = build_outputs(ws)
+            xlsx, docx, _, _ = build_outputs(ws, lang_mode=body.get('lang') or 'vi_ko')
             kwargs = dict(actor=actor, owner_username=uname, title=body.get('title', '').strip(),
                           note=body.get('note', '').strip(), overwrite_record_id=overwrite_id)
             if r2:

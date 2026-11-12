@@ -125,8 +125,8 @@
   <link rel="manifest" href="static/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="static/icon.svg" />
   <link rel="apple-touch-icon" href="static/icon-192.png" />
-  <link rel="stylesheet" href="static/tailwind.css?v=57cb1ea8d6" />
-  <script src="web-boot.js?v=100b1a43fd"></script>
+  <link rel="stylesheet" href="static/tailwind.css?v=1e63fb8bec" />
+  <script src="web-boot.js?v=d8036a42ff"></script>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -226,6 +226,9 @@
     <!-- sources: File hiện trường + File tài liệu -->
     <div id="srcBar" class="hidden"></div>
 
+    <!-- export language selector (Việt-Hàn, Việt-Anh, Việt-Trung, Mỗi tiếng Việt) -->
+    <div id="expLangBar" class="card px-3.5 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"></div>
+
     <!-- primary actions -->
     <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
       <button id="actUpload" onclick="openFindingUpload()" class="action-card text-left rounded-2xl p-3.5 bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center gap-3 shadow-md">
@@ -242,11 +245,11 @@
       </button>
       <button id="actXlsx" onclick="downloadFile('api/download/xlsx')" class="action-card text-left rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
         <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-black text-[10px]">XLSX</span>
-        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_xlsx"></span><span class="block text-[11px] text-slate-500" id="actXlsxSub"></span></span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_xlsx"></span><span class="block text-[11px] text-slate-500 truncate" id="actXlsxSub"></span></span>
       </button>
       <button id="actDocx" onclick="downloadFile('api/download/docx')" class="action-card text-left rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
         <span class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 font-black text-[10px]">DOCX</span>
-        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_docx"></span><span class="block text-[11px] text-slate-500" id="actDocxSub"></span></span>
+        <span class="min-w-0"><span class="block font-extrabold text-sm text-slate-900" data-i18n="act_docx"></span><span class="block text-[11px] text-slate-500 truncate" id="actDocxSub"></span></span>
       </button>
       <div id="actPack" class="action-card rounded-2xl p-3.5 bg-white border border-slate-200 flex items-center gap-3 shadow-sm">
         <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 font-black text-[10px]">PDF</span>
@@ -365,12 +368,15 @@
       <div id="folderGrid" class="grid grid-cols-2 lg:grid-cols-5 gap-2.5"></div>
     </div>
     <div class="card overflow-hidden">
-      <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between">
+      <div class="px-5 py-3.5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
         <div>
           <h3 class="font-extrabold text-slate-900" data-i18n="sto_title"></h3>
           <p class="text-[11px] text-slate-500" data-i18n="only_owner_hint"></p>
         </div>
-        <button onclick="loadStorage()" class="text-xs font-bold text-blue-600 hover:underline" data-i18n="refresh"></button>
+        <div class="flex flex-wrap items-center gap-2">
+          <div id="stoLangBar" class="flex flex-wrap items-center gap-1"></div>
+          <button onclick="loadStorage()" class="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-xs font-bold text-blue-600" data-i18n="refresh"></button>
+        </div>
       </div>
       <div class="overflow-x-auto scroll">
         <table class="w-full text-xs sto-table">
@@ -820,47 +826,56 @@ const I18N_DUAL = {
  vi: {
   tabs_checklist:'Chấm điểm', tabs_round2:'Lần 2', tabs_word:'Báo cáo', tabs_factory:'Nhà máy', tabs_qa:'Ngôn ngữ', tabs_storage:'Kho',
   bk_upload:'Tải lên bản sao lưu', bk_uploaded:'Đã tải lên bản sao lưu', web_pdf_print:'Hộp thoại In đã mở — chọn "Lưu thành PDF"', web_popup:'Trình duyệt chặn cửa sổ mới — đang in trực tiếp',
-  fu_kicker:'Bước 1 · Chọn file', fu_desc:'Chọn File hiện trường và/hoặc File tài liệu (cùng mẫu EHS Audit Findings). Hệ thống sẽ tổng hợp cả 2 file thành một kết quả chấm điểm.',
+  fu_kicker:'Bước 1 · Chọn file', fu_desc:'Chọn File hiện trường (EHS Audit Findings .xlsm/.xlsx) và/hoặc File tài liệu (Form RBA Audit Checklist .xlsx hoặc Findings .xlsm). Hệ thống sẽ tổng hợp cả 2 file thành kết quả cuối cùng.',
   fu_hint:'💡 Thiếu 1 file vẫn tổng hợp được. File còn thiếu có thể bổ sung sau tại thanh "Nguồn dữ liệu" hoặc trong Kho lưu trữ — kết quả sẽ được tổng hợp lại và lưu thành phiên bản mới.',
   fu_go:'Tổng hợp & chấm điểm', fu_both:'Đã chọn đủ 2 file', fu_one:'Đã chọn 1 file — vẫn tổng hợp được', fu_none:'Chưa chọn file nào',
   slot_field:'File hiện trường', slot_doc:'File tài liệu', slot_field_short:'Hiện trường', slot_doc_short:'Tài liệu',
-  slot_field_d:'Lỗi quan sát tại hiện trường (facility), kèm ảnh', slot_doc_d:'Lỗi hồ sơ, tài liệu, quy trình (Administrative)',
+  slot_field_d:'Lỗi quan sát tại hiện trường kèm ảnh (Findings .xlsm/.xlsx hoặc Checklist .xlsx)', slot_doc_d:'Form báo cáo tài liệu (RBA Audit Checklist .xlsx) hoặc Findings .xlsm/.xlsx',
   slot_pick:'Chọn file', slot_change:'Đổi file khác', slot_optional:'Không bắt buộc · .xlsm / .xlsx', slot_bad_file:'Chỉ nhận file Excel .xlsm / .xlsx',
-  supp_title:'Bổ sung file Finding', supp_msg:'Chọn loại file cần bổ sung hoặc thay thế. Kết quả sẽ được tổng hợp lại từ cả 2 file.', supp_which:'Loại file',
+  supp_title:'Bổ sung file Finding / Checklist', supp_msg:'Chọn loại file cần bổ sung hoặc thay thế. Kết quả sẽ được tổng hợp lại từ cả 2 file.', supp_which:'Loại file',
   supp_replace:'Thay file', supp_btn:'Bổ sung', supp_missing:'Chưa có — kết quả đang tổng hợp từ 1 file', supp_missing_short:'thiếu',
   supp_done:'Đã bổ sung và tổng hợp lại kết quả', supp_done_saved:'Đã bổ sung, tổng hợp lại và lưu phiên bản mới vào kho',
-  act_upload_sub:'Hiện trường + Tài liệu', w_r1_d:'Nạp File hiện trường và File tài liệu để tổng hợp, chấm điểm 41 hạng mục',
-  web_engine:'Đang khởi động hệ thống...', web_engine_sub:'Lần đầu có thể mất 10–20 giây để tải bộ xử lý.'
+  act_upload_sub:'Hiện trường + Tài liệu', w_r1_d:'Nạp File hiện trường và File tài liệu (Checklist / Findings) để tổng hợp 41 hạng mục',
+  web_engine:'Đang khởi động hệ thống...', web_engine_sub:'Lần đầu có thể mất 10–20 giây để tải bộ xử lý.',
+  exp_lang_lbl:'Ngôn ngữ xuất file', exp_lang_sub:'Áp dụng cho Checklist .xlsx · Báo cáo .docx · Findings .xlsm · PDF · ZIP',
+  exp_vi_ko:'🇻🇳🇰🇷 Việt – Hàn', exp_vi_en:'🇻🇳🇬🇧 Việt – Anh', exp_vi_zh:'🇻🇳🇨🇳 Việt – Trung', exp_vi:'🇻🇳 Mỗi tiếng Việt',
+  exp_busy:'Đang tạo file xuất ({lang})…', kind_checklist:'Form Checklist', kind_findings:'Findings'
  },
  en: {
   tabs_checklist:'Scoring', tabs_round2:'Round 2', tabs_word:'Report', tabs_factory:'Factory', tabs_qa:'Language', tabs_storage:'Archive',
   bk_upload:'Upload backup', bk_uploaded:'Backup uploaded', web_pdf_print:'Print dialog opened — choose "Save as PDF"', web_popup:'Pop-up blocked — printing in place',
-  fu_kicker:'Step 1 · Choose files', fu_desc:'Choose the Site file and/or the Document file (same EHS Audit Findings template). Both are combined into one scoring result.',
+  fu_kicker:'Step 1 · Choose files', fu_desc:'Choose the Site file (EHS Audit Findings .xlsm/.xlsx) and/or the Document file (RBA Audit Checklist .xlsx form or Findings .xlsm). Both are combined into one final result.',
   fu_hint:'💡 One file is enough to start. The missing file can be added later from the "Data sources" bar or the Archive — results are recombined and saved as a new revision.',
   fu_go:'Combine & score', fu_both:'Both files selected', fu_one:'1 file selected — can still combine', fu_none:'No file selected',
   slot_field:'Site file', slot_doc:'Document file', slot_field_short:'Site', slot_doc_short:'Docs',
-  slot_field_d:'On-site (facility) findings with photos', slot_doc_d:'Records, documents and procedures (Administrative)',
+  slot_field_d:'On-site findings with photos (Findings .xlsm/.xlsx or Checklist .xlsx)', slot_doc_d:'Document audit form (RBA Audit Checklist .xlsx) or Findings .xlsm/.xlsx',
   slot_pick:'Choose file', slot_change:'Choose another file', slot_optional:'Optional · .xlsm / .xlsx', slot_bad_file:'Only Excel .xlsm / .xlsx files',
-  supp_title:'Add Finding file', supp_msg:'Choose which file to add or replace. Results are recombined from both files.', supp_which:'File type',
+  supp_title:'Add Finding / Checklist file', supp_msg:'Choose which file to add or replace. Results are recombined from both files.', supp_which:'File type',
   supp_replace:'Replace', supp_btn:'Add file', supp_missing:'Missing — results use one file only', supp_missing_short:'missing',
   supp_done:'File added and results recombined', supp_done_saved:'File added, results recombined and saved as a new revision',
-  act_upload_sub:'Site + Documents', w_r1_d:'Upload the Site and Document files to combine and score the 41 items',
-  web_engine:'Starting the system...', web_engine_sub:'First start may take 10–20 seconds.'
+  act_upload_sub:'Site + Documents', w_r1_d:'Upload Site and Document (Checklist / Findings) files to combine & score 41 items',
+  web_engine:'Starting the system...', web_engine_sub:'First start may take 10–20 seconds.',
+  exp_lang_lbl:'Export language', exp_lang_sub:'Applies to Checklist .xlsx · Report .docx · Findings .xlsm · PDF · ZIP',
+  exp_vi_ko:'🇻🇳🇰🇷 Vietnamese – Korean', exp_vi_en:'🇻🇳🇬🇧 Vietnamese – English', exp_vi_zh:'🇻🇳🇨🇳 Vietnamese – Chinese', exp_vi:'🇻🇳 Vietnamese only',
+  exp_busy:'Generating export ({lang})…', kind_checklist:'Checklist form', kind_findings:'Findings'
  },
  ko: {
   tabs_checklist:'평가', tabs_round2:'2차', tabs_word:'보고서', tabs_factory:'공장', tabs_qa:'언어', tabs_storage:'보관함',
   bk_upload:'백업 업로드', bk_uploaded:'백업을 업로드했습니다', web_pdf_print:'인쇄 창이 열렸습니다 — "PDF로 저장"을 선택하세요', web_popup:'팝업이 차단되어 현재 창에서 인쇄합니다',
-  fu_kicker:'1단계 · 파일 선택', fu_desc:'현장 파일 및/또는 문서 파일(동일 EHS Audit Findings 양식)을 선택하세요. 두 파일을 하나의 평가 결과로 통합합니다.',
+  fu_kicker:'1단계 · 파일 선택', fu_desc:'현장 파일(EHS Audit Findings .xlsm/.xlsx) 및/또는 문서 파일(RBA Audit Checklist .xlsx 양식 또는 Findings .xlsm)을 선택하세요. 두 파일을 최종 결과로 통합합니다.',
   fu_hint:'💡 파일 1개만으로도 통합할 수 있습니다. 누락된 파일은 나중에 "데이터 소스" 또는 보관함에서 추가할 수 있으며, 결과가 다시 통합되어 새 버전으로 저장됩니다.',
   fu_go:'통합 및 평가', fu_both:'2개 파일 선택됨', fu_one:'1개 파일 선택됨 — 통합 가능', fu_none:'선택된 파일 없음',
   slot_field:'현장 파일', slot_doc:'문서 파일', slot_field_short:'현장', slot_doc_short:'문서',
-  slot_field_d:'현장 관찰 지적사항(facility), 사진 포함', slot_doc_d:'기록·문서·절차 지적사항(Administrative)',
+  slot_field_d:'현장 지적사항·사진 (Findings .xlsm/.xlsx 또는 Checklist .xlsx)', slot_doc_d:'문서 점검 양식 (RBA Audit Checklist .xlsx) 또는 Findings .xlsm/.xlsx',
   slot_pick:'파일 선택', slot_change:'다른 파일 선택', slot_optional:'선택 사항 · .xlsm / .xlsx', slot_bad_file:'Excel .xlsm / .xlsx 파일만 가능합니다',
-  supp_title:'Finding 파일 추가', supp_msg:'추가하거나 교체할 파일 종류를 선택하세요. 두 파일로 결과를 다시 통합합니다.', supp_which:'파일 종류',
+  supp_title:'Finding / Checklist 파일 추가', supp_msg:'추가하거나 교체할 파일 종류를 선택하세요. 두 파일로 결과를 다시 통합합니다.', supp_which:'파일 종류',
   supp_replace:'교체', supp_btn:'추가', supp_missing:'없음 — 1개 파일로만 통합됨', supp_missing_short:'없음',
   supp_done:'파일을 추가하고 결과를 다시 통합했습니다', supp_done_saved:'파일 추가, 재통합 후 새 버전으로 저장했습니다',
-  act_upload_sub:'현장 + 문서', w_r1_d:'현장 파일과 문서 파일을 업로드하여 41개 항목 통합 평가',
-  web_engine:'시스템 시작 중...', web_engine_sub:'처음에는 10–20초 정도 걸릴 수 있습니다.'
+  act_upload_sub:'현장 + 문서', w_r1_d:'현장·문서(Checklist / Findings) 파일을 업로드하여 41개 항목 통합 평가',
+  web_engine:'시스템 시작 중...', web_engine_sub:'처음에는 10–20초 정도 걸릴 수 있습니다.',
+  exp_lang_lbl:'내보내기 언어', exp_lang_sub:'Checklist .xlsx · 보고서 .docx · Findings .xlsm · PDF · ZIP 적용',
+  exp_vi_ko:'🇻🇳🇰🇷 베트남어 – 한국어', exp_vi_en:'🇻🇳🇬🇧 베트남어 – 영어', exp_vi_zh:'🇻🇳🇨🇳 베트남어 – 중국어', exp_vi:'🇻🇳 베트남어 전용',
+  exp_busy:'파일 생성 중 ({lang})…', kind_checklist:'체크리스트 양식', kind_findings:'Findings'
  }
 };
 Object.keys(I18N_DUAL).forEach(l => Object.assign(I18N[l], I18N_DUAL[l]));
@@ -869,6 +884,43 @@ const LANG_NAMES = { vi:'🇻🇳 Tiếng Việt', ko:'🇰🇷 한국어', en:'
 let LANG = localStorage.getItem('RBA_LANG') || 'vi';
 const t = (k, vars) => { let s = (I18N[LANG] && I18N[LANG][k]) ?? I18N.vi[k] ?? k; if (vars) Object.keys(vars).forEach(v => s = s.split(`{${v}}`).join(vars[v])); return s; };
 
+const EXPORT_LANGS = ['vi_ko', 'vi_en', 'vi_zh', 'vi'];
+let EXPORT_LANG = localStorage.getItem('RBA_EXPORT_LANG') || 'vi_ko';
+if (!EXPORT_LANGS.includes(EXPORT_LANG)) EXPORT_LANG = 'vi_ko';
+const expLangLabel = (k = EXPORT_LANG) => t('exp_' + k);
+
+function setExportLang(lg) {
+  if (!EXPORT_LANGS.includes(lg)) return;
+  EXPORT_LANG = lg;
+  localStorage.setItem('RBA_EXPORT_LANG', lg);
+  renderExpLang();
+  if (STATE && !isEmpty()) renderActions();
+  if (STORAGE) renderStorage();
+}
+
+function renderExpLang() {
+  const pills = compact => EXPORT_LANGS.map(k => {
+    const on = k === EXPORT_LANG;
+    const sz = compact ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-1.5 text-xs';
+    const cls = on
+      ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+    return `<button type="button" data-exp-lang="${k}" onclick="setExportLang('${k}')" class="${sz} rounded-xl border font-bold transition whitespace-nowrap ${cls}">${expLangLabel(k)}</button>`;
+  }).join('');
+  const bar = document.getElementById('expLangBar');
+  if (bar) {
+    bar.innerHTML = `<div class="min-w-0">
+        <div class="text-xs font-extrabold text-slate-900 flex items-center gap-1.5"><span>🌐</span><span>${t('exp_lang_lbl')}</span></div>
+        <div class="text-[11px] text-slate-500">${t('exp_lang_sub')}</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-1.5">${pills(false)}</div>`;
+  }
+  const stoBar = document.getElementById('stoLangBar');
+  if (stoBar) {
+    stoBar.innerHTML = `<span class="text-[11px] font-bold text-slate-500 mr-1">🌐 ${t('exp_lang_lbl')}:</span>${pills(true)}`;
+  }
+}
+
 function applyI18n() {
   document.documentElement.lang = LANG;
   document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
@@ -876,6 +928,7 @@ function applyI18n() {
   document.querySelectorAll('.lang-select').forEach(sel => {
     sel.innerHTML = Object.keys(LANG_NAMES).map(k => `<option value="${k}" ${k === LANG ? 'selected' : ''}>${LANG_NAMES[k]}</option>`).join('');
   });
+  renderExpLang();
 }
 function setLang(l) { LANG = l; localStorage.setItem('RBA_LANG', l); applyI18n(); renderHeader(); renderAll(); if (ACC_OPEN) renderAccount(); }
 
@@ -1051,11 +1104,12 @@ function renderHeader() {
 
 async function downloadFile(ep) {
   if (isR2() && !r2Confirmed()) return toast(t('r2_need_confirm'), 'err');
-  return downloadBlob(ep + (ep.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(TOKEN));
+  const sep = ep.includes('?') ? '&' : '?';
+  return downloadBlob(`${ep}${sep}lang=${encodeURIComponent(EXPORT_LANG)}&token=${encodeURIComponent(TOKEN)}`);
 }
 async function downloadBlob(url) {
-  const slow = /pdf|zip/.test(url);
-  if (slow) toast(t('pdf_busy'));
+  if (/[?&]lang=/.test(url)) toast(t('exp_busy', { lang:expLangLabel() }));
+  else if (/pdf|zip/.test(url)) toast(t('pdf_busy'));
   try {
     const res = await fetch(url, { headers:H() });
     if (!res.ok) { const j = await res.json().catch(() => ({ message:'HTTP ' + res.status })); return toast(j.message, 'err'); }
@@ -1074,6 +1128,7 @@ function closePanel() { panelModal.classList.add('hidden'); panelModal.classList
    TOP-LEVEL RENDER
    ================================================================= */
 function renderAll() {
+  renderExpLang();
   if (!STATE) return;
   if (isEmpty()) { renderWelcome(); return; }
   welcome.classList.add('hidden'); workspace.classList.remove('hidden');
@@ -1084,6 +1139,7 @@ function renderAll() {
 
 function renderWelcome() {
   workspace.classList.add('hidden'); welcome.classList.remove('hidden');
+  renderExpLang();
   wR1.classList.toggle('hidden', !can('can_upload_findings'));
   wR2.classList.toggle('hidden', !can('can_upload_round2'));
   wOpen.classList.toggle('hidden', !can('can_view_storage'));
@@ -1120,8 +1176,9 @@ function renderActions() {
   actPack.classList.toggle('hidden', !can('can_export_word'));
   const locked = isR2() && !r2Confirmed();
   [actSave, actXlsx, actDocx, actPack].forEach(b => b.classList.toggle('locked', locked));
-  actXlsxSub.textContent = locked ? '🔒 ' + t('r2_locked') : (isR2() ? 'RBA 8.0.1 · ' + t('round2') : t('act_xlsx_sub'));
-  actDocxSub.textContent = locked ? '🔒 ' + t('r2_locked') : (isR2() ? 'Word · ' + t('round1') + ' + ' + t('round2') : t('act_docx_sub'));
+  const lg = expLangLabel();
+  actXlsxSub.textContent = locked ? '🔒 ' + t('r2_locked') : `${isR2() ? 'RBA 8.0.1 · ' + t('round2') : t('act_xlsx_sub')} · ${lg}`;
+  actDocxSub.textContent = locked ? '🔒 ' + t('r2_locked') : `${isR2() ? 'Word · ' + t('round1') + ' + ' + t('round2') : t('act_docx_sub')} · ${lg}`;
 }
 
 function renderStatus() {
@@ -1692,9 +1749,10 @@ function renderSources() {
   const src = STATE.sources, up = can('can_upload_findings');
   srcBar.innerHTML = `<div class="card p-3 sm:p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">${['field', 'doc'].map(k => {
     const x = src[k], m = SLOT_META[k];
+    const kindBadge = x && x.kind ? `<span class="ml-1 px-1.5 py-0.5 rounded bg-white/80 border border-slate-200 text-[9px] font-extrabold text-slate-600">${esc(x.kind === 'checklist' ? t('kind_checklist') : t('kind_findings'))}</span>` : '';
     return x ? `<div class="flex items-center gap-3 rounded-xl border ${m.ring} px-3 py-2.5 min-w-0">
         <span class="text-lg shrink-0">${m.icon}</span>
-        <div class="min-w-0 flex-1"><div class="text-[11px] font-black uppercase text-slate-500">${t('slot_' + k)} · <span class="text-emerald-700">✓ ${x.findings ?? '—'} ${t('st_findings').toLowerCase()}</span></div>
+        <div class="min-w-0 flex-1"><div class="text-[11px] font-black uppercase text-slate-500 flex flex-wrap items-center gap-1"><span>${t('slot_' + k)}</span>${kindBadge}<span>·</span><span class="text-emerald-700">✓ ${x.findings ?? '—'} ${t('st_findings').toLowerCase()}</span></div>
           <div class="text-[13px] font-semibold truncate" title="${esc(x.filename)}">${esc(x.filename)}</div></div>
         ${up ? `<button onclick="supplementFile('${k}')" class="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-[11px] font-bold shrink-0">${t('supp_replace')}</button>` : ''}</div>`
       : `<div class="flex items-center gap-3 rounded-xl border-2 border-dashed border-amber-300 bg-amber-50 px-3 py-2.5 min-w-0">
@@ -1760,7 +1818,7 @@ async function saveReport() {
   const d = await dialog({ title:t('save_title'), message:t('save_msg'), icon:'💾', okText:t('save'), fields });
   if (!d.ok) return;
   const off = canOverwrite ? 1 : 0;
-  const r = await api('api/storage/save_session', { overwrite: canOverwrite && d.values[0] === 'overwrite', title:d.values[off], note:d.values[off + 1] });
+  const r = await api('api/storage/save_session', { overwrite: canOverwrite && d.values[0] === 'overwrite', title:d.values[off], note:d.values[off + 1], lang:EXPORT_LANG });
   if (r.status !== 'ok') return toast(r.message, 'err');
   STATE = r.data; STORAGE = r.storage; renderAll(); toast(t('msg_report_saved'));
 }
@@ -1768,6 +1826,9 @@ async function saveReport() {
 /* =================================================================
    TAB: STORAGE (round-2 reports grouped under their round-1 report)
    ================================================================= */
+function downloadStorage(ep, rid) {
+  return downloadBlob(`${ep}?record_id=${encodeURIComponent(rid)}&lang=${encodeURIComponent(EXPORT_LANG)}&token=${encodeURIComponent(TOKEN)}`);
+}
 async function loadStorage() {
   if (!can('can_view_storage')) return;
   const r = await api('api/storage/list');
@@ -1775,6 +1836,7 @@ async function loadStorage() {
   STORAGE = r; renderStorage();
 }
 function renderStorage() {
+  renderExpLang();
   if (!STORAGE) return;
   const folders = STORAGE.folders || [];
   folderBox.classList.toggle('hidden', !isAdmin() || !folders.length);
@@ -1792,13 +1854,13 @@ function renderStorage() {
     const f = r.files || {}, rnd = r.round || 1;
     return `<tr class="${child ? 'bg-violet-50/40' : ''} ${active === r.record_id ? 'ring-2 ring-inset ring-amber-300' : ''} hover:bg-slate-50/70">
       <td class="px-4 py-3 ${child ? 'pl-10' : ''}"><div class="flex items-center gap-1.5">${child ? '<span class="text-violet-400">↳</span>' : ''}<span class="px-1.5 py-0.5 rounded text-[9px] font-black ${rnd > 1 ? 'bg-violet-600 text-white' : 'bg-blue-100 text-blue-700'}">${rnd > 1 ? t('round2') : t('round1')}</span><b class="text-slate-900">${esc(r.title || r.record_id)}</b></div>
-        <div class="text-[10px] text-slate-400 font-mono mt-0.5">${esc(r.record_id)} · ${esc(r.created_at)}${(r.revision || 1) > 1 ? ` · ${t('revision')} ${r.revision}` : ''}</div>${r.note ? `<div class="text-[11px] text-slate-500 mt-0.5">${esc(r.note)}</div>` : ''}${rnd === 1 && r.sources ? `<div class="flex flex-wrap gap-1 mt-1">${['field', 'doc'].map(k => `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${r.sources[k] ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-300'}">${r.sources[k] ? '✓' : '⚠'} ${t('slot_' + k)}${r.sources[k] ? '' : ' · ' + t('supp_missing_short')}</span>`).join('')}</div>` : ''}</td>
+        <div class="text-[10px] text-slate-400 font-mono mt-0.5">${esc(r.record_id)} · ${esc(r.created_at)}${(r.revision || 1) > 1 ? ` · ${t('revision')} ${r.revision}` : ''}</div>${r.note ? `<div class="text-[11px] text-slate-500 mt-0.5">${esc(r.note)}</div>` : ''}${rnd === 1 && r.sources ? `<div class="flex flex-wrap gap-1 mt-1">${['field', 'doc'].map(k => `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${r.sources[k] ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-300'}">${r.sources[k] ? '✓' : '⚠'} ${t('slot_' + k)}${r.sources[k] && r.sources[k].kind ? ' (' + esc(r.sources[k].kind === 'checklist' ? t('kind_checklist') : t('kind_findings')) + ')' : ''}${r.sources[k] ? '' : ' · ' + t('supp_missing_short')}</span>`).join('')}</div>` : ''}</td>
       <td class="px-4 py-3" data-lbl="${t('col_vendor')}"><div class="font-bold">${esc(r.vendor_short)}</div><div class="text-[10px] text-slate-400">${esc(r.vendor_code)} · ${esc(r.audit_date)}</div></td>
       <td class="px-4 py-3 text-center" data-lbl="${t('col_result')}"><span class="font-black text-slate-900">${r.total_score}</span> · <b class="${['A','B'].includes(r.grade_level) ? 'text-emerald-600' : 'text-red-600'}">${r.grade_level}</b><div class="text-[10px] text-slate-400">${r.violated_items_count}/41</div></td>
       <td class="px-4 py-3 text-slate-600" data-lbl="${t('col_owner')}">${esc(r.created_by)}${r.updated_by ? `<div class="text-[10px] text-slate-400">✎ ${esc(r.updated_by)}</div>` : ''}</td>
-      <td class="px-4 py-3" data-lbl="${t('col_files')}"><div class="flex flex-wrap gap-1">${f.finding ? `<a href="api/storage/finding?record_id=${r.record_id}&token=${encodeURIComponent(TOKEN)}" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700">Finding</a>` : ''}${fileBtn(f.checklist, 'XLSX', 'bg-emerald-50 text-emerald-700')}${fileBtn(f.report, 'DOCX', 'bg-sky-50 text-sky-700')}${fileBtn(f.finding_field, '🏭 ' + t('slot_field_short'), 'bg-blue-50 text-blue-700')}${fileBtn(f.finding_doc, '📑 ' + t('slot_doc_short'), 'bg-teal-50 text-teal-700')}
-        <button onclick="downloadBlob('api/storage/pdf?record_id=${r.record_id}&token='+encodeURIComponent(TOKEN))" class="px-2 py-1 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700">PDF</button>
-        <button onclick="downloadBlob('api/storage/zip?record_id=${r.record_id}&token='+encodeURIComponent(TOKEN))" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-800 text-white">ZIP</button></div></td>
+      <td class="px-4 py-3" data-lbl="${t('col_files')}"><div class="flex flex-wrap gap-1">${(f.finding || f.snapshot) ? `<button onclick="downloadStorage('api/storage/finding','${r.record_id}')" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Finding</button>` : ''}${(f.checklist || f.snapshot) ? `<button onclick="downloadStorage('api/storage/xlsx','${r.record_id}')" class="px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100">XLSX</button>` : ''}${(f.report || f.snapshot) ? `<button onclick="downloadStorage('api/storage/docx','${r.record_id}')" class="px-2 py-1 rounded-md text-[10px] font-bold bg-sky-50 text-sky-700 hover:bg-sky-100">DOCX</button>` : ''}${fileBtn(f.finding_field, '🏭 ' + t('slot_field_short'), 'bg-blue-50 text-blue-700')}${fileBtn(f.finding_doc, '📑 ' + t('slot_doc_short'), 'bg-teal-50 text-teal-700')}
+        <button onclick="downloadStorage('api/storage/pdf','${r.record_id}')" class="px-2 py-1 rounded-md text-[10px] font-bold bg-rose-50 text-rose-700 hover:bg-rose-100">PDF</button>
+        <button onclick="downloadStorage('api/storage/zip','${r.record_id}')" class="px-2 py-1 rounded-md text-[10px] font-bold bg-slate-800 text-white hover:bg-slate-700">ZIP</button></div></td>
       <td class="px-4 py-3 text-right whitespace-nowrap space-x-1 sto-actions">
         <button onclick="openRecord('${r.record_id}', false)" class="px-2.5 py-1.5 rounded-lg bg-slate-900 text-white text-[11px] font-bold">${t('btn_open')}</button>
         ${rnd === 1 && can('can_upload_round2') ? `<button onclick="startRound2('${r.record_id}')" class="px-2.5 py-1.5 rounded-lg bg-violet-50 text-violet-700 border border-violet-200 text-[11px] font-bold hover:bg-violet-100">${t('btn_upload_r2')}</button>` : ''}

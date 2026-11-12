@@ -218,14 +218,25 @@ def build_round2_export_data(r1_data):
     r2 = r1_data['round2']
     by_code = {r['audit_id']: r for r in r2['checklist2']}
     open_by_code = {}
+    all_open = []
+    seq = 0
     for i in r2['items']:
         if not i['closed']:
-            open_by_code.setdefault(i['audit_id'], []).append(i['issue_vn'])
+            seq += 1
+            f_obj = {'no': seq, 'audit_id': i['audit_id'], 'issue_vn': i['issue_vn'], 'issue_en': '',
+                     'location_vn': i.get('location_vn', ''), 'improvement_vn': i.get('improvement_vn', '')}
+            open_by_code.setdefault(i['audit_id'], []).append(f_obj)
+            all_open.append(f_obj)
     for n in r2['new_findings']:
         if n.get('include'):
-            open_by_code.setdefault(n['audit_id'], []).append(f"[Mới - Lần 2] {n['issue_vn']}")
+            seq += 1
+            f_obj = {'no': seq, 'audit_id': n['audit_id'], 'issue_vn': f"[Mới - Lần 2] {n['issue_vn']}", 'issue_en': '',
+                     'location_vn': n.get('location_vn', ''), 'improvement_vn': ''}
+            open_by_code.setdefault(n['audit_id'], []).append(f_obj)
+            all_open.append(f_obj)
 
     out = dict(r1_data)
+    out['findings'] = all_open
     new_checklist = []
     for it in r1_data['checklist']:
         nit = dict(it)
@@ -234,10 +245,13 @@ def build_round2_export_data(r1_data):
             nit['significance'] = row['sig2']
             nit['score'] = row['score2']
             opens = open_by_code.get(it['audit_id'], [])
+            nit['findings'] = opens
             if opens:
-                nit['evidence_text'] = "\n".join(f"{k}. {txt}" for k, txt in enumerate(opens, 1)) if len(opens) > 1 else opens[0]
+                nit['evidence_text'] = "\n".join(f"{k}. {f['issue_vn']}" for k, f in enumerate(opens, 1)) if len(opens) > 1 else opens[0]['issue_vn']
             elif row['total']:
                 nit['evidence_text'] = f"Lần 2: Đã khắc phục toàn bộ {row['total']} lỗi của lần 1"
+            else:
+                nit['evidence_text'] = "1:\n2:\n3:"
         new_checklist.append(nit)
     out['checklist'] = new_checklist
     s2 = dict(r2['summary2'])
@@ -260,15 +274,18 @@ def build_round2_docx_data(r1_data):
     r2 = r1_data['round2']
     by_code = {r['audit_id']: r for r in r2['checklist2']}
     open_nos = {i['r1_no'] for i in r2['items'] if not i['closed']}
-    open_findings = [f for f in r1_data.get('findings', []) if f.get('no') in open_nos]
+    open_findings = [dict(f) for f in r1_data.get('findings', []) if f.get('no') in open_nos]
+    max_no = max([int(f.get('no') or 0) for f in open_findings] + [1000])
     new_included = [{
-        'no': n['r2_no'], 'audit_id': n['audit_id'], 'issue_vn': n.get('issue_vn', ''), 'issue_full': n.get('issue_vn', ''),
+        'no': max_no + idx, 'r2_no': n['r2_no'], 'audit_id': n['audit_id'],
+        'issue_vn': n.get('issue_vn', ''), 'issue_en': n.get('issue_en', ''), 'issue_full': n.get('issue_vn', ''),
         'location_vn': n.get('location_vn', ''), 'cause': 'facility', 'mandatory': n.get('mandatory', ''),
         'photos': n.get('photos', []), 'excel_row': 0, 'is_new': True,
-    } for n in r2['new_findings'] if n.get('include')]
+    } for idx, n in enumerate((x for x in r2['new_findings'] if x.get('include')), 1)]
     remaining = open_findings + new_included
 
     out = dict(r1_data)
+    out['findings'] = remaining
     remaining_by_code = {}
     for f in remaining:
         remaining_by_code.setdefault(f['audit_id'], []).append(f)

@@ -52,7 +52,21 @@ def _e(x):
     return html.escape(str(x if x is not None else ''))
 
 
-def build_report_html(data, round2_summary=None, title=''):
+def _fmt_ml(txt, prefix=''):
+    lines = [ln.strip() for ln in str(txt or '').split('\n') if ln.strip()]
+    if not lines:
+        return ''
+    first = prefix + _e(lines[0])
+    if len(lines) == 1:
+        return first
+    rest = '<br/>'.join(f"<span class='tr'>{_e(ln)}</span>" for ln in lines[1:])
+    return f"{first}<br/>{rest}"
+
+
+def build_report_html(data, round2_summary=None, title='', lang_mode=None):
+    if lang_mode:
+        from translator import apply_export_lang_to_data
+        data = apply_export_lang_to_data(data, lang_mode)
     m, s = data['metadata'], data['summary']
     year_str, _ = audit_period(m)
 
@@ -77,38 +91,48 @@ def build_report_html(data, round2_summary=None, title=''):
         items = [x for x in data['checklist'] if x.get('significance') == sev]
         for i, x in enumerate(items):
             lbl = f"({len(items)})" if sev == 'Priority' else f"({len(items):02d})"
-            fs = x.get('findings') or []
-            if fs:
-                b_list = ['- ' + _e(_compact_violation_text(f.get('issue_vn', ''), 135)) for f in fs[:2]]
-                if len(fs) > 2:
-                    b_list[-1] = b_list[-1].rstrip('.') + '...'
-                bullets = '<br/>'.join(b_list)
+            if x.get('export_t3_lines'):
+                bullets = '<br/>'.join(_fmt_ml(ln, prefix='- ') for ln in x['export_t3_lines'])
             else:
-                bullets = '- ' + _e(_compact_violation_text(x.get('evidence_text', ''), 135))
+                fs = x.get('findings') or []
+                if fs:
+                    b_list = ['- ' + _e(_compact_violation_text(f.get('issue_vn', ''), 135)) for f in fs[:2]]
+                    if len(fs) > 2:
+                        b_list[-1] = b_list[-1].rstrip('.') + '...'
+                    bullets = '<br/>'.join(b_list)
+                else:
+                    bullets = '- ' + _e(_compact_violation_text(x.get('evidence_text', ''), 135))
             first = f"<td rowspan='{len(items)}' class='c'>{sev}<br/>{lbl}</td>" if i == 0 else ''
             t3 += f"<tr>{first}<td>{bullets}</td><td class='c'>{_e(x['audit_id'])}</td></tr>"
     if not t3:
-        t3 = f"<tr><td class='c'>—</td><td>{_e(data.get('empty_t3_text', 'Không có lỗi vi phạm'))}</td><td class='c'>—</td></tr>"
+        t3 = f"<tr><td class='c'>—</td><td>{_fmt_ml(data.get('empty_t3_text', 'Không có lỗi vi phạm'))}</td><td class='c'>—</td></tr>"
 
     t4 = ''
     for k in (data.get('key_issues') or [])[:5]:
         ph = (k.get('photos') or [{}])[0].get('data_url', '')
         im = f"<img src='{ph}'/>" if str(ph).startswith('data:') else ''
-        t4 += f"<tr><td class='ph'>{im}</td><td>[<span style='color:#FF0000'>{_e(k['significance'])}</span>] {_e(_compact_violation_text(k['issue_vn'], 160))}</td></tr>"
+        k_txt = _fmt_ml(k['export_issue_text']) if k.get('export_issue_text') else _e(_compact_violation_text(k['issue_vn'], 160))
+        t4 += f"<tr><td class='ph'>{im}</td><td>[<span style='color:#FF0000'>{_e(k['significance'])}</span>] {k_txt}</td></tr>"
     if not t4:
-        t4 = f"<tr><td class='ph'></td><td>{_e(data.get('empty_key_issue_text', 'Không có vấn đề tồn đọng'))}</td></tr>"
+        t4 = f"<tr><td class='ph'></td><td>{_fmt_ml(data.get('empty_key_issue_text', 'Không có vấn đề tồn đọng'))}</td></tr>"
 
-    doc_capped, fac_capped = cap_violations_pair(
-        data.get('doc_violations'), data.get('facility_violations'), max_per_type=3, max_total=5
-    )
-    lis = lambda arr: ''.join(f"<li>{_e(v)}</li>" for v in arr or [])
+    if data.get('doc_violations_export') is not None:
+        doc_capped = data.get('doc_violations_export') or []
+        fac_capped = data.get('facility_violations_export') or []
+    else:
+        doc_capped, fac_capped = cap_violations_pair(
+            data.get('doc_violations'), data.get('facility_violations'), max_per_type=3, max_total=5
+        )
+    lis = lambda arr: ''.join(f"<li>{_fmt_ml(v)}</li>" for v in arr or [])
+    overall_html = f"<p class='i'>□ Đánh giá chung: {_fmt_ml(data['export_overall'])}</p>" if data.get('export_overall') else ''
     return f"""<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><title>{_e(title)}</title><style>
     @page {{ size: A4; margin: 11mm 13mm; }}
-    body {{ font-family: "Times New Roman", Times, serif; color:#000; font-size:10.5pt; line-height:1.26; margin:0; }}
+    body {{ font-family: "Times New Roman", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans CJK KR", "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Times, serif; color:#000; font-size:10.5pt; line-height:1.28; margin:0; }}
     h1 {{ text-align:center; font-size:18pt; text-decoration:underline; margin:0; }}
     .sub {{ text-align:center; font-size:17pt; font-weight:bold; text-decoration:underline; margin:0 0 3px; }}
     .r {{ text-align:right; font-size:10pt; }} .row {{ display:flex; justify-content:space-between; font-size:10pt; margin-bottom:2px; }}
     .h {{ font-weight:bold; font-size:11.5pt; margin-top:5px; }} .i {{ margin:1px 0 1px 6px; }} .i2 {{ margin:1px 0 1px 20px; }}
+    .tr {{ color:#1e293b; font-size:9.2pt; }}
     .t {{ width:100%; border-collapse:collapse; margin:3px 0 6px; font-size:9.5pt; page-break-inside:auto; }}
     .t th, .t td {{ border:1px solid #000; padding:2.5px 5px; vertical-align:middle; }} .t th {{ background:#e7e6e6; }}
     .t tr {{ page-break-inside:avoid; }} .c {{ text-align:center; }}
@@ -125,6 +149,7 @@ def build_report_html(data, round2_summary=None, title=''):
     {sec1}
     <p style="font-size:9pt;margin:1px 0">※[Chú thích] Level xếp hạng: A(90 điểm↑), B(80~89), C(70~79), D(69↓)</p>
     <div class="h">2. Kết quả đánh giá</div>
+    {overall_html}
     <p class="i"><b>① Lỗi vi phạm Tài liệu:</b></p><ul>{lis(doc_capped)}</ul>
     <p class="i"><b>② Lỗi vi phạm Hiện trường:</b></p><ul>{lis(fac_capped)}</ul>
     <div class="h">3. Kế hoạch sau này</div>
@@ -157,7 +182,8 @@ def make_pdf(docx_path, html_text, out_pdf):
             with open(src, 'w', encoding='utf-8') as f:
                 f.write(html_text)
             produced = os.path.join(tmpdir, 'report.pdf')
-            subprocess.run([eng['path'], '--headless=new', '--disable-gpu', f'--user-data-dir={os.path.join(tmpdir, "profile")}',
+            subprocess.run([eng['path'], '--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu',
+                            f'--user-data-dir={os.path.join(tmpdir, "profile")}',
                             '--no-pdf-header-footer', '--no-first-run', f'--print-to-pdf={produced}', pathlib.Path(src).as_uri()],
                            check=True, timeout=180, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if not os.path.exists(produced) or os.path.getsize(produced) < 500:

@@ -1,7 +1,7 @@
 /* RBA 8.0.1 — Engine worker: chạy mã Python của hệ thống trong trình duyệt (Pyodide).
    Dữ liệu (database, storage, backups, templates) lưu trong IndexedDB của trình duyệt.
    © NGUYỄN NGỌC NGÔN */
-const BUILD = '100b1a43fd';
+const BUILD = 'd8036a42ff';
 const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
 importScripts(PYODIDE + 'pyodide.js');
 
@@ -10,6 +10,19 @@ let py = null, handle = null, syncTimer = null, syncing = false, syncAgain = fal
 const queue = [];
 
 const post = (type, extra) => self.postMessage(Object.assign({ type }, extra || {}));
+
+// Synchronous HTTP POST helper for Pyodide (used by translator.py for multi-language GTX batch translation)
+self.rbaHttpPost = function (url, body) {
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, false);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    xhr.send(body || '');
+    return (xhr.status >= 200 && xhr.status < 300) ? (xhr.responseText || '') : '';
+  } catch (e) {
+    return '';
+  }
+};
 
 function syncfs(populate) {
   return new Promise((res, rej) => py.FS.syncfs(populate, e => e ? rej(e) : res()));
